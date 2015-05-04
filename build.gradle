@@ -85,7 +85,7 @@ project(":html") {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
         compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
         compile "com.badlogicgames.ashley:ashley:$ashleyVersion:sources"
-        compile "com.kotcrab.vis:vis-ui:0.7.3:sources"
+        compile "com.kotcrab.vis:vis-ui:0.7.4:sources"
     }
 }
 
@@ -96,7 +96,7 @@ project(":core") {
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
-        compile "com.kotcrab.vis:vis-ui:0.7.3"
+        compile "com.kotcrab.vis:vis-ui:0.7.4"
     }
 }
 
