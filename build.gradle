@@ -97,6 +97,7 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
         compile "com.kotcrab.vis:vis-ui:0.7.4"
+        compile "org.jetbrains:annotations:13.0"
     }
 }
 
