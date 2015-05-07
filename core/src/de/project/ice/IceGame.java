@@ -10,11 +10,12 @@ import de.project.ice.screens.GameScreen;
 import org.jetbrains.annotations.NotNull;
 
 public class IceGame extends ApplicationAdapter {
-    public final SpriteBatch batch = new SpriteBatch();
+    public SpriteBatch batch;
     private final DelayedRemovalArray<BaseScreen> screens = new DelayedRemovalArray<BaseScreen>();
 
     @Override
     public void create () {
+        batch = new SpriteBatch();
         GameScreen gameScreen = new GameScreen(this);
         addScreen(gameScreen);
     }
@@ -84,7 +85,8 @@ public class IceGame extends ApplicationAdapter {
             }
         }
         if (index == -1) {
-            screens.peek().pause();
+            if (screens.size > 0)
+                screens.peek().pause();
             screens.add(screen);
             screen.show();
         } else {
