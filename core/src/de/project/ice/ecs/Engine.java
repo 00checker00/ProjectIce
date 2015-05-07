@@ -2,10 +2,7 @@ package de.project.ice.ecs;
 
 import com.badlogic.ashley.core.PooledEngine;
 import de.project.ice.IceGame;
-import de.project.ice.ecs.systems.AnimationSystem;
-import de.project.ice.ecs.systems.CameraSystem;
-import de.project.ice.ecs.systems.RenderingSystem;
-import de.project.ice.ecs.systems.StateSystem;
+import de.project.ice.ecs.systems.*;
 import org.jetbrains.annotations.NotNull;
 
 public class Engine extends PooledEngine {
@@ -17,6 +14,8 @@ public class Engine extends PooledEngine {
     public final RenderingSystem renderingSystem;
     @NotNull
     public final CameraSystem cameraSystem;
+    @NotNull
+    public final ScriptingSystem scriptingSystem;
 
     public Engine (IceGame iceGame) {
         super();
@@ -24,5 +23,12 @@ public class Engine extends PooledEngine {
         animationSystem = new AnimationSystem();
         cameraSystem = new CameraSystem();
         renderingSystem = new RenderingSystem(iceGame.batch);
+        scriptingSystem = new ScriptingSystem();
+
+        addSystem(stateSystem);
+        addSystem(animationSystem);
+        addSystem(cameraSystem);
+        addSystem(renderingSystem);
+        addSystem(scriptingSystem);
     }
 }

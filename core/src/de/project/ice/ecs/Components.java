@@ -9,4 +9,6 @@ public abstract class Components {
     public static final ComponentMapper<StateComponent> state = ComponentMapper.getFor(StateComponent.class);
     public static final ComponentMapper<TextureComponent> texture = ComponentMapper.getFor(TextureComponent.class);
     public static final ComponentMapper<TransformComponent> transform = ComponentMapper.getFor(TransformComponent.class);
+    public static final ComponentMapper<DisabledComponent> disabled = ComponentMapper.getFor(DisabledComponent.class);
+    public static final ComponentMapper<ScriptComponent> script = ComponentMapper.getFor(ScriptComponent.class);
 }
