@@ -3,7 +3,10 @@ package de.project.ice;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.*;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
@@ -13,10 +16,12 @@ import javafx.scene.AmbientLight;
  * Grafik Branch
  */
 public class IceGame extends ApplicationAdapter {
-    /*
-    SpriteBatch batch;
-    Texture img;
-    */
+
+    SpriteBatch spriteBatch;
+    TextureAtlas textureAtlas;
+    TextureRegion textureRegion;
+    Sprite sprite;
+
 
     private OrthographicCamera camera;
     private ModelBatch modelBatch;
@@ -29,10 +34,13 @@ public class IceGame extends ApplicationAdapter {
 
     @Override
     public void create() {
-        /*
-        batch = new SpriteBatch();
-        img = new Texture("badlogic.jpg");
-        */
+
+        spriteBatch = new SpriteBatch();
+        textureAtlas = new TextureAtlas(Gdx.files.internal("spritesheets/eskimo.atlas"));
+        textureRegion = textureAtlas.findRegion("eskimo1");
+        sprite = new Sprite(textureRegion);
+        sprite.setPosition(0f, 0f);
+
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.position.set(0f, 0f, 20f);
         camera.lookAt(0f, 0f, 0f); // look at Origin
@@ -60,7 +68,8 @@ public class IceGame extends ApplicationAdapter {
 
         camera.update();
         modelBatch.begin(camera);
-        modelBatch.render(modelInstance);
+        modelBatch.render(modelInstance, environment);
+        sprite.draw(spriteBatch);
         modelBatch.end();
 
         /*
