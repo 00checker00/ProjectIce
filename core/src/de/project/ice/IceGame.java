@@ -2,81 +2,96 @@ package de.project.ice;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g3d.*;
-import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
-import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
-import javafx.scene.AmbientLight;
+import com.badlogic.gdx.utils.DelayedRemovalArray;
+import de.project.ice.screens.BaseScreen;
+import de.project.ice.screens.GameScreen;
+import org.jetbrains.annotations.NotNull;
 
-/**
- * Grafik Branch
- */
 public class IceGame extends ApplicationAdapter {
-
-    SpriteBatch spriteBatch;
-    TextureAtlas textureAtlas;
-    TextureRegion textureRegion;
-    Sprite sprite;
-
-
-    private OrthographicCamera camera;
-    private ModelBatch modelBatch;
-    private ModelBuilder modelBuilder;
-    private Model box;
-    private ModelInstance modelInstance;
-    private Environment environment;
-
-
+    public SpriteBatch batch;
+    private final DelayedRemovalArray<BaseScreen> screens = new DelayedRemovalArray<BaseScreen>();
 
     @Override
-    public void create() {
-
-        spriteBatch = new SpriteBatch();
-        textureAtlas = new TextureAtlas(Gdx.files.internal("spritesheets/eskimo.atlas"));
-        textureRegion = textureAtlas.findRegion("eskimo1");
-        sprite = new Sprite(textureRegion);
-        sprite.setPosition(0f, 0f);
-
-        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        camera.position.set(0f, 0f, 20f);
-        camera.lookAt(0f, 0f, 0f); // look at Origin
-        camera.near = 0.5f;
-        camera.far = 20f;
-
-        modelBatch = new ModelBatch();
-        modelBuilder = new ModelBuilder();
-        box = modelBuilder.createBox(20f, 20f, 10f,
-                new Material(ColorAttribute.createDiffuse(Color.RED)),
-                VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal);
-        modelInstance = new ModelInstance(box, 0, 0, 0); // small instance of the whole box model!
-
-        environment = new Environment();
-        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.8f, 0.8f, 0.8f, 1f));
-
-       // box.dispose();
+    public void create () {
+        batch = new SpriteBatch();
+        GameScreen gameScreen = new GameScreen(this);
+        addScreen(gameScreen);
     }
 
     @Override
-    public void render() {
-
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-
-        camera.update();
-        modelBatch.begin(camera);
-        modelBatch.render(modelInstance, environment);
-        sprite.draw(spriteBatch);
-        modelBatch.end();
-
-        /*
-        batch.begin();
-        batch.draw(img, 0, 0);
-        batch.end();
-        */
+    public void dispose () {
+        screens.begin();
+        for (BaseScreen screen : screens) {
+            screen.hide();
+        }
+        screens.end();
     }
 
+    @Override
+    public void pause () {
+        if (screens.size > 0) {
+            screens.peek().pause();
+        }
+    }
+
+    @Override
+    public void resume () {
+        if (screens.size > 0) {
+            screens.peek().resume();
+        }
+    }
+
+    @Override
+    public void render () {
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        float delta = Gdx.graphics.getDeltaTime();
+        screens.begin();
+        for (BaseScreen screen : screens) {
+            screen.update(delta);
+        }
+        screens.end();
+        for (BaseScreen screen : screens) {
+            screen.render();
+        }
+    }
+
+    @Override
+    public void resize (int width, int height) {
+        screens.begin();
+        for (BaseScreen screen : screens) {
+            screen.resize(width, height);
+        }
+        screens.end();
+    }
+
+    public void removeScreen (@NotNull BaseScreen screen) {
+        if (screen == screens.peek()) {
+            screens.pop();
+            screens.peek().resume();
+        } else {
+            screens.removeValue(screen, true);
+        }
+        screen.hide();
+    }
+
+    public void addScreen (@NotNull BaseScreen screen) {
+        int index = -1;
+        for (int i = 0; i < screens.size; i++) {
+            if (screens.get(i).getPriority() < screen.getPriority()) {
+                index = i;
+                break;
+            }
+        }
+        if (index == -1) {
+            if (screens.size > 0)
+                screens.peek().pause();
+            screens.add(screen);
+            screen.show();
+        } else {
+            screens.insert(index, screen);
+        }
+        screen.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    }
 }
