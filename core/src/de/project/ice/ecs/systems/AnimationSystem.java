@@ -2,6 +2,7 @@ package de.project.ice.ecs.systems;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import de.project.ice.ecs.Components;
 import de.project.ice.ecs.Families;
@@ -26,6 +27,7 @@ public class AnimationSystem extends IteratingSystem {
 
         if (animation != null) {
             tex.region = animation.getKeyFrame(state.time);
+            Gdx.app.log("Animation", "" + state.time);
         }
 
         state.time += deltaTime;

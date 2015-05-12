@@ -1,0 +1,130 @@
+eksi2.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Opa
+  rotate: false
+  xy: 0 ,0
+  size: 210 ,286
+  orig: 210 ,286
+  offset: 0 ,0
+  index:0
+arm_1
+  rotate: false
+  xy: 652 ,296
+  size: 110 ,326
+  orig: 110 ,326
+  offset: 0 ,0
+  index:0
+arm_2
+  rotate: false
+  xy: 762 ,296
+  size: 64 ,90
+  orig: 64 ,90
+  offset: 0 ,0
+  index:0
+baum2
+  rotate: false
+  xy: 210 ,0
+  size: 120 ,131
+  orig: 120 ,131
+  offset: 0 ,0
+  index:0
+bein_1
+  rotate: false
+  xy: 826 ,296
+  size: 62 ,38
+  orig: 62 ,38
+  offset: 0 ,0
+  index:0
+bein_2
+  rotate: false
+  xy: 888 ,296
+  size: 78 ,38
+  orig: 78 ,38
+  offset: 0 ,0
+  index:0
+eksi2
+  rotate: false
+  xy: 330 ,0
+  size: 195 ,296
+  orig: 195 ,296
+  offset: 0 ,0
+  index:0
+eksi2
+  rotate: false
+  xy: 525 ,0
+  size: 195 ,296
+  orig: 195 ,296
+  offset: 0 ,0
+  index:1
+eksi2
+  rotate: false
+  xy: 720 ,0
+  size: 195 ,296
+  orig: 195 ,296
+  offset: 0 ,0
+  index:2
+eksi2
+  rotate: false
+  xy: 0 ,296
+  size: 195 ,296
+  orig: 195 ,296
+  offset: 0 ,0
+  index:3
+eksi2
+  rotate: false
+  xy: 195 ,296
+  size: 195 ,296
+  orig: 195 ,296
+  offset: 0 ,0
+  index:4
+eksi_rotznase
+  rotate: false
+  xy: 390 ,296
+  size: 262 ,326
+  orig: 262 ,326
+  offset: 0 ,0
+  index:0
+eski_lauf
+  rotate: false
+  xy: 192 ,622
+  size: 262 ,327
+  orig: 262 ,332
+  offset: 0 ,0
+  index:0
+eski_lauf
+  rotate: false
+  xy: 454 ,622
+  size: 260 ,326
+  orig: 262 ,332
+  offset: -2 ,0
+  index:1
+eski_lauf
+  rotate: false
+  xy: 714 ,622
+  size: 260 ,327
+  orig: 262 ,332
+  offset: -5 ,0
+  index:2
+eski_lauf
+  rotate: false
+  xy: 454 ,622
+  size: 260 ,326
+  orig: 262 ,332
+  offset: -2 ,0
+  index:3
+eski_tween
+  rotate: false
+  xy: 192 ,622
+  size: 262 ,327
+  orig: 262 ,332
+  offset: 0 ,0
+  index:0
+rumpf
+  rotate: false
+  xy: 0 ,622
+  size: 192 ,270
+  orig: 192 ,270
+  offset: 0 ,0
+  index:0
