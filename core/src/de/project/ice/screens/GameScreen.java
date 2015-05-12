@@ -6,6 +6,9 @@ import de.project.ice.scripting.ScriptManager;
 import de.project.ice.scripting.scripts.Scene01_Load;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Input Handling here...
+ */
 public class GameScreen extends BaseScreenAdapter {
     @NotNull
     private final IceGame game;
