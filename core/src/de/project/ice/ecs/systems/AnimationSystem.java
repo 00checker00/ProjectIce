@@ -27,7 +27,7 @@ public class AnimationSystem extends IteratingSystem {
 
         if (animation != null) {
             tex.region = animation.getKeyFrame(state.time);
-            Gdx.app.log("Animation", "" + state.time);
+            //Gdx.app.log("Animation", "" + state.time);
         }
 
         state.time += deltaTime;
