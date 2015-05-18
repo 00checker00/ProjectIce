@@ -16,6 +16,10 @@ public class Engine extends PooledEngine {
     public final CameraSystem cameraSystem;
     @NotNull
     public final ScriptingSystem scriptingSystem;
+    @NotNull
+    public final MovementSystem movementSystem;
+    @NotNull
+    public final ControlSystem controlSystem;
 
     public Engine (IceGame iceGame) {
         super();
@@ -24,11 +28,15 @@ public class Engine extends PooledEngine {
         cameraSystem = new CameraSystem();
         renderingSystem = new RenderingSystem(iceGame.batch);
         scriptingSystem = new ScriptingSystem();
+        movementSystem = new MovementSystem();
+        controlSystem = new ControlSystem();
 
         addSystem(stateSystem);
         addSystem(animationSystem);
         addSystem(cameraSystem);
         addSystem(renderingSystem);
         addSystem(scriptingSystem);
+        addSystem(movementSystem);
+        addSystem(controlSystem);
     }
 }
