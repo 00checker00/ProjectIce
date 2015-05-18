@@ -32,6 +32,10 @@ allprojects {
     }
 }
 
+project(":SpriteConverter") {
+    apply plugin: "java"
+}
+
 project(":desktop") {
     apply plugin: "java"
 
