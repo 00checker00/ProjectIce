@@ -48,7 +48,9 @@ public class MainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
     private javax.swing.JButton deleteBtn;
-    private CompactCheckBox drawTrianglesChk;
+    private CompactCheckBox drawConnectionsChk;
+    private CompactCheckBox drawAreaChk;
+    private CompactCheckBox drawPathChk;
     private javax.swing.JPanel headerPanel;
     private JList imagesList;
     private JLabel jLabel1;
@@ -116,10 +118,22 @@ public class MainWindow extends javax.swing.JFrame {
                 canvas.spriteOpacity = spriteOpacitySlider.getValue();
             }
         });
-        drawTrianglesChk.setActionListener(new ActionListener() {
+        drawConnectionsChk.setActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                canvas.drawTriangles = drawTrianglesChk.isSelected();
+                canvas.drawConnections = drawConnectionsChk.isSelected();
+            }
+        });
+        drawAreaChk.setActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                canvas.drawArea = drawAreaChk.isSelected();
+            }
+        });
+        drawPathChk.setActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                canvas.drawPath = drawPathChk.isSelected();
             }
         });
 
@@ -233,7 +247,9 @@ public class MainWindow extends javax.swing.JFrame {
         imagesList = new JList();
         optionsPanel = new javax.swing.JPanel();
         spriteOpacitySlider = new CompactSlider();
-        drawTrianglesChk = new CompactCheckBox();
+        drawConnectionsChk = new CompactCheckBox();
+        drawPathChk = new CompactCheckBox();
+        drawAreaChk = new CompactCheckBox();
         jLabel1 = new JLabel();
         jLabel2 = new JLabel();
         versionLabel = new JLabel();
@@ -305,8 +321,14 @@ public class MainWindow extends javax.swing.JFrame {
 
         spriteOpacitySlider.setValue(0.5F);
 
-        drawTrianglesChk.setSelected(false);
-        drawTrianglesChk.setText("Draw Paths");
+        drawConnectionsChk.setSelected(false);
+        drawConnectionsChk.setText("Draw Connections");
+
+        drawPathChk.setSelected(false);
+        drawPathChk.setText("Draw Paths");
+
+        drawAreaChk.setSelected(true);
+        drawAreaChk.setText("Draw Area");
 
         jLabel1.setText("Image opacity");
 
@@ -322,7 +344,11 @@ public class MainWindow extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(spriteOpacitySlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGroup(optionsPanelLayout.createSequentialGroup()
-                                                .addComponent(drawTrianglesChk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(drawAreaChk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(drawConnectionsChk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(drawPathChk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addGap(0, 0, Short.MAX_VALUE)))
                                 .addContainerGap())
@@ -336,7 +362,9 @@ public class MainWindow extends javax.swing.JFrame {
                                         .addComponent(spriteOpacitySlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(drawTrianglesChk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(drawAreaChk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(drawConnectionsChk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(drawPathChk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

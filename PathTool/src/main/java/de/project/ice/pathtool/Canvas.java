@@ -51,7 +51,9 @@ public class Canvas extends ApplicationAdapter {
     public ImageModel selectedModel;
     public Vector2 nearestPoint, nextPoint;
     public Vector2 mouseSelectionP1, mouseSelectionP2;
-    public boolean drawTriangles = false, drawBoundingBox = false;
+    public boolean drawConnections = false, drawBoundingBox = false;
+    public boolean drawPath = false;
+    public boolean drawArea = true;
     public float spriteOpacity = 0.5f;
     public Mode mode = null;
     private CanvasDrawer drawer;
@@ -196,7 +198,7 @@ public class Canvas extends ApplicationAdapter {
             batch.end();
 
             if (drawBoundingBox) drawer.drawBoundingBox(sprite);
-            drawer.drawModel(selectedModel, selectedPoints, nextPoint, nearestPoint, drawTriangles, mode == Mode.CREATION);
+            drawer.drawModel(selectedModel, selectedPoints, nextPoint, nearestPoint, drawConnections, drawArea, drawPath, mode == Mode.CREATION);
             drawer.drawMouseSelection(mouseSelectionP1, mouseSelectionP2);
         }
 

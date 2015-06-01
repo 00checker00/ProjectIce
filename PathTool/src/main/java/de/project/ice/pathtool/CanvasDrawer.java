@@ -38,13 +38,15 @@ public class CanvasDrawer {
     // Public API
     // -------------------------------------------------------------------------
 
-    public void drawModel(ImageModel model, List<Vector2> selectedPoints, Vector2 nextPoint, Vector2 nearestPoint, boolean drawTriangles, boolean creation) {
+    public void drawModel(ImageModel model, List<Vector2> selectedPoints, Vector2 nextPoint, Vector2 nearestPoint, boolean drawConnections, boolean drawArea, boolean drawPath, boolean creation) {
         if (model == null) return;
         drawer.setProjectionMatrix(camera.combined);
-        if (drawTriangles) drawLineOfSight(model);
-        for (Shape shape : model.shapes) drawShape(shape, nextPoint);
-        for (Shape shape : model.shapes) drawPoints(shape, selectedPoints, nearestPoint);
-        if (drawTriangles) drawPathNodes(model);
+        if (drawConnections) drawConnections(model);
+        if (drawArea) {
+            for (Shape shape : model.shapes) drawShape(shape, nextPoint);
+            for (Shape shape : model.shapes) drawPoints(shape, selectedPoints, nearestPoint);
+        }
+        if (drawPath) drawPathNodes(model);
         if (creation) drawNextPoint(nextPoint);
     }
 
@@ -136,7 +138,7 @@ public class CanvasDrawer {
         }
     }
 
-    private void drawLineOfSight(ImageModel model) {
+    private void drawConnections(ImageModel model) {
         Gdx.gl.glLineWidth(2);
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
