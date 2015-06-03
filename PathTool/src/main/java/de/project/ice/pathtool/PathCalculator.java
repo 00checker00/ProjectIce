@@ -20,6 +20,10 @@ public class PathCalculator {
     private static boolean Inside(PathArea pathArea, Vector2 position) {
         if (!Inside(pathArea.shape, position, true))
             return false;
+        for (ImageModel.Shape hole : pathArea.holes)
+            if (Inside(hole, position, false))
+                return false;
+
         return true;
     }
 
@@ -72,6 +76,7 @@ public class PathCalculator {
 
         Vector2 mid = new Vector2(start).sub(end).scl(0.5f).add(end);
 
+        // Not in LOS if the middle point is inside any hole
         for (ImageModel.Shape hole : pathArea.holes) {
             if (Inside(hole, mid, false)) {
                 return false;
@@ -82,15 +87,15 @@ public class PathCalculator {
         return Inside(pathArea, mid);
     }
 
-    private static boolean LineSegmentsCross(Vector2 a, Vector2 b, Vector2 c, Vector2 d) {
-        float denominator = ((b.x - a.x) * (d.y - c.y)) - ((b.y - a.y) * (d.x - c.x));
+    private static boolean LineSegmentsCross (Vector2 start_1, Vector2 end_1, Vector2 start_2, Vector2 end_2) {
+        float denominator = ((end_1.x - start_1.x) * (end_2.y - start_2.y)) - ((end_1.y - start_1.y) * (end_2.x - start_2.x));
 
         if (denominator == 0) {
             return false;
         }
 
-        float numerator1 = ((a.y - c.y) * (d.x - c.x)) - ((a.x - c.x) * (d.y - c.y));
-        float numerator2 = ((a.y - c.y) * (b.x - a.x)) - ((a.x - c.x) * (b.y - a.y));
+        float numerator1 = ((start_1.y - start_2.y) * (end_2.x - start_2.x)) - ((start_1.x - start_2.x) * (end_2.y - start_2.y));
+        float numerator2 = ((start_1.y - start_2.y) * (end_1.x - start_1.x)) - ((start_1.x - start_2.x) * (end_1.y - start_1.y));
 
         if (numerator1 == 0 || numerator2 == 0) {
             return false;
@@ -112,35 +117,105 @@ public class PathCalculator {
             for (Vector2 vertex : hole.vertices)
                 graph.addNode(new PathNode(vertex));
 
-        for (PathNode waypoint : pathArea.waypoints)
+        for (PathNode waypoint : pathArea.waypoints) {
+            if (!Inside(pathArea, waypoint.pos))
+                moveWaypointInside(graph, pathArea, waypoint);
             graph.addNode(waypoint);
+        }
 
         for (int n = 0; n < graph.nodes.size; n++) {
             PathNode startNode = graph.nodes.get(n);
             for (int m = 0; m < graph.nodes.size; m++) {
                 PathNode endNode = graph.nodes.get(m);
 
-                if (startNode == endNode)
-                    continue;
-
-                boolean lineOfSight = true;
-
-                if (LineSegmentCrosses(startNode.pos, endNode.pos, pathArea.shape.vertices))
-                    lineOfSight = false;
-
-                for (ImageModel.Shape hole : pathArea.holes) {
-                    if (LineSegmentCrosses(startNode.pos, endNode.pos, hole.vertices)) {
-                        lineOfSight = false;
-                        break;
-                    }
-                }
-
-                if (lineOfSight && InLineOfSight(pathArea, startNode.pos, endNode.pos)) {
+                if (ConnectionValid(startNode, endNode, pathArea)) {
                     startNode.connections.add(new PathConnection(startNode, endNode));
                 }
             }
         }
         return graph;
+    }
+
+    private static boolean ConnectionValid (PathNode start, PathNode end, PathArea area) {
+        if (start == end)
+            return false;
+
+        boolean lineOfSight = true;
+
+        if (LineSegmentCrosses(start.pos, end.pos, area.shape.vertices))
+            lineOfSight = false;
+
+        for (ImageModel.Shape hole : area.holes) {
+            if (LineSegmentCrosses(start.pos, end.pos, hole.vertices)) {
+                lineOfSight = false;
+                break;
+            }
+        }
+        return lineOfSight && InLineOfSight(area, start.pos, end.pos);
+    }
+
+    private static void moveWaypointInside (PathGraph graph, PathArea area, PathNode waypoint) {
+        Vector2 closest = waypoint.pos;
+        float closestDistance = Float.MAX_VALUE;
+        for (int i = 1; i <= area.shape.vertices.size; i++) {
+            try {
+                Vector2 closestOnSegment = closestPoint(
+                        waypoint.pos,
+                        area.shape.vertices.get(i - 1),
+                        area.shape.vertices.get(i % area.shape.vertices.size)
+                );
+                float distanceToSegment = closestOnSegment.dst(waypoint.pos);
+                if (distanceToSegment < closestDistance) {
+                    closest = closestOnSegment;
+                    closestDistance = distanceToSegment;
+                }
+            } catch (IllegalArgumentException ignored) {
+
+            }
+        }
+        for (ImageModel.Shape hole : area.holes) {
+            for (int i = 1; i <= hole.vertices.size; i++) {
+                try {
+                    Vector2 closestOnSegment = closestPoint(
+                            waypoint.pos,
+                            hole.vertices.get(i - 1),
+                            hole.vertices.get(i % hole.vertices.size)
+                    );
+                    float distanceToSegment = closestOnSegment.dst(waypoint.pos);
+                    if (distanceToSegment < closestDistance) {
+                        closest = closestOnSegment;
+                        closestDistance = distanceToSegment;
+                    }
+                } catch (IllegalArgumentException ignored) {
+
+                }
+            }
+        }
+        waypoint.pos.set(closest);
+    }
+
+
+    public static Vector2 closestPoint (Vector2 point, Vector2 start, Vector2 end) throws IllegalArgumentException {
+        final float dX = end.x - start.x;
+        final float dY = end.y - start.y;
+
+        if ((dX == 0) && (dY == 0)) {
+            throw new IllegalArgumentException("start and end cannot be the same point");
+        }
+
+        final float u = ((point.x - start.x) * dX + (point.y - start.y) * dY) / (dX * dX + dY * dY);
+
+        final Vector2 closestPoint;
+        if (u < 0) {
+            closestPoint = start;
+        } else if (u > 1) {
+            closestPoint = end;
+        } else {
+            closestPoint = new Vector2(start.x + u * dX, start.y + u * dY);
+            closestPoint.add(new Vector2(closestPoint.x - point.x, closestPoint.y - point.y).nor().scl(epsilon));
+        }
+
+        return closestPoint;
     }
 
     public static class PathArea {

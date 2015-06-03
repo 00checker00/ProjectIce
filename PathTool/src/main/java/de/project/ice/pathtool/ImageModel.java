@@ -1,19 +1,19 @@
 package de.project.ice.pathtool;
 
-import de.project.ice.utils.notifications.ChangeableObject;
 import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.ai.pfa.DefaultGraphPath;
 import com.badlogic.gdx.ai.pfa.GraphPath;
 import com.badlogic.gdx.ai.pfa.indexed.IndexedAStarPathFinder;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import de.project.ice.utils.notifications.ChangeableObject;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.imageio.ImageIO;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
@@ -23,6 +23,7 @@ public class ImageModel extends ChangeableObject {
     public final List<Shape> shapes = new ArrayList<Shape>();
     public final Array<Connection<PathCalculator.PathNode>> linesOfSight = new Array<Connection<PathCalculator.PathNode>>();
     public final GraphPath<PathCalculator.PathNode> pathNodes = new DefaultGraphPath<PathCalculator.PathNode>();
+    public final Array<PathCalculator.PathNode> waypoints = new Array<PathCalculator.PathNode>();
     private final float w, h;
     public Vector2 mousePos = new Vector2();
     public Vector2 startPos = new Vector2();
@@ -65,11 +66,15 @@ public class ImageModel extends ChangeableObject {
         for (int i = 1; i < shapes.size(); i++)
             pathArea.holes.add(shapes.get(i));
 
+        waypoints.clear();
+
         PathCalculator.PathNode start = new PathCalculator.PathNode(startPos);
         pathArea.waypoints.add(start);
+        waypoints.add(start);
 
         PathCalculator.PathNode end = new PathCalculator.PathNode(mousePos);
         pathArea.waypoints.add(end);
+        waypoints.add(end);
 
         PathCalculator.PathGraph pathGraph = pathCalc.computeGraph(pathArea);
         linesOfSight.clear();

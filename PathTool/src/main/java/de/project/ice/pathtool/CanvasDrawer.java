@@ -1,6 +1,5 @@
 package de.project.ice.pathtool;
 
-import de.project.ice.pathtool.ImageModel.Shape;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.ai.pfa.GraphPath;
@@ -12,6 +11,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import de.project.ice.pathtool.ImageModel.Shape;
 
 import java.util.List;
 
@@ -172,6 +172,15 @@ public class CanvasDrawer {
         }
 
         drawer.end();
+
+        float w = 10 * camera.zoom;
+
+        for (PathCalculator.PathNode p : model.waypoints) {
+            drawer.begin(ShapeRenderer.ShapeType.Filled);
+            drawer.setColor(PATH_COLOR);
+            drawer.rect(p.getPos().cpy().sub(w / 2, w / 2).x, p.getPos().cpy().sub(w / 2, w / 2).y, w, w);
+            drawer.end();
+        }
     }
 
     private void drawMouseSelection(float x1, float y1, float x2, float y2) {
