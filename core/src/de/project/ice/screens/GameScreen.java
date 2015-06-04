@@ -3,7 +3,7 @@ package de.project.ice.screens;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import de.project.ice.IceGame;
-import de.project.ice.ecs.Engine;
+import de.project.ice.ecs.IceEngine;
 import de.project.ice.scripting.ScriptManager;
 import de.project.ice.scripting.scripts.Scene01_Load;
 import de.project.ice.utils.DelegatingBlockingInputProcessor;
@@ -14,13 +14,13 @@ import org.jetbrains.annotations.NotNull;
  */
 public class GameScreen extends BaseScreenAdapter {
     @NotNull
-    private final Engine engine;
+    private final IceEngine engine;
     @NotNull
     private final ScriptManager scriptManager;
 
     public GameScreen (@NotNull IceGame game) {
         super(game);
-        this.engine = new Engine(game);
+        this.engine = new IceEngine(game);
         this.scriptManager = new ScriptManager(this.engine);
 
         // Load "Scene01" by loading the Scene01_Load script

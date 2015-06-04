@@ -5,7 +5,7 @@ import de.project.ice.IceGame;
 import de.project.ice.ecs.systems.*;
 import org.jetbrains.annotations.NotNull;
 
-public class Engine extends PooledEngine {
+public class IceEngine extends PooledEngine {
     @NotNull
     public final StateSystem stateSystem;
     @NotNull
@@ -21,7 +21,7 @@ public class Engine extends PooledEngine {
     @NotNull
     public final ControlSystem controlSystem;
 
-    public Engine (IceGame iceGame) {
+    public IceEngine(IceGame iceGame) {
         super();
         stateSystem = new StateSystem();
         animationSystem = new AnimationSystem();

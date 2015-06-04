@@ -2,52 +2,78 @@ package de.project.ice.ecs.systems;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
-import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.utils.Array;
 import de.project.ice.ecs.Components;
+import de.project.ice.ecs.Families;
+import de.project.ice.ecs.IceEngine;
+import de.project.ice.ecs.components.CameraComponent;
 import de.project.ice.ecs.components.ControlComponent;
 import de.project.ice.ecs.components.MovableComponent;
-import org.jetbrains.annotations.NotNull;
+import de.project.ice.ecs.components.TextureComponent;
+import de.project.ice.utils.FakePerspectiveCamera;
 
-public class ControlSystem extends IteratingSystem implements InputProcessor {
-    @NotNull
-    private Array<Entity> controlQueue = new Array<Entity>();
+public class ControlSystem extends IteratingIceSystem implements InputProcessor {
 
-    private Vector3 pointerPos = new Vector3();
+    private ImmutableArray<Entity> cameras;
+    FakePerspectiveCamera active_camera = null;
+
+    private Vector2 pointerPos = new Vector2();
     private boolean pointerDown = false;
     private boolean pointerClicked = false;
+    private CameraSystem cameraSystem;
 
     @SuppressWarnings("unchecked")
     public ControlSystem() {
-        super(Family.all(ControlComponent.class, MovableComponent.class).get());
+        super(Family.all(ControlComponent.class, MovableComponent.class, TextureComponent.class).get());
     }
 
     @Override
     public void processEntity (Entity entity, float deltaTime) {
-        controlQueue.add(entity);
+        MovableComponent move = Components.movable.get(entity);
+        ControlComponent control = Components.control.get(entity);
+        TextureComponent texture = Components.texture.get(entity);
+
+        if(pointerDown) {
+            if(pointerClicked) {
+                pointerClicked = false;
+                if (active_camera != null) {
+                    Vector3 pos = active_camera.unproject(new Vector3(pointerPos.x, pointerPos.y, 0f)); // unprojects UI coordinates to camera coordinates
+
+                    if (pos.y > active_camera.getHorizonPosition()) {
+                        pos.y = active_camera.getHorizonPosition();
+                    }
+
+                    float height = active_camera.calcDistanceScaling(pos.y) *
+                            FakePerspectiveCamera.PIXELS_TO_METRES * (texture.region != null ? texture.region.getRegionHeight() : 0);
+
+                    move.targetPositions.clear();
+                    move.targetPositions.add(new Vector2(pos.x, pos.y + height/2));
+                }
+            }
+
+        }
     }
 
     @Override
     public void update(float deltaTime) {
+        // update the active camera
+        if(cameras.size() > 0)
+            active_camera = cameras.first().getComponent(CameraComponent.class).camera;
+
+        if (active_camera == null)
+            return;
+
         super.update(deltaTime);
+    }
 
-        for(Entity entity : controlQueue)
-        {
-
-            MovableComponent move = Components.movable.get(entity);
-            ControlComponent control = Components.control.get(entity);
-
-            if(pointerDown) {
-                if(pointerClicked) {
-                    pointerClicked = false;
-
-                    move.targetPositions.add(pointerPos); // the position of the mouse cursor
-                }
-            }
-        }
+    @Override
+    public void addedToEngine(IceEngine engine) {
+        super.addedToEngine(engine);
+        cameras = engine.getEntitiesFor(Families.camera);
+        cameraSystem = engine.cameraSystem;
     }
 
     @Override
@@ -67,7 +93,7 @@ public class ControlSystem extends IteratingSystem implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        pointerPos.set(screenX, screenY, 0f);
+        pointerPos.set(screenX, screenY);
         pointerDown = true;
         pointerClicked = true;
         return false;
@@ -75,7 +101,7 @@ public class ControlSystem extends IteratingSystem implements InputProcessor {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        pointerPos.set(screenX, screenY, 0f);
+        pointerPos.set(screenX, screenY);
         pointerDown = false;
         pointerClicked = false;
         return false;
@@ -88,7 +114,7 @@ public class ControlSystem extends IteratingSystem implements InputProcessor {
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        pointerPos.set(screenX, screenY, 0f);
+        pointerPos.set(screenX, screenY);
         return true;
     }
 

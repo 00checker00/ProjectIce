@@ -1,9 +1,8 @@
 package de.project.ice.ecs.components;
 
 import com.badlogic.ashley.core.Component;
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.Pool;
+import de.project.ice.utils.FakePerspectiveCamera;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -11,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class CameraComponent extends Component implements Pool.Poolable {
     @Nullable
-    public OrthographicCamera camera = null;
+    public FakePerspectiveCamera camera = null;
 
     @Override
     public void reset () {
