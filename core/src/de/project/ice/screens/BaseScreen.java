@@ -2,6 +2,9 @@ package de.project.ice.screens;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.InputProcessor;
+import de.project.ice.IceGame;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * <p>
@@ -22,6 +25,12 @@ public interface BaseScreen {
      * @return The display priority of the screen
      */
     int getPriority ();
+
+    /**
+     * Get the game to which this screen belongs
+     * @return the game to which this screen belongs
+     */
+    IceGame getGame();
 
     /**
      * Called when this screen becomes the current screen for a {@link Game}.
@@ -64,4 +73,11 @@ public interface BaseScreen {
      * Called when this screen should release all resources.
      */
     void dispose ();
+
+    /**
+     * Get the InputProcessor for this screen
+     * @return The InputProcessor for this screen
+     */
+    @NotNull
+    InputProcessor getInputProcessor();
 }

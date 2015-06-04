@@ -1,6 +1,17 @@
 package de.project.ice.screens;
 
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputProcessor;
+import de.project.ice.IceGame;
+import org.jetbrains.annotations.NotNull;
+
 public abstract class BaseScreenAdapter implements BaseScreen {
+    @NotNull
+    protected final IceGame game;
+
+    public BaseScreenAdapter(@NotNull IceGame game) {
+        this.game = game;
+    }
 
     /**
      * {@inheritDoc}
@@ -10,6 +21,12 @@ public abstract class BaseScreenAdapter implements BaseScreen {
     @Override
     public int getPriority () {
         return 0;
+    }
+
+    @Override
+    @NotNull
+    public IceGame getGame() {
+        return game;
     }
 
     @Override
@@ -42,5 +59,16 @@ public abstract class BaseScreenAdapter implements BaseScreen {
 
     @Override
     public void dispose () {
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return The InputProcessor for this screen, base implementation returns an empty InputProcessor
+     */
+    @NotNull
+    @Override
+    public InputProcessor getInputProcessor() {
+        return new InputAdapter();
     }
 }

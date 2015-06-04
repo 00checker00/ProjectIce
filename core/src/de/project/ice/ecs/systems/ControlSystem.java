@@ -1,28 +1,24 @@
 package de.project.ice.ecs.systems;
 
-import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.ashley.utils.ImmutableArray;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.Array;
 import de.project.ice.ecs.Components;
-import de.project.ice.ecs.Families;
-import de.project.ice.ecs.components.CameraComponent;
 import de.project.ice.ecs.components.ControlComponent;
 import de.project.ice.ecs.components.MovableComponent;
-import de.project.ice.ecs.components.TransformComponent;
 import org.jetbrains.annotations.NotNull;
 
-public class ControlSystem extends IteratingSystem {
-
+public class ControlSystem extends IteratingSystem implements InputProcessor {
     @NotNull
     private Array<Entity> controlQueue = new Array<Entity>();
+
+    private Vector3 pointerPos = new Vector3();
+    private boolean pointerDown = false;
+    private boolean pointerClicked = false;
 
     @SuppressWarnings("unchecked")
     public ControlSystem() {
@@ -44,19 +40,60 @@ public class ControlSystem extends IteratingSystem {
             MovableComponent move = Components.movable.get(entity);
             ControlComponent control = Components.control.get(entity);
 
-            if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-                if(!control.isMousePressed) {
-                    //Gdx.app.log("Mouse clicked", "");
-                    move.targetPositions.add(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0f)); // the position of the mouse cursor
-                    control.isMousePressed = true;
+            if(pointerDown) {
+                if(pointerClicked) {
+                    pointerClicked = false;
+
+                    move.targetPositions.add(pointerPos); // the position of the mouse cursor
                 }
             }
-            else {
-                control.isMousePressed = false;
-            }
-
         }
     }
 
+    @Override
+    public boolean keyDown(int keycode) {
+        return false;
+    }
 
+    @Override
+    public boolean keyUp(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyTyped(char character) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        pointerPos.set(screenX, screenY, 0f);
+        pointerDown = true;
+        pointerClicked = true;
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        pointerPos.set(screenX, screenY, 0f);
+        pointerDown = false;
+        pointerClicked = false;
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        pointerPos.set(screenX, screenY, 0f);
+        return true;
+    }
+
+    @Override
+    public boolean scrolled(int amount) {
+        return false;
+    }
 }
