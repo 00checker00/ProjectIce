@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
-import de.project.ice.ecs.Engine;
+import de.project.ice.ecs.IceEngine;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -18,14 +18,14 @@ public class ScriptManager {
     private HashMap<Class<? extends Script>, Script> loadedScripts = new HashMap<Class<? extends Script>, Script>();
 
     @NotNull
-    private final Engine engine;
+    private final IceEngine engine;
 
-    public ScriptManager (@NotNull Engine engine) {
+    public ScriptManager (@NotNull IceEngine engine) {
         this.engine = engine;
     }
 
     @NotNull
-    public Engine getEngine () {
+    public IceEngine getEngine () {
         return engine;
     }
 
@@ -209,7 +209,7 @@ public class ScriptManager {
         }
 
         /**
-         * A global script doesn't get unloaded except when directly unloaded
+         * A global script doesn't getAnimation unloaded except when directly unloaded
          *
          * @return true or false
          */
@@ -218,7 +218,7 @@ public class ScriptManager {
         }
 
         /**
-         * A global script doesn't get unloaded except when directly unloaded
+         * A global script doesn't getAnimation unloaded except when directly unloaded
          */
         public void setGlobal (boolean global) {
             this.global = global;

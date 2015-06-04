@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 
-public class ScriptingSystem extends IntervalSystem implements EntityListener {
+public class ScriptingSystem extends IntervalIceSystem implements EntityListener {
     HashSet<ScriptManager.Script> activeScripts = new HashSet<ScriptManager.Script>();
     @NotNull
     private Family family;

@@ -2,25 +2,29 @@ package de.project.ice;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import de.project.ice.screens.BaseScreen;
 import de.project.ice.screens.GameScreen;
+import de.project.ice.screens.MainMenuScreen;
 import org.jetbrains.annotations.NotNull;
 
 public class IceGame extends ApplicationAdapter {
-    public SpriteBatch batch;
     public static TextureAtlas textureAtlas;
     private final DelayedRemovalArray<BaseScreen> screens = new DelayedRemovalArray<BaseScreen>();
+    public SpriteBatch batch;
 
     @Override
     public void create () {
         batch = new SpriteBatch();
         textureAtlas = new TextureAtlas(Gdx.files.internal("spritesheets/eksi2.atlas"));
-        GameScreen gameScreen = new GameScreen(this);
-        addScreen(gameScreen);
+        BaseScreen mainMenuScreen = new MainMenuScreen(this);
+        addScreen(mainMenuScreen);
+
+        Gdx.input.setInputProcessor(new InputMultiplexer());
     }
 
     @Override
@@ -96,5 +100,69 @@ public class IceGame extends ApplicationAdapter {
             screens.insert(index, screen);
         }
         screen.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    }
+
+    public void startNewGame() {
+        addScreen(new GameScreen(this));
+    }
+
+    /**
+     * Exit the game. Cleans up all the resources
+     */
+    public void exit() {
+        //TODO: Actually clean up the resources
+        Gdx.app.exit();
+    }
+
+    private class InputMultiplexer implements InputProcessor {
+        public boolean keyDown(int keycode) {
+            for (int i = screens.size-1; i >= 0; --i)
+                if (screens.get(i).getInputProcessor().keyDown(keycode)) return true;
+            return false;
+        }
+
+        public boolean keyUp(int keycode) {
+            for (int i = screens.size-1; i >= 0; --i)
+                if (screens.get(i).getInputProcessor().keyUp(keycode)) return true;
+            return false;
+        }
+
+        public boolean keyTyped(char character) {
+            for (int i = screens.size-1; i >= 0; --i)
+                if (screens.get(i).getInputProcessor().keyTyped(character)) return true;
+            return false;
+        }
+
+        public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+            for (int i = screens.size-1; i >= 0; --i)
+                if (screens.get(i).getInputProcessor().touchDown(screenX, screenY, pointer, button)) return true;
+            return false;
+        }
+
+        public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+            for (int i = screens.size-1; i >= 0; --i)
+                if (screens.get(i).getInputProcessor().touchUp(screenX, screenY, pointer, button)) return true;
+            return false;
+        }
+
+        public boolean touchDragged(int screenX, int screenY, int pointer) {
+            for (int i = screens.size-1; i >= 0; --i)
+                if (screens.get(i).getInputProcessor().touchDragged(screenX, screenY, pointer)) return true;
+            return false;
+        }
+
+        @Override
+        public boolean mouseMoved(int screenX, int screenY) {
+            for (int i = screens.size-1; i >= 0; --i)
+                if (screens.get(i).getInputProcessor().mouseMoved(screenX, screenY)) return true;
+            return false;
+        }
+
+        @Override
+        public boolean scrolled(int amount) {
+            for (int i = screens.size-1; i >= 0; --i)
+                if (screens.get(i).getInputProcessor().scrolled(amount)) return true;
+            return false;
+        }
     }
 }

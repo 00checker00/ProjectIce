@@ -12,25 +12,13 @@ import java.util.List;
 
 /**
  * Component for movable objects and characters
- *
  */
 public class MovableComponent extends Component implements Pool.Poolable {
-
-    // target position vector for character movement
-    public Vector2 targetUnprojected = new Vector2();
-    public Vector2 directionVector = new Vector2();
-    public Vector2 movementVector = new Vector2();
-    public Vector2 velocityVector = new Vector2();
     public boolean isMoving = false;
-
-    public List<Vector3> targetPositions = new LinkedList<Vector3>();
+    public List<Vector2> targetPositions = new LinkedList<Vector2>();
 
     @Override
     public void reset () {
-        targetUnprojected.set(new Vector2());
-        directionVector.set(new Vector2());
-        movementVector.set(new Vector2());
-        velocityVector.set(new Vector2());
         isMoving = false;
         targetPositions.clear();
     }

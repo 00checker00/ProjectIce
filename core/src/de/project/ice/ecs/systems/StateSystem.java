@@ -6,7 +6,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import de.project.ice.ecs.Components;
 import de.project.ice.ecs.components.StateComponent;
 
-public class StateSystem extends IteratingSystem {
+public class StateSystem extends IteratingIceSystem {
 
     @SuppressWarnings("unchecked")
     public StateSystem () {
