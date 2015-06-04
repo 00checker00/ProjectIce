@@ -47,7 +47,7 @@ public class MainMenuScreen extends BaseScreenAdapter {
         stage.addActor(root);
 
         root.setFillParent(true);
-        root.setBackground(skin.getTiledDrawable("menu_bg"));
+        //root.setBackground(skin.getTiledDrawable("menu_bg"));
 
         Image logo = new Image(skin, "menu_logo");
         root.add(logo);
@@ -85,6 +85,7 @@ public class MainMenuScreen extends BaseScreenAdapter {
                 return true;
             }
         });
+        inputProcessor = new DelegatingBlockingInputProcessor(stage);
     }
 
     @Override
@@ -128,11 +129,5 @@ public class MainMenuScreen extends BaseScreenAdapter {
     public void dispose() {
         stage.dispose();
         shapeRenderer.dispose();
-    }
-
-    @NotNull
-    @Override
-    public InputProcessor getInputProcessor() {
-        return new DelegatingBlockingInputProcessor(stage);
     }
 }

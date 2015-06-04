@@ -8,9 +8,12 @@ import org.jetbrains.annotations.NotNull;
 public abstract class BaseScreenAdapter implements BaseScreen {
     @NotNull
     protected final IceGame game;
+    @NotNull
+    protected InputProcessor inputProcessor;
 
     public BaseScreenAdapter(@NotNull IceGame game) {
         this.game = game;
+        inputProcessor = new InputAdapter();
     }
 
     /**
@@ -69,6 +72,6 @@ public abstract class BaseScreenAdapter implements BaseScreen {
     @NotNull
     @Override
     public InputProcessor getInputProcessor() {
-        return new InputAdapter();
+        return inputProcessor;
     }
 }
