@@ -22,7 +22,7 @@ btn_pressed
   rotate: false
   xy: 803, 625
   size: 22, 22
-  split: 6, 6, 6, 6
+  split: 7, 7, 7, 7
   orig: 22, 22
   offset: 0, 0
   index: -1

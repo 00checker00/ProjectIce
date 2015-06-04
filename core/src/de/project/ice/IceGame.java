@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
+import de.project.ice.dialog.Dialog;
 import de.project.ice.screens.BaseScreen;
+import de.project.ice.screens.DialogScreen;
 import de.project.ice.screens.GameScreen;
 import de.project.ice.screens.MainMenuScreen;
 import org.jetbrains.annotations.NotNull;
@@ -21,8 +23,7 @@ public class IceGame extends ApplicationAdapter {
     public void create () {
         batch = new SpriteBatch();
         textureAtlas = new TextureAtlas(Gdx.files.internal("spritesheets/eksi2.atlas"));
-        BaseScreen mainMenuScreen = new MainMenuScreen(this);
-        addScreen(mainMenuScreen);
+        addScreen(new GameScreen(this));
 
         Gdx.input.setInputProcessor(new InputMultiplexer());
     }
@@ -32,8 +33,10 @@ public class IceGame extends ApplicationAdapter {
         screens.begin();
         for (BaseScreen screen : screens) {
             screen.hide();
+            screen.dispose();
         }
         screens.end();
+        screens.clear();
     }
 
     @Override
@@ -81,6 +84,7 @@ public class IceGame extends ApplicationAdapter {
             screens.removeValue(screen, true);
         }
         screen.hide();
+        screen.dispose();
     }
 
     public void addScreen (@NotNull BaseScreen screen) {

@@ -1,8 +1,6 @@
 package de.project.ice.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -21,8 +19,6 @@ public class MainMenuScreen extends BaseScreenAdapter {
     protected static final String BUTTON_SETTINGS_ID = "BTN_SETTINGS";
     protected static final String BUTTON_EXIT_ID = "BTN_EXIT";
 
-    @NotNull
-    private ShapeRenderer shapeRenderer;     // For debug drawing
     @NotNull
     private Stage stage;
     @NotNull
@@ -47,7 +43,7 @@ public class MainMenuScreen extends BaseScreenAdapter {
         stage.addActor(root);
 
         root.setFillParent(true);
-        //root.setBackground(skin.getTiledDrawable("menu_bg"));
+        root.setBackground(skin.getTiledDrawable("menu_bg"));
 
         Image logo = new Image(skin, "menu_logo");
         root.add(logo);
@@ -57,8 +53,6 @@ public class MainMenuScreen extends BaseScreenAdapter {
         menuLayout.fill();
         menuLayout.space(5f);
         root.add(menuLayout);
-
-        shapeRenderer = new ShapeRenderer();
 
         createMenuButton(BUTTON_NEW_GAME_ID, "New Game", new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -128,6 +122,5 @@ public class MainMenuScreen extends BaseScreenAdapter {
 
     public void dispose() {
         stage.dispose();
-        shapeRenderer.dispose();
     }
 }
