@@ -1,9 +1,5 @@
-package de.project.ice.pathtool;
+package de.project.ice.pathlib;
 
-import com.badlogic.gdx.ai.pfa.Connection;
-import com.badlogic.gdx.ai.pfa.Heuristic;
-import com.badlogic.gdx.ai.pfa.indexed.IndexedGraph;
-import com.badlogic.gdx.ai.pfa.indexed.IndexedNode;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
@@ -20,14 +16,14 @@ public class PathCalculator {
     private static boolean Inside(PathArea pathArea, Vector2 position) {
         if (!Inside(pathArea.shape, position, true))
             return false;
-        for (ImageModel.Shape hole : pathArea.holes)
+        for (Shape hole : pathArea.holes)
             if (Inside(hole, position, false))
                 return false;
 
         return true;
     }
 
-    public static boolean Inside(ImageModel.Shape shape, Vector2 position, boolean isOuterShape) {
+    public static boolean Inside(Shape shape, Vector2 position, boolean isOuterShape) {
         Vector2 point = position;
 
         boolean inside = false;
@@ -77,7 +73,7 @@ public class PathCalculator {
         Vector2 mid = new Vector2(start).sub(end).scl(0.5f).add(end);
 
         // Not in LOS if the middle point is inside any hole
-        for (ImageModel.Shape hole : pathArea.holes) {
+        for (Shape hole : pathArea.holes) {
             if (Inside(hole, mid, false)) {
                 return false;
             }
@@ -113,7 +109,7 @@ public class PathCalculator {
         for (Vector2 vertex : pathArea.shape.vertices)
             graph.addNode(new PathNode(vertex));
 
-        for (ImageModel.Shape hole : pathArea.holes)
+        for (Shape hole : pathArea.holes)
             for (Vector2 vertex : hole.vertices)
                 graph.addNode(new PathNode(vertex));
 
@@ -145,7 +141,7 @@ public class PathCalculator {
         if (LineSegmentCrosses(start.pos, end.pos, area.shape.vertices))
             lineOfSight = false;
 
-        for (ImageModel.Shape hole : area.holes) {
+        for (Shape hole : area.holes) {
             if (LineSegmentCrosses(start.pos, end.pos, hole.vertices)) {
                 lineOfSight = false;
                 break;
@@ -173,7 +169,7 @@ public class PathCalculator {
 
             }
         }
-        for (ImageModel.Shape hole : area.holes) {
+        for (Shape hole : area.holes) {
             for (int i = 1; i <= hole.vertices.size; i++) {
                 try {
                     Vector2 closestOnSegment = closestPoint(
@@ -219,97 +215,9 @@ public class PathCalculator {
     }
 
     public static class PathArea {
-        public final Array<ImageModel.Shape> holes = new Array<ImageModel.Shape>();
+        public final Array<Shape> holes = new Array<Shape>();
         public final Array<PathNode> waypoints = new Array<PathNode>();
-        public ImageModel.Shape shape;
+        public Shape shape;
     }
 
-    public static class PathGraph implements IndexedGraph<PathNode> {
-        private final Array<PathNode> nodes = new Array<PathNode>();
-
-        @Override
-        public int getNodeCount() {
-            return nodes.size;
-        }
-
-        public void addNode(PathNode node) {
-            node.index = nodes.size;
-            nodes.add(node);
-        }
-
-        public Array<PathNode> getNodes() {
-            return nodes;
-        }
-
-        public Array<Connection<PathNode>> getConnections() {
-            Array<Connection<PathNode>> allConnections = new Array<Connection<PathNode>>();
-            for (PathNode node : nodes)
-                allConnections.addAll(node.connections);
-            return allConnections;
-        }
-
-        @Override
-        public Array<Connection<PathNode>> getConnections(PathNode pathNode) {
-            return pathNode.connections;
-        }
-    }
-
-    public static class PathConnection implements Connection<PathNode> {
-        private float cost = 0;
-        private PathNode start = null;
-        private PathNode end = null;
-
-        public PathConnection(PathNode start, PathNode end) {
-            this.start = start;
-            this.end = end;
-            this.cost = start.pos.dst(end.pos);
-        }
-
-        @Override
-        public float getCost() {
-            return cost;
-        }
-
-        @Override
-        public PathNode getFromNode() {
-            return start;
-        }
-
-        @Override
-        public PathNode getToNode() {
-            return end;
-        }
-    }
-
-    public static class PathNode implements IndexedNode<PathNode> {
-        private final Array<Connection<PathNode>> connections = new Array<Connection<PathNode>>();
-        private int index = -1;
-        private Vector2 pos;
-
-        public PathNode(Vector2 pos) {
-            this.pos = pos;
-        }
-
-        public Vector2 getPos() {
-            return pos;
-        }
-
-        @Override
-        public int getIndex() {
-            return index;
-        }
-
-        @Override
-        public Array<Connection<PathNode>> getConnections() {
-            return connections;
-        }
-    }
-
-    public static class PathHeuristic implements Heuristic<PathNode> {
-
-        @Override
-        public float estimate(PathNode startNode, PathNode endNode) {
-            return startNode.pos.dst(endNode.pos);
-        }
-    }
 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.ai.pfa.GraphPath;
 import com.badlogic.gdx.ai.pfa.indexed.IndexedAStarPathFinder;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import de.project.ice.pathlib.*;
 import de.project.ice.utils.notifications.ChangeableObject;
 
 import javax.imageio.ImageIO;
@@ -21,9 +22,9 @@ import java.util.List;
 public class ImageModel extends ChangeableObject {
     public final File file;
     public final List<Shape> shapes = new ArrayList<Shape>();
-    public final Array<Connection<PathCalculator.PathNode>> linesOfSight = new Array<Connection<PathCalculator.PathNode>>();
-    public final GraphPath<PathCalculator.PathNode> pathNodes = new DefaultGraphPath<PathCalculator.PathNode>();
-    public final Array<PathCalculator.PathNode> waypoints = new Array<PathCalculator.PathNode>();
+    public final Array<Connection<PathNode>> linesOfSight = new Array<Connection<PathNode>>();
+    public final GraphPath<PathNode> pathNodes = new DefaultGraphPath<PathNode>();
+    public final Array<PathNode> waypoints = new Array<PathNode>();
     private final float w, h;
     public Vector2 mousePos = new Vector2();
     public Vector2 startPos = new Vector2();
@@ -49,7 +50,7 @@ public class ImageModel extends ChangeableObject {
         for (int i = 1; i < shapes.size(); i++)
             pathArea.holes.add(shapes.get(i));
 
-        PathCalculator.PathGraph pathGraph = pathCalc.computeGraph(pathArea);
+        PathGraph pathGraph = pathCalc.computeGraph(pathArea);
         linesOfSight.addAll(pathGraph.getConnections());
 
     }
@@ -68,21 +69,21 @@ public class ImageModel extends ChangeableObject {
 
         waypoints.clear();
 
-        PathCalculator.PathNode start = new PathCalculator.PathNode(startPos);
+        PathNode start = new PathNode(startPos);
         pathArea.waypoints.add(start);
         waypoints.add(start);
 
-        PathCalculator.PathNode end = new PathCalculator.PathNode(mousePos);
+        PathNode end = new PathNode(mousePos);
         pathArea.waypoints.add(end);
         waypoints.add(end);
 
-        PathCalculator.PathGraph pathGraph = pathCalc.computeGraph(pathArea);
+        PathGraph pathGraph = pathCalc.computeGraph(pathArea);
         linesOfSight.clear();
         linesOfSight.addAll(pathGraph.getConnections());
 
-        IndexedAStarPathFinder<PathCalculator.PathNode> astar = new IndexedAStarPathFinder<PathCalculator.PathNode>(pathGraph);
+        IndexedAStarPathFinder<PathNode> astar = new IndexedAStarPathFinder<PathNode>(pathGraph);
         pathNodes.clear();
-        return astar.searchNodePath(start, end, new PathCalculator.PathHeuristic(), pathNodes);
+        return astar.searchNodePath(start, end, new PathHeuristic(), pathNodes);
     }
 
     public void clear() {
@@ -94,8 +95,4 @@ public class ImageModel extends ChangeableObject {
         linesOfSight.clear();
     }
 
-    public static class Shape {
-        public final Array<Vector2> vertices = new Array<Vector2>();
-        public boolean closed;
-    }
 }
