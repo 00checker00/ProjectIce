@@ -1,6 +1,8 @@
 package de.project.ice.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -48,7 +50,7 @@ public class DialogScreen extends BaseScreenAdapter {
 
         root.setFillParent(true);
 
-        inputProcessor = new DelegatingBlockingInputProcessor(stage);
+        inputProcessor = new InputProcessor(stage);
 
         showNode(dialog);
     }
@@ -107,17 +109,10 @@ public class DialogScreen extends BaseScreenAdapter {
 
         root.row().expandX();
 
-        final Node next = node.next;
+        ((InputProcessor)inputProcessor).next = node.next;
+        ((InputProcessor)inputProcessor).nextEnabled = node.choices.size == 0;
+
         Label textLabel = new Label(node.text, skin);
-        if (node.choices.size == 0) {
-            textLabel.addListener(new InputListener() {
-                @Override
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    showNode(next);
-                    return true;
-                }
-            });
-        }
         textLabel.setAlignment(Align.center);
         ScrollPane scrollPane = new ScrollPane(textLabel, skin);
         root.add(scrollPane).height(50f).fill();
@@ -152,5 +147,23 @@ public class DialogScreen extends BaseScreenAdapter {
 
     public void dispose() {
         stage.dispose();
+    }
+
+    private class InputProcessor extends DelegatingBlockingInputProcessor {
+        public Node next = null;
+        public boolean nextEnabled = false;
+
+        public InputProcessor(com.badlogic.gdx.InputProcessor processor) {
+            super(processor);
+        }
+
+        @Override
+        public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+            if (!nextEnabled)
+             return super.touchDown(screenX, screenY, pointer, button);
+
+            showNode(next);
+            return true;
+        }
     }
 }
