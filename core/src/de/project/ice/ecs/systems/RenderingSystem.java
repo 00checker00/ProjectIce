@@ -21,7 +21,7 @@ public class RenderingSystem extends SortedIteratingIceSystem {
     @NotNull
     private SpriteBatch batch;
 
-    public RenderingSystem (@NotNull SpriteBatch batch) {
+    public RenderingSystem () {
         super(Families.renderable, new Comparator<Entity>() {
             @Override
             public int compare(Entity entityA, Entity entityB) {
@@ -30,7 +30,7 @@ public class RenderingSystem extends SortedIteratingIceSystem {
             }
         });
 
-        this.batch = batch;
+        this.batch = new SpriteBatch();
     }
 
     @Override

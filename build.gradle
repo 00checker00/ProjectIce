@@ -37,6 +37,7 @@ project(":pathlib") {
 
         dependencies {
             compile "com.badlogicgames.gdx:gdx-ai:1.5.0"
+            compile "org.jetbrains:annotations:13.0"
         }
     }
 

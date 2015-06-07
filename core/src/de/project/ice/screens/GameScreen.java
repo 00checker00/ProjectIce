@@ -23,9 +23,9 @@ public class GameScreen extends BaseScreenAdapter {
     private final ScriptManager scriptManager;
     private final EntitySystem[] SystemsToPause;
 
-    public GameScreen (@NotNull IceGame game) {
+    public GameScreen (@NotNull IceGame game, @NotNull IceEngine engine) {
         super(game);
-        this.engine = new IceEngine(game);
+        this.engine = engine;
         this.scriptManager = new ScriptManager(this.engine);
 
         // Load "Scene01" by loading the Scene01_Load script

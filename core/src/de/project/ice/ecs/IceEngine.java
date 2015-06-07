@@ -21,12 +21,12 @@ public class IceEngine extends PooledEngine {
     @NotNull
     public final ControlSystem controlSystem;
 
-    public IceEngine(IceGame iceGame) {
+    public IceEngine() {
         super();
         stateSystem = new StateSystem();
         animationSystem = new AnimationSystem();
         cameraSystem = new CameraSystem();
-        renderingSystem = new RenderingSystem(iceGame.batch);
+        renderingSystem = new RenderingSystem();
         scriptingSystem = new ScriptingSystem();
         movementSystem = new MovementSystem();
         controlSystem = new ControlSystem();
