@@ -23,7 +23,7 @@ public class PathCalculator {
         return true;
     }
 
-    public static boolean Inside(Shape shape, Vector2 position, boolean isOuterShape) {
+    private static boolean Inside(Shape shape, Vector2 position, boolean isOuterShape) {
         Vector2 point = position;
 
         boolean inside = false;
@@ -103,7 +103,7 @@ public class PathCalculator {
         return (r > 0 && r < 1) && (s > 0 && s < 1);
     }
 
-    public PathGraph computeGraph(PathArea pathArea) {
+    public static PathGraph computeGraph(PathArea pathArea) {
         PathGraph graph = new PathGraph();
 
         for (Vector2 vertex : pathArea.shape.vertices)
@@ -124,7 +124,7 @@ public class PathCalculator {
             for (int m = 0; m < graph.nodes.size; m++) {
                 PathNode endNode = graph.nodes.get(m);
 
-                if (ConnectionValid(startNode, endNode, pathArea)) {
+                if (startNode != endNode && ConnectionValid(startNode.pos, endNode.pos, pathArea)) {
                     startNode.connections.add(new PathConnection(startNode, endNode));
                 }
             }
@@ -132,22 +132,22 @@ public class PathCalculator {
         return graph;
     }
 
-    private static boolean ConnectionValid (PathNode start, PathNode end, PathArea area) {
+    public static boolean ConnectionValid (Vector2 start, Vector2 end, PathArea area) {
         if (start == end)
             return false;
 
         boolean lineOfSight = true;
 
-        if (LineSegmentCrosses(start.pos, end.pos, area.shape.vertices))
+        if (LineSegmentCrosses(start, end, area.shape.vertices))
             lineOfSight = false;
 
         for (Shape hole : area.holes) {
-            if (LineSegmentCrosses(start.pos, end.pos, hole.vertices)) {
+            if (LineSegmentCrosses(start, end, hole.vertices)) {
                 lineOfSight = false;
                 break;
             }
         }
-        return lineOfSight && InLineOfSight(area, start.pos, end.pos);
+        return lineOfSight && InLineOfSight(area, start, end);
     }
 
     private static void moveWaypointInside (PathGraph graph, PathArea area, PathNode waypoint) {
@@ -191,7 +191,7 @@ public class PathCalculator {
     }
 
 
-    public static Vector2 closestPoint (Vector2 point, Vector2 start, Vector2 end) throws IllegalArgumentException {
+    private static Vector2 closestPoint (Vector2 point, Vector2 start, Vector2 end) throws IllegalArgumentException {
         final float dX = end.x - start.x;
         final float dY = end.y - start.y;
 
@@ -212,12 +212,6 @@ public class PathCalculator {
         }
 
         return closestPoint;
-    }
-
-    public static class PathArea {
-        public final Array<Shape> holes = new Array<Shape>();
-        public final Array<PathNode> waypoints = new Array<PathNode>();
-        public Shape shape;
     }
 
 }
