@@ -26,6 +26,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.io.FilenameUtils;
 import res.Res;
@@ -67,6 +68,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel projectPanel;
     private javax.swing.JPanel renderPanel;
     private javax.swing.JButton saveBtn;
+    private javax.swing.JButton exportBtn;
     private final ListSelectionListener emittersListSelectionListener = new ListSelectionListener() {
         @Override
         public void valueChanged(ListSelectionEvent e) {
@@ -74,6 +76,7 @@ public class MainWindow extends javax.swing.JFrame {
             canvas.setImage(img);
             deleteBtn.setEnabled(img != null);
             saveBtn.setEnabled(img != null);
+            exportBtn.setEnabled(img != null);
         }
     };
     private CompactSlider spriteOpacitySlider;
@@ -103,6 +106,12 @@ public class MainWindow extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 save();
+            }
+        });
+        exportBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                export();
             }
         });
         loadBtn.addActionListener(new ActionListener() {
@@ -203,6 +212,8 @@ public class MainWindow extends javax.swing.JFrame {
     private void load() {
         JFileChooser chooser = new JFileChooser(".");
         chooser.setDialogTitle("Choose the file to read");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("ProjectIce Pathfinding Project", "pfp");
+        chooser.setFileFilter(filter);
 
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             try {
@@ -218,12 +229,34 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void save() {
         JFileChooser chooser = new JFileChooser(".");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("ProjectIce Pathfinding Project", "pfp");
+        chooser.setFileFilter(filter);
         chooser.setDialogTitle("Choose the file to write or overwrite");
 
         if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
             try {
                 File file = chooser.getSelectedFile();
+                if (!file.getName().endsWith(".pfp"))
+                    file = new File(file.getAbsolutePath() + ".pfp");
                 ImageModelIo.save(file, images);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "Cannot save the project, reason is:\n" + ex.getMessage());
+            }
+        }
+    }
+
+    private void export() {
+        JFileChooser chooser = new JFileChooser(".");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("ProjectIce Pathfinding Area", "pfa");
+        chooser.setFileFilter(filter);
+        chooser.setDialogTitle("Choose the file to write or overwrite");
+
+        if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            try {
+                File file = chooser.getSelectedFile();
+                if (!file.getName().endsWith(".pfa"))
+                    file = new File(file.getAbsolutePath() + ".pfa");
+                ImageModelIo.export(file, (ImageModel)imagesList.getSelectedValue());
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(this, "Cannot save the project, reason is:\n" + ex.getMessage());
             }
@@ -242,6 +275,7 @@ public class MainWindow extends javax.swing.JFrame {
         deleteBtn = new javax.swing.JButton();
         jToolBar7 = new javax.swing.JToolBar();
         saveBtn = new javax.swing.JButton();
+        exportBtn = new javax.swing.JButton();
         loadBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         imagesList = new JList();
@@ -290,6 +324,13 @@ public class MainWindow extends javax.swing.JFrame {
         saveBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         saveBtn.setMargin(new java.awt.Insets(2, 3, 2, 3));
         jToolBar7.add(saveBtn);
+
+        exportBtn.setIcon(new javax.swing.ImageIcon(Res.class.getResource("gfx/ic_save.png"))); // NOI18N
+        exportBtn.setText("Export");
+        exportBtn.setFocusable(false);
+        exportBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        exportBtn.setMargin(new java.awt.Insets(2, 3, 2, 3));
+        jToolBar7.add(exportBtn);
 
         loadBtn.setIcon(new javax.swing.ImageIcon(Res.class.getResource("gfx/ic_open.png"))); // NOI18N
         loadBtn.setText("Load");

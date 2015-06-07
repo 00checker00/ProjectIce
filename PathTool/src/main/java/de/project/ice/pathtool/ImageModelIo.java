@@ -1,13 +1,11 @@
 package de.project.ice.pathtool;
 
-import de.project.ice.pathlib.PathNode;
+import com.badlogic.gdx.utils.JsonWriter;
 import de.project.ice.pathlib.Shape;
 import de.project.ice.utils.io.FilenameHelper;
-import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.math.Vector2;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +21,9 @@ public class ImageModelIo {
 
         for (int i = 0; i < models.size(); i++) {
             if (i > 0) output += "\n\n---\n\n";
-            models.get(i).lineOfSight();
 
             output += "i " + FilenameHelper.relativize(models.get(i).file.getPath(), file.getParent());
-            Array<Vector2> vertices = new Array<Vector2>();
             for (Shape shape : models.get(i).shapes) {
-                vertices.addAll(shape.vertices);
                 output += "\ns ";
                 Array<Vector2> vs = shape.vertices;
                 for (Vector2 v : vs) output += (v == vs.get(0) ? "" : ",") + v.x + "," + v.y;
@@ -36,6 +31,23 @@ public class ImageModelIo {
         }
 
         FileUtils.writeStringToFile(file, output);
+    }
+
+    public static void export(File file, ImageModel model) throws IOException {
+        JsonWriter json = new JsonWriter(new FileWriter(file));
+        json.object().name("area").array();
+        for (Shape shape : model.shapes) {
+            json.object().name("shape").array();
+            for (Vector2 v : shape.vertices) {
+                json.object();
+                json.set("x", v.x);
+                json.set("y", v.y);
+                json.pop();
+            }
+            json.pop();
+            json.pop();
+        }
+        json.close();
     }
 
     public static List<ImageModel> load(File file) throws IOException {

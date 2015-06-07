@@ -44,7 +44,7 @@ public class ImageModel extends ChangeableObject {
         if (shapes.size() == 0 || !shapes.get(0).closed)
             return;
 
-        PathCalculator.PathArea pathArea = new PathCalculator.PathArea();
+        PathArea pathArea = new PathArea();
         pathArea.shape = shapes.get(0);
 
         for (int i = 1; i < shapes.size(); i++)
@@ -61,7 +61,7 @@ public class ImageModel extends ChangeableObject {
         if (shapes.size() == 0 || !shapes.get(0).closed)
             return false;
 
-        PathCalculator.PathArea pathArea = new PathCalculator.PathArea();
+        PathArea pathArea = new PathArea();
         pathArea.shape = shapes.get(0);
 
         for (int i = 1; i < shapes.size(); i++)
