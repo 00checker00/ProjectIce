@@ -16,5 +16,11 @@ com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	default: { down: btn_pressed, up: btn, font: default-font, fontColor: white },
 	toggle: { down: btn_pressed, up: btn, checked: btn_pressed, font: default-font, fontColor: white, downFontColor: red }
-}
+},
+com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+	default: { font: default-font, fontColor: black }
+},
+com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
+	default: { background: white }
+},
 }

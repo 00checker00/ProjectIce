@@ -1,9 +1,12 @@
 package de.project.ice.screens;
 
 import com.badlogic.ashley.core.EntitySystem;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.files.FileHandle;
 import de.project.ice.IceGame;
+import de.project.ice.dialog.Dialog;
 import de.project.ice.ecs.IceEngine;
 import de.project.ice.scripting.ScriptManager;
 import de.project.ice.scripting.scripts.Scene01_Load;
@@ -34,6 +37,8 @@ public class GameScreen extends BaseScreenAdapter {
                 if (keycode == Input.Keys.ESCAPE) {
                     GameScreen.this.game.addScreen(new PauseScreen(GameScreen.this.game));
                     return true;
+                } else if (keycode == Input.Keys.T) {
+                    GameScreen.this.game.addScreen(new DialogScreen(GameScreen.this.game, Dialog.load(Gdx.files.internal("dialog/test.dlz"))));
                 }
                 return super.keyDown(keycode);
             }
