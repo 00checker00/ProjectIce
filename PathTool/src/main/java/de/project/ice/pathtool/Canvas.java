@@ -1,6 +1,6 @@
 package de.project.ice.pathtool;
 
-import de.project.ice.pathtool.ImageModel.Shape;
+import de.project.ice.pathlib.Shape;
 import de.project.ice.pathtool.input.PanZoomInputProcessor;
 import de.project.ice.pathtool.input.ShapeEditInputProcessor;
 import aurelienribon.tweenengine.BaseTween;

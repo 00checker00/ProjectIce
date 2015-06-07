@@ -1,7 +1,7 @@
 package de.project.ice.pathtool.input;
 
+import de.project.ice.pathlib.Shape;
 import de.project.ice.pathtool.ImageModel;
-import de.project.ice.pathtool.ImageModel.Shape;
 import de.project.ice.pathtool.Canvas;
 import de.project.ice.pathtool.Canvas.Mode;
 import de.project.ice.pathtool.InputHelper;

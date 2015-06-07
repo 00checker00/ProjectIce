@@ -1,6 +1,7 @@
 package de.project.ice.pathtool;
 
-import de.project.ice.pathtool.ImageModel.Shape;
+import de.project.ice.pathlib.PathNode;
+import de.project.ice.pathlib.Shape;
 import de.project.ice.utils.io.FilenameHelper;
 import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.math.Vector2;
@@ -32,11 +33,6 @@ public class ImageModelIo {
                 Array<Vector2> vs = shape.vertices;
                 for (Vector2 v : vs) output += (v == vs.get(0) ? "" : ",") + v.x + "," + v.y;
             }
-
-            output += "\nv ";
-            Array<Connection<PathCalculator.PathNode>> tvs = models.get(i).linesOfSight;
-            for (Connection<PathCalculator.PathNode> v : tvs)
-                output += (v == tvs.get(0) ? "" : ",") + v.getFromNode().getIndex() + ":" + v.getToNode().getIndex() + "=" + v.getCost();
         }
 
         FileUtils.writeStringToFile(file, output);

@@ -1,6 +1,5 @@
 package de.project.ice.pathtool;
 
-import de.project.ice.pathtool.ImageModel.Shape;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.ai.pfa.GraphPath;
@@ -12,6 +11,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import de.project.ice.pathlib.PathNode;
+import de.project.ice.pathlib.Shape;
 
 import java.util.List;
 
@@ -146,9 +147,9 @@ public class CanvasDrawer {
         drawer.begin(ShapeRenderer.ShapeType.Line);
         drawer.setColor(LINE_OF_SIGHT_COLOR);
 
-        Array<Connection<PathCalculator.PathNode>> vs = model.linesOfSight;
+        Array<Connection<PathNode>> vs = model.linesOfSight;
 
-        for (Connection<PathCalculator.PathNode> connection : vs) {
+        for (Connection<PathNode> connection : vs) {
             drawer.line(connection.getFromNode().getPos().x, connection.getFromNode().getPos().y,
                     connection.getToNode().getPos().x, connection.getToNode().getPos().y);
         }
@@ -164,7 +165,7 @@ public class CanvasDrawer {
         drawer.begin(ShapeRenderer.ShapeType.Line);
         drawer.setColor(PATH_COLOR);
 
-        GraphPath<PathCalculator.PathNode> vs = model.pathNodes;
+        GraphPath<PathNode> vs = model.pathNodes;
 
         for (int i = 1; i < vs.getCount(); i++) {
             drawer.line(vs.get(i - 1).getPos().x, vs.get(i - 1).getPos().y,
@@ -172,6 +173,15 @@ public class CanvasDrawer {
         }
 
         drawer.end();
+
+        float w = 10 * camera.zoom;
+
+        for (PathNode p : model.waypoints) {
+            drawer.begin(ShapeRenderer.ShapeType.Filled);
+            drawer.setColor(PATH_COLOR);
+            drawer.rect(p.getPos().cpy().sub(w / 2, w / 2).x, p.getPos().cpy().sub(w / 2, w / 2).y, w, w);
+            drawer.end();
+        }
     }
 
     private void drawMouseSelection(float x1, float y1, float x2, float y2) {
