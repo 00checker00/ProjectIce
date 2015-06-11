@@ -16,10 +16,12 @@ import java.util.List;
 public class MovableComponent extends Component implements Pool.Poolable {
     public boolean isMoving = false;
     public List<Vector2> targetPositions = new LinkedList<Vector2>();
+    public float speed = 2.0f;
 
     @Override
     public void reset () {
         isMoving = false;
+        speed = 2.0f;
         targetPositions.clear();
     }
 }

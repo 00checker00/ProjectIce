@@ -10,7 +10,7 @@ public class TransformComponent extends Component implements Pool.Poolable {
     @NotNull
     public Vector2 pos = new Vector2();
     @NotNull
-    public final Vector2 scale = new Vector2(1.0f, 1.0f);
+    public Vector2 scale = new Vector2(1.0f, 1.0f);
     public float rotation = 0.0f;
     public int z = 0;
 

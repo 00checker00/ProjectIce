@@ -8,7 +8,7 @@ import com.badlogic.gdx.InputProcessor;
  * Usage: Subclass and selectively override Events your interested in
  */
 public class DelegatingInputProcessor implements InputProcessor {
-    private InputProcessor processor;
+    protected InputProcessor processor;
 
     public DelegatingInputProcessor(InputProcessor processor) {
         this.processor = processor;

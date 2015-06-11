@@ -20,6 +20,8 @@ public class IceEngine extends PooledEngine {
     public final MovementSystem movementSystem;
     @NotNull
     public final ControlSystem controlSystem;
+    @NotNull
+    public final BreathSystem breathSystem;
 
     public IceEngine() {
         super();
@@ -30,6 +32,7 @@ public class IceEngine extends PooledEngine {
         scriptingSystem = new ScriptingSystem();
         movementSystem = new MovementSystem();
         controlSystem = new ControlSystem();
+        breathSystem = new BreathSystem();
 
         addSystem(stateSystem);
         addSystem(animationSystem);
@@ -38,5 +41,6 @@ public class IceEngine extends PooledEngine {
         addSystem(scriptingSystem);
         addSystem(movementSystem);
         addSystem(controlSystem);
+        addSystem(breathSystem);
     }
 }

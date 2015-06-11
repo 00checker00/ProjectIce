@@ -7,6 +7,7 @@ import de.project.ice.ecs.Families;
 import de.project.ice.ecs.components.AnimationComponent;
 import de.project.ice.ecs.components.StateComponent;
 import de.project.ice.ecs.components.TextureComponent;
+import de.project.ice.utils.Assets;
 
 public class AnimationSystem extends IteratingIceSystem {
     public static final int ANIMATION_NONE = 0;
@@ -25,9 +26,10 @@ public class AnimationSystem extends IteratingIceSystem {
         AnimationComponent anim = Components.animation.get(entity);
         StateComponent state = Components.state.get(entity);
 
-        Animation animation = anim.animations.get(state.getAnimation());
-        if (animation != null) {
-            tex.region = animation.getKeyFrame(state.time);
+        Assets.AnimationHolder animation = anim.animations.get(state.getAnimation());
+        if (animation != null && animation.data != null) {
+            tex.region.data = animation.data.getKeyFrame(state.time);
+            tex.region.name = animation.name;
             //Gdx.app.log("Animation", "" + state.time);
         }
     }

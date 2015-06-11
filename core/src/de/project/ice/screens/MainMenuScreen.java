@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import de.project.ice.IceGame;
+import de.project.ice.scripting.scripts.Scene01_Load;
 import de.project.ice.utils.DelegatingBlockingInputProcessor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -58,6 +59,8 @@ public class MainMenuScreen extends BaseScreenAdapter {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 MainMenuScreen.this.game.startNewGame();
                 MainMenuScreen.this.game.removeScreen(MainMenuScreen.this);
+
+                MainMenuScreen.this.game.scriptManager.loadScript(Scene01_Load.class);
                 return true;
             }
         });

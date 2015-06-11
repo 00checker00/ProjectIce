@@ -3,7 +3,9 @@ package de.project.ice.ecs.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.project.ice.ecs.Components;
@@ -13,12 +15,11 @@ import de.project.ice.ecs.components.CameraComponent;
 import de.project.ice.ecs.components.ControlComponent;
 import de.project.ice.ecs.components.MovableComponent;
 import de.project.ice.ecs.components.TextureComponent;
-import de.project.ice.utils.FakePerspectiveCamera;
 
 public class ControlSystem extends IteratingIceSystem implements InputProcessor {
 
     private ImmutableArray<Entity> cameras;
-    FakePerspectiveCamera active_camera = null;
+    OrthographicCamera active_camera = null;
 
     private Vector2 pointerPos = new Vector2();
     private boolean pointerDown = false;
@@ -41,16 +42,10 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
                 pointerClicked = false;
                 if (active_camera != null) {
                     Vector3 pos = active_camera.unproject(new Vector3(pointerPos.x, pointerPos.y, 0f)); // unprojects UI coordinates to camera coordinates
-
-                    if (pos.y > active_camera.getHorizonPosition()) {
-                        pos.y = active_camera.getHorizonPosition();
-                    }
-
-                    float height = active_camera.calcDistanceScaling(pos.y) *
-                            FakePerspectiveCamera.PIXELS_TO_METRES * (texture.region != null ? texture.region.getRegionHeight() : 0);
+                    float width = RenderingSystem.PIXELS_TO_METRES * (texture.region.data != null ? texture.region.data.getRegionWidth() : 0);
 
                     move.targetPositions.clear();
-                    move.targetPositions.add(new Vector2(pos.x, pos.y + height/2));
+                    move.targetPositions.add(new Vector2(pos.x - width/2, pos.y));
                 }
             }
 

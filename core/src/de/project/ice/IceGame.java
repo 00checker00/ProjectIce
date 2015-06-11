@@ -13,20 +13,36 @@ import de.project.ice.screens.BaseScreen;
 import de.project.ice.screens.DialogScreen;
 import de.project.ice.screens.GameScreen;
 import de.project.ice.screens.MainMenuScreen;
+import de.project.ice.scripting.ScriptManager;
+import de.project.ice.scripting.scripts.Scene01_Load;
 import org.jetbrains.annotations.NotNull;
 
 public class IceGame extends ApplicationAdapter {
-    public static TextureAtlas textureAtlas;
     private final DelayedRemovalArray<BaseScreen> screens = new DelayedRemovalArray<BaseScreen>();
     public IceEngine engine;
+    protected GameScreen gameScreen = null;
+    @NotNull
+    public ScriptManager scriptManager;
 
     @Override
     public void create () {
         engine = new IceEngine();
-        textureAtlas = new TextureAtlas(Gdx.files.internal("spritesheets/eksi2.atlas"));
-        addScreen(new GameScreen(this, engine));
+        scriptManager = new ScriptManager(engine);
+        gameScreen = new GameScreen(this, engine);
+        addScreen(gameScreen);
+        addScreen(new MainMenuScreen(this));
 
         Gdx.input.setInputProcessor(new InputMultiplexer());
+    }
+
+    public void pauseGame() {
+        if (gameScreen != null)
+            gameScreen.pauseGame();
+    }
+
+    public void resumeGame() {
+        if (gameScreen != null)
+            gameScreen.resumeGame();
     }
 
     @Override
@@ -108,7 +124,8 @@ public class IceGame extends ApplicationAdapter {
     }
 
     public void startNewGame() {
-        addScreen(new GameScreen(this, engine));
+        engine.removeAllEntities();
+        scriptManager.loadScript(Scene01_Load.class);
     }
 
     /**
@@ -119,7 +136,7 @@ public class IceGame extends ApplicationAdapter {
         Gdx.app.exit();
     }
 
-    private class InputMultiplexer implements InputProcessor {
+    public class InputMultiplexer implements InputProcessor {
         public boolean keyDown(int keycode) {
             for (int i = screens.size-1; i >= 0; --i)
                 if (screens.get(i).getInputProcessor().keyDown(keycode)) return true;

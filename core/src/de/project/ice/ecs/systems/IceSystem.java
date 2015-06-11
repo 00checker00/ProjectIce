@@ -6,6 +6,14 @@ import com.badlogic.ashley.core.EntitySystem;
 import de.project.ice.ecs.IceEngine;
 
 public class IceSystem extends EntitySystem {
+
+    public IceSystem() {
+    }
+
+    public IceSystem(int priority) {
+        super(priority);
+    }
+
     @Override
     @Deprecated
     public void addedToEngine(Engine engine) {
@@ -13,6 +21,7 @@ public class IceSystem extends EntitySystem {
     }
 
     @Override
+
     @Deprecated
     public void removedFromEngine(Engine engine) {
         removedFromEngine((IceEngine) engine);

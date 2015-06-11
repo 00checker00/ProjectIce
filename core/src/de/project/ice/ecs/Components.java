@@ -17,4 +17,5 @@ public abstract class Components {
     public static final ComponentMapper<ControlComponent> control = ComponentMapper.getFor(ControlComponent.class);
     public static final ComponentMapper<MovableComponent> movable = ComponentMapper.getFor(MovableComponent.class);
     public static final ComponentMapper<BreathComponent> breath = ComponentMapper.getFor(BreathComponent.class);
+    public static final ComponentMapper<NameComponent> name = ComponentMapper.getFor(NameComponent.class);
 }

@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.Pool;
 import de.project.ice.ecs.systems.AnimationSystem;
 
 public class StateComponent extends Component implements Pool.Poolable {
-    private int animation = AnimationSystem.ANIMATION_NONE;
+    public int animation = AnimationSystem.ANIMATION_NONE;
     public float time = 0.0f;
 
     public int getAnimation() {

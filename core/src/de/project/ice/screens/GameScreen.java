@@ -19,17 +19,14 @@ import org.jetbrains.annotations.NotNull;
 public class GameScreen extends BaseScreenAdapter {
     @NotNull
     private final IceEngine engine;
-    @NotNull
-    private final ScriptManager scriptManager;
     private final EntitySystem[] SystemsToPause;
 
     public GameScreen (@NotNull IceGame game, @NotNull IceEngine engine) {
         super(game);
         this.engine = engine;
-        this.scriptManager = new ScriptManager(this.engine);
 
         // Load "Scene01" by loading the Scene01_Load script
-        this.scriptManager.loadScript(Scene01_Load.class);
+        // this.scriptManager.loadScript(Scene01_Load.class);
 
         inputProcessor = new DelegatingBlockingInputProcessor(engine.controlSystem) {
             @Override
@@ -60,14 +57,20 @@ public class GameScreen extends BaseScreenAdapter {
 
     @Override
     public void resume () {
-        for (EntitySystem system : SystemsToPause)
-            system.setProcessing(true);
     }
 
     @Override
     public void pause () {
+    }
+
+    public void pauseGame() {
         for (EntitySystem system : SystemsToPause)
             system.setProcessing(false);
+    }
+
+    public void resumeGame() {
+        for (EntitySystem system : SystemsToPause)
+            system.setProcessing(true);
     }
 
     @Override

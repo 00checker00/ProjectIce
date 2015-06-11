@@ -9,12 +9,15 @@ import com.badlogic.gdx.utils.Pool;
  */
 public class BreathComponent extends Component implements Pool.Poolable {
 
-    public final Vector2 scale = new Vector2(1.0f, 1.0f);
-    public final float speed = 30f;
+    public Vector2 curScale = new Vector2(0f, 0f);
+    public Vector2 scaleValue = new Vector2(0f, 0f);
+    public float duration = 1f;
 
     @Override
     public void reset(){
-        scale.set(1.0f, 1.0f);
+        curScale.set(0f, 0f);
+        scaleValue.set(0f, 0f);
+        duration = 1f;
     }
 }
 

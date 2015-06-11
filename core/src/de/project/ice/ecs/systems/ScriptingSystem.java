@@ -70,17 +70,27 @@ public class ScriptingSystem extends IntervalIceSystem implements EntityListener
 
     @Override
     public void entityAdded (Entity entity) {
-        ScriptManager.Script script = Components.script.get(entity).script;
-        if (script != null) {
-            script.onCreate(entity);
-        }
+        ScriptComponent component = Components.script.get(entity);
+        if (component == null)
+            return;
+
+        ScriptManager.Script script = component.script;
+        if (script == null)
+            return;
+
+        script.onCreate(entity);
     }
 
     @Override
     public void entityRemoved (Entity entity) {
-        ScriptManager.Script script = Components.script.get(entity).script;
-        if (script != null) {
-            script.onRemove(entity);
-        }
+        ScriptComponent component = Components.script.get(entity);
+        if (component == null)
+            return;
+
+        ScriptManager.Script script = component.script;
+        if (script == null)
+            return;
+
+        script.onRemove(entity);
     }
 }

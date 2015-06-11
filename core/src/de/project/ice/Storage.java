@@ -108,7 +108,7 @@ public abstract class Storage {
         prefs.remove(key);
     }
 
-    private static class Global extends Storage {
+    public static class Global extends Storage {
         private Global() {
             super(Gdx.app.getPreferences(PREFIX + "_global"));
         }
