@@ -8,14 +8,21 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import de.project.ice.ecs.Components;
 import de.project.ice.ecs.Families;
+import de.project.ice.ecs.IceEngine;
+import de.project.ice.ecs.components.HotspotComponent;
 import de.project.ice.ecs.components.*;
+import de.project.ice.pathlib.PathArea;
+import static de.project.ice.config.Config.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Comparator;
 
 public class RenderingSystem extends SortedIteratingIceSystem {
+    private ImmutableArray<Entity> hotspots;
+    private ImmutableArray<Entity> walkareas;
     /**
      * x-axis dimension from far left to far right
      */
@@ -24,7 +31,6 @@ public class RenderingSystem extends SortedIteratingIceSystem {
      * y-axis dimension from bottom to top
      */
     public static final float FRUSTUM_HEIGHT = 9f;
-    public  static final float PIXELS_TO_METRES = 1.0f / 128.0f;
 
     private ImmutableArray<Entity> cameras;
     OrthographicCamera active_camera = null;
@@ -65,8 +71,46 @@ public class RenderingSystem extends SortedIteratingIceSystem {
         debugRenderer.begin(ShapeRenderer.ShapeType.Line);
         debugRenderer.setColor(Color.RED);
         super.update(deltaTime);
+        debugRenderer.setColor(Color.BLUE);
+        for (Entity hotspot : hotspots)
+            renderHotspot(hotspot);
+        if (walkareas.size() > 0) {
+            WalkAreaComponent component = Components.walkarea.get(walkareas.first());
+            PathArea area = component.getArea();
+
+            if (area != null && area.shape != null) {
+
+                debugRenderer.setColor(Color.PURPLE);
+
+                for (int i = 1; i < area.shape.vertices.size; i++)
+                    debugRenderer.line(
+                            area.shape.vertices.get(i).x,
+                            area.shape.vertices.get(i).y,
+                            area.shape.vertices.get(i - 1).x,
+                            area.shape.vertices.get(i - 1).y);
+
+                debugRenderer.line(
+                        area.shape.vertices.get(0).x,
+                        area.shape.vertices.get(0).y,
+                        area.shape.vertices.get(area.shape.vertices.size - 1).x,
+                        area.shape.vertices.get(area.shape.vertices.size - 1).y);
+            }
+
+        }
+        debugRenderer.setColor(Color.GRAY);
+        debugRenderer.line(0, -1, 0, 1);
+        debugRenderer.line(-1, 0, 1, 0);
         debugRenderer.end();
         forceSort();
+    }
+
+    private void renderHotspot(Entity entity) {
+        TransformComponent transform = Components.transform.get(entity);
+        HotspotComponent hotspot = Components.hotspot.get(entity);
+
+        Vector2 pos = transform.pos.cpy().add(hotspot.origin);
+
+        debugRenderer.rect(pos.x, pos.y, hotspot.width, hotspot.height);
     }
 
     @Override
@@ -108,6 +152,13 @@ public class RenderingSystem extends SortedIteratingIceSystem {
             debugRenderer.line(t.pos.x + width/2 - 0.1f, t.pos.y + originY, t.pos.x + width/2 + 0.1f, t.pos.y + originY);
             debugRenderer.line(t.pos.x + originX, t.pos.y + height/2 - 0.1f, t.pos.x + originX, t.pos.y + height/2 + 0.1f);
         }
+    }
+
+    @Override
+    public void addedToEngine(IceEngine engine) {
+        hotspots = engine.getEntitiesFor(Families.hotspot);
+        walkareas = engine.getEntitiesFor(Families.walkArea);
+        super.addedToEngine(engine);
     }
 
     public static class RenderingComparator implements Comparator<Entity> {

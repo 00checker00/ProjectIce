@@ -142,6 +142,7 @@ public class DialogScreen extends BaseScreenAdapter {
     }
 
     public void render () {
+        stage.getViewport().apply();
         stage.draw();
     }
 

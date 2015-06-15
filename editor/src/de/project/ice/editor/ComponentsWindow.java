@@ -2,17 +2,14 @@ package de.project.ice.editor;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.util.TableUtils;
 import com.kotcrab.vis.ui.widget.*;
 import de.project.ice.ecs.IceEngine;
+import de.project.ice.ecs.components.HotspotComponent;
 import de.project.ice.ecs.components.*;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,6 +21,7 @@ public class ComponentsWindow extends VisWindow {
             BreathComponent.class,
             CameraComponent.class,
             ControlComponent.class,
+            HotspotComponent.class,
             IdleComponent.class,
             InvisibilityComponent.class,
             MovableComponent.class,
@@ -32,6 +30,7 @@ public class ComponentsWindow extends VisWindow {
             StateComponent.class,
             TextureComponent.class,
             TransformComponent.class,
+            WalkAreaComponent.class,
     };
 
     private Entity entity = null;

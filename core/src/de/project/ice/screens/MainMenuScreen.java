@@ -120,6 +120,7 @@ public class MainMenuScreen extends BaseScreenAdapter {
     }
 
     public void render () {
+        stage.getViewport().apply();
         stage.draw();
     }
 

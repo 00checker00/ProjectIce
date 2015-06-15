@@ -55,9 +55,10 @@ public abstract class SceneWriter {
                 Double.class.equals(type) || type == double.class ||
                 Short.class.equals(type) || type == short.class ||
                 Integer.class.equals(type) || type == int.class ||
-                Long.class.equals(type) || type == long.class ||
-                String.class.equals(type)) {
+                Long.class.equals(type) || type == long.class) {
             xml.text(o);
+        } else if (String.class.equals(type)) {
+            xml.text(((String)o).replace("&", "&amp").replace("<", "&lt").replace(">", "&gt"));
         } else if (Vector2.class.equals(type)) {
             Vector2 vec = (Vector2) o;
             xml.attribute("x", vec.x);

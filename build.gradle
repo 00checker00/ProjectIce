@@ -35,11 +35,16 @@ allprojects {
 project(":pathlib") {
     apply plugin: "java"
 
-        dependencies {
-            compile "com.badlogicgames.gdx:gdx-ai:1.5.0"
-            compile "org.jetbrains:annotations:13.0"
-        }
+    dependencies {
+        compile project(":config")
+        compile "com.badlogicgames.gdx:gdx-ai:1.5.0"
+        compile "org.jetbrains:annotations:13.0"
     }
+}
+
+project(":config") {
+    apply plugin: "java"
+}
 
 project(":PathTool") {
     apply plugin: "java"
@@ -132,6 +137,7 @@ project(":core") {
 
 
     dependencies {
+        compile project(":config")
         compile project(":pathlib")
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.ashley:ashley:$ashleyVersion"

@@ -3,6 +3,7 @@ package de.project.ice.editor.editors;
 
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 
@@ -10,8 +11,9 @@ public class ValueEditor<T> extends BaseEditor {
     private String title;
     protected T value;
     private T oldValue;
-    private Field field;
-    private Object target;
+    protected Field field;
+
+    protected Object target;
     private Array<ValueChangedListener<T>> listeners = new Array<ValueChangedListener<T>>(0);
 
 
@@ -20,15 +22,14 @@ public class ValueEditor<T> extends BaseEditor {
         super.act(delta);
         if ((oldValue != null && !oldValue.equals(value)) || (oldValue == null && value != null)) {
             oldValue = value;
+            setValue(field, target, value);
             fireValueChanged();
         } else  {
             try {
-                if (!value.equals(field.get(target))) {
-                    value = (T) field.get(target);
+                if (!value.equals(getValue(field, target))) {
+                    value = (T) getValue(field, target);
                     updateValue();
                 }
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
             } catch (NullPointerException ignore) {}
         }
     }

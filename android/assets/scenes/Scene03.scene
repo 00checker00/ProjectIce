@@ -1,0 +1,81 @@
+<scene>
+	<entities>
+		<entity>
+			<components>
+				<CameraComponent>
+					<camera type="OrthographicCamera" viewportWidth="16.0" viewportHeight="9.0">
+						<pos type="Vector3" x="3.6796875" y="2.9296875" z="0.0"/>
+					</camera>
+				</CameraComponent>
+				<NameComponent>
+					<name type="String">MainCamera</name>
+				</NameComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">Player</name>
+				</NameComponent>
+				<TransformComponent>
+					<pos type="Vector2" x="3.0" y="2.0"/>
+					<scale type="Vector2" x="1.0" y="1.0"/>
+					<rotation type="Float">0.0</rotation>
+					<z type="Integer">0</z>
+				</TransformComponent>
+				<BreathComponent>
+					<curScale type="Vector2" x="0.0" y="0.0"/>
+					<scaleValue type="Vector2" x="0.0" y="0.03"/>
+					<duration type="Float">0.8</duration>
+				</BreathComponent>
+				<TextureComponent>
+					<region type="TextureRegionHolder">eksi_rotznase</region>
+				</TextureComponent>
+				<IdleComponent/>
+				<StateComponent>
+					<animation type="Integer">1</animation>
+					<time type="Float">0.0</time>
+				</StateComponent>
+				<ControlComponent/>
+				<MovableComponent>
+					<isMoving type="Boolean" type="null"/>
+					<targetPositions type="LinkedList" type="null"/>
+					<speed type="Float">2.0</speed>
+				</MovableComponent>
+				<AnimationComponent>
+					<animations type="IntMap" type="IntMap" subType="AnimationHolder">
+						<_1 type="AnimationHolder" frameDuration="0.13" mode="LOOP">eski_lauf</_1>
+					</animations>
+				</AnimationComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">Opa</name>
+				</NameComponent>
+				<TransformComponent>
+					<pos type="Vector2" x="0.0" y="0.0"/>
+					<scale type="Vector2" x="1.0" y="1.0"/>
+					<rotation type="Float">0.0</rotation>
+					<z type="Integer">0</z>
+				</TransformComponent>
+				<TextureComponent>
+					<region type="TextureRegionHolder">Opa</region>
+				</TextureComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">WalkableArea</name>
+				</NameComponent>
+				<WalkAreaComponent>
+					<areaJSON type="String">
+						&ltarea&gt&ltshape&gt&ltvertex x="-2.0" y="255.49998"/&gt&ltvertex x="-30.0" y="218.5"/&gt&ltvertex x="-76.0" y="148.49997"/&gt&ltvertex x="-76.0" y="69.49999"/&gt&ltvertex x="-61.999985" y="19.500015"/&gt&ltvertex x="-53.999985" y="-12.5"/&gt&ltvertex x="-39.999985" y="-71.499985"/&gt&ltvertex x="1.5258789E-5" y="-124.499985"/&gt&ltvertex x="46.0" y="-167.5"/&gt&ltvertex x="166.99997" y="-206.49997"/&gt&ltvertex x="302.00003" y="-237.49997"/&gt&ltvertex x="533.0" y="-248.49997"/&gt&ltvertex x="655.00006" y="-232.5"/&gt&ltvertex x="737.0" y="-175.49997"/&gt&ltvertex x="821.0" y="-118.49997"/&gt&ltvertex x="876.0" y="46.500008"/&gt&ltvertex x="876.0" y="272.5"/&gt&ltvertex x="851.0" y="486.49997"/&gt&ltvertex x="819.00006" y="522.5"/&gt&ltvertex x="674.00006" y="478.5"/&gt&ltvertex x="725.0" y="377.49997"/&gt&ltvertex x="797.0" y="321.5"/&gt&ltvertex x="791.99994" y="258.5"/&gt&ltvertex x="616.0" y="273.5"/&gt&ltvertex x="485.99997" y="356.49994"/&gt&ltvertex x="426.00003" y="450.5"/&gt&ltvertex x="491.00003" y="495.5"/&gt&ltvertex x="651.0" y="513.49994"/&gt&ltvertex x="651.0" y="551.5"/&gt&ltvertex x="497.00003" y="577.5"/&gt&ltvertex x="341.0" y="550.5"/&gt&ltvertex x="287.99997" y="450.5"/&gt&ltvertex x="363.0" y="328.5"/&gt&ltvertex x="524.0" y="293.5"/&gt&ltvertex x="630.0" y="264.49997"/&gt&ltvertex x="701.99994" y="220.49997"/&gt&ltvertex x="757.99994" y="207.49998"/&gt&ltvertex x="779.00006" y="161.50002"/&gt&ltvertex x="763.99994" y="104.50001"/&gt&ltvertex x="713.0" y="48.500015"/&gt&ltvertex x="590.0" y="57.499992"/&gt&ltvertex x="411.00003" y="162.49997"/&gt&ltvertex x="341.0" y="234.49997"/&gt&ltvertex x="299.99997" y="302.49997"/&gt&ltvertex x="335.0" y="299.5"/&gt&ltvertex x="448.99997" y="200.49998"/&gt&ltvertex x="559.0" y="136.5"/&gt&ltvertex x="653.0" y="106.500015"/&gt&ltvertex x="708.00006" y="128.49998"/&gt&ltvertex x="634.0" y="203.49997"/&gt&ltvertex x="478.0" y="250.50002"/&gt&ltvertex x="420.00003" y="280.5"/&gt&ltvertex x="392.00003" y="298.49994"/&gt&ltvertex x="364.99997" y="312.49997"/&gt&ltvertex x="327.00003" y="334.5"/&gt&ltvertex x="261.0" y="391.49997"/&gt&ltvertex x="247.99997" y="476.49997"/&gt&ltvertex x="276.0" y="544.5"/&gt&ltvertex x="276.0" y="582.5"/&gt&ltvertex x="129.99997" y="569.5"/&gt&ltvertex x="80.0" y="534.5"/&gt&ltvertex x="90.000015" y="470.49997"/&gt&ltvertex x="187.0" y="388.49997"/&gt&ltvertex x="185.00003" y="338.5"/&gt&ltvertex x="93.000015" y="350.49997"/&gt&ltvertex x="34.999992" y="369.5"/&gt&ltvertex x="12.0" y="484.49997"/&gt&ltvertex x="-81.0" y="530.49994"/&gt&ltvertex x="-115.0" y="495.5"/&gt&ltvertex x="-107.999985" y="385.5"/&gt&ltvertex x="119.00001" y="328.5"/&gt&ltvertex x="228.00003" y="299.5"/&gt&ltvertex x="250.00003" y="252.5"/&gt&ltvertex x="296.99997" y="174.5"/&gt&ltvertex x="370.99994" y="107.5"/&gt&ltvertex x="590.0" y="16.499992"/&gt&ltvertex x="641.0" y="10.500008"/&gt&ltvertex x="704.99994" y="-3.5"/&gt&ltvertex x="715.0" y="-54.499985"/&gt&ltvertex x="660.0" y="-101.49997"/&gt&ltvertex x="618.0" y="-125.49997"/&gt&ltvertex x="530.0" y="-120.499985"/&gt&ltvertex x="475.0" y="-104.5"/&gt&ltvertex x="442.00006" y="-80.5"/&gt&ltvertex x="460.00003" y="-31.499985"/&gt&ltvertex x="463.00003" y="10.500008"/&gt&ltvertex x="383.99997" y="32.500008"/&gt&ltvertex x="352.99997" y="-21.499985"/&gt&ltvertex x="363.0" y="-82.49997"/&gt&ltvertex x="403.0" y="-133.5"/&gt&ltvertex x="378.0" y="-167.5"/&gt&ltvertex x="271.0" y="-136.5"/&gt&ltvertex x="210.99998" y="-21.499985"/&gt&ltvertex x="261.0" y="69.49999"/&gt&ltvertex x="338.0" y="90.5"/&gt&ltvertex x="395.99997" y="75.50001"/&gt&ltvertex x="437.0" y="31.500015"/&gt&ltvertex x="481.0" y="-2.4999847"/&gt&ltvertex x="506.00003" y="-19.499985"/&gt&ltvertex x="528.0" y="-39.5"/&gt&ltvertex x="564.0" y="-67.499985"/&gt&ltvertex x="629.0" y="-100.499985"/&gt&ltvertex x="685.0" y="-78.499985"/&gt&ltvertex x="623.0" y="-29.5"/&gt&ltvertex x="571.99994" y="-7.4999847"/&gt&ltvertex x="539.0" y="4.4999924"/&gt&ltvertex x="478.0" y="34.500008"/&gt&ltvertex x="450.0" y="56.500008"/&gt&ltvertex x="432.00003" y="69.49999"/&gt&ltvertex x="394.0" y="88.5"/&gt&ltvertex x="304.0" y="133.5"/&gt&ltvertex x="236.0" y="181.5"/&gt&ltvertex x="178.00002" y="248.49998"/&gt&ltvertex x="145.00005" y="292.49997"/&gt&ltvertex x="96.000015" y="293.5"/&gt&ltvertex x="127.000015" y="194.5"/&gt&ltvertex x="145.99998" y="126.5"/&gt&ltvertex x="154.00003" y="56.500008"/&gt&ltvertex x="162.0" y="2.5000153"/&gt&ltvertex x="147.00002" y="0.50001526"/&gt&ltvertex x="108.999985" y="59.5"/&gt&ltvertex x="87.00002" y="153.5"/&gt&ltvertex x="69.99998" y="239.5"/&gt&ltvertex x="51.999992" y="276.5"/&gt&lt/shape&gt&ltshape&gt&ltvertex x="23.999992" y="91.499985"/&gt&ltvertex x="-5.9999847" y="19.500015"/&gt&ltvertex x="-10.000015" y="-42.499985"/&gt&ltvertex x="20.000008" y="-93.499985"/&gt&ltvertex x="102.00001" y="-143.5"/&gt&ltvertex x="185.00003" y="-178.49997"/&gt&ltvertex x="224.0" y="-146.5"/&gt&ltvertex x="200.99997" y="-85.5"/&gt&ltvertex x="148.99998" y="-40.499985"/&gt&ltvertex x="77.999985" y="10.500008"/&gt&ltvertex x="48.000015" y="75.50001"/&gt&lt/shape&gt&ltshape&gt&ltvertex x="253.00003" y="359.5"/&gt&ltvertex x="230.0" y="327.5"/&gt&ltvertex x="244.99998" y="299.5"/&gt&ltvertex x="278.00006" y="259.5"/&gt&ltvertex x="280.0" y="321.5"/&gt&lt/shape&gt&ltshape&gt&ltvertex x="432.00003" y="528.5"/&gt&ltvertex x="375.0" y="499.5"/&gt&ltvertex x="355.99997" y="464.5"/&gt&ltvertex x="345.0" y="421.49997"/&gt&ltvertex x="367.99994" y="375.5"/&gt&ltvertex x="400.0" y="345.5"/&gt&ltvertex x="453.0" y="364.5"/&gt&ltvertex x="423.99997" y="400.5"/&gt&ltvertex x="398.00003" y="443.49997"/&gt&ltvertex x="426.00003" y="508.49997"/&gt&lt/shape&gt&lt/area&gt
+					</areaJSON>
+				</WalkAreaComponent>
+			</components>
+		</entity>
+	</entities>
+</scene>

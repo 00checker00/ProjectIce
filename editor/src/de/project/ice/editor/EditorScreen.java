@@ -35,8 +35,9 @@ import de.project.ice.utils.SceneWriter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static de.project.ice.config.Config.*;
+
 import java.io.*;
-import java.util.Comparator;
 
 public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.SelectionListener {
     private static final String VERSION = "0.0.1";
@@ -124,8 +125,8 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
                             if (texture.region.isNull())
                                 continue;
 
-                            float width = texture.region.data.getRegionWidth() * RenderingSystem.PIXELS_TO_METRES;
-                            float height = texture.region.data.getRegionHeight() * RenderingSystem.PIXELS_TO_METRES;
+                            float width = texture.region.data.getRegionWidth() * PIXELS_TO_METRES;
+                            float height = texture.region.data.getRegionHeight() * PIXELS_TO_METRES;
 
                             if (new Rectangle(transform.pos.x, transform.pos.y, width, height).contains(coords.x, coords.y)) {
                                 dragComponent = transform;
@@ -156,7 +157,7 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
 
                         dragComponent.pos.set(new Vector2(coords.x - dragOriginX, coords.y - dragOriginY));
                     } else if (cameraDrag != null) {
-                        cameraDrag.translate(new Vector2(screenX, screenY).sub(cameraDragDown).scl(RenderingSystem.PIXELS_TO_METRES).scl(-1, 1));
+                        cameraDrag.translate(new Vector2(screenX, screenY).sub(cameraDragDown).scl(PIXELS_TO_METRES).scl(-1, 1));
                         cameraDragDown.set(screenX, screenY);
                 }
                 return super.touchDragged(screenX, screenY, pointer);
@@ -281,6 +282,13 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
         XmlWriter xml = new XmlWriter(writer);
         serializeScene(xml);
         storedState = writer.toString();
+        try {
+            FileWriter fileWriter = new FileWriter("$stored_state$");
+            fileWriter.write(storedState);
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void restoreState() {
@@ -289,6 +297,7 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
         game.engine.removeAllEntities();
         try {
             SceneLoader.loadScene(game.engine, storedState);
+            storedState = null;
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SceneLoader.LoadException e) {
@@ -338,7 +347,7 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
     private void save(boolean forceFileDialog) {
         if (filename == null || forceFileDialog) {
             FileChooser fileChooser = new FileChooser(FileChooser.Mode.SAVE);
-            fileChooser.setDirectory(filename != null ? new FileHandle(filename) : new FileHandle("."));
+            fileChooser.setDirectory(filename != null ? new FileHandle(filename).parent() : new FileHandle("."));
             fileChooser.setSelectionMode(FileChooser.SelectionMode.FILES);
             fileChooser.setFileFilter(new FileFilter() {
                 @Override
@@ -365,6 +374,9 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
 
         try {
             if (storedState == null) {
+                File file = new File(filename);
+                if (file.exists())
+                    file.renameTo(new File(file.getParent() + "/" + file.getName() + ".bak"));
                 XmlWriter xml = new XmlWriter(new FileWriter(filename));
                 serializeScene(xml);
             } else {

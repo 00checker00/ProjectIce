@@ -1,9 +1,8 @@
 package de.project.ice.ecs;
 
 import com.badlogic.ashley.core.ComponentMapper;
+import de.project.ice.ecs.components.HotspotComponent;
 import de.project.ice.ecs.components.*;
-
-import javax.naming.ldap.Control;
 
 // TODO breathComponent, controlComponent(steuerbarer Charakter), movableComponent
 public abstract class Components {
@@ -18,4 +17,6 @@ public abstract class Components {
     public static final ComponentMapper<MovableComponent> movable = ComponentMapper.getFor(MovableComponent.class);
     public static final ComponentMapper<BreathComponent> breath = ComponentMapper.getFor(BreathComponent.class);
     public static final ComponentMapper<NameComponent> name = ComponentMapper.getFor(NameComponent.class);
+    public static final ComponentMapper<HotspotComponent> hotspot = ComponentMapper.getFor(HotspotComponent.class);
+    public static final ComponentMapper<WalkAreaComponent> walkarea = ComponentMapper.getFor(WalkAreaComponent.class);
 }

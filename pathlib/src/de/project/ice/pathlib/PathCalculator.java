@@ -4,26 +4,34 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
 public class PathCalculator {
-    private static final float epsilon = 0.5f;
+    private final float epsilon;
 
-    private static boolean LineSegmentCrosses(Vector2 start, Vector2 end, Array<Vector2> vertices) {
+    public PathCalculator() {
+        this(0.5f);
+    }
+
+    public PathCalculator(float epsilon) {
+        this.epsilon = epsilon;
+    }
+
+    private boolean LineSegmentCrosses(Vector2 start, Vector2 end, Array<Vector2> vertices) {
         for (int i = 0; i < vertices.size; i++)
             if (LineSegmentsCross(start, end, vertices.get(i), vertices.get((i + 1) % vertices.size)))
                 return true;
         return false;
     }
 
-    private static boolean Inside(PathArea pathArea, Vector2 position) {
-        if (!Inside(pathArea.shape, position, true))
+    public boolean IsInside(PathArea pathArea, Vector2 position) {
+        if (!IsInside(pathArea.shape, position, true))
             return false;
         for (Shape hole : pathArea.holes)
-            if (Inside(hole, position, false))
+            if (IsInside(hole, position, false))
                 return false;
 
         return true;
     }
 
-    private static boolean Inside(Shape shape, Vector2 position, boolean isOuterShape) {
+    private boolean IsInside(Shape shape, Vector2 position, boolean isOuterShape) {
         Vector2 point = position;
 
         boolean inside = false;
@@ -63,9 +71,9 @@ public class PathCalculator {
         return inside;
     }
 
-    private static boolean InLineOfSight(PathArea pathArea, Vector2 start, Vector2 end) {
+    private boolean InLineOfSight(PathArea pathArea, Vector2 start, Vector2 end) {
         // Not in LOS if any of the ends is outside the pathArea
-        if (!Inside(pathArea, start) || !Inside(pathArea, end)) return false;
+        if (!IsInside(pathArea, start) || !IsInside(pathArea, end)) return false;
 
         // In LOS if it's the same start and end location
         if (start.dst(end) < epsilon) return true;
@@ -74,16 +82,16 @@ public class PathCalculator {
 
         // Not in LOS if the middle point is inside any hole
         for (Shape hole : pathArea.holes) {
-            if (Inside(hole, mid, false)) {
+            if (IsInside(hole, mid, false)) {
                 return false;
             }
         }
 
         // Finally the middle point in the segment determines if in LOS or not
-        return Inside(pathArea, mid);
+        return IsInside(pathArea, mid);
     }
 
-    private static boolean LineSegmentsCross (Vector2 start_1, Vector2 end_1, Vector2 start_2, Vector2 end_2) {
+    private boolean LineSegmentsCross (Vector2 start_1, Vector2 end_1, Vector2 start_2, Vector2 end_2) {
         float denominator = ((end_1.x - start_1.x) * (end_2.y - start_2.y)) - ((end_1.y - start_1.y) * (end_2.x - start_2.x));
 
         if (denominator == 0) {
@@ -103,7 +111,7 @@ public class PathCalculator {
         return (r > 0 && r < 1) && (s > 0 && s < 1);
     }
 
-    public static PathGraph computeGraph(PathArea pathArea) {
+    public PathGraph computeGraph(PathArea pathArea) {
         PathGraph graph = new PathGraph();
 
         for (Vector2 vertex : pathArea.shape.vertices)
@@ -114,7 +122,7 @@ public class PathCalculator {
                 graph.addNode(new PathNode(vertex));
 
         for (PathNode waypoint : pathArea.waypoints) {
-            if (!Inside(pathArea, waypoint.pos))
+            if (!IsInside(pathArea, waypoint.pos))
                 moveWaypointInside(graph, pathArea, waypoint);
             graph.addNode(waypoint);
         }
@@ -132,7 +140,7 @@ public class PathCalculator {
         return graph;
     }
 
-    public static boolean ConnectionValid (Vector2 start, Vector2 end, PathArea area) {
+    public boolean ConnectionValid (Vector2 start, Vector2 end, PathArea area) {
         if (start == end)
             return false;
 
@@ -150,7 +158,7 @@ public class PathCalculator {
         return lineOfSight && InLineOfSight(area, start, end);
     }
 
-    private static void moveWaypointInside (PathGraph graph, PathArea area, PathNode waypoint) {
+    private void moveWaypointInside (PathGraph graph, PathArea area, PathNode waypoint) {
         Vector2 closest = waypoint.pos;
         float closestDistance = Float.MAX_VALUE;
         for (int i = 1; i <= area.shape.vertices.size; i++) {
@@ -191,7 +199,7 @@ public class PathCalculator {
     }
 
 
-    private static Vector2 closestPoint (Vector2 point, Vector2 start, Vector2 end) throws IllegalArgumentException {
+    private Vector2 closestPoint (Vector2 point, Vector2 start, Vector2 end) throws IllegalArgumentException {
         final float dX = end.x - start.x;
         final float dY = end.y - start.y;
 

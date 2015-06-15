@@ -1,6 +1,7 @@
 package de.project.ice.ecs;
 
 import com.badlogic.ashley.core.Family;
+import de.project.ice.ecs.components.HotspotComponent;
 import de.project.ice.ecs.components.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,4 +19,10 @@ public abstract class Families {
     public static final Family camera = Family.all(CameraComponent.class).exclude(DisabledComponent.class).get();
     @NotNull
     public static final Family breathing = Family.all(BreathComponent.class, IdleComponent.class, StateComponent.class).exclude(InvisibilityComponent.class, DisabledComponent.class).get();
+    @NotNull
+    public static final Family hotspot = Family.all(HotspotComponent.class, TransformComponent.class).exclude(DisabledComponent.class).get();
+    @NotNull
+    public static final Family walkArea = Family.all(WalkAreaComponent.class).exclude(DisabledComponent.class).get();
+    @NotNull
+    public static final Family controllable = Family.all(ControlComponent.class, MovableComponent.class, TextureComponent.class, TransformComponent.class).exclude(DisabledComponent.class).get();
 }

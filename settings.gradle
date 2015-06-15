@@ -1,1 +1,1 @@
-include 'desktop', 'android', 'ios', 'html', 'core', 'SpriteConverter', "PathTool", "pathlib", "editor"
+include 'desktop', 'android', 'ios', 'html', 'core', 'config', 'SpriteConverter', "PathTool", "pathlib", "editor"

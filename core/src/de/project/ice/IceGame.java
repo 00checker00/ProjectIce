@@ -4,34 +4,51 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
-import de.project.ice.dialog.Dialog;
 import de.project.ice.ecs.IceEngine;
-import de.project.ice.screens.BaseScreen;
-import de.project.ice.screens.DialogScreen;
-import de.project.ice.screens.GameScreen;
-import de.project.ice.screens.MainMenuScreen;
+import de.project.ice.inventory.Inventory;
+import de.project.ice.screens.*;
 import de.project.ice.scripting.ScriptManager;
 import de.project.ice.scripting.scripts.Scene01_Load;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class IceGame extends ApplicationAdapter {
     private final DelayedRemovalArray<BaseScreen> screens = new DelayedRemovalArray<BaseScreen>();
     public IceEngine engine;
     protected GameScreen gameScreen = null;
     @NotNull
+    protected CursorScreen cursorScreen ;
+    @NotNull
     public ScriptManager scriptManager;
+    @NotNull
+    public Inventory inventory;
+    @Nullable
+    public Inventory.Item activeItem = null;
+
+    public IceGame() {
+    }
 
     @Override
     public void create () {
         engine = new IceEngine();
         scriptManager = new ScriptManager(engine);
+        inventory = new Inventory(this);
+
+        for(int i = 0; i < 64; ++i)
+            inventory.addItem("Tree");
+
         gameScreen = new GameScreen(this, engine);
         addScreen(gameScreen);
-        addScreen(new MainMenuScreen(this));
+        cursorScreen = new CursorScreen(this);
+        addScreen(cursorScreen);
+        addScreen(new InventoryScreen(this));
+        init();
 
+    }
+
+    protected void init() {
+        addScreen(new MainMenuScreen(this));
         Gdx.input.setInputProcessor(new InputMultiplexer());
     }
 
@@ -68,6 +85,24 @@ public class IceGame extends ApplicationAdapter {
         if (screens.size > 0) {
             screens.peek().resume();
         }
+    }
+
+    @NotNull
+    public CursorScreen.Cursor getPrimaryCursor() {
+        return cursorScreen.getPrimaryCursor();
+    }
+
+    public void setPrimaryCursor(@NotNull CursorScreen.Cursor primaryCursor) {
+        cursorScreen.setPrimaryCursor(primaryCursor);
+    }
+
+    @NotNull
+    public CursorScreen.Cursor getSecondaryCursor() {
+        return cursorScreen.getSecondaryCursor();
+    }
+
+    public void setSecondaryCursor(@NotNull CursorScreen.Cursor secondaryCursor) {
+        cursorScreen.setSecondaryCursor(secondaryCursor);
     }
 
     @Override

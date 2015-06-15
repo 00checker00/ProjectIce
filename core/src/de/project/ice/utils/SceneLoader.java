@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.reflect.Field;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
 import de.project.ice.ecs.IceEngine;
 import com.badlogic.gdx.utils.XmlReader;
+import de.project.ice.ecs.components.WalkAreaComponent;
 import de.project.ice.ecs.systems.RenderingSystem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -105,6 +106,11 @@ public abstract class SceneLoader {
                 throw new LoadException("Invalid scene file (Couldn't set field " + childElement.getName() + " of component " + element.getName() + ")", e);
             }
         }
+
+        if (WalkAreaComponent.class.equals(componentClass)) {
+            WalkAreaComponent walkAreaComponent = (WalkAreaComponent) component;
+            walkAreaComponent.setAreaJSON(walkAreaComponent.areaJSON);
+        }
         return component;
     }
 
@@ -115,7 +121,7 @@ public abstract class SceneLoader {
         } else if (type.equalsIgnoreCase("Integer")) {
             return loadInt(element);
         } else if (type.equalsIgnoreCase("String")) {
-            return element.getText();
+            return element.getText().replace("&gt", ">").replace("&lt", "<").replace("&amp", "&");
         } else if (type.equalsIgnoreCase("OrthographicCamera")) {
             return loadOrthographicCamera(element);
         } else if (type.equalsIgnoreCase("Vector2")) {

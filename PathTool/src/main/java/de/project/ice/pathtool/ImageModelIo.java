@@ -1,6 +1,7 @@
 package de.project.ice.pathtool;
 
 import com.badlogic.gdx.utils.JsonWriter;
+import com.badlogic.gdx.utils.XmlWriter;
 import de.project.ice.pathlib.Shape;
 import de.project.ice.utils.io.FilenameHelper;
 import com.badlogic.gdx.math.Vector2;
@@ -33,21 +34,23 @@ public class ImageModelIo {
         FileUtils.writeStringToFile(file, output);
     }
 
-    public static void export(File file, ImageModel model) throws IOException {
-        JsonWriter json = new JsonWriter(new FileWriter(file));
-        json.object().name("area").array();
+    public static String export(ImageModel model) throws IOException {
+        StringWriter writer = new StringWriter();
+        XmlWriter xml = new XmlWriter(writer);
+        xml.element("area");
         for (Shape shape : model.shapes) {
-            json.object().name("shape").array();
+            xml.element("shape");
             for (Vector2 v : shape.vertices) {
-                json.object();
-                json.set("x", v.x);
-                json.set("y", v.y);
-                json.pop();
+                xml.element("vertex");
+                xml.attribute("x", v.x);
+                xml.attribute("y", v.y);
+                xml.pop();
             }
-            json.pop();
-            json.pop();
+            xml.pop();
         }
-        json.close();
+        xml.pop();
+        xml.close();
+        return writer.toString();
     }
 
     public static List<ImageModel> load(File file) throws IOException {

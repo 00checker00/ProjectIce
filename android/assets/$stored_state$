@@ -63,6 +63,15 @@
 				<TextureComponent>
 					<region type="TextureRegionHolder">Opa</region>
 				</TextureComponent>
+				<StateComponent>
+					<animation type="Integer">1</animation>
+					<time type="Float">0.0</time>
+				</StateComponent>
+				<AnimationComponent>
+					<animations type="IntMap" type="IntMap" subType="AnimationHolder">
+						<_1 type="AnimationHolder" frameDuration="0.13" mode="LOOP">eksi_lauf</_1>
+					</animations>
+				</AnimationComponent>
 			</components>
 		</entity>
 		<entity>

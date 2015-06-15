@@ -15,20 +15,20 @@ public abstract class NumberEditor<T extends Number> extends ValueEditor<T> {
 
     @Override
     protected void createUi() {
-        valueField = new VisTextField(String.valueOf((T)value));
+        valueField = new VisTextField(String.valueOf(value));
         add(valueField);
     }
 
     @Override
     public void act(float delta) {
         try {
-            value = getValue();
+            value = parseValue();
         } catch (NumberFormatException ignore) {}
 
         super.act(delta);
     }
 
-    protected T getValue() {
+    protected T parseValue() {
         try {
             return parse(valueField.getText());
         } catch (ParseException e) {
@@ -71,7 +71,7 @@ public abstract class NumberEditor<T extends Number> extends ValueEditor<T> {
         }
 
         @Override
-        protected Integer getValue() {
+        protected Integer parseValue() {
             return numberSelector.getValue();
         }
 

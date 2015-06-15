@@ -3,15 +3,13 @@ package de.project.ice.screens;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.files.FileHandle;
 import de.project.ice.IceGame;
 import de.project.ice.dialog.Dialog;
 import de.project.ice.ecs.IceEngine;
-import de.project.ice.scripting.ScriptManager;
-import de.project.ice.scripting.scripts.Scene01_Load;
 import de.project.ice.utils.DelegatingBlockingInputProcessor;
 import org.jetbrains.annotations.NotNull;
+
+import static de.project.ice.config.Config.*;
 
 /**
  * Input Handling here...
@@ -21,7 +19,7 @@ public class GameScreen extends BaseScreenAdapter {
     private final IceEngine engine;
     private final EntitySystem[] SystemsToPause;
 
-    public GameScreen (@NotNull IceGame game, @NotNull IceEngine engine) {
+    public GameScreen (@NotNull final IceGame game, @NotNull final IceEngine engine) {
         super(game);
         this.engine = engine;
 
@@ -30,14 +28,31 @@ public class GameScreen extends BaseScreenAdapter {
 
         inputProcessor = new DelegatingBlockingInputProcessor(engine.controlSystem) {
             @Override
+            public boolean mouseMoved(int screenX, int screenY) {
+                super.mouseMoved(screenX, screenY);
+                game.setPrimaryCursor(engine.controlSystem.primaryCursor);
+                game.setSecondaryCursor(engine.controlSystem.secondaryCursor);
+                return true;
+            }
+
+            @Override
             public boolean keyDown(int keycode) {
-                if (keycode == Input.Keys.ESCAPE) {
-                    GameScreen.this.game.addScreen(new PauseScreen(GameScreen.this.game));
-                    return true;
-                } else if (keycode == Input.Keys.T) {
-                    GameScreen.this.game.addScreen(new DialogScreen(GameScreen.this.game, Dialog.load(Gdx.files.internal("dialog/test.dlz"))));
+                switch (keycode) {
+                    case MENU_KEY:
+                        GameScreen.this.game.addScreen(new PauseScreen(GameScreen.this.game));
+                        return true;
+
+                    case INVENTORY_KEY:
+                        GameScreen.this.game.addScreen(new InventoryScreen(GameScreen.this.game));
+                        return true;
+
+                    case Input.Keys.T:
+                        GameScreen.this.game.addScreen(new DialogScreen(GameScreen.this.game, Dialog.load(Gdx.files.internal("dialog/test.dlz"))));
+                        return true;
+
+                    default:
+                        return super.keyDown(keycode);
                 }
-                return super.keyDown(keycode);
             }
         };
         SystemsToPause = new EntitySystem[] {

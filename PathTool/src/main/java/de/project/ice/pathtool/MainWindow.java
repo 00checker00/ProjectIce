@@ -15,12 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.ListCellRenderer;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
@@ -246,21 +241,17 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void export() {
-        JFileChooser chooser = new JFileChooser(".");
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("ProjectIce Pathfinding Area", "pfa");
-        chooser.setFileFilter(filter);
-        chooser.setDialogTitle("Choose the file to write or overwrite");
 
-        if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-            try {
-                File file = chooser.getSelectedFile();
-                if (!file.getName().endsWith(".pfa"))
-                    file = new File(file.getAbsolutePath() + ".pfa");
-                ImageModelIo.export(file, (ImageModel)imagesList.getSelectedValue());
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(this, "Cannot save the project, reason is:\n" + ex.getMessage());
-            }
+        JTextArea textarea= null;
+        try {
+            textarea = new JTextArea(ImageModelIo.export((ImageModel) imagesList.getSelectedValue()));
+            textarea.setLineWrap(true);
+            textarea.setEditable(false);
+            JOptionPane.showMessageDialog(null, textarea, "Patharea data", JOptionPane.PLAIN_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Cannot export project, reason is:\n" + e.getMessage());
         }
+
     }
 
     @SuppressWarnings("unchecked")

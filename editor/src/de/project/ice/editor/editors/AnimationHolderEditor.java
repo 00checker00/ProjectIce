@@ -26,8 +26,8 @@ public class AnimationHolderEditor extends HolderEditor<Animation> {
             @Override
             public void finished(String textureRegion, Animation.PlayMode playMode, float frameTime) {
                 Assets.Holder<Animation> newHolder = Assets.createAnimation(textureRegion, frameTime, playMode);
-                value.data = newHolder.data;
-                value.name = newHolder.name;
+                setHolderData(newHolder.data);
+                setHolderName(newHolder.name);
             }
         }, value);
     }
@@ -40,7 +40,7 @@ public class AnimationHolderEditor extends HolderEditor<Animation> {
         private VisTextButton okButton;
         private VisTextButton cancelButton;
 
-        public EditAnimationDialog(String title, Listener listener, Assets.Holder<Animation> value) {
+        public EditAnimationDialog(String title, Listener listener, Assets.Holder<Animation> holder) {
             super(title);
             this.listener = listener;
 
@@ -56,20 +56,20 @@ public class AnimationHolderEditor extends HolderEditor<Animation> {
 
             VisTable fieldTable = new VisTable(true);
 
-            textureRegion = new VisTextField(value.name);
+            textureRegion = new VisTextField(holder.name);
             fieldTable.add(new VisLabel("Texture Region: "));
             fieldTable.add(textureRegion).expand().fill().row();
 
             frameTime = new VisValidableTextField(new Validators.FloatValidator());
-            if (value.data != null)
-                frameTime.setText(String.valueOf(value.data.getFrameDuration()));
+            if (holder.data != null)
+                frameTime.setText(String.valueOf(holder.data.getFrameDuration()));
             fieldTable.add(new VisLabel("Frame Time: "));
             fieldTable.add(frameTime).expand().fill().row();
 
             playMode = new VisSelectBox<Animation.PlayMode>();
             playMode.setItems(Animation.PlayMode.values());
-            if (value.data != null)
-                playMode.setSelected(value.data.getPlayMode());
+            if (holder.data != null)
+                playMode.setSelected(holder.data.getPlayMode());
             fieldTable.add(new VisLabel("Mode: "));
             fieldTable.add(playMode).expand().fill();
 
@@ -155,8 +155,8 @@ public class AnimationHolderEditor extends HolderEditor<Animation> {
             }
         }
 
-        public static void showDialog(Stage stage, String title, Listener listener, Assets.Holder<Animation> value) {
-            EditAnimationDialog dialog = new EditAnimationDialog(title, listener, value);
+        public static void showDialog(Stage stage, String title, Listener listener, Assets.Holder<Animation> holder) {
+            EditAnimationDialog dialog = new EditAnimationDialog(title, listener, holder);
             stage.addActor(dialog.fadeIn());
         }
 

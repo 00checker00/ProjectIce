@@ -13,7 +13,6 @@ public class AnimationSystem extends IteratingIceSystem {
     public static final int ANIMATION_NONE = 0;
     public static final int ANIMATION_IDLE = 1;
     public static final int ANIMATION_WALK = 2;
-    public static final int ANIMATION_USER = Integer.MAX_VALUE/2;
 
     public AnimationSystem () {
         super(Families.animated);
@@ -27,10 +26,11 @@ public class AnimationSystem extends IteratingIceSystem {
         StateComponent state = Components.state.get(entity);
 
         Assets.AnimationHolder animation = anim.animations.get(state.getAnimation());
-        if (animation != null && animation.data != null) {
-            tex.region.data = animation.data.getKeyFrame(state.time);
-            tex.region.name = animation.name;
-            //Gdx.app.log("Animation", "" + state.time);
+        if (animation != null && animation.data != null && state.animation > 0) {
+            try {
+                tex.region.data = animation.data.getKeyFrame(state.time);
+                tex.region.name = animation.name;
+            } catch (ArithmeticException ignore) {}
         }
     }
 }

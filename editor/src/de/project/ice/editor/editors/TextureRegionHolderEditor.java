@@ -26,8 +26,8 @@ public class TextureRegionHolderEditor extends HolderEditor<TextureRegion> {
             @Override
             public void finished(String textureRegion) {
                 Assets.Holder<TextureRegion> newHolder = Assets.findRegion(textureRegion);
-                value.data = newHolder.data;
-                value.name = newHolder.name;
+                setHolderName(newHolder.name);
+                setHolderData(newHolder.data);
             }
         }, value);
     }
@@ -38,7 +38,7 @@ public class TextureRegionHolderEditor extends HolderEditor<TextureRegion> {
         private VisTextButton okButton;
         private VisTextButton cancelButton;
 
-        public EditTextureRegionDialog(String title, Listener listener, Assets.Holder<TextureRegion> value) {
+        public EditTextureRegionDialog(String title, Listener listener, Assets.Holder<TextureRegion> holder) {
             super(title);
             this.listener = listener;
 
@@ -54,7 +54,7 @@ public class TextureRegionHolderEditor extends HolderEditor<TextureRegion> {
 
             VisTable fieldTable = new VisTable(true);
 
-            textureRegion = new VisTextField(value.name);
+            textureRegion = new VisTextField(holder.name);
             fieldTable.add(new VisLabel("Texture Region: "));
             fieldTable.add(textureRegion).expand().fill().row();
 
@@ -138,8 +138,8 @@ public class TextureRegionHolderEditor extends HolderEditor<TextureRegion> {
             }
         }
 
-        public static void showDialog(Stage stage, String title, Listener listener, Assets.Holder<TextureRegion> value) {
-            EditTextureRegionDialog dialog = new EditTextureRegionDialog(title, listener, value);
+        public static void showDialog(Stage stage, String title, Listener listener, Assets.Holder<TextureRegion> holder) {
+            EditTextureRegionDialog dialog = new EditTextureRegionDialog(title, listener, holder);
             stage.addActor(dialog.fadeIn());
         }
 
