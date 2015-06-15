@@ -13,16 +13,19 @@ public abstract class Assets {
 
     public static AssetManager manager = new AssetManager();
     private static TextureAtlas spritesheet = null;
+    private static TextureAtlas spritesheet2 = null;
     private static HashMap<String, Array<TextureRegion>> cachedRegions = new HashMap<String, Array<TextureRegion>>();
 
     static {
-        manager.load("spritesheets/eksi2.atlas", TextureAtlas.class);
+        manager.load("spritesheets/chars.atlas", TextureAtlas.class);
+        manager.load("spritesheets/scene3.atlas", TextureAtlas.class);
     }
 
     public static TextureRegionsHolder findRegions(String name) {
         if(spritesheet == null) {
             manager.finishLoading();
-            spritesheet = manager.get("spritesheets/eksi2.atlas", TextureAtlas.class);
+            spritesheet = manager.get("spritesheets/chars.atlas", TextureAtlas.class);
+            spritesheet2 = manager.get("spritesheets/scene3.atlas", TextureAtlas.class);
         }
         if(cachedRegions.containsKey(name)) {
             return new TextureRegionsHolder(cachedRegions.get(name), name);
@@ -30,6 +33,10 @@ public abstract class Assets {
 
         Array<TextureRegion> regions = new Array<TextureRegion>();
         regions.addAll(spritesheet.findRegions(name));
+        if (regions.size == 0)
+        {
+            regions.addAll(spritesheet2.findRegions(name));
+        }
 
         cachedRegions.put(name, regions);
         return new TextureRegionsHolder(regions, name);

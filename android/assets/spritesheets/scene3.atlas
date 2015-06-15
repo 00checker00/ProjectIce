@@ -1,0 +1,123 @@
+scene3.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bild1
+  rotate: false
+  xy: 1685 ,0
+  size: 293 ,218
+  orig: 293 ,218
+  offset: 0 ,0
+  index:0
+candle
+  rotate: false
+  xy: 1978 ,0
+  size: 41 ,116
+  orig: 41 ,116
+  offset: 0 ,0
+  index:0
+candle_fire
+  rotate: false
+  xy: 1853 ,414
+  size: 10 ,18
+  orig: 10 ,18
+  offset: 0 ,0
+  index:0
+candle_fire
+  rotate: false
+  xy: 1853 ,432
+  size: 10 ,18
+  orig: 10 ,18
+  offset: 0 ,0
+  index:1
+candle_fire
+  rotate: false
+  xy: 1853 ,450
+  size: 9 ,18
+  orig: 10 ,18
+  offset: 0 ,0
+  index:2
+candle_fire
+  rotate: false
+  xy: 1862 ,450
+  size: 9 ,18
+  orig: 10 ,18
+  offset: 0 ,0
+  index:3
+candle_fire
+  rotate: false
+  xy: 1853 ,450
+  size: 9 ,18
+  orig: 10 ,18
+  offset: 0 ,0
+  index:4
+candle_fire
+  rotate: false
+  xy: 1853 ,432
+  size: 10 ,18
+  orig: 10 ,18
+  offset: 0 ,0
+  index:5
+candle_fire
+  rotate: false
+  xy: 1853 ,414
+  size: 10 ,18
+  orig: 10 ,18
+  offset: 0 ,0
+  index:6
+eis_tisch
+  rotate: false
+  xy: 1685 ,476
+  size: 228 ,140
+  orig: 228 ,140
+  offset: 0 ,0
+  index:0
+fridge
+  rotate: false
+  xy: 1685 ,218
+  size: 168 ,258
+  orig: 168 ,258
+  offset: 0 ,0
+  index:0
+holz
+  rotate: false
+  xy: 1853 ,218
+  size: 178 ,96
+  orig: 178 ,96
+  offset: 0 ,0
+  index:0
+iglu_innen
+  rotate: false
+  xy: 0 ,0
+  size: 1418 ,862
+  orig: 1418 ,862
+  offset: 0 ,0
+  index:0
+ofen
+  rotate: false
+  xy: 1418 ,0
+  size: 267 ,773
+  orig: 267 ,773
+  offset: 0 ,0
+  index:0
+robbe
+  rotate: false
+  xy: 1853 ,314
+  size: 153 ,100
+  orig: 153 ,100
+  offset: 0 ,0
+  index:0
+sitz1
+  rotate: false
+  xy: 1913 ,414
+  size: 111 ,94
+  orig: 111 ,94
+  offset: 0 ,0
+  index:0
+teekanne
+  rotate: false
+  xy: 1913 ,508
+  size: 119 ,81
+  orig: 119 ,81
+  offset: 0 ,0
+  index:0

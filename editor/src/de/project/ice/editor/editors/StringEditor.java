@@ -12,7 +12,7 @@ public class StringEditor extends ValueEditor<String> {
     @Override
     protected void createUi() {
 
-        valueField = new VisTextField(value);
+        valueField = new VisTextField(value != null ? value:"");
         addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

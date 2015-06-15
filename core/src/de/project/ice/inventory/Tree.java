@@ -7,6 +7,6 @@ public class Tree extends Inventory.Item {
     @NotNull
     @Override
     public String getIcon() {
-        return "baum2";
+        return "holz";
     }
 }

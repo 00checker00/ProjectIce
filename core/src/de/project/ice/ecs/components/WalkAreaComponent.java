@@ -11,7 +11,9 @@ public class WalkAreaComponent extends Component implements Pool.Poolable {
 
     public void setAreaJSON (String json) {
         areaJSON = json;
-        area = PathArea.load(json);
+        try {
+            area = PathArea.load(json);
+        }catch (Exception ignore){}
     }
 
     @Override
