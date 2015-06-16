@@ -67,7 +67,7 @@ public class SpriteConverter {
             }
 
             FileWriter fw = new FileWriter(argv[0].replace(".xml", "") + ".atlas");
-            fw.write("spritesheet.png\n" +
+            fw.write(imagePath + "\n" +
                     "format: RGBA8888\n" +
                     "filter: Linear,Linear\n" +
                     "repeat: none\n");
