@@ -52,8 +52,8 @@ public class PathArea {
             s.closed = true;
             for (int j = 0; j < shape.getChildCount(); ++j) {
                 XmlReader.Element vertex = shape.getChild(j);
-                float x = vertex.getFloat("x") * PIXELS_TO_METRES;
-                float y = vertex.getFloat("y") * PIXELS_TO_METRES;
+                float x = vertex.getFloat("x");
+                float y = vertex.getFloat("y");
                 s.vertices.add(new Vector2(x, y));
             }
             if (area.shape == null) {

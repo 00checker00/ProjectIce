@@ -4,86 +4,115 @@
 			<components>
 				<CameraComponent>
 					<camera type="OrthographicCamera" viewportWidth="16.0" viewportHeight="9.0">
-						<pos type="Vector3" x="3.6796875" y="2.9296875" z="0.0"/>
+						<pos type="Vector3" x="5.7890625" y="3.1015625" z="0.0"/>
 					</camera>
 				</CameraComponent>
 				<NameComponent>
-					<name type="String">MainCamera</name>
+					<name type="String">Kamera</name>
+				</NameComponent>
+				<WalkAreaComponent>
+					<areaJSON type="String">
+						&ltarea&gt&ltshape&gt&ltvertex x="21.5" y="21.0"/&gt&ltvertex x="34.5" y="173.00003"/&gt&ltvertex x="279.5" y="222.00002"/&gt&ltvertex x="640.5" y="238.00003"/&gt&ltvertex x="965.5" y="221.00002"/&gt&ltvertex x="1125.5" y="207.00002"/&gt&ltvertex x="1128.5" y="0.0"/&gt&ltvertex x="41.5" y="-6.0"/&gt&lt/shape&gt&ltshape&gt&ltvertex x="295.49997" y="128.00003"/&gt&ltvertex x="177.5" y="48.00003"/&gt&ltvertex x="69.5" y="29.00003"/&gt&ltvertex x="34.5" y="86.0"/&gt&ltvertex x="70.5" y="126.000015"/&gt&ltvertex x="149.49997" y="149.00003"/&gt&ltvertex x="227.5" y="162.00002"/&gt&lt/shape&gt&lt/area&gt
+					</areaJSON>
+				</WalkAreaComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<TextureComponent>
+					<region type="TextureRegionHolder">iglu_innen</region>
+				</TextureComponent>
+				<TransformComponent>
+					<pos type="Vector2" x="0.0" y="0.0"/>
+					<scale type="Vector2" x="1.0" y="1.0"/>
+					<rotation type="Float">0.0</rotation>
+					<z type="Integer">100</z>
+				</TransformComponent>
+				<NameComponent>
+					<name type="String">iglu_innen</name>
 				</NameComponent>
 			</components>
 		</entity>
 		<entity>
 			<components>
-				<NameComponent>
-					<name type="String">Player</name>
-				</NameComponent>
+				<TextureComponent>
+					<region type="TextureRegionHolder">eskimo_normal</region>
+				</TextureComponent>
 				<TransformComponent>
-					<pos type="Vector2" x="3.0" y="2.0"/>
+					<pos type="Vector2" x="4.5428567" y="0.8198384"/>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<rotation type="Float">0.0</rotation>
-					<z type="Integer">0</z>
+					<z type="Integer">10</z>
 				</TransformComponent>
-				<BreathComponent>
-					<curScale type="Vector2" x="0.0" y="0.0"/>
-					<scaleValue type="Vector2" x="0.0" y="0.03"/>
-					<duration type="Float">0.8</duration>
-				</BreathComponent>
-				<TextureComponent>
-					<region type="TextureRegionHolder">eksi_rotznase</region>
-				</TextureComponent>
-				<IdleComponent/>
 				<StateComponent>
-					<animation type="Integer">1</animation>
+					<animation type="Integer">0</animation>
 					<time type="Float">0.0</time>
 				</StateComponent>
+				<AnimationComponent>
+					<animations type="IntMap"/>
+				</AnimationComponent>
 				<ControlComponent/>
 				<MovableComponent>
 					<isMoving type="Boolean" type="null"/>
 					<targetPositions type="LinkedList" type="null"/>
 					<speed type="Float">2.0</speed>
 				</MovableComponent>
-				<AnimationComponent>
-					<animations type="IntMap" type="IntMap" subType="AnimationHolder">
-						<_1 type="AnimationHolder" frameDuration="0.13" mode="LOOP">eski_lauf</_1>
-					</animations>
-				</AnimationComponent>
+				<BreathComponent>
+					<curScale type="Vector2" x="0.0" y="0.0"/>
+					<scaleValue type="Vector2" x="0.0" y="0.0"/>
+					<duration type="Float">1.0</duration>
+				</BreathComponent>
+				<NameComponent>
+					<name type="String">player</name>
+				</NameComponent>
 			</components>
 		</entity>
 		<entity>
 			<components>
-				<NameComponent>
-					<name type="String">Opa</name>
-				</NameComponent>
 				<TransformComponent>
-					<pos type="Vector2" x="0.0" y="0.0"/>
+					<pos type="Vector2" x="1.3142858" y="0.947368"/>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<rotation type="Float">0.0</rotation>
-					<z type="Integer">0</z>
+					<z type="Integer">10</z>
 				</TransformComponent>
 				<TextureComponent>
-					<region type="TextureRegionHolder">Opa</region>
+					<region type="TextureRegionHolder">fridge</region>
 				</TextureComponent>
-				<StateComponent>
-					<animation type="Integer">1</animation>
-					<time type="Float">0.0</time>
-				</StateComponent>
-				<AnimationComponent>
-					<animations type="IntMap" type="IntMap" subType="AnimationHolder">
-						<_1 type="AnimationHolder" frameDuration="0.13" mode="LOOP">eksi_lauf</_1>
-					</animations>
-				</AnimationComponent>
+				<NameComponent>
+					<name type="String">fridge</name>
+				</NameComponent>
 			</components>
 		</entity>
 		<entity>
 			<components>
+				<TextureComponent>
+					<region type="TextureRegionHolder">ofen</region>
+				</TextureComponent>
+				<TransformComponent>
+					<pos type="Vector2" x="-0.20000076" y="0.47368455"/>
+					<scale type="Vector2" x="1.0" y="1.0"/>
+					<rotation type="Float">0.0</rotation>
+					<z type="Integer">10</z>
+				</TransformComponent>
 				<NameComponent>
-					<name type="String">WalkableArea</name>
+					<name type="String">ofen</name>
 				</NameComponent>
-				<WalkAreaComponent>
-					<areaJSON type="String">
-						&ltarea&gt&ltshape&gt&ltvertex x="-519.0" y="204.5"/&gt&ltvertex x="-503.0" y="-66.499985"/&gt&ltvertex x="287.00003" y="-165.5"/&gt&ltvertex x="704.99994" y="-77.49997"/&gt&ltvertex x="830.0" y="93.5"/&gt&ltvertex x="788.00006" y="307.5"/&gt&ltvertex x="664.99994" y="461.5"/&gt&ltvertex x="488.99997" y="359.5"/&gt&ltvertex x="457.00003" y="103.49999"/&gt&ltvertex x="326.0" y="-15.5"/&gt&ltvertex x="97.999985" y="-18.499985"/&gt&ltvertex x="-175.0" y="-17.5"/&gt&ltvertex x="-324.0" y="9.500023"/&gt&ltvertex x="62.000015" y="301.5"/&gt&ltvertex x="-81.999985" y="416.5"/&gt&ltvertex x="-378.0" y="391.49997"/&gt&lt/shape&gt&lt/area&gt
-					</areaJSON>
-				</WalkAreaComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<TextureComponent>
+					<region type="TextureRegionHolder">teekanne</region>
+				</TextureComponent>
+				<TransformComponent>
+					<pos type="Vector2" x="0.55238104" y="1.876518"/>
+					<scale type="Vector2" x="1.0" y="1.0"/>
+					<rotation type="Float">0.0</rotation>
+					<z type="Integer">8</z>
+				</TransformComponent>
+				<NameComponent>
+					<name type="String">teekanne</name>
+				</NameComponent>
 			</components>
 		</entity>
 	</entities>
