@@ -3,6 +3,7 @@ package de.project.ice.scripting.scripts;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import de.project.ice.scripting.ScriptManager;
+import de.project.ice.utils.Assets;
 import de.project.ice.utils.SceneLoader;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ public abstract class SceneLoad extends ScriptManager.Script {
 
         try {
             FileHandle file = Gdx.files.internal("scenes/" + scene + ".scene");
+            Assets.loadScene(scene);
             SceneLoader.loadScene(getManager().getEngine(), file);
         } catch (IOException e) {
             e.printStackTrace();

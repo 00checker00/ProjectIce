@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.project.ice.IceGame;
-import de.project.ice.inventory.Inventory;
 import de.project.ice.utils.Assets;
 import org.jetbrains.annotations.NotNull;
 
@@ -100,8 +99,10 @@ public class CursorScreen extends BaseScreenAdapter {
         if (game.activeItem == null) {
             batch.draw(cursors.get(primaryCursor), Gdx.input.getX() + 10, viewport.getScreenHeight() - Gdx.input.getY() - 32 - 10, 32, 32);
             batch.draw(cursors.get(secondaryCursor), Gdx.input.getX() + 2, viewport.getScreenHeight() - Gdx.input.getY() - 16 - 2, 16, 16);
-        } else {
-            batch.draw(Assets.findRegion(game.activeItem.getIcon()).data, Gdx.input.getX() + 10, viewport.getScreenHeight() - Gdx.input.getY() - 32 - 10, 32, 32);
+        } else{
+            Assets.TextureRegionHolder item = Assets.findRegion(game.activeItem.getIcon());
+            if (item.isValid())
+                batch.draw(item.data, Gdx.input.getX() + 10, viewport.getScreenHeight() - Gdx.input.getY() - 32 - 10, 32, 32);
         }
         batch.end();
     }

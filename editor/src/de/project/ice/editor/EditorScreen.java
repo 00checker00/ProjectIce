@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.XmlWriter;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.util.dialog.DialogUtils;
+import com.kotcrab.vis.ui.util.dialog.InputDialogListener;
 import com.kotcrab.vis.ui.widget.*;
 import com.kotcrab.vis.ui.widget.file.FileChooser;
 import com.kotcrab.vis.ui.widget.file.FileChooserAdapter;
@@ -29,6 +30,7 @@ import de.project.ice.ecs.components.TextureComponent;
 import de.project.ice.ecs.components.TransformComponent;
 import de.project.ice.ecs.systems.RenderingSystem;
 import de.project.ice.screens.BaseScreenAdapter;
+import de.project.ice.utils.Assets;
 import de.project.ice.utils.DelegatingInputProcessor;
 import de.project.ice.utils.SceneLoader;
 import de.project.ice.utils.SceneWriter;
@@ -122,7 +124,7 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
                             TransformComponent transform = Components.transform.get(entity);
                             TextureComponent texture = Components.texture.get(entity);
 
-                            if (texture.region.isNull())
+                            if (!texture.region.isValid())
                                 continue;
 
                             float width = texture.region.data.getRegionWidth() * PIXELS_TO_METRES;
@@ -305,15 +307,29 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
         }
     }
 
-    private void newScene() {
+    private void clear(){
         filename = null;
         game.engine.removeAllEntities();
 
         game.pauseGame();
     }
 
+    private void newScene() {
+        clear();
+        DialogUtils.showInputDialog(stage, "Scene Name", "Name", new InputDialogListener() {
+            @Override
+            public void finished(String input) {
+                Assets.loadScene(input);
+            }
+
+            @Override
+            public void canceled() {
+            }
+        });
+    }
+
     private void open() {
-        newScene();
+        clear();
 
         FileChooser fileChooser = new FileChooser(FileChooser.Mode.OPEN);
         fileChooser.setDirectory(new FileHandle("."));
@@ -328,6 +344,9 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
             @Override
             public void selected (FileHandle file) {
                 try {
+                    if (!Assets.loadScene(file.nameWithoutExtension())) {
+                        DialogUtils.showErrorDialog(stage, "Couldn't load spritesheet for scene: " + file.nameWithoutExtension());
+                    }
                     SceneLoader.loadScene(game.engine, file.read());
                     filename = file.file().getCanonicalFile().getAbsolutePath();
                 } catch (IOException e) {

@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 
 public class Scene01_Load extends SceneLoad {
     public Scene01_Load() {
-        super("Scene01");
+        super("scene3");
     }
 
     @Override

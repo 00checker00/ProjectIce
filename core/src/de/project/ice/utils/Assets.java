@@ -1,44 +1,74 @@
 package de.project.ice.utils;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
 
 public abstract class Assets {
 
     public static AssetManager manager = new AssetManager();
-    private static TextureAtlas spritesheet = null;
-    private static TextureAtlas spritesheet2 = null;
-    private static HashMap<String, Array<TextureRegion>> cachedRegions = new HashMap<String, Array<TextureRegion>>();
+    private static TextureAtlas charsSheet = null;
+    private static TextureAtlas sceneSheet = null;
+    private static String currentScene = null;
+    private static HashMap<String, Array<TextureRegion>> cachedRegionsChars = new HashMap<String, Array<TextureRegion>>();
+    private static HashMap<String, Array<TextureRegion>> cachedRegionsScene = new HashMap<String, Array<TextureRegion>>();
 
     static {
         manager.load("spritesheets/chars.atlas", TextureAtlas.class);
-        manager.load("spritesheets/scene3.atlas", TextureAtlas.class);
+    }
+
+    public static boolean loadScene(String scene) {
+        scene = "spritesheets/" + scene + ".atlas";
+
+        if(currentScene != null) {
+            manager.unload(currentScene);
+            cachedRegionsScene.clear();
+        }
+
+        if (Gdx.files.internal(scene).exists()) {
+            currentScene = scene;
+            manager.load(currentScene, TextureAtlas.class);
+            return true;
+        } else {
+            currentScene = null;
+            sceneSheet = null;
+            return false;
+        }
     }
 
     public static TextureRegionsHolder findRegions(String name) {
-        if(spritesheet == null) {
+        if(charsSheet == null) {
             manager.finishLoading();
-            spritesheet = manager.get("spritesheets/chars.atlas", TextureAtlas.class);
-            spritesheet2 = manager.get("spritesheets/scene3.atlas", TextureAtlas.class);
+            charsSheet = manager.get("spritesheets/chars.atlas", TextureAtlas.class);
         }
-        if(cachedRegions.containsKey(name)) {
-            return new TextureRegionsHolder(cachedRegions.get(name), name);
+        if(sceneSheet == null && currentScene != null) {
+            manager.finishLoading();
+            sceneSheet = manager.get(currentScene, TextureAtlas.class);
+        }
+
+        if(cachedRegionsChars.containsKey(name)) {
+            return new TextureRegionsHolder(cachedRegionsChars.get(name), name);
+        }
+        if(cachedRegionsScene.containsKey(name)) {
+            return new TextureRegionsHolder(cachedRegionsScene.get(name), name);
         }
 
         Array<TextureRegion> regions = new Array<TextureRegion>();
-        regions.addAll(spritesheet.findRegions(name));
-        if (regions.size == 0)
-        {
-            regions.addAll(spritesheet2.findRegions(name));
+        regions.addAll(charsSheet.findRegions(name));
+
+        if (regions.size == 0 && sceneSheet != null) {
+            regions.addAll(sceneSheet.findRegions(name));
+            if (regions.size > 0)
+                cachedRegionsScene.put(name, regions);
+        } else {
+            cachedRegionsChars.put(name, regions);
         }
 
-        cachedRegions.put(name, regions);
         return new TextureRegionsHolder(regions, name);
     }
 
@@ -52,7 +82,7 @@ public abstract class Assets {
 
     public static AnimationHolder createAnimation(String name, float frameDuration, Animation.PlayMode playMode) {
         Holder<Array<TextureRegion>> regions = findRegions(name);
-        if (regions.isNull())
+        if (!regions.isValid())
             return new AnimationHolder(name);
         Animation animation = new Animation(frameDuration, regions.data, playMode);
         return new AnimationHolder(animation, name);
@@ -75,8 +105,8 @@ public abstract class Assets {
             this(null, "null");
         }
 
-        public boolean isNull() {
-            return data == null;
+        public boolean isValid() {
+            return data != null;
         }
     }
 
@@ -117,5 +147,9 @@ public abstract class Assets {
 
         public AnimationHolder() {
         }
+    }
+
+    public static void update() {
+        manager.update();
     }
 }

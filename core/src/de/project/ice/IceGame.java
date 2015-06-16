@@ -10,6 +10,7 @@ import de.project.ice.inventory.Inventory;
 import de.project.ice.screens.*;
 import de.project.ice.scripting.ScriptManager;
 import de.project.ice.scripting.scripts.Scene01_Load;
+import de.project.ice.utils.Assets;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -107,6 +108,8 @@ public class IceGame extends ApplicationAdapter {
 
     @Override
     public void render () {
+        Assets.update();
+
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         float delta = Gdx.graphics.getDeltaTime();
         screens.begin();

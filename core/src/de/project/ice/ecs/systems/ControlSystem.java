@@ -1,7 +1,6 @@
 package de.project.ice.ecs.systems;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ai.pfa.DefaultGraphPath;
@@ -31,7 +30,7 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
     private CameraSystem cameraSystem;
 
     private PathCalculator mouseCalculator = new PathCalculator(0f);
-    private PathCalculator pathCalculator = new PathCalculator(0.001f);
+    private PathCalculator pathCalculator = new PathCalculator(0.01f);
 
     public CursorScreen.Cursor primaryCursor = CursorScreen.Cursor.None;
     public CursorScreen.Cursor secondaryCursor = CursorScreen.Cursor.None;
