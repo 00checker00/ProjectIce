@@ -13,6 +13,7 @@ import de.project.ice.IceGame;
 import de.project.ice.inventory.Inventory;
 import de.project.ice.utils.Assets;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import static de.project.ice.config.Config.*;
 
@@ -149,6 +150,7 @@ public class InventoryScreen extends BaseScreenAdapter {
         return new Vector2(x, y);
     }
 
+    @Nullable
     private Inventory.Item itemAt(float x, float y) {
         Vector2 pos = viewport.unproject(new Vector2(x, y));
         int column = (int) ((pos.x - MARGIN_HORIZONTAL) / (ICON_SIZE + ICON_SPACE));
@@ -163,7 +165,11 @@ public class InventoryScreen extends BaseScreenAdapter {
                 ICON_SIZE).contains(pos))
             return null;
 
-        return game.inventory.items.get(row * ICON_COLUMNS + column);
+        int index = row * ICON_COLUMNS + column;
+        if (index >= game.inventory.items.size)
+            return null;
+        else
+            return game.inventory.items.get(index);
     }
 
     public void dispose() {

@@ -6,5 +6,6 @@
     <extend-configuration-property name="gdx.reflect.include" value="de.project.ice.scripting.ScriptManager"/>
     <extend-configuration-property name="gdx.reflect.include" value="de.project.ice.scripting.scripts"/>
     <extend-configuration-property name="gdx.reflect.include" value="de.project.ice.inventory"/>
+    <extend-configuration-property name="gdx.reflect.include" value="de.project.ice.hotspot"/>
     <extend-configuration-property name="gdx.reflect.include" value="de.project.ice.utils.SceneWriter"/>
 </module>

@@ -4,8 +4,11 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
+import de.project.ice.dialog.Dialog;
 import de.project.ice.ecs.IceEngine;
+import de.project.ice.hotspot.HotspotManager;
 import de.project.ice.inventory.Inventory;
 import de.project.ice.screens.*;
 import de.project.ice.scripting.ScriptManager;
@@ -15,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class IceGame extends ApplicationAdapter {
-    private final DelayedRemovalArray<BaseScreen> screens = new DelayedRemovalArray<BaseScreen>();
+    private final Array<BaseScreen> screens = new Array<BaseScreen>();
     public IceEngine engine;
     protected GameScreen gameScreen = null;
     @NotNull
@@ -24,6 +27,8 @@ public class IceGame extends ApplicationAdapter {
     public ScriptManager scriptManager;
     @NotNull
     public Inventory inventory;
+    @NotNull
+    public HotspotManager hotspotManager;
     @Nullable
     public Inventory.Item activeItem = null;
 
@@ -32,18 +37,15 @@ public class IceGame extends ApplicationAdapter {
 
     @Override
     public void create () {
-        engine = new IceEngine();
-        scriptManager = new ScriptManager(engine);
         inventory = new Inventory(this);
-
-        for(int i = 0; i < 64; ++i)
-            inventory.addItem("Tree");
+        hotspotManager = new HotspotManager(this);
+        engine = new IceEngine(this);
+        scriptManager = new ScriptManager(engine);
 
         gameScreen = new GameScreen(this, engine);
         addScreen(gameScreen);
         cursorScreen = new CursorScreen(this);
         addScreen(cursorScreen);
-        addScreen(new InventoryScreen(this));
         init();
 
     }
@@ -63,14 +65,16 @@ public class IceGame extends ApplicationAdapter {
             gameScreen.resumeGame();
     }
 
+    public void showDialog(String dialog) {
+       addScreen(new DialogScreen(this, Dialog.load(Gdx.files.internal("dialog/" + dialog + ".dlz"))));
+    }
+
     @Override
     public void dispose () {
-        screens.begin();
         for (BaseScreen screen : screens) {
             screen.hide();
             screen.dispose();
         }
-        screens.end();
         screens.clear();
     }
 
@@ -112,11 +116,9 @@ public class IceGame extends ApplicationAdapter {
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         float delta = Gdx.graphics.getDeltaTime();
-        screens.begin();
         for (BaseScreen screen : screens) {
             screen.update(delta);
         }
-        screens.end();
         for (BaseScreen screen : screens) {
             screen.render();
         }
@@ -124,11 +126,9 @@ public class IceGame extends ApplicationAdapter {
 
     @Override
     public void resize (int width, int height) {
-        screens.begin();
         for (BaseScreen screen : screens) {
             screen.resize(width, height);
         }
-        screens.end();
     }
 
     public void removeScreen (@NotNull BaseScreen screen) {

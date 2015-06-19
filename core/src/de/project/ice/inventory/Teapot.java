@@ -3,10 +3,10 @@ package de.project.ice.inventory;
 
 import org.jetbrains.annotations.NotNull;
 
-public class Tree extends Inventory.Item {
+public class Teapot extends Inventory.Item {
     @NotNull
     @Override
     public String getIcon() {
-        return "holz";
+        return "teekanne";
     }
 }

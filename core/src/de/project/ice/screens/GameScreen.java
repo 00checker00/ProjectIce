@@ -46,10 +46,6 @@ public class GameScreen extends BaseScreenAdapter {
                         GameScreen.this.game.addScreen(new InventoryScreen(GameScreen.this.game));
                         return true;
 
-                    case Input.Keys.T:
-                        GameScreen.this.game.addScreen(new DialogScreen(GameScreen.this.game, Dialog.load(Gdx.files.internal("dialog/test.dlz"))));
-                        return true;
-
                     default:
                         return super.keyDown(keycode);
                 }

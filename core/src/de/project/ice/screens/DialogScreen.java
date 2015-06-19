@@ -1,11 +1,6 @@
 package de.project.ice.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -15,15 +10,14 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import de.project.ice.IceGame;
 import de.project.ice.Storage;
 import de.project.ice.dialog.Node;
-import de.project.ice.utils.ColorDrawable;
 import de.project.ice.utils.DelegatingBlockingInputProcessor;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 
+import static de.project.ice.config.Config.*;
+
 public class DialogScreen extends BaseScreenAdapter {
-    private static final String DIALOG_STORAGE_PREFIX = "__dialog__";
     @NotNull
     private Stage stage;
     @NotNull

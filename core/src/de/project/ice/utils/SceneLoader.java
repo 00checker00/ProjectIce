@@ -121,7 +121,7 @@ public abstract class SceneLoader {
         } else if (type.equalsIgnoreCase("Integer")) {
             return loadInt(element);
         } else if (type.equalsIgnoreCase("String")) {
-            return element.getText().replace("&gt", ">").replace("&lt", "<").replace("&amp", "&");
+            return element.getText() == null ? "" : element.getText().replace("&gt", ">").replace("&lt", "<").replace("&amp", "&");
         } else if (type.equalsIgnoreCase("OrthographicCamera")) {
             return loadOrthographicCamera(element);
         } else if (type.equalsIgnoreCase("Vector2")) {

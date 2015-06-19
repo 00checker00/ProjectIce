@@ -114,6 +114,44 @@
 				<NameComponent>
 					<name type="String">teekanne</name>
 				</NameComponent>
+				<HotspotComponent>
+					<origin type="Vector2" x="0.0" y="0.0"/>
+					<width type="Float">0.9</width>
+					<height type="Float">0.6</height>
+					<script type="String">Teapot</script>
+				</HotspotComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<TransformComponent>
+					<pos type="Vector2" x="8.100629" y="1.3098344"/>
+					<scale type="Vector2" x="1.0" y="1.0"/>
+					<rotation type="Float">0.0</rotation>
+					<z type="Integer">0</z>
+				</TransformComponent>
+				<HotspotComponent>
+					<origin type="Vector2" x="0.0" y="0.0"/>
+					<width type="Float">1.75</width>
+					<height type="Float">2.55</height>
+					<script type="String">PrincessIgloo</script>
+				</HotspotComponent>
+				<NameComponent>
+					<name type="String">Prinzessin</name>
+				</NameComponent>
+				<TextureComponent>
+					<region type="TextureRegionHolder">prinzessin_atmung</region>
+				</TextureComponent>
+				<BreathComponent>
+					<curScale type="Vector2" x="0.0" y="0.0"/>
+					<scaleValue type="Vector2" x="0.01" y="0.01"/>
+					<duration type="Float">0.8</duration>
+				</BreathComponent>
+				<IdleComponent/>
+				<StateComponent>
+					<animation type="Integer">0</animation>
+					<time type="Float">0.0</time>
+				</StateComponent>
 			</components>
 		</entity>
 	</entities>

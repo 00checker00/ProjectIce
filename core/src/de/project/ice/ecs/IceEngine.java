@@ -1,9 +1,14 @@
 package de.project.ice.ecs;
 
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.ashley.utils.ImmutableArray;
 import de.project.ice.IceGame;
+import de.project.ice.ecs.components.NameComponent;
 import de.project.ice.ecs.systems.*;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class IceEngine extends PooledEngine {
     @NotNull
@@ -22,9 +27,15 @@ public class IceEngine extends PooledEngine {
     public final ControlSystem controlSystem;
     @NotNull
     public final BreathSystem breathSystem;
+    @NotNull
+    public final IceGame game;
 
-    public IceEngine() {
+    @NotNull
+    private final ImmutableArray<Entity> namedEntities;
+
+    public IceEngine(@NotNull IceGame game) {
         super();
+        this.game = game;
         stateSystem = new StateSystem();
         animationSystem = new AnimationSystem();
         cameraSystem = new CameraSystem();
@@ -42,5 +53,16 @@ public class IceEngine extends PooledEngine {
         addSystem(movementSystem);
         addSystem(controlSystem);
         addSystem(breathSystem);
+
+        namedEntities = getEntitiesFor(Family.all(NameComponent.class).get());
+    }
+
+    @Nullable
+    public Entity getEntityByName(@NotNull String name) {
+        for(Entity entity : namedEntities)
+            if (name.equals(Components.name.get(entity).name))
+                return entity;
+
+        return null;
     }
 }
