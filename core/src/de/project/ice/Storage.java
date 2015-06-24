@@ -121,6 +121,7 @@ public abstract class Storage {
     public static class Savestate extends Storage {
         private Savestate() {
             super(Gdx.app.getPreferences(PREFIX + "_temp"));
+            prefs.clear();
         }
 
         public void load(int slot) {

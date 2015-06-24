@@ -13,6 +13,8 @@ public class TransformComponent extends Component implements Pool.Poolable {
     public Vector2 scale = new Vector2(1.0f, 1.0f);
     public float rotation = 0.0f;
     public int z = 0;
+    public boolean flipHorizontal;
+    public boolean flipVertical;
 
     @Override
     public void reset () {
@@ -20,5 +22,7 @@ public class TransformComponent extends Component implements Pool.Poolable {
         scale.set(1.0f, 1.0f);
         rotation = 0.0f;
         z = 0;
+        flipHorizontal = false;
+        flipVertical = false;
     }
 }

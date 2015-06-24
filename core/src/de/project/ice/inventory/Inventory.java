@@ -18,6 +18,7 @@ public class Inventory {
     }
 
     public void addItem(String name) {
+        removeItem(name);
         try {
             Class<Item> clazz = ClassReflection.forName("de.project.ice.inventory." + name);
             Item item = ClassReflection.newInstance(clazz);
@@ -25,6 +26,14 @@ public class Inventory {
             items.add(item);
         } catch (ReflectionException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void removeItem(String name) {
+        for (Item item : items) {
+            if (item.getClass().getSimpleName().equals(name)) {
+                items.removeValue(item, true);
+            }
         }
     }
 

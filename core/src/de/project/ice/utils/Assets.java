@@ -19,7 +19,7 @@ public abstract class Assets {
     private static HashMap<String, Array<TextureRegion>> cachedRegionsScene = new HashMap<String, Array<TextureRegion>>();
 
     static {
-        manager.load("spritesheets/chars.atlas", TextureAtlas.class);
+        manager.load("spritesheets/objects.atlas", TextureAtlas.class);
     }
 
     public static boolean loadScene(String scene) {
@@ -44,7 +44,7 @@ public abstract class Assets {
     public static TextureRegionsHolder findRegions(String name) {
         if(charsSheet == null) {
             manager.finishLoading();
-            charsSheet = manager.get("spritesheets/chars.atlas", TextureAtlas.class);
+            charsSheet = manager.get("spritesheets/objects.atlas", TextureAtlas.class);
         }
         if(sceneSheet == null && currentScene != null) {
             manager.finishLoading();

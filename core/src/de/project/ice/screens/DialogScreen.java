@@ -66,10 +66,10 @@ public class DialogScreen extends BaseScreenAdapter {
         } else if(node.type == Node.Type.Branch) {
             // Switch to correct branch
             Node next;
-            if (node.variable_name == null || node.branch == null) {
+            if ( node.branch == null) {
                 next = null;
             } else {
-                next = node.branch.getForValue(Storage.getSavestate().getString(DIALOG_STORAGE_PREFIX + node.variable_name));
+                next = node.branch.getForValue(Storage.getSavestate().getString(DIALOG_STORAGE_PREFIX + node.branch.variable_name));
             }
             showNode(next);
             return;

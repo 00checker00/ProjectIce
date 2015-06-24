@@ -19,6 +19,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class IceGame extends ApplicationAdapter {
     private final Array<BaseScreen> screens = new Array<BaseScreen>();
+    private final Array<BaseScreen> screensToAdd  = new Array<BaseScreen>();
+    private final Array<BaseScreen> screensToRemove  = new Array<BaseScreen>();
     public IceEngine engine;
     protected GameScreen gameScreen = null;
     @NotNull
@@ -29,8 +31,6 @@ public class IceGame extends ApplicationAdapter {
     public Inventory inventory;
     @NotNull
     public HotspotManager hotspotManager;
-    @Nullable
-    public Inventory.Item activeItem = null;
 
     public IceGame() {
     }
@@ -122,6 +122,36 @@ public class IceGame extends ApplicationAdapter {
         for (BaseScreen screen : screens) {
             screen.render();
         }
+        for (BaseScreen screen : screensToAdd) {
+            int index = -1;
+            for (int i = 0; i < screens.size; i++) {
+                if (screens.get(i).getPriority() < screen.getPriority()) {
+                    index = i;
+                    break;
+                }
+            }
+            if (index == -1) {
+                if (screens.size > 0)
+                    screens.peek().pause();
+                screens.add(screen);
+                screen.show();
+            } else {
+                screens.insert(index, screen);
+            }
+            screen.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        }
+        screensToAdd.clear();
+        for (BaseScreen screen : screensToRemove) {
+            if (screen == screens.peek()) {
+                screens.pop();
+                screens.peek().resume();
+            } else {
+                screens.removeValue(screen, true);
+            }
+            screen.hide();
+            screen.dispose();
+        }
+        screensToRemove.clear();
     }
 
     @Override
@@ -132,33 +162,11 @@ public class IceGame extends ApplicationAdapter {
     }
 
     public void removeScreen (@NotNull BaseScreen screen) {
-        if (screen == screens.peek()) {
-            screens.pop();
-            screens.peek().resume();
-        } else {
-            screens.removeValue(screen, true);
-        }
-        screen.hide();
-        screen.dispose();
+        screensToRemove.add(screen);
     }
 
     public void addScreen (@NotNull BaseScreen screen) {
-        int index = -1;
-        for (int i = 0; i < screens.size; i++) {
-            if (screens.get(i).getPriority() < screen.getPriority()) {
-                index = i;
-                break;
-            }
-        }
-        if (index == -1) {
-            if (screens.size > 0)
-                screens.peek().pause();
-            screens.add(screen);
-            screen.show();
-        } else {
-            screens.insert(index, screen);
-        }
-        screen.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        screensToAdd.add(screen);
     }
 
     public void startNewGame() {

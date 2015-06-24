@@ -2,6 +2,8 @@ package de.project.ice.ecs.systems;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ai.pfa.DefaultGraphPath;
 import com.badlogic.gdx.ai.pfa.GraphPath;
@@ -15,6 +17,7 @@ import de.project.ice.ecs.Families;
 import de.project.ice.ecs.IceEngine;
 import de.project.ice.ecs.components.*;
 import de.project.ice.hotspot.HotspotManager;
+import de.project.ice.inventory.Inventory;
 import de.project.ice.pathlib.*;
 import de.project.ice.screens.CursorScreen;
 
@@ -32,7 +35,11 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
 
     private Vector2 pointerPos = new Vector2();
     private boolean pointerDown = false;
-    private boolean pointerClicked = false;
+    private boolean pointerWasDown = false;
+    private boolean mouseUp = false;
+    private boolean mouseDown = false;
+    private int button;
+
     private CameraSystem cameraSystem;
 
     private PathCalculator mouseCalculator = new PathCalculator(0f);
@@ -40,6 +47,7 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
 
     public CursorScreen.Cursor primaryCursor = CursorScreen.Cursor.None;
     public CursorScreen.Cursor secondaryCursor = CursorScreen.Cursor.None;
+    public Inventory.Item active_item = null;
     private IceEngine engine;
 
     @SuppressWarnings("unchecked")
@@ -54,30 +62,36 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
         TextureComponent texture = Components.texture.get(entity);
         TransformComponent transform = Components.transform.get(entity);
 
-        if(pointerDown) {
-            if(pointerClicked) {
-                pointerClicked = false;
+        if (mouseUp) {
+            activateHotspot(entity);
+        } else if(mouseDown) {
 
-                if (active_hotspot != null) {
-                    UseComponent useComponent = engine.createComponent(UseComponent.class);
-                    useComponent.target = hotspot_entity;
-                    useComponent.cursor = primaryCursor;
-                    entity.add(useComponent);
-                }
+            if (button == Input.Buttons.LEFT || button == Input.Buttons.RIGHT) {
+                if (button == Input.Buttons.RIGHT && active_item != null)
+                    active_item = null;
 
-                switch (primaryCursor) {
+                activateHotspot(entity);
+                switch (button == Input.Buttons.LEFT ? primaryCursor : secondaryCursor) {
                     case Walk:
                     case Take:
                     case Speak:
-                        Vector3 target = active_camera.unproject(new Vector3(pointerPos.x, pointerPos.y, 0f)); // unprojects UI coordinates to camera coordinates
+
                         float width = PIXELS_TO_METRES * (texture.region.data != null ? texture.region.data.getRegionWidth() : 0);
 
-                        target = new Vector3(target.x, target.y, 0f);
+                        Vector2 target;
+                        if (hotspot_entity != null) {
+                            HotspotComponent hotspotComponent = Components.hotspot.get(hotspot_entity);
+                            target = Components.transform.get(hotspot_entity).pos.cpy()
+                                    .add(hotspotComponent.origin).add(hotspotComponent.targetPos);
+                        } else {
+                            Vector3 mouse_target = active_camera.unproject(new Vector3(pointerPos.x, pointerPos.y, 0f)); // unprojects UI coordinates to camera coordinates
+                            target = new Vector2(mouse_target.x, mouse_target.y);
+                        }
 
                         walkarea.waypoints.clear();
                         PathNode startNode = new PathNode(transform.pos.cpy().add(width / 2, 0));
                         walkarea.waypoints.add(startNode);
-                        PathNode endNode = new PathNode(new Vector2(target.x, target.y));
+                        PathNode endNode = new PathNode(target);
                         walkarea.waypoints.add(endNode);
                         PathGraph graph = pathCalculator.computeGraph(walkarea);
 
@@ -88,12 +102,22 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
 
                         move.targetPositions.clear();
 
-                        for (PathNode node  : path) {
-                            move.targetPositions.add(node.getPos().cpy().sub(width/2, 0));
+                        for (PathNode node : path) {
+                            move.targetPositions.add(node.getPos().cpy().sub(width / 2, 0));
                         }
                         break;
                 }
             }
+        }
+    }
+
+    private void activateHotspot(Entity entity) {
+        if (active_hotspot != null) {
+            UseComponent useComponent = engine.createComponent(UseComponent.class);
+            useComponent.target = hotspot_entity;
+            useComponent.cursor = primaryCursor;
+            useComponent.item = active_item;
+            entity.add(useComponent);
         }
     }
 
@@ -109,7 +133,18 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
         if (active_camera == null)
             return;
 
+        if (pointerDown && !pointerWasDown) {
+            mouseDown = true;
+            Gdx.app.log("Test", "mouse down");
+        } else if (!pointerDown && pointerWasDown) {
+            mouseUp = true;
+            Gdx.app.log("Test", "mouse up");
+        }
+
         super.update(deltaTime);
+        mouseUp = false;
+        mouseDown = false;
+        pointerWasDown = pointerDown;
     }
 
     @Override
@@ -141,8 +176,8 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         pointerPos.set(screenX, screenY);
+        this.button = button;
         pointerDown = true;
-        pointerClicked = true;
         return false;
     }
 
@@ -150,7 +185,6 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         pointerPos.set(screenX, screenY);
         pointerDown = false;
-        pointerClicked = false;
         return false;
     }
 

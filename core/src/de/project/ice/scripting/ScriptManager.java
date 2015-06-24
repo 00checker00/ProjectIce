@@ -97,7 +97,7 @@ public class ScriptManager {
     /**
      * Unloads all currently loaded script
      *
-     * @param forceUnload if true will even unload global scripts
+     * @param forceUnload if true will also unload global scripts
      * @param exceptions  scripts which shouldn't be unloaded
      */
     public void unloadAll (boolean forceUnload, Script... exceptions) {
@@ -209,7 +209,7 @@ public class ScriptManager {
         }
 
         /**
-         * A global script doesn't getAnimation unloaded except when directly unloaded
+         * A global script doesn't get unloaded except when directly unloaded
          *
          * @return true or false
          */
@@ -218,7 +218,7 @@ public class ScriptManager {
         }
 
         /**
-         * A global script doesn't getAnimation unloaded except when directly unloaded
+         * A global script doesn't get unloaded except when directly unloaded
          */
         public void setGlobal (boolean global) {
             this.global = global;

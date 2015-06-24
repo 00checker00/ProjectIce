@@ -32,8 +32,6 @@ public class CursorScreen extends BaseScreenAdapter {
     private final OrthographicCamera camera;
     private final Viewport viewport;
     private final HashMap<Cursor, TextureRegion> cursors = new HashMap<Cursor, TextureRegion>();
-    private Cursor primaryCursor = Cursor.None;
-    private Cursor secondaryCursor = Cursor.None;
 
     public CursorScreen(@NotNull IceGame game) {
         super(game);
@@ -62,20 +60,20 @@ public class CursorScreen extends BaseScreenAdapter {
 
     @NotNull
     public Cursor getPrimaryCursor() {
-        return primaryCursor;
+        return game.engine.controlSystem.primaryCursor;
     }
 
     public void setPrimaryCursor(@NotNull Cursor primaryCursor) {
-        this.primaryCursor = primaryCursor;
+        game.engine.controlSystem.primaryCursor = primaryCursor;
     }
 
     @NotNull
     public Cursor getSecondaryCursor() {
-        return secondaryCursor;
+        return game.engine.controlSystem.secondaryCursor;
     }
 
     public void setSecondaryCursor(@NotNull Cursor secondaryCursor) {
-        this.secondaryCursor = secondaryCursor;
+        game.engine.controlSystem.secondaryCursor = secondaryCursor;
     }
 
     @Override
@@ -96,11 +94,11 @@ public class CursorScreen extends BaseScreenAdapter {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         batch.draw(cursor, Gdx.input.getX(), viewport.getScreenHeight()-Gdx.input.getY()-cursor.getRegionHeight());
-        if (game.activeItem == null) {
-            batch.draw(cursors.get(primaryCursor), Gdx.input.getX() + 10, viewport.getScreenHeight() - Gdx.input.getY() - 32 - 10, 32, 32);
-            batch.draw(cursors.get(secondaryCursor), Gdx.input.getX() + 2, viewport.getScreenHeight() - Gdx.input.getY() - 16 - 2, 16, 16);
-        } else{
-            Assets.TextureRegionHolder item = Assets.findRegion(game.activeItem.getIcon());
+        if (game.engine.controlSystem.active_item == null) {
+            batch.draw(cursors.get(game.engine.controlSystem.primaryCursor), Gdx.input.getX() + 10, viewport.getScreenHeight() - Gdx.input.getY() - 32 - 10, 32, 32);
+            batch.draw(cursors.get(game.engine.controlSystem.secondaryCursor), Gdx.input.getX() + 2, viewport.getScreenHeight() - Gdx.input.getY() - 16 - 2, 16, 16);
+        } else {
+            Assets.TextureRegionHolder item = Assets.findRegion(game.engine.controlSystem.active_item.getIcon());
             if (item.isValid())
                 batch.draw(item.data, Gdx.input.getX() + 10, viewport.getScreenHeight() - Gdx.input.getY() - 32 - 10, 32, 32);
         }

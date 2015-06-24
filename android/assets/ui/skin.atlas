@@ -3,76 +3,11 @@ skin.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-menu_logo
+inventory_bg
   rotate: false
-  xy: 1, 93
-  size: 800, 600
-  orig: 800, 600
-  offset: 0, 0
-  index: -1
-cursor
-  rotate: false
-  xy: 1, 59
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-cur_look
-  rotate: false
-  xy: 803, 661
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-cur_speak
-  rotate: false
-  xy: 1, 25
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-cur_take
-  rotate: false
-  xy: 35, 59
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-cur_walk
-  rotate: false
-  xy: 803, 627
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-btn
-  rotate: false
-  xy: 837, 671
-  size: 22, 22
-  split: 7, 7, 7, 7
-  orig: 22, 22
-  offset: 0, 0
-  index: -1
-btn_pressed
-  rotate: false
-  xy: 1, 1
-  size: 22, 22
-  split: 7, 7, 7, 7
-  orig: 22, 22
-  offset: 0, 0
-  index: -1
-white
-  rotate: false
-  xy: 35, 37
-  size: 20, 20
-  orig: 20, 20
-  offset: 0, 0
-  index: -1
-transparent
-  rotate: false
-  xy: 69, 90
-  size: 1, 1
-  orig: 1, 1
+  xy: 0, 0
+  size: 1024, 1024
+  orig: 1024, 1024
   offset: 0, 0
   index: -1
 
@@ -80,9 +15,86 @@ skin2.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+menu_logo
+  rotate: false
+  xy: 0, 86
+  size: 800, 600
+  orig: 800, 600
+  offset: 0, 0
+  index: -1
+cursor
+  rotate: false
+  xy: 0, 54
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+cur_look
+  rotate: false
+  xy: 800, 654
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+cur_speak
+  rotate: false
+  xy: 0, 22
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+cur_take
+  rotate: false
+  xy: 32, 54
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+cur_walk
+  rotate: false
+  xy: 800, 622
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+btn
+  rotate: false
+  xy: 832, 664
+  size: 22, 22
+  split: 7, 7, 7, 7
+  orig: 22, 22
+  offset: 0, 0
+  index: -1
+btn_pressed
+  rotate: false
+  xy: 0, 0
+  size: 22, 22
+  split: 7, 7, 7, 7
+  orig: 22, 22
+  offset: 0, 0
+  index: -1
+white
+  rotate: false
+  xy: 32, 34
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+transparent
+  rotate: false
+  xy: 64, 85
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+
+skin3.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
 menu_bg
   rotate: false
-  xy: 1, 1
+  xy: 0, 0
   size: 500, 500
   orig: 500, 500
   offset: 0, 0

@@ -50,8 +50,8 @@ public abstract class Dialog {
                 }
             }
 
-            if (value.has("connections") && node.branch != null) {
-                for (JsonValue jsonBranch : value.get("connections")) {
+            if (value.has("branches") && node.branch != null) {
+                for (JsonValue jsonBranch : value.get("branches")) {
                     String expected_value = jsonBranch.name;
                     String branchId = jsonBranch.asString();
                     node.branch.connections.put(expected_value, loadNode(branchId, nodes));

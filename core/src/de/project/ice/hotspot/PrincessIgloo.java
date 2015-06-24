@@ -19,6 +19,9 @@ public class PrincessIgloo extends HotspotManager.Hotspot {
     public void useWith(@NotNull Inventory.Item item) {
         Storage.getSavestate().putString(DIALOG_STORAGE_PREFIX + "PrincessGiveTeapot", "True").flush();
         Game().showDialog("PrincessIgloo");
+        Game().inventory.removeItem("Teapot");
+        if (Engine().controlSystem.active_item == item)
+            Engine().controlSystem.active_item = null;
     }
 
     @Override

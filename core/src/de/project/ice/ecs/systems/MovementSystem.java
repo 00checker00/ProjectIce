@@ -6,10 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import de.project.ice.IceGame;
 import de.project.ice.ecs.Components;
 import de.project.ice.ecs.IceEngine;
-import de.project.ice.ecs.components.HotspotComponent;
-import de.project.ice.ecs.components.MovableComponent;
-import de.project.ice.ecs.components.TransformComponent;
-import de.project.ice.ecs.components.UseComponent;
+import de.project.ice.ecs.components.*;
 import de.project.ice.hotspot.HotspotManager;
 
 public class MovementSystem extends IteratingIceSystem {
@@ -42,6 +39,11 @@ public class MovementSystem extends IteratingIceSystem {
                 // Gdx.app.log("handleMovement", "" + movementVector.len());
                 t.pos.add(movementVector.x, movementVector.y);
                 move.isMoving = true;
+                if (directionVector.x > 0) {
+                    t.flipHorizontal = true;
+                } else if (directionVector.x < 0) {
+                    t.flipHorizontal = false;
+                }
             } else {
                 t.pos.set(targetVector.x, targetVector.y);
                 move.isMoving = false;
@@ -50,6 +52,14 @@ public class MovementSystem extends IteratingIceSystem {
                 // Target reached
                 if (move.targetPositions.isEmpty()) {
                     onTargetReached(entity);
+                }
+            }
+            if (Components.state.has(entity)) {
+                StateComponent state = Components.state.get(entity);
+                if (state.animation == AnimationSystem.ANIMATION_WALK && !move.isMoving)
+                    state.setAnimation(AnimationSystem.ANIMATION_NONE);
+                else if (state.animation != AnimationSystem.ANIMATION_WALK && move.isMoving) {
+                    state.setAnimation(AnimationSystem.ANIMATION_WALK);
                 }
             }
         }
@@ -68,10 +78,11 @@ public class MovementSystem extends IteratingIceSystem {
             HotspotManager.Hotspot hotspot = game.hotspotManager.get(hotspotComponent.script);
 
             if (hotspot != null) {
-                if (component.item != null)
+                if (component.item != null) {
                     hotspot.useWith(component.item);
-                else
+                } else {
                     hotspot.use(component.cursor);
+                }
             }
         }
         entity.remove(UseComponent.class);

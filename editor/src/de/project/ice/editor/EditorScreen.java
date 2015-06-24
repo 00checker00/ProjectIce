@@ -222,6 +222,12 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
                 save(true);
             }
         }).setShortcut("Ctrl + Shift + S"));
+        fileMenu.addItem(new MenuItem("Screenshot", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                ScreenshotFactory.saveScreenshot();
+            }
+        }));
         fileMenu.addSeparator();
         fileMenu.addItem(new MenuItem("Quit", new ChangeListener() {
             @Override

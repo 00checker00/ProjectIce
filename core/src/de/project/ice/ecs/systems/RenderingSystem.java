@@ -3,12 +3,16 @@ package de.project.ice.ecs.systems;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import de.project.ice.ecs.Components;
 import de.project.ice.ecs.Families;
 import de.project.ice.ecs.IceEngine;
@@ -63,6 +67,7 @@ public class RenderingSystem extends SortedIteratingIceSystem {
             return;
 
         active_camera.update();
+        Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.setProjectionMatrix(active_camera.combined);
         batch.begin();
         super.update(deltaTime);
@@ -111,6 +116,8 @@ public class RenderingSystem extends SortedIteratingIceSystem {
         Vector2 pos = transform.pos.cpy().add(hotspot.origin);
 
         debugRenderer.rect(pos.x, pos.y, hotspot.width, hotspot.height);
+        cross(pos.cpy().add(hotspot.origin).add(hotspot.width/2, hotspot.height/2));
+        cross(pos.cpy().add(hotspot.targetPos).add(hotspot.origin));
     }
 
     @Override
@@ -144,14 +151,18 @@ public class RenderingSystem extends SortedIteratingIceSystem {
                     t.pos.x, t.pos.y,
                     originX, originY,
                     width, height,
-                    1, 1,
+                    t.flipHorizontal?-1f:1f, t.flipVertical?-1f:1f,
                     MathUtils.radiansToDegrees * t.rotation);
 
         } else if (debugRenderer.isDrawing()) {
             debugRenderer.rect(t.pos.x, t.pos.y, width, height);
-            debugRenderer.line(t.pos.x + width/2 - 0.1f, t.pos.y + originY, t.pos.x + width/2 + 0.1f, t.pos.y + originY);
-            debugRenderer.line(t.pos.x + originX, t.pos.y + height/2 - 0.1f, t.pos.x + originX, t.pos.y + height/2 + 0.1f);
+            cross(t.pos.cpy().add(width/2, height/2).add(originX, originY));
         }
+    }
+
+    private void cross(Vector2 pos) {
+        debugRenderer.line(pos.x - 0.1f, pos.y,        pos.x + 0.1f, pos.y       );
+        debugRenderer.line(pos.x,        pos.y - 0.1f, pos.x,        pos.y + 0.1f);
     }
 
     @Override
