@@ -30,7 +30,7 @@ public class Wood extends HotspotManager.Hotspot {
                 break;
 
             case Look:
-                Game().showMessages("Ein Stapel Holzscheite.");
+                Game().showMessages(Game().strings.get("s3_wood_desc"));
                 break;
         }
     }

@@ -42,7 +42,7 @@ public class PrincessIgloo extends HotspotManager.Hotspot {
                 Game().showDialog("PrincessIgloo");
                 break;
             case Look:
-                Game().showMessages("Prinzessin ________. Meine groﬂe Liebe.");
+                Game().showMessages(Game().strings.get("s3_princess_desc"));
                 break;
         }
     }

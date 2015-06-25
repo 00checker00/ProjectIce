@@ -22,7 +22,7 @@ public class Teapot extends HotspotManager.Hotspot {
     @Override
     public void use(@NotNull CursorScreen.Cursor cursor) {
         if (!Storage.getSavestate().getBoolean("scene_03_tea_ready")) {
-            Game().showMessages("Der Tee ist noch nicht heiﬂ.");
+            Game().showMessages(Game().strings.get("s3_tea_not_ready"));
             return;
         }
 

@@ -106,7 +106,7 @@ public class DialogScreen extends BaseScreenAdapter {
         ((InputProcessor)inputProcessor).next = node.next;
         ((InputProcessor)inputProcessor).nextEnabled = node.choices.size == 0;
 
-        Label textLabel = new Label(node.text, skin);
+        Label textLabel = new Label(game.strings.get(node.text), skin);
         textLabel.setAlignment(Align.center);
         ScrollPane scrollPane = new ScrollPane(textLabel, skin);
         root.add(scrollPane).height(50f).fill();

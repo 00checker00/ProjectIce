@@ -80,7 +80,7 @@ public class InventoryScreen extends BaseScreenAdapter {
 
                     case Input.Buttons.RIGHT:
                         if (item != null)
-                            game.showMessages(item.getDescription());
+                            game.showMessages(game.strings.get(item.getDescription()));
                         break;
                 }
                 return true;
@@ -176,7 +176,7 @@ public class InventoryScreen extends BaseScreenAdapter {
             return null;
 
         int index = row * ICON_COLUMNS + column;
-        if (index >= game.inventory.items.size)
+        if (index >= game.inventory.items.size || index < 0)
             return null;
         else
             return game.inventory.items.get(index);

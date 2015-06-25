@@ -14,6 +14,6 @@ public class Teapot extends Inventory.Item {
     @Nullable
     @Override
     public String getDescription() {
-        return "Mhhmmm feinster Tee aus Schottland.";
+        return "s3_teapot_desc";
     }
 }

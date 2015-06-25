@@ -14,6 +14,6 @@ public class Wood extends Inventory.Item {
     @Nullable
     @Override
     public String getDescription() {
-        return "Ein Stapel Holzscheite.";
+        return "s3_wood_desc";
     }
 }

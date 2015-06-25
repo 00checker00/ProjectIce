@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.I18NBundle;
 import de.project.ice.dialog.Dialog;
 import de.project.ice.ecs.IceEngine;
 import de.project.ice.hotspot.HotspotManager;
@@ -29,15 +30,19 @@ public class IceGame extends ApplicationAdapter {
     public Inventory inventory;
     @NotNull
     public HotspotManager hotspotManager;
+    @NotNull
+    public I18NBundle strings;
 
     public IceGame() {
     }
 
     @Override
     public void create () {
+        I18NBundle.setSimpleFormatter(true);
         inventory = new Inventory(this);
         hotspotManager = new HotspotManager(this);
         engine = new IceEngine(this);
+        strings = I18NBundle.createBundle(Gdx.files.internal("strings/ProjectIce"));
 
         gameScreen = new GameScreen(this, engine);
         addScreen(gameScreen);

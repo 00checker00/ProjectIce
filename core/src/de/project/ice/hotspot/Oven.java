@@ -35,7 +35,7 @@ public class Oven extends HotspotManager.Hotspot {
     public void use(@NotNull CursorScreen.Cursor cursor) {
         switch (cursor) {
             case Look:
-                Game().showMessages("Hmmm... Kein Holz");
+                Game().showMessages(Game().strings.get("s3_oven_no_wood"));
                 break;
         }
     }
