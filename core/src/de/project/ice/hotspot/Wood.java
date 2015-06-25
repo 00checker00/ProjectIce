@@ -1,12 +1,11 @@
 package de.project.ice.hotspot;
 
-
 import com.badlogic.ashley.core.Entity;
 import de.project.ice.Storage;
 import de.project.ice.screens.CursorScreen;
 import org.jetbrains.annotations.NotNull;
 
-public class Teapot extends HotspotManager.Hotspot {
+public class Wood extends HotspotManager.Hotspot {
     @NotNull
     @Override
     public CursorScreen.Cursor getPrimaryCursor() {
@@ -21,21 +20,18 @@ public class Teapot extends HotspotManager.Hotspot {
 
     @Override
     public void use(@NotNull CursorScreen.Cursor cursor) {
-        if (!Storage.getSavestate().getBoolean("scene_03_tea_ready")) {
-            Game().showMessages("Der Tee ist noch nicht heiﬂ.");
-            return;
-        }
-
         switch (cursor) {
             case Take:
-                Entity teapot = Engine().getEntityByName("teekanne");
-                if (teapot != null) {
-                    Engine().removeEntity(teapot);
-                    Game().inventory.addItem("Teapot");
+                Entity wood = Engine().getEntityByName("wood");
+                if (wood != null) {
+                    Engine().removeEntity(wood);
+                    Game().inventory.addItem("Wood");
                 }
                 break;
 
-
+            case Look:
+                Game().showMessages("Ein Stapel Holzscheite.");
+                break;
         }
     }
 }

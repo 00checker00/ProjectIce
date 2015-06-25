@@ -3,6 +3,7 @@ package de.project.ice.utils;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -16,6 +17,7 @@ import de.project.ice.ecs.IceEngine;
 import com.badlogic.gdx.utils.XmlReader;
 import de.project.ice.ecs.components.WalkAreaComponent;
 import de.project.ice.ecs.systems.RenderingSystem;
+import de.project.ice.scripting.Script;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,6 +48,12 @@ public abstract class SceneLoader {
         if (scene == null || !scene.getName().equals("scene"))
             throw new LoadException("Invalid scene file (Not a scene file)");
 
+        String sceneName = null;
+        try {
+            sceneName = scene.getAttribute("name");
+            Assets.loadScene(sceneName);
+        } catch (Exception ignore) {}
+
         Element entities = scene.getChildByName("entities");
         if (entities == null) {
             throw new LoadException("Invalid scene file (No entities entry)");
@@ -55,6 +63,13 @@ public abstract class SceneLoader {
             Element child = entities.getChild(i);
             if (child.getName().endsWith("entity"))
                 engine.addEntity(loadEntity(engine, child));
+        }
+
+        if (sceneName != null) {
+            Script sceneScript = Script.loadScript( sceneName + "_load", engine.game);
+            if (sceneScript != null) {
+                sceneScript.onLoad();
+            }
         }
     }
 

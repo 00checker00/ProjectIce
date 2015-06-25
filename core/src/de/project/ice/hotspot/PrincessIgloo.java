@@ -15,9 +15,15 @@ public class PrincessIgloo extends HotspotManager.Hotspot {
         return CursorScreen.Cursor.Speak;
     }
 
+    @NotNull
+    @Override
+    public CursorScreen.Cursor getSecondaryCursor() {
+        return CursorScreen.Cursor.Look;
+    }
+
     @Override
     public void useWith(@NotNull Inventory.Item item) {
-        Storage.getSavestate().putString(DIALOG_STORAGE_PREFIX + "PrincessGiveTeapot", "True").flush();
+        Storage.getSavestate().put("PrincessGiveTea", true).flush();
         Game().showDialog("PrincessIgloo");
         Game().inventory.removeItem("Teapot");
         if (Engine().controlSystem.active_item == item)
@@ -34,6 +40,9 @@ public class PrincessIgloo extends HotspotManager.Hotspot {
         switch (cursor) {
             case Speak:
                 Game().showDialog("PrincessIgloo");
+                break;
+            case Look:
+                Game().showMessages("Prinzessin ________. Meine groﬂe Liebe.");
                 break;
         }
     }

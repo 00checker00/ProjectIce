@@ -5,17 +5,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.DelayedRemovalArray;
 import de.project.ice.dialog.Dialog;
 import de.project.ice.ecs.IceEngine;
 import de.project.ice.hotspot.HotspotManager;
 import de.project.ice.inventory.Inventory;
 import de.project.ice.screens.*;
-import de.project.ice.scripting.ScriptManager;
-import de.project.ice.scripting.scripts.Scene01_Load;
+import de.project.ice.scripting.Script;
 import de.project.ice.utils.Assets;
+import de.project.ice.utils.SceneLoader;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import java.io.IOException;
 
 public class IceGame extends ApplicationAdapter {
     private final Array<BaseScreen> screens = new Array<BaseScreen>();
@@ -25,8 +25,6 @@ public class IceGame extends ApplicationAdapter {
     protected GameScreen gameScreen = null;
     @NotNull
     protected CursorScreen cursorScreen ;
-    @NotNull
-    public ScriptManager scriptManager;
     @NotNull
     public Inventory inventory;
     @NotNull
@@ -40,7 +38,6 @@ public class IceGame extends ApplicationAdapter {
         inventory = new Inventory(this);
         hotspotManager = new HotspotManager(this);
         engine = new IceEngine(this);
-        scriptManager = new ScriptManager(engine);
 
         gameScreen = new GameScreen(this, engine);
         addScreen(gameScreen);
@@ -67,6 +64,10 @@ public class IceGame extends ApplicationAdapter {
 
     public void showDialog(String dialog) {
        addScreen(new DialogScreen(this, Dialog.load(Gdx.files.internal("dialog/" + dialog + ".dlz"))));
+    }
+
+    public void showMessages(String... messages) {
+       addScreen(new MessageScreen(this, messages));
     }
 
     @Override
@@ -171,7 +172,13 @@ public class IceGame extends ApplicationAdapter {
 
     public void startNewGame() {
         engine.removeAllEntities();
-        scriptManager.loadScript(Scene01_Load.class);
+        try {
+            SceneLoader.loadScene(engine, Gdx.files.internal("scenes/scene3.scene"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SceneLoader.LoadException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

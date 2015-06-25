@@ -23,8 +23,8 @@ public class GameScreen extends BaseScreenAdapter {
         super(game);
         this.engine = engine;
 
-        // Load "Scene01" by loading the Scene01_Load script
-        // this.scriptManager.loadScript(Scene01_Load.class);
+        // Load "Scene01" by loading the scene3_load script
+        // this.scriptManager.loadScript(scene3_load.class);
 
         inputProcessor = new DelegatingBlockingInputProcessor(engine.controlSystem) {
             @Override

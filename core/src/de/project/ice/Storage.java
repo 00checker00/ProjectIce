@@ -39,60 +39,93 @@ public abstract class Storage {
         this.prefs = prefs;
     }
 
-    public Preferences putBoolean(@NotNull String key, boolean val) {
-        return prefs.putBoolean(key, val);
+    public Preferences put(@NotNull String key, boolean val) {
+        return prefs.putString(key, Boolean.toString(val));
     }
 
-    public Preferences putInteger(@NotNull String key, int val) {
-        return prefs.putInteger(key, val);
+    public Preferences put(@NotNull String key, int val) {
+        return prefs.putString(key, Integer.toString(val));
     }
 
-    public Preferences putLong(@NotNull String key, long val) {
-        return prefs.putLong(key, val);
+    public Preferences put(@NotNull String key, long val) {
+        return prefs.putString(key, Long.toString(val));
     }
 
-    public Preferences putFloat(@NotNull String key, float val) {
-        return prefs.putFloat(key, val);
+    public Preferences put(@NotNull String key, float val) {
+        return prefs.putString(key, Float.toString(val));
     }
 
-    public Preferences putString(@NotNull String key, String val) {
+    public Preferences put(@NotNull String key, String val) {
         return prefs.putString(key, val);
     }
 
     public boolean getBoolean(@NotNull String key) {
-        return prefs.getBoolean(key);
+        try {
+            return Boolean.parseBoolean(prefs.getString(key));
+        } catch (Exception ignore) {
+            return false;
+        }
     }
 
     public int getInteger(@NotNull String key) {
-        return prefs.getInteger(key);
+        try {
+            return Integer.parseInt(prefs.getString(key));
+        } catch (Exception ignore) {
+            return 0;
+        }
     }
 
     public long getLong(@NotNull String key) {
-        return prefs.getLong(key);
+        try {
+            return Long.parseLong(prefs.getString(key));
+        } catch (Exception ignore) {
+            return 0L;
+        }
     }
 
     public float getFloat(@NotNull String key) {
-        return prefs.getFloat(key);
+        try {
+            return Float.parseFloat(prefs.getString(key));
+        } catch (Exception ignore) {
+            return 0f;
+        }
     }
 
     public String getString(@NotNull String key) {
         return prefs.getString(key);
     }
 
-    public boolean getBoolean(@NotNull String key, boolean defValue) {
-        return prefs.getBoolean(key, defValue);
+
+    public boolean getBoolean(@NotNull String key, boolean defaultValue) {
+        try {
+            return Boolean.parseBoolean(prefs.getString(key));
+        } catch (Exception ignore) {
+            return defaultValue;
+        }
     }
 
-    public int getInteger(@NotNull String key, int defValue) {
-        return prefs.getInteger(key, defValue);
+    public int getInteger(@NotNull String key, int defaultValue) {
+        try {
+            return Integer.parseInt(prefs.getString(key));
+        } catch (Exception ignore) {
+            return defaultValue;
+        }
     }
 
-    public long getLong(@NotNull String key, long defValue) {
-        return prefs.getLong(key, defValue);
+    public long getLong(@NotNull String key, long defaultValue) {
+        try {
+            return Long.parseLong(prefs.getString(key));
+        } catch (Exception ignore) {
+            return defaultValue;
+        }
     }
 
-    public float getFloat(@NotNull String key, float defValue) {
-        return prefs.getFloat(key, defValue);
+    public float getFloat(@NotNull String key, float defaultValue) {
+        try {
+            return Float.parseFloat(prefs.getString(key));
+        } catch (Exception ignore) {
+            return defaultValue;
+        }
     }
 
     @NotNull

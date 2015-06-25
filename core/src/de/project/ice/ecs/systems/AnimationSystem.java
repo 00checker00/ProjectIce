@@ -10,7 +10,7 @@ import de.project.ice.ecs.components.TextureComponent;
 import de.project.ice.utils.Assets;
 
 public class AnimationSystem extends IteratingIceSystem {
-    public static final int ANIMATION_NONE = 1;
+    public static final int ANIMATION_DEFAULT = 1;
     public static final int ANIMATION_IDLE = 2;
     public static final int ANIMATION_WALK = 3;
 

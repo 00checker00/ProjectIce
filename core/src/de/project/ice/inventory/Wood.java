@@ -1,19 +1,19 @@
 package de.project.ice.inventory;
 
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class Teapot extends Inventory.Item {
+public class Wood extends Inventory.Item {
+
     @NotNull
     @Override
     public String getIcon() {
-        return "teekanne";
+        return "holz";
     }
 
     @Nullable
     @Override
     public String getDescription() {
-        return "Mhhmmm feinster Tee aus Schottland.";
+        return "Ein Stapel Holzscheite.";
     }
 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
 import de.project.ice.IceGame;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class Inventory {
     @NotNull
@@ -46,6 +47,11 @@ public class Inventory {
 
         @NotNull
         public abstract String getIcon();
+
+        @Nullable
+        public String getDescription() {
+            return null;
+        }
 
         public boolean canCombine(@NotNull Item other) {
             return false;

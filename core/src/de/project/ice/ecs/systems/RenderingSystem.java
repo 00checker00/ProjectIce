@@ -10,9 +10,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import de.project.ice.ecs.Components;
 import de.project.ice.ecs.Families;
 import de.project.ice.ecs.IceEngine;
@@ -72,40 +69,42 @@ public class RenderingSystem extends SortedIteratingIceSystem {
         batch.begin();
         super.update(deltaTime);
         batch.end();
-        debugRenderer.setProjectionMatrix(active_camera.combined);
-        debugRenderer.begin(ShapeRenderer.ShapeType.Line);
-        debugRenderer.setColor(Color.RED);
-        super.update(deltaTime);
-        debugRenderer.setColor(Color.BLUE);
-        for (Entity hotspot : hotspots)
-            renderHotspot(hotspot);
-        if (walkareas.size() > 0) {
-            WalkAreaComponent component = Components.walkarea.get(walkareas.first());
-            PathArea area = component.getArea();
+        if (RENDER_DEBUG) {
+            debugRenderer.setProjectionMatrix(active_camera.combined);
+            debugRenderer.begin(ShapeRenderer.ShapeType.Line);
+            debugRenderer.setColor(Color.RED);
+            super.update(deltaTime);
+            debugRenderer.setColor(Color.BLUE);
+            for (Entity hotspot : hotspots)
+                renderHotspot(hotspot);
+            if (walkareas.size() > 0) {
+                WalkAreaComponent component = Components.walkarea.get(walkareas.first());
+                PathArea area = component.getArea();
 
-            if (area != null && area.shape != null) {
+                if (area != null && area.shape != null) {
 
-                debugRenderer.setColor(Color.PURPLE);
+                    debugRenderer.setColor(Color.PURPLE);
 
-                for (int i = 1; i < area.shape.vertices.size; i++)
+                    for (int i = 1; i < area.shape.vertices.size; i++)
+                        debugRenderer.line(
+                                area.shape.vertices.get(i).x,
+                                area.shape.vertices.get(i).y,
+                                area.shape.vertices.get(i - 1).x,
+                                area.shape.vertices.get(i - 1).y);
+
                     debugRenderer.line(
-                            area.shape.vertices.get(i).x,
-                            area.shape.vertices.get(i).y,
-                            area.shape.vertices.get(i - 1).x,
-                            area.shape.vertices.get(i - 1).y);
+                            area.shape.vertices.get(0).x,
+                            area.shape.vertices.get(0).y,
+                            area.shape.vertices.get(area.shape.vertices.size - 1).x,
+                            area.shape.vertices.get(area.shape.vertices.size - 1).y);
+                }
 
-                debugRenderer.line(
-                        area.shape.vertices.get(0).x,
-                        area.shape.vertices.get(0).y,
-                        area.shape.vertices.get(area.shape.vertices.size - 1).x,
-                        area.shape.vertices.get(area.shape.vertices.size - 1).y);
             }
-
+            debugRenderer.setColor(Color.GRAY);
+            debugRenderer.line(0, -1, 0, 1);
+            debugRenderer.line(-1, 0, 1, 0);
+            debugRenderer.end();
         }
-        debugRenderer.setColor(Color.GRAY);
-        debugRenderer.line(0, -1, 0, 1);
-        debugRenderer.line(-1, 0, 1, 0);
-        debugRenderer.end();
         forceSort();
     }
 

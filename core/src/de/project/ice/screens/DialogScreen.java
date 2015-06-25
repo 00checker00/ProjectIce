@@ -60,7 +60,7 @@ public class DialogScreen extends BaseScreenAdapter {
             return;
         } else if(node.type == Node.Type.Set) {
             // Set value then skip to next
-            Storage.getSavestate().putString(DIALOG_STORAGE_PREFIX + node.variable_name, node.variable_value);
+            Storage.getSavestate().put(node.variable_name, node.variable_value);
             showNode(node.next);
             return;
         } else if(node.type == Node.Type.Branch) {
@@ -69,7 +69,7 @@ public class DialogScreen extends BaseScreenAdapter {
             if ( node.branch == null) {
                 next = null;
             } else {
-                next = node.branch.getForValue(Storage.getSavestate().getString(DIALOG_STORAGE_PREFIX + node.branch.variable_name));
+                next = node.branch.getForValue(Storage.getSavestate().getString(node.branch.variable_name));
             }
             showNode(next);
             return;
@@ -119,7 +119,7 @@ public class DialogScreen extends BaseScreenAdapter {
 
     @Override
     public int getPriority () {
-        return 100;
+        return 700;
     }
 
     protected TextButton getButton(@NotNull String id) {

@@ -30,6 +30,7 @@ import de.project.ice.ecs.components.TextureComponent;
 import de.project.ice.ecs.components.TransformComponent;
 import de.project.ice.ecs.systems.RenderingSystem;
 import de.project.ice.screens.BaseScreenAdapter;
+import de.project.ice.scripting.Script;
 import de.project.ice.utils.Assets;
 import de.project.ice.utils.DelegatingInputProcessor;
 import de.project.ice.utils.SceneLoader;
@@ -300,6 +301,7 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
     }
 
     private void restoreState() {
+        game.inventory.items.clear();
         if (storedState == null)
             return;
         game.engine.removeAllEntities();
@@ -350,9 +352,6 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
             @Override
             public void selected (FileHandle file) {
                 try {
-                    if (!Assets.loadScene(file.nameWithoutExtension())) {
-                        DialogUtils.showErrorDialog(stage, "Couldn't load spritesheet for scene: " + file.nameWithoutExtension());
-                    }
                     SceneLoader.loadScene(game.engine, file.read());
                     filename = file.file().getCanonicalFile().getAbsolutePath();
                 } catch (IOException e) {
@@ -418,7 +417,7 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
 
     private void serializeScene(XmlWriter xml) {
         try {
-            SceneWriter.serializeScene(game.engine, xml);
+            SceneWriter.serializeScene(Gdx.files.absolute(filename).nameWithoutExtension(), game.engine, xml);
         } catch (IOException e) {
             DialogUtils.showErrorDialog(stage, "Couldn't save the scene.", e);
         }
@@ -438,8 +437,8 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
     public void resize (int width, int height) {
         stage.getViewport().update(width, height, true);
         Storage.Global storage = Storage.getGlobal();
-        storage.putInteger("editor_screen_width", width);
-        storage.putInteger("editor_screen_height", height);
+        storage.put("editor_screen_width", width);
+        storage.put("editor_screen_height", height);
         storage.save();
     }
 
@@ -458,16 +457,16 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
 
     public void dispose() {
         Storage.Global storage = Storage.getGlobal();
-        storage.putFloat("editor_components_x", componentsWindow.getX());
-        storage.putFloat("editor_components_y", componentsWindow.getY());
-        storage.putFloat("editor_components_width", componentsWindow.getWidth());
-        storage.putFloat("editor_components_height", componentsWindow.getHeight());
-        storage.putBoolean("editor_components_visible", componentsWindow.isVisible());
-        storage.putFloat("editor_entities_x", entitiesWindow.getX());
-        storage.putFloat("editor_entities_y", entitiesWindow.getY());
-        storage.putFloat("editor_entities_width", entitiesWindow.getWidth());
-        storage.putFloat("editor_entities_height", entitiesWindow.getHeight());
-        storage.putBoolean("editor_entities_visible", entitiesWindow.isVisible());
+        storage.put("editor_components_x", componentsWindow.getX());
+        storage.put("editor_components_y", componentsWindow.getY());
+        storage.put("editor_components_width", componentsWindow.getWidth());
+        storage.put("editor_components_height", componentsWindow.getHeight());
+        storage.put("editor_components_visible", componentsWindow.isVisible());
+        storage.put("editor_entities_x", entitiesWindow.getX());
+        storage.put("editor_entities_y", entitiesWindow.getY());
+        storage.put("editor_entities_width", entitiesWindow.getWidth());
+        storage.put("editor_entities_height", entitiesWindow.getHeight());
+        storage.put("editor_entities_visible", entitiesWindow.isVisible());
         storage.save();
         stage.dispose();
         VisUI.dispose();

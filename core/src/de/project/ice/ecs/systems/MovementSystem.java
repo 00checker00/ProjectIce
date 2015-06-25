@@ -57,7 +57,7 @@ public class MovementSystem extends IteratingIceSystem {
             if (Components.state.has(entity)) {
                 StateComponent state = Components.state.get(entity);
                 if (state.animation == AnimationSystem.ANIMATION_WALK && !move.isMoving)
-                    state.setAnimation(AnimationSystem.ANIMATION_NONE);
+                    state.setAnimation(AnimationSystem.ANIMATION_DEFAULT);
                 else if (state.animation != AnimationSystem.ANIMATION_WALK && move.isMoving) {
                     state.setAnimation(AnimationSystem.ANIMATION_WALK);
                 }

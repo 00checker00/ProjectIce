@@ -17,8 +17,10 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 
 public abstract class SceneWriter {
-    public static void serializeScene(@NotNull IceEngine engine, @NotNull XmlWriter xml) throws IOException {
-        xml.element("scene").element("entities");
+    public static void serializeScene(String sceneName, @NotNull IceEngine engine, @NotNull XmlWriter xml) throws IOException {
+        xml.element("scene")
+                .attribute("name", sceneName)
+                .element("entities");
 
         for (Entity entity : engine.getEntities()) {
             xml.element("entity");
@@ -49,6 +51,7 @@ public abstract class SceneWriter {
     }
 
     private static void serializeObject(XmlWriter xml, Object o) throws IOException {
+        if (o == null) return;
         Class type = o.getClass();
         xml.attribute("type", type.getSimpleName());
         if (Float.class.equals(type) || type == float.class ||

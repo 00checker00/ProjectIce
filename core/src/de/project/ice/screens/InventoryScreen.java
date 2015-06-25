@@ -79,7 +79,8 @@ public class InventoryScreen extends BaseScreenAdapter {
                         break;
 
                     case Input.Buttons.RIGHT:
-
+                        if (item != null)
+                            game.showMessages(item.getDescription());
                         break;
                 }
                 return true;

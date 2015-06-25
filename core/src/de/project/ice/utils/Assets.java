@@ -25,6 +25,8 @@ public abstract class Assets {
     public static boolean loadScene(String scene) {
         scene = "spritesheets/" + scene + ".atlas";
 
+        if (scene.equals(currentScene)) return true;
+
         if(currentScene != null) {
             manager.unload(currentScene);
             cachedRegionsScene.clear();

@@ -38,7 +38,6 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
     private boolean pointerWasDown = false;
     private boolean mouseUp = false;
     private boolean mouseDown = false;
-    private int button;
 
     private CameraSystem cameraSystem;
 
@@ -62,18 +61,17 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
         TextureComponent texture = Components.texture.get(entity);
         TransformComponent transform = Components.transform.get(entity);
 
-        if (mouseUp) {
-            activateHotspot(entity);
-        } else if(mouseDown) {
-
-            if (button == Input.Buttons.LEFT || button == Input.Buttons.RIGHT) {
-                if (button == Input.Buttons.RIGHT && active_item != null)
+        if (mouseDown) {
+            entity.remove(UseComponent.class);
+            if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) || Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
+                if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT) && active_item != null)
                     active_item = null;
 
                 activateHotspot(entity);
-                switch (button == Input.Buttons.LEFT ? primaryCursor : secondaryCursor) {
+                switch (getActiveCursor()) {
                     case Walk:
                     case Take:
+                    case Look:
                     case Speak:
 
                         float width = PIXELS_TO_METRES * (texture.region.data != null ? texture.region.data.getRegionWidth() : 0);
@@ -115,10 +113,14 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
         if (active_hotspot != null) {
             UseComponent useComponent = engine.createComponent(UseComponent.class);
             useComponent.target = hotspot_entity;
-            useComponent.cursor = primaryCursor;
+            useComponent.cursor = getActiveCursor();
             useComponent.item = active_item;
             entity.add(useComponent);
         }
+    }
+
+    private CursorScreen.Cursor getActiveCursor() {
+        return Gdx.input.isButtonPressed(Input.Buttons.LEFT) || secondaryCursor == CursorScreen.Cursor.None ? primaryCursor : secondaryCursor;
     }
 
     @Override
@@ -135,10 +137,8 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
 
         if (pointerDown && !pointerWasDown) {
             mouseDown = true;
-            Gdx.app.log("Test", "mouse down");
         } else if (!pointerDown && pointerWasDown) {
             mouseUp = true;
-            Gdx.app.log("Test", "mouse up");
         }
 
         super.update(deltaTime);
@@ -176,7 +176,6 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         pointerPos.set(screenX, screenY);
-        this.button = button;
         pointerDown = true;
         return false;
     }
@@ -222,6 +221,7 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
                     if (active_hotspot != null) {
                         hotspot_entity = entity;
                         primaryCursor = active_hotspot.getPrimaryCursor();
+                        secondaryCursor = active_hotspot.getSecondaryCursor();
                     }
                     break;
                 }
