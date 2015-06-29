@@ -13,13 +13,15 @@ import com.badlogic.gdx.math.Vector2;
 import de.project.ice.ecs.Components;
 import de.project.ice.ecs.Families;
 import de.project.ice.ecs.IceEngine;
-import de.project.ice.ecs.components.HotspotComponent;
 import de.project.ice.ecs.components.*;
 import de.project.ice.pathlib.PathArea;
-import static de.project.ice.config.Config.*;
+import de.project.ice.pathlib.Shape;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Comparator;
+
+import static de.project.ice.config.Config.PIXELS_TO_METRES;
+import static de.project.ice.config.Config.RENDER_DEBUG;
 
 public class RenderingSystem extends SortedIteratingIceSystem {
     private ImmutableArray<Entity> hotspots;
@@ -81,9 +83,9 @@ public class RenderingSystem extends SortedIteratingIceSystem {
                 WalkAreaComponent component = Components.walkarea.get(walkareas.first());
                 PathArea area = component.getArea();
 
-                if (area != null && area.shape != null) {
+                debugRenderer.setColor(Color.PURPLE);
 
-                    debugRenderer.setColor(Color.PURPLE);
+                if (area != null && area.shape != null) {
 
                     for (int i = 1; i < area.shape.vertices.size; i++)
                         debugRenderer.line(
@@ -97,6 +99,21 @@ public class RenderingSystem extends SortedIteratingIceSystem {
                             area.shape.vertices.get(0).y,
                             area.shape.vertices.get(area.shape.vertices.size - 1).x,
                             area.shape.vertices.get(area.shape.vertices.size - 1).y);
+
+                    for (Shape hole : area.holes) {
+                        for (int i = 1; i < hole.vertices.size; i++)
+                            debugRenderer.line(
+                                    hole.vertices.get(i).x,
+                                    hole.vertices.get(i).y,
+                                    hole.vertices.get(i - 1).x,
+                                    hole.vertices.get(i - 1).y);
+
+                        debugRenderer.line(
+                                hole.vertices.get(0).x,
+                                hole.vertices.get(0).y,
+                                hole.vertices.get(hole.vertices.size - 1).x,
+                                hole.vertices.get(hole.vertices.size - 1).y);
+                    }
                 }
 
             }
