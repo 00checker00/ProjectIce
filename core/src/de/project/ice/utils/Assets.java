@@ -13,13 +13,16 @@ public abstract class Assets {
 
     public static AssetManager manager = new AssetManager();
     private static TextureAtlas charsSheet = null;
+    private static TextureAtlas inventorySheet = null;
     private static TextureAtlas sceneSheet = null;
     private static String currentScene = null;
     private static HashMap<String, Array<TextureRegion>> cachedRegionsChars = new HashMap<String, Array<TextureRegion>>();
+    private static HashMap<String, Array<TextureRegion>> cachedRegionsInventory = new HashMap<String, Array<TextureRegion>>();
     private static HashMap<String, Array<TextureRegion>> cachedRegionsScene = new HashMap<String, Array<TextureRegion>>();
 
     static {
         manager.load("spritesheets/objects.atlas", TextureAtlas.class);
+        manager.load("spritesheets/inventory.atlas", TextureAtlas.class);
     }
 
     public static boolean loadScene(String scene) {
@@ -48,6 +51,10 @@ public abstract class Assets {
             manager.finishLoading();
             charsSheet = manager.get("spritesheets/objects.atlas", TextureAtlas.class);
         }
+        if (inventorySheet == null) {
+            manager.finishLoading();
+            inventorySheet = manager.get("spritesheets/inventory.atlas", TextureAtlas.class);
+        }
         if(sceneSheet == null && currentScene != null) {
             manager.finishLoading();
             sceneSheet = manager.get(currentScene, TextureAtlas.class);
@@ -55,6 +62,10 @@ public abstract class Assets {
 
         if(cachedRegionsChars.containsKey(name)) {
             return new TextureRegionsHolder(cachedRegionsChars.get(name), name);
+        }
+
+        if (cachedRegionsInventory.containsKey(name)) {
+            return new TextureRegionsHolder(cachedRegionsInventory.get(name), name);
         }
         if(cachedRegionsScene.containsKey(name)) {
             return new TextureRegionsHolder(cachedRegionsScene.get(name), name);
@@ -64,9 +75,14 @@ public abstract class Assets {
         regions.addAll(charsSheet.findRegions(name));
 
         if (regions.size == 0 && sceneSheet != null) {
-            regions.addAll(sceneSheet.findRegions(name));
-            if (regions.size > 0)
-                cachedRegionsScene.put(name, regions);
+            regions.addAll(inventorySheet.findRegions(name));
+            if (regions.size > 0) {
+                cachedRegionsInventory.put(name, regions);
+            } else {
+                regions.addAll(sceneSheet.findRegions(name));
+                if (regions.size > 0)
+                    cachedRegionsScene.put(name, regions);
+            }
         } else {
             cachedRegionsChars.put(name, regions);
         }
