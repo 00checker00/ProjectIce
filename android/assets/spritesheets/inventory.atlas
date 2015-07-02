@@ -1,0 +1,46 @@
+inventory.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+angel_angel
+  rotate: false
+  xy: 0 ,363
+  size: 326 ,326
+  orig: 326 ,326
+  offset: 0 ,0
+  index:0
+haken_angel
+  rotate: false
+  xy: 326 ,363
+  size: 173 ,173
+  orig: 173 ,173
+  offset: 0 ,0
+  index:0
+hakenschnur_angel
+  rotate: false
+  xy: 0 ,0
+  size: 363 ,363
+  orig: 363 ,363
+  offset: 0 ,0
+  index:0
+pickenhelm_antagonist
+  rotate: false
+  xy: 326 ,536
+  size: 128 ,128
+  orig: 128 ,128
+  offset: 0 ,0
+  index:0
+schnur_angel
+  rotate: false
+  xy: 211 ,689
+  size: 174 ,174
+  orig: 174 ,174
+  offset: 0 ,0
+  index:0
+stock_angel
+  rotate: false
+  xy: 0 ,689
+  size: 211 ,211
+  orig: 211 ,211
+  offset: 0 ,0
+  index:0
