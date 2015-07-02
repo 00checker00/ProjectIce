@@ -12,25 +12,37 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class SpriteConverter
-{
-    public static void main(String[] argv)
-    {
-        if (argv.length != 1)
-        {
-            System.err.println("Usage:   java de.project.ice.spriteconverter.SpriteConverter <XmlFile>");
-            System.err.println("Example: java ExampleDomShowNodes MyXmlFile.xml");
-            System.exit(1);
+public class SpriteConverter {
+    public static void main (String[] argv) {
+        if (argv.length == 0) {
+            File dir = new File(".");
+            File[] files = dir.listFiles(new FilenameFilter() {
+                @Override
+                public boolean accept (File dir, String name) {
+                    return name.endsWith(".xml");
+                }
+            });
+
+            for (File xmlfile : files) {
+                convertXml(xmlfile.getName());
+            }
+        } else {
+            for (int index = 0; index < argv.length; index++) {
+                convertXml(argv[index]);
+            }
         }
-        try
-        {
+    }
+
+    private static void convertXml (String xmlname) {
+        try {
             // ---- Parse XML file ----
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            Document document = builder.parse(new File(argv[0]));
+            Document document = builder.parse(new File(xmlname));
 
             Node textureAtlasNode = document.getElementsByTagName("TextureAtlas").item(0);
             NamedNodeMap textureAtlasAttributes = textureAtlasNode.getAttributes();
@@ -83,7 +95,7 @@ public class SpriteConverter
 
             }
 
-            FileWriter fw = new FileWriter(argv[0].replace(".xml", "") + ".atlas");
+            FileWriter fw = new FileWriter(xmlname.replace(".xml", "") + ".atlas");
             fw.write(imagePath + "\n" +
                     "format: RGBA8888\n" +
                     "filter: Linear,Linear\n" +
