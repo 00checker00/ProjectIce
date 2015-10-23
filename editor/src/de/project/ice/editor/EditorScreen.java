@@ -29,6 +29,7 @@ import de.project.ice.ecs.components.CameraComponent;
 import de.project.ice.ecs.components.TextureComponent;
 import de.project.ice.ecs.components.TransformComponent;
 import de.project.ice.ecs.systems.RenderingSystem;
+import de.project.ice.editor.editors.AudioWindow;
 import de.project.ice.screens.BaseScreenAdapter;
 import de.project.ice.scripting.Script;
 import de.project.ice.utils.Assets;
@@ -44,6 +45,7 @@ import java.io.*;
 
 public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.SelectionListener {
     private static final String VERSION = "0.0.1";
+    private final AudioWindow audioWindow;
     @NotNull
     private Stage stage;
     @NotNull
@@ -91,6 +93,9 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
         componentsWindow.setSize(storage.getFloat("editor_components_width", 400f), storage.getFloat("editor_components_height", 400f));
         componentsWindow.setVisible(storage.getBoolean("editor_components_visible", true));
         stage.addActor(componentsWindow);
+
+        audioWindow = new AudioWindow(game.engine);
+        stage.addActor(audioWindow);
 
 
         inputProcessor = new DelegatingInputProcessor(stage) {
@@ -353,6 +358,7 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
             public void selected (FileHandle file) {
                 try {
                     SceneLoader.loadScene(game.engine, file.read());
+                    audioWindow.setValues(game.engine.soundSystem.getMusic(), game.engine.soundSystem.getSounds());
                     filename = file.file().getCanonicalFile().getAbsolutePath();
                 } catch (IOException e) {
                     DialogUtils.showErrorDialog(stage, "Couldn't save the scene.", e);

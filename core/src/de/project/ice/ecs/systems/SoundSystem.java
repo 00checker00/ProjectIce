@@ -16,6 +16,7 @@ public class SoundSystem extends IceSystem {
     private LongMap<String> ids = new LongMap<String>();
     private Music music = null;
     private DelayedRemovalArray<Fader> faders = new DelayedRemovalArray<Fader>();
+    private String musicname = new String();
 
     @Override
     public void update(float deltaTime) {
@@ -37,6 +38,12 @@ public class SoundSystem extends IceSystem {
 
     public void loadSound(String name){
         FileHandle file = Gdx.files.internal("sounds/" + name + ".mp3");
+
+        if (!file.exists()) {
+            Gdx.app.log(getClass().getSimpleName(), "Sound file doesn'T exist: " + file.path());
+            return;
+        }
+
         Sound sound = Gdx.audio.newSound(file);
         sounds.put(name, sound);
 
@@ -77,12 +84,32 @@ public class SoundSystem extends IceSystem {
 
 
     public void playMusic(String name){
+
         playMusic(name, true);
+
     }
+
+    public String getMusic() {
+        return musicname;
+    }
+
+    public Array<String> getSounds() {
+        return sounds.keys().toArray();
+    }
+
+
 
     public void playMusic(String name, boolean loop){
 
+
         FileHandle file = Gdx.files.internal("music/" + name + ".mp3");
+
+        if (!file.exists()) {
+            Gdx.app.log(getClass().getSimpleName(), "Music file doesn'T exist: " + file.path());
+            return;
+        }
+
+        musicname = name;
         Music music = Gdx.audio.newMusic(file);
         music.setLooping(loop);
 
@@ -102,8 +129,10 @@ public class SoundSystem extends IceSystem {
 
     public void stopMusic(){
 
-        faders.add(Fader.fadeOut(music));
-        music = null;
+        if(music!=null) {
+            faders.add(Fader.fadeOut(music));
+            music = null;
+        }
     }
 
     public void pauseMusic(){

@@ -2,6 +2,7 @@ package de.project.ice.utils;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.Field;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
 import de.project.ice.ecs.IceEngine;
+import de.project.ice.ecs.systems.SoundSystem;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -19,9 +21,12 @@ import java.io.IOException;
 public abstract class SceneWriter {
     public static void serializeScene(String sceneName, @NotNull IceEngine engine, @NotNull XmlWriter xml) throws IOException {
         xml.element("scene")
-                .attribute("name", sceneName)
-                .element("entities");
+                .attribute("name", sceneName);
 
+
+        serializeAudio(xml, engine.soundSystem);
+
+        xml.element("entities");
         for (Entity entity : engine.getEntities()) {
             xml.element("entity");
             xml.element("components");
@@ -48,6 +53,19 @@ public abstract class SceneWriter {
         xml.pop();
         xml.pop();
         xml.close();
+    }
+
+    private static void serializeAudio(XmlWriter xml, SoundSystem sound) throws IOException {
+        xml.element("music").text(sound.getMusic()).pop();
+
+        xml.element("sounds");
+
+        for(String s:sound.getSounds()){
+            xml.element("sound").text(s).pop();
+        }
+
+        xml.pop();
+
     }
 
     private static void serializeObject(XmlWriter xml, Object o) throws IOException {
