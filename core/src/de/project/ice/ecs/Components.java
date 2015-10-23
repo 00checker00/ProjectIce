@@ -20,4 +20,5 @@ public abstract class Components {
     public static final ComponentMapper<HotspotComponent> hotspot = ComponentMapper.getFor(HotspotComponent.class);
     public static final ComponentMapper<WalkAreaComponent> walkarea = ComponentMapper.getFor(WalkAreaComponent.class);
     public static final ComponentMapper<UseComponent> use = ComponentMapper.getFor(UseComponent.class);
+
 }

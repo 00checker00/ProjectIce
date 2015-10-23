@@ -37,6 +37,17 @@ public class Oven extends HotspotManager.Hotspot {
             case Look:
                 Game().showMessages(Game().strings.get("s3_oven_no_wood"));
                 break;
+            case Speak:
+
+               //Engine().soundSystem.playSound("piano");
+                Engine().soundSystem.playMusic("mafia3");
+                break;
         }
+    }
+
+    @NotNull
+    @Override
+    public CursorScreen.Cursor getSecondaryCursor() {
+        return CursorScreen.Cursor.Speak;
     }
 }

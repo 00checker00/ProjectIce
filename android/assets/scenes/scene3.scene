@@ -1,4 +1,8 @@
 <scene name="scene3">
+	<sounds>
+		<sound>piano</sound>
+	</sounds>
+	<music>mafia2</music>
 	<entities>
 		<entity>
 			<components>

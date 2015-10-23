@@ -28,7 +28,10 @@ public class IceEngine extends PooledEngine {
     @NotNull
     public final BreathSystem breathSystem;
     @NotNull
+    public final SoundSystem soundSystem;
+    @NotNull
     public final IceGame game;
+
 
     @NotNull
     private final ImmutableArray<Entity> namedEntities;
@@ -44,6 +47,7 @@ public class IceEngine extends PooledEngine {
         movementSystem = new MovementSystem();
         controlSystem = new ControlSystem();
         breathSystem = new BreathSystem();
+        soundSystem = new SoundSystem();
 
         addSystem(stateSystem);
         addSystem(animationSystem);
@@ -53,6 +57,7 @@ public class IceEngine extends PooledEngine {
         addSystem(movementSystem);
         addSystem(controlSystem);
         addSystem(breathSystem);
+        addSystem(soundSystem);
 
         namedEntities = getEntitiesFor(Family.all(NameComponent.class).get());
     }

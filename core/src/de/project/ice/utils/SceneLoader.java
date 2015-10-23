@@ -44,6 +44,8 @@ public abstract class SceneLoader {
         loadScene(engine, new XmlReader().parse(in));
     }
 
+
+
     private static void loadScene(@NotNull IceEngine engine, @Nullable Element scene) throws LoadException {
         if (scene == null || !scene.getName().equals("scene"))
             throw new LoadException("Invalid scene file (Not a scene file)");
@@ -64,6 +66,24 @@ public abstract class SceneLoader {
             if (child.getName().endsWith("entity"))
                 engine.addEntity(loadEntity(engine, child));
         }
+
+
+        Element sounds = scene.getChildByName("sounds");
+
+        if(sounds!=null) {
+
+            for (int i = 0; i < sounds.getChildCount(); ++i) {
+                Element child = sounds.getChild(i);
+                if (child.getName().equals("sound"))
+                    engine.soundSystem.loadSound(child.getText());
+            }
+        }
+
+        Element music = scene.getChildByName("music");
+        if(music != null){
+            engine.soundSystem.playMusic(music.getText(),true);
+        }
+
 
         if (sceneName != null) {
             Script sceneScript = Script.loadScript( sceneName + "_load", engine.game);
