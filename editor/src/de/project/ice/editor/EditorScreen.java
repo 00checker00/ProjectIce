@@ -1,18 +1,12 @@
 package de.project.ice.editor;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.XmlWriter;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.kotcrab.vis.ui.VisUI;
@@ -23,15 +17,9 @@ import com.kotcrab.vis.ui.widget.file.FileChooser;
 import com.kotcrab.vis.ui.widget.file.FileChooserAdapter;
 import de.project.ice.IceGame;
 import de.project.ice.Storage;
-import de.project.ice.ecs.Components;
-import de.project.ice.ecs.Families;
-import de.project.ice.ecs.components.CameraComponent;
-import de.project.ice.ecs.components.TextureComponent;
-import de.project.ice.ecs.components.TransformComponent;
-import de.project.ice.ecs.systems.RenderingSystem;
 import de.project.ice.editor.editors.AudioWindow;
+import de.project.ice.editor.undoredo.UndoRedoManager;
 import de.project.ice.screens.BaseScreenAdapter;
-import de.project.ice.scripting.Script;
 import de.project.ice.utils.Assets;
 import de.project.ice.utils.DelegatingInputProcessor;
 import de.project.ice.utils.SceneLoader;
@@ -39,13 +27,12 @@ import de.project.ice.utils.SceneWriter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static de.project.ice.config.Config.*;
-
 import java.io.*;
 
 public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.SelectionListener {
     private static final String VERSION = "0.0.1";
     private final AudioWindow audioWindow;
+    private final PathScreen pathScreen;
     @NotNull
     private Stage stage;
     @NotNull
@@ -57,9 +44,13 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
     EntitiesWindow entitiesWindow;
     @NotNull
     ComponentsWindow componentsWindow;
+    @NotNull
+    private UndoRedoManager undoRedoManager = new UndoRedoManager();
 
     private String filename = null;
     private String storedState = null;
+    private VisTextButton redoBtn;
+    private VisTextButton undoBtn;
 
     public EditorScreen(@NotNull final IceGame game) {
         super(game);
@@ -81,96 +72,32 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
 
         createMenus();
 
-        entitiesWindow = new EntitiesWindow(game.engine);
+        pathScreen = new PathScreen(game);
+        if (storage.getBoolean("editor_pathscreen_visible", true)) {
+            game.addScreen(pathScreen);
+        }
+
+        entitiesWindow = new EntitiesWindow(game.engine, undoRedoManager);
         entitiesWindow.setSelectionListener(this);
         entitiesWindow.setPosition(storage.getFloat("editor_entities_x", 0f), storage.getFloat("editor_entities_y", 0f));
         entitiesWindow.setSize(storage.getFloat("editor_entities_width", 200f), storage.getFloat("editor_entities_height", 400f));
         entitiesWindow.setVisible(storage.getBoolean("editor_entities_visible", true));
         stage.addActor(entitiesWindow);
 
-        componentsWindow = new ComponentsWindow(game.engine);
+        componentsWindow = new ComponentsWindow(game.engine, undoRedoManager);
         componentsWindow.setPosition(storage.getFloat("editor_components_x", 0f), storage.getFloat("editor_components_y", 0f));
         componentsWindow.setSize(storage.getFloat("editor_components_width", 400f), storage.getFloat("editor_components_height", 400f));
         componentsWindow.setVisible(storage.getBoolean("editor_components_visible", true));
         stage.addActor(componentsWindow);
 
         audioWindow = new AudioWindow(game.engine);
+        audioWindow.setPosition(storage.getFloat("editor_audio_x", 0f), storage.getFloat("editor_audio_y", 0f));
+        audioWindow.setSize(storage.getFloat("editor_audio_width", 200f), storage.getFloat("editor_audio_height", 400f));
+        audioWindow.setVisible(storage.getBoolean("editor_audio_visible", true));
         stage.addActor(audioWindow);
 
 
         inputProcessor = new DelegatingInputProcessor(stage) {
-            private TransformComponent dragComponent = null;
-            private float dragOriginX = 0f;
-            private float dragOriginY = 0f;
-            private Vector2 cameraDragDown = new Vector2();
-            private OrthographicCamera cameraDrag = null;
-
-            @Override
-            public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-                dragComponent = null;
-                cameraDrag = null;
-                return super.touchUp(screenX, screenY, pointer, button);
-            }
-
-            @Override
-            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-                if ((!super.touchDown(screenX, screenY, pointer, button)) && storedState == null) {
-                    ImmutableArray<Entity> cameras = game.engine.getEntitiesFor(Families.camera);
-                    if (cameras.size() == 0)
-                        return false;
-
-                    Entity activeCamera = cameras.first();
-                    CameraComponent cameraComponent = Components.camera.get(activeCamera);
-                    Vector3 coords = cameraComponent.camera.unproject(new Vector3(screenX, screenY, 0f));
-                    if (button == Input.Buttons.LEFT) {
-                        Array <Entity> entities = new Array<Entity>(game.engine.getEntitiesFor(Families.renderable).toArray());
-                        entities.sort(new RenderingSystem.RenderingComparator());
-                        entities.reverse();
-                        for(Entity entity : entities) {
-                            TransformComponent transform = Components.transform.get(entity);
-                            TextureComponent texture = Components.texture.get(entity);
-
-                            if (!texture.region.isValid())
-                                continue;
-
-                            float width = texture.region.data.getRegionWidth() * PIXELS_TO_METRES;
-                            float height = texture.region.data.getRegionHeight() * PIXELS_TO_METRES;
-
-                            if (new Rectangle(transform.pos.x, transform.pos.y, width, height).contains(coords.x, coords.y)) {
-                                dragComponent = transform;
-                                dragOriginX = coords.x - transform.pos.x;
-                                dragOriginY = coords.y - transform.pos.y;
-                                return true;
-                            }
-                        }
-                        return true;
-                    } else if (button == Input.Buttons.MIDDLE) {
-                        cameraDragDown.set(screenX, screenY);
-                        cameraDrag = cameraComponent.camera;
-                    }
-                }
-                return false;
-            }
-
-            @Override
-            public boolean touchDragged(int screenX, int screenY, int pointer) {
-                    if (dragComponent != null) {
-                        ImmutableArray<Entity> cameras = game.engine.getEntitiesFor(Families.camera);
-                        if (cameras.size() == 0)
-                            return false;
-
-                        Entity activeCamera = cameras.first();
-                        CameraComponent cameraComponent = Components.camera.get(activeCamera);
-                        Vector3 coords = cameraComponent.camera.unproject(new Vector3(screenX, screenY, 0f));
-
-                        dragComponent.pos.set(new Vector2(coords.x - dragOriginX, coords.y - dragOriginY));
-                    } else if (cameraDrag != null) {
-                        cameraDrag.translate(new Vector2(screenX, screenY).sub(cameraDragDown).scl(PIXELS_TO_METRES).scl(-1, 1));
-                        cameraDragDown.set(screenX, screenY);
-                }
-                return super.touchDragged(screenX, screenY, pointer);
-            }
-
             @Override
             public boolean keyDown(int keycode) {
                 if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
@@ -186,6 +113,32 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
                         case Input.Keys.N:
                             newScene();
                             break;
+                        case Input.Keys.P:
+                            if (game.isScreenVisible(pathScreen)) {
+                                game.removeScreen(pathScreen, false);
+                            } else {
+                                game.addScreen(pathScreen);
+                            }
+
+
+                            break;
+
+                        case Input.Keys.Z:
+                            if (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
+                                undoRedoManager.redo();
+                            } else {
+                                undoRedoManager.undo();
+                            }
+                            break;
+
+                        case Input.Keys.H:
+                            hideAllWindows();
+                            break;
+
+                        case Input.Keys.A:
+                            showAllWindows();
+                            break;
+
                     }
                     return true;
                 }
@@ -196,6 +149,20 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
         Gdx.graphics.setDisplayMode(storage.getInteger("editor_screen_width", 800),
                 storage.getInteger("editor_screen_height", 600),
                 false);
+    }
+
+    private void hideAllWindows () {
+        entitiesWindow.setVisible(false);
+        componentsWindow.setVisible(false);
+        audioWindow.setVisible(false);
+        game.removeScreen(pathScreen, false);
+    }
+
+    private void showAllWindows () {
+        entitiesWindow.setVisible(true);
+        componentsWindow.setVisible(true);
+        audioWindow.setVisible(true);
+        game.addScreen(pathScreen);
     }
 
     private void createMenus () {
@@ -255,6 +222,41 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
             }
         }));
 
+        windowMenu.addItem(new MenuItem("Show/Hide Audio Window", new ChangeListener() {
+            @Override
+            public void changed (ChangeEvent event, Actor actor) {
+                audioWindow.setVisible(!audioWindow.isVisible());
+            }
+        }));
+
+        windowMenu.addItem(new MenuItem("Show/Hide Path Screen ", new ChangeListener() {
+            @Override
+            public void changed (ChangeEvent event, Actor actor) {
+
+                if (game.isScreenVisible(pathScreen)) {
+                    game.removeScreen(pathScreen, false);
+                } else {
+                    game.addScreen(pathScreen);
+                }
+
+            }
+        }).setShortcut("Ctrl + P"));
+
+
+        windowMenu.addItem(new MenuItem("Show All Windows", new ChangeListener() {
+            @Override
+            public void changed (ChangeEvent event, Actor actor) {
+                showAllWindows();
+            }
+        }));
+
+        windowMenu.addItem(new MenuItem("Hide All Windows", new ChangeListener() {
+            @Override
+            public void changed (ChangeEvent event, Actor actor) {
+                hideAllWindows();
+            }
+        }));
+
         startPlaytest = new MenuItem("Start PlayTest", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -289,6 +291,22 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
         menuBar.addMenu(windowMenu);
         menuBar.addMenu(testMenu);
         menuBar.addMenu(helpMenu);
+
+        undoBtn = new VisTextButton("Undo", new ChangeListener() {
+            @Override
+            public void changed (ChangeEvent event, Actor actor) {
+                undoRedoManager.undo();
+            }
+        });
+        menuBar.getTable().add(undoBtn);
+
+        redoBtn = new VisTextButton("Redo", new ChangeListener() {
+            @Override
+            public void changed (ChangeEvent event, Actor actor) {
+                undoRedoManager.redo();
+            }
+        });
+        menuBar.getTable().add(redoBtn);
     }
 
     private void storeState() {
@@ -312,6 +330,7 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
         game.engine.removeAllEntities();
         try {
             SceneLoader.loadScene(game.engine, storedState);
+            audioWindow.setValues(game.engine.soundSystem.getMusic(), game.engine.soundSystem.getSounds());
             storedState = null;
         } catch (IOException e) {
             e.printStackTrace();
@@ -455,6 +474,8 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
             Gdx.graphics.setTitle("Editor (Here be dragons)");
         else
             Gdx.graphics.setTitle("Editor (Here be dragons) [" + filename + "]");
+        undoBtn.setDisabled(!undoRedoManager.canUndo());
+        redoBtn.setDisabled(!undoRedoManager.canRedo());
     }
 
     public void render () {
@@ -473,6 +494,12 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
         storage.put("editor_entities_width", entitiesWindow.getWidth());
         storage.put("editor_entities_height", entitiesWindow.getHeight());
         storage.put("editor_entities_visible", entitiesWindow.isVisible());
+        storage.put("editor_audio_x", audioWindow.getX());
+        storage.put("editor_audio_y", audioWindow.getY());
+        storage.put("editor_audio_width", audioWindow.getWidth());
+        storage.put("editor_audio_height", audioWindow.getHeight());
+        storage.put("editor_audio_visible", audioWindow.isVisible());
+        storage.put("editor_pathscreen_visible", game.isScreenVisible(pathScreen));
         storage.save();
         stage.dispose();
         VisUI.dispose();

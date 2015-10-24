@@ -14,9 +14,8 @@ import de.project.ice.ecs.Components;
 import de.project.ice.ecs.Families;
 import de.project.ice.ecs.IceEngine;
 import de.project.ice.ecs.components.*;
-import de.project.ice.pathlib.PathArea;
-import de.project.ice.pathlib.Shape;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
 
@@ -36,8 +35,12 @@ public class RenderingSystem extends SortedIteratingIceSystem {
     public static final float FRUSTUM_HEIGHT = 9f;
 
     private ImmutableArray<Entity> cameras;
-    OrthographicCamera active_camera = null;
+    public OrthographicCamera active_camera = null;
 
+    @Nullable
+    public OrthographicCamera getActive_camera () {
+        return active_camera;
+    }
 
     @NotNull
     private SpriteBatch batch;
@@ -79,44 +82,44 @@ public class RenderingSystem extends SortedIteratingIceSystem {
             debugRenderer.setColor(Color.BLUE);
             for (Entity hotspot : hotspots)
                 renderHotspot(hotspot);
-            if (walkareas.size() > 0) {
-                WalkAreaComponent component = Components.walkarea.get(walkareas.first());
-                PathArea area = component.getArea();
-
-                debugRenderer.setColor(Color.PURPLE);
-
-                if (area != null && area.shape != null) {
-
-                    for (int i = 1; i < area.shape.vertices.size; i++)
-                        debugRenderer.line(
-                                area.shape.vertices.get(i).x,
-                                area.shape.vertices.get(i).y,
-                                area.shape.vertices.get(i - 1).x,
-                                area.shape.vertices.get(i - 1).y);
-
-                    debugRenderer.line(
-                            area.shape.vertices.get(0).x,
-                            area.shape.vertices.get(0).y,
-                            area.shape.vertices.get(area.shape.vertices.size - 1).x,
-                            area.shape.vertices.get(area.shape.vertices.size - 1).y);
-
-                    for (Shape hole : area.holes) {
-                        for (int i = 1; i < hole.vertices.size; i++)
-                            debugRenderer.line(
-                                    hole.vertices.get(i).x,
-                                    hole.vertices.get(i).y,
-                                    hole.vertices.get(i - 1).x,
-                                    hole.vertices.get(i - 1).y);
-
-                        debugRenderer.line(
-                                hole.vertices.get(0).x,
-                                hole.vertices.get(0).y,
-                                hole.vertices.get(hole.vertices.size - 1).x,
-                                hole.vertices.get(hole.vertices.size - 1).y);
-                    }
-                }
-
-            }
+//            if (walkareas.size() > 0) {
+//                WalkAreaComponent component = Components.walkarea.get(walkareas.first());
+//                PathArea area = component.getArea();
+//
+//                debugRenderer.setColor(Color.PURPLE);
+//
+//                if (area != null && area.shape != null) {
+//
+//                    for (int i = 1; i < area.shape.vertices.size; i++)
+//                        debugRenderer.line(
+//                                area.shape.vertices.get(i).x,
+//                                area.shape.vertices.get(i).y,
+//                                area.shape.vertices.get(i - 1).x,
+//                                area.shape.vertices.get(i - 1).y);
+//
+//                    debugRenderer.line(
+//                            area.shape.vertices.get(0).x,
+//                            area.shape.vertices.get(0).y,
+//                            area.shape.vertices.get(area.shape.vertices.size - 1).x,
+//                            area.shape.vertices.get(area.shape.vertices.size - 1).y);
+//
+//                    for (Shape hole : area.holes) {
+//                        for (int i = 1; i < hole.vertices.size; i++)
+//                            debugRenderer.line(
+//                                    hole.vertices.get(i).x,
+//                                    hole.vertices.get(i).y,
+//                                    hole.vertices.get(i - 1).x,
+//                                    hole.vertices.get(i - 1).y);
+//
+//                        debugRenderer.line(
+//                                hole.vertices.get(0).x,
+//                                hole.vertices.get(0).y,
+//                                hole.vertices.get(hole.vertices.size - 1).x,
+//                                hole.vertices.get(hole.vertices.size - 1).y);
+//                    }
+//                }
+//
+//            }
             debugRenderer.setColor(Color.GRAY);
             debugRenderer.line(0, -1, 0, 1);
             debugRenderer.line(-1, 0, 1, 0);

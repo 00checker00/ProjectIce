@@ -21,7 +21,7 @@ import de.project.ice.inventory.Inventory;
 import de.project.ice.pathlib.*;
 import de.project.ice.screens.CursorScreen;
 
-import static de.project.ice.config.Config.*;
+import static de.project.ice.config.Config.PIXELS_TO_METRES;
 
 public class ControlSystem extends IteratingIceSystem implements InputProcessor {
     private ImmutableArray<Entity> walkareas;
@@ -130,7 +130,7 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
             active_camera = cameras.first().getComponent(CameraComponent.class).camera;
 
         if(walkareas.size() > 0)
-            walkarea = Components.walkarea.get(walkareas.first()).getArea();
+            walkarea = Components.walkarea.get(walkareas.first()).area;
 
         if (active_camera == null)
             return;
@@ -233,5 +233,12 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
     @Override
     public boolean scrolled(int amount) {
         return false;
+    }
+
+    public WalkAreaComponent getWalkArea () {
+        if (walkareas.size() > 0) {
+            return Components.walkarea.get(walkareas.first());
+        }
+        return null;
     }
 }

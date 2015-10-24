@@ -9,8 +9,10 @@ import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.util.TableUtils;
 import com.kotcrab.vis.ui.widget.*;
 import de.project.ice.ecs.IceEngine;
-import de.project.ice.ecs.components.HotspotComponent;
 import de.project.ice.ecs.components.*;
+import de.project.ice.editor.undoredo.AddComponentAction;
+import de.project.ice.editor.undoredo.RemoveComponentAction;
+import de.project.ice.editor.undoredo.UndoRedoManager;
 import org.jetbrains.annotations.Nullable;
 
 
@@ -36,10 +38,12 @@ public class ComponentsWindow extends VisWindow {
     private Entity entity = null;
     private VisTable componentsTable;
     private IceEngine engine;
+    private UndoRedoManager undoRedoManager;
 
-    public ComponentsWindow(IceEngine engine) throws IllegalStateException {
+    public ComponentsWindow (IceEngine engine, UndoRedoManager undoRedoManager) throws IllegalStateException {
         super("Components");
         this.engine = engine;
+        this.undoRedoManager = undoRedoManager;
 
         TableUtils.setSpacingDefaults(this);
         createWidgets();
@@ -64,7 +68,7 @@ public class ComponentsWindow extends VisWindow {
             MenuItem item = new MenuItem(component.getSimpleName(), new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    entity.add(engine.createComponent(component));
+                    undoRedoManager.addAction(new AddComponentAction(engine.createComponent(component), entity));
                     updateEntity();
                 }
             });
@@ -108,7 +112,7 @@ public class ComponentsWindow extends VisWindow {
             VisTextButton removeBtn = new VisTextButton("-", new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    entity.remove(component.getClass());
+                    undoRedoManager.addAction(new RemoveComponentAction(component, entity));
                     updateEntity();
                 }
             });

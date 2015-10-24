@@ -7,8 +7,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.kotcrab.vis.ui.util.TableUtils;
-import com.kotcrab.vis.ui.widget.*;
+import com.kotcrab.vis.ui.widget.VisList;
+import com.kotcrab.vis.ui.widget.VisScrollPane;
+import com.kotcrab.vis.ui.widget.VisTextButton;
+import com.kotcrab.vis.ui.widget.VisWindow;
 import de.project.ice.ecs.IceEngine;
+import de.project.ice.editor.undoredo.AddEntityAction;
+import de.project.ice.editor.undoredo.UndoRedoManager;
 import org.jetbrains.annotations.Nullable;
 
 
@@ -19,11 +24,13 @@ public class EntitiesWindow extends VisWindow {
     private EntityEntry selectedEntry = null;
     private SelectionListener selectionListener = null;
     private IceEngine engine;
+    private UndoRedoManager undoRedoManager;
 
-    public EntitiesWindow(IceEngine engine) throws IllegalStateException {
+    public EntitiesWindow (IceEngine engine, UndoRedoManager undoRedoManager) throws IllegalStateException {
         super("Entities");
         this.engine = engine;
         this.entities = engine.getEntities();
+        this.undoRedoManager = undoRedoManager;
 
         TableUtils.setSpacingDefaults(this);
         createWidgets();
@@ -80,7 +87,8 @@ public class EntitiesWindow extends VisWindow {
         VisTextButton createEntityBtn = new VisTextButton("Create Entity", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                engine.addEntity(engine.createEntity());
+                undoRedoManager.addAction(new AddEntityAction(engine.createEntity(), engine));
+
             }
         });
         add(createEntityBtn).expandX().fill().row();

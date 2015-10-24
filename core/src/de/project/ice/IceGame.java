@@ -11,8 +11,8 @@ import de.project.ice.ecs.IceEngine;
 import de.project.ice.hotspot.HotspotManager;
 import de.project.ice.inventory.Inventory;
 import de.project.ice.screens.*;
-import de.project.ice.scripting.Script;
 import de.project.ice.utils.Assets;
+import de.project.ice.utils.Pair;
 import de.project.ice.utils.SceneLoader;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,7 +21,7 @@ import java.io.IOException;
 public class IceGame extends ApplicationAdapter {
     private final Array<BaseScreen> screens = new Array<BaseScreen>();
     private final Array<BaseScreen> screensToAdd  = new Array<BaseScreen>();
-    private final Array<BaseScreen> screensToRemove  = new Array<BaseScreen>();
+    private final Array<Pair<BaseScreen, Boolean>> screensToRemove = new Array<Pair<BaseScreen, Boolean>>();
     public IceEngine engine;
     protected GameScreen gameScreen = null;
     @NotNull
@@ -32,6 +32,7 @@ public class IceGame extends ApplicationAdapter {
     public HotspotManager hotspotManager;
     @NotNull
     public I18NBundle strings;
+    private boolean paused = false;
 
     public IceGame() {
     }
@@ -58,13 +59,21 @@ public class IceGame extends ApplicationAdapter {
     }
 
     public void pauseGame() {
-        if (gameScreen != null)
+        if (gameScreen != null) {
             gameScreen.pauseGame();
+            paused = true;
+        }
     }
 
     public void resumeGame() {
-        if (gameScreen != null)
+        if (gameScreen != null) {
             gameScreen.resumeGame();
+            paused = false;
+        }
+    }
+
+    public boolean isGamePaused () {
+        return paused;
     }
 
     public void showDialog(String dialog) {
@@ -147,15 +156,17 @@ public class IceGame extends ApplicationAdapter {
             screen.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         }
         screensToAdd.clear();
-        for (BaseScreen screen : screensToRemove) {
-            if (screen == screens.peek()) {
+        for (Pair<BaseScreen, Boolean> pair : screensToRemove) {
+            if (pair == screens.peek()) {
                 screens.pop();
                 screens.peek().resume();
             } else {
-                screens.removeValue(screen, true);
+                screens.removeValue(pair.getFirst(), true);
             }
-            screen.hide();
-            screen.dispose();
+            pair.getFirst().hide();
+            if (pair.getSecond()) {
+                pair.getFirst().dispose();
+            }
         }
         screensToRemove.clear();
     }
@@ -168,11 +179,19 @@ public class IceGame extends ApplicationAdapter {
     }
 
     public void removeScreen (@NotNull BaseScreen screen) {
-        screensToRemove.add(screen);
+        removeScreen(screen, true);
+    }
+
+    public void removeScreen (@NotNull BaseScreen screen, boolean dispose) {
+        screensToRemove.add(new Pair<BaseScreen, Boolean>(screen, dispose));
     }
 
     public void addScreen (@NotNull BaseScreen screen) {
         screensToAdd.add(screen);
+    }
+
+    public boolean isScreenVisible (@NotNull BaseScreen screen) {
+        return screens.contains(screen, true);
     }
 
     public void startNewGame() {

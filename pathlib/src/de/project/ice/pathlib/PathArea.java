@@ -5,9 +5,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.XmlReader;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import static de.project.ice.config.Config.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,8 +16,8 @@ public class PathArea {
     public final Array<Shape> holes = new Array<Shape>();
     @NotNull
     public final Array<PathNode> waypoints = new Array<PathNode>();
-    @Nullable
-    public Shape shape = null;
+    @NotNull
+    public Shape shape = new Shape();
 
     @NotNull
     public static PathArea load(String xml) {
@@ -66,6 +63,7 @@ public class PathArea {
     private static PathArea load(XmlReader.Element root, float scale) {
         PathArea area = new PathArea();
 
+        boolean first = true;
         for (int i = 0; i < root.getChildCount(); ++i) {
             XmlReader.Element shape = root.getChild(i);
             Shape s = new Shape();
@@ -76,8 +74,9 @@ public class PathArea {
                 float y = vertex.getFloat("y") * scale;
                 s.vertices.add(new Vector2(x, y));
             }
-            if (area.shape == null) {
+            if (first) {
                 area.shape = s;
+                first = false;
             } else {
                 area.holes.add(s);
             }

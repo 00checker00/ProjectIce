@@ -3,29 +3,29 @@ package de.project.ice.utils;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.IntMap;
+import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.Field;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
 import de.project.ice.ecs.IceEngine;
-import com.badlogic.gdx.utils.XmlReader;
-import de.project.ice.ecs.components.WalkAreaComponent;
 import de.project.ice.ecs.systems.RenderingSystem;
+import de.project.ice.pathlib.PathArea;
+import de.project.ice.pathlib.Shape;
 import de.project.ice.scripting.Script;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.badlogic.gdx.utils.XmlReader.Element;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+
+import static com.badlogic.gdx.utils.XmlReader.Element;
 
 public abstract class SceneLoader {
     public static void loadScene(@NotNull IceEngine engine, @NotNull InputStream in) throws IOException, LoadException {
@@ -141,11 +141,6 @@ public abstract class SceneLoader {
                 throw new LoadException("Invalid scene file (Couldn't set field " + childElement.getName() + " of component " + element.getName() + ")", e);
             }
         }
-
-        if (WalkAreaComponent.class.equals(componentClass)) {
-            WalkAreaComponent walkAreaComponent = (WalkAreaComponent) component;
-            walkAreaComponent.setAreaJSON(walkAreaComponent.areaJSON);
-        }
         return component;
     }
 
@@ -155,6 +150,8 @@ public abstract class SceneLoader {
             return loadFloat(element);
         } else if (type.equalsIgnoreCase("Integer")) {
             return loadInt(element);
+        } else if (type.equalsIgnoreCase("Boolean")) {
+            return loadBoolean(element);
         } else if (type.equalsIgnoreCase("String")) {
             return element.getText() == null ? "" : element.getText().replace("&gt", ">").replace("&lt", "<").replace("&amp", "&");
         } else if (type.equalsIgnoreCase("OrthographicCamera")) {
@@ -169,13 +166,45 @@ public abstract class SceneLoader {
             return loadTextureRegion(element);
         } else if (type.equalsIgnoreCase("AnimationHolder")) {
             return loadAnimation(element);
+        } else if (type.equalsIgnoreCase("PathArea")) {
+            return loadPathArea(element);
         } else
             throw new LoadException("Invalid scene file (Unknown Component type: " + type + ")");
+    }
+
+    private static Boolean loadBoolean (Element element) {
+        return element.getText().trim().equals("true");
+    }
+
+    private static PathArea loadPathArea (@NotNull Element element) {
+        PathArea pathArea = new PathArea();
+        Element shapeelement = element.getChildByName("Shape");
+        pathArea.shape = loadShape(element.getChildByName("shape"));
+
+        Element holes = element.getChildByName("holes");
+        for (int i = 0; i < holes.getChildCount(); ++i) {
+            pathArea.holes.add(loadShape(holes.getChild(i)));
+        }
+        return pathArea;
+    }
+
+
+    private static Shape loadShape (@NotNull Element element) {
+        Shape shape = new Shape();
+        Element vertices = element.getChildByName("vertices");
+        for (int i = 0; i < vertices.getChildCount(); ++i) {
+            shape.vertices.add(loadVector2(vertices.getChild(i)));
+        }
+
+        shape.closed = element.getBoolean("closed");
+
+        return shape;
     }
 
     private static float loadFloat(@NotNull Element element) {
         return Float.parseFloat(element.getText());
     }
+
 
     private static int loadInt(@NotNull Element element) {
         return Integer.parseInt(element.getText());
