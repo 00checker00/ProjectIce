@@ -1,6 +1,7 @@
 package de.project.ice.scripting;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
 import de.project.ice.IceGame;
@@ -72,7 +73,7 @@ public abstract class Script {
             script.onLoad();
             return script;
         } catch (ReflectionException e) {
-            e.printStackTrace();
+            Gdx.app.log(Script.class.getSimpleName(), "Unable to load script: " + scriptName);
         }
         return null;
     }

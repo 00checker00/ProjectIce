@@ -1,0 +1,249 @@
+<scene name="scene4">
+    <music>mafia2</music>
+    <sounds>
+        <sound>piano</sound>
+    </sounds>
+    <entities>
+        <entity>
+            <components>
+                <CameraComponent>
+                    <camera type="OrthographicCamera" viewportWidth="10.5" viewportHeight="5.9">
+                        <pos type="Vector3" x="5.265625" y="3.015625" z="0.0"/>
+                    </camera>
+                </CameraComponent>
+                <NameComponent>
+                    <name type="String">Kamera</name>
+                </NameComponent>
+                <WalkAreaComponent>
+                    <scale type="Float">1.2</scale>
+                    <areaJSON type="String">
+                        &ltarea&gt&ltshape&gt&ltvertex x="21.5" y="21.0"/&gt&ltvertex x="34.5" y="173.00003"/&gt&
+                        ltvertex x="279.5" y="222.00002"/&gt&ltvertex x="640.5" y="238.00003"/&gt&ltvertex x="965.5"
+                        y="221.00002"/&gt&ltvertex x="1125.5" y="207.00002"/&gt&ltvertex x="1128.5" y="0.0"/&gt&ltvertex
+                        x="41.5" y="-6.0"/&gt&lt/shape&gt&ltshape&gt&ltvertex x="295.49997" y="128.00003"/&gt&ltvertex
+                        x="177.5" y="48.00003"/&gt&ltvertex x="69.5" y="29.00003"/&gt&ltvertex x="34.5" y="86.0"/&gt&
+                        ltvertex x="70.5" y="126.000015"/&gt&ltvertex x="149.49997" y="149.00003"/&gt&ltvertex x="227.5"
+                        y="162.00002"/&gt&lt/shape&gt&lt/area&gt
+                    </areaJSON>
+                </WalkAreaComponent>
+            </components>
+        </entity>
+        <entity>
+            <components>
+                <TextureComponent>
+                    <region type="TextureRegionHolder">iglu_innen</region>
+                </TextureComponent>
+                <TransformComponent>
+                    <pos type="Vector2" x="-0.07402897" y="-0.017143011"/>
+                    <scale type="Vector2" x="1.0" y="1.0"/>
+                    <rotation type="Float">0.0</rotation>
+                    <z type="Integer">100</z>
+                    <flipHorizontal type="Boolean" type="null"/>
+                    <flipVertical type="Boolean" type="null"/>
+                </TransformComponent>
+                <NameComponent>
+                    <name type="String">iglu_innen</name>
+                </NameComponent>
+            </components>
+        </entity>
+        <entity>
+            <components>
+                <TextureComponent>
+                    <region type="TextureRegionHolder">eskimo_normal</region>
+                </TextureComponent>
+                <TransformComponent>
+                    <pos type="Vector2" x="4.1466303" y="0.9117565"/>
+                    <scale type="Vector2" x="1.0" y="1.0"/>
+                    <rotation type="Float">0.0</rotation>
+                    <z type="Integer">10</z>
+                    <flipHorizontal type="Boolean" type="null"/>
+                    <flipVertical type="Boolean" type="null"/>
+                </TransformComponent>
+                <StateComponent>
+                    <animation type="Integer">0</animation>
+                    <time type="Float">0.0</time>
+                </StateComponent>
+                <AnimationComponent>
+                    <animations type="IntMap" type="IntMap" subType="AnimationHolder">
+                        <_1 type="AnimationHolder" frameDuration="0.0" mode="NORMAL">eskimo_normal</_1>
+                        <_3 type="AnimationHolder" frameDuration="0.13" mode="LOOP">eskimo_lauf_idle</_3>
+                    </animations>
+                </AnimationComponent>
+                <ControlComponent/>
+                <MovableComponent>
+                    <isMoving type="Boolean" type="null"/>
+                    <targetPositions type="LinkedList" type="null"/>
+                    <speed type="Float">2.0</speed>
+                </MovableComponent>
+                <BreathComponent>
+                    <curScale type="Vector2" x="0.0" y="0.0"/>
+                    <scaleValue type="Vector2" x="0.0" y="0.0"/>
+                    <duration type="Float">1.0</duration>
+                </BreathComponent>
+                <NameComponent>
+                    <name type="String">player</name>
+                </NameComponent>
+            </components>
+        </entity>
+        <entity>
+            <components>
+                <TransformComponent>
+                    <pos type="Vector2" x="1.3087826" y="1.1254594"/>
+                    <scale type="Vector2" x="1.0" y="1.0"/>
+                    <rotation type="Float">0.0</rotation>
+                    <z type="Integer">10</z>
+                    <flipHorizontal type="Boolean" type="null"/>
+                    <flipVertical type="Boolean" type="null"/>
+                </TransformComponent>
+                <TextureComponent>
+                    <region type="TextureRegionHolder">fridge</region>
+                </TextureComponent>
+                <NameComponent>
+                    <name type="String">fridge</name>
+                </NameComponent>
+            </components>
+        </entity>
+        <entity>
+            <components>
+                <TextureComponent>
+                    <region type="TextureRegionHolder">ofen</region>
+                </TextureComponent>
+                <TransformComponent>
+                    <pos type="Vector2" x="-0.37059927" y="0.41623545"/>
+                    <scale type="Vector2" x="1.0" y="1.0"/>
+                    <rotation type="Float">0.0</rotation>
+                    <z type="Integer">10</z>
+                    <flipHorizontal type="Boolean" type="null"/>
+                    <flipVertical type="Boolean" type="null"/>
+                </TransformComponent>
+                <NameComponent>
+                    <name type="String">ofen</name>
+                </NameComponent>
+                <HotspotComponent>
+                    <origin type="Vector2" x="0.7" y="0.4"/>
+                    <targetPos type="Vector2" x="0.9" y="-0.6"/>
+                    <width type="Float">1.0</width>
+                    <height type="Float">1.0</height>
+                    <script type="String">Oven</script>
+                </HotspotComponent>
+            </components>
+        </entity>
+        <entity>
+            <components>
+                <TextureComponent>
+                    <region type="TextureRegionHolder">teekanne</region>
+                </TextureComponent>
+                <TransformComponent>
+                    <pos type="Vector2" x="0.3927889" y="1.9109874"/>
+                    <scale type="Vector2" x="1.0" y="1.0"/>
+                    <rotation type="Float">0.0</rotation>
+                    <z type="Integer">8</z>
+                    <flipHorizontal type="Boolean" type="null"/>
+                    <flipVertical type="Boolean" type="null"/>
+                </TransformComponent>
+                <NameComponent>
+                    <name type="String">teekanne</name>
+                </NameComponent>
+                <HotspotComponent>
+                    <origin type="Vector2" x="0.0" y="0.0"/>
+                    <targetPos type="Vector2" x="1.54" y="-1.29"/>
+                    <width type="Float">0.9</width>
+                    <height type="Float">0.6</height>
+                    <script type="String">Teapot</script>
+                </HotspotComponent>
+                <ScriptComponent>
+                    <script/>
+                    <scriptName type="String">Teapot</scriptName>
+                </ScriptComponent>
+            </components>
+        </entity>
+        <entity>
+            <components>
+                <TransformComponent>
+                    <pos type="Vector2" x="8.975628" y="0.98237574"/>
+                    <scale type="Vector2" x="1.0" y="1.0"/>
+                    <rotation type="Float">0.0</rotation>
+                    <z type="Integer">10</z>
+                    <flipHorizontal type="Boolean" type="null"/>
+                    <flipVertical type="Boolean" type="null"/>
+                </TransformComponent>
+                <HotspotComponent>
+                    <origin type="Vector2" x="0.0" y="0.0"/>
+                    <targetPos type="Vector2" x="-0.5" y="0.0"/>
+                    <width type="Float">1.75</width>
+                    <height type="Float">2.55</height>
+                    <script type="String">PrincessIgloo</script>
+                </HotspotComponent>
+                <NameComponent>
+                    <name type="String">Prinzessin</name>
+                </NameComponent>
+                <TextureComponent>
+                    <region type="TextureRegionHolder">prinzessin_atmung</region>
+                </TextureComponent>
+                <BreathComponent>
+                    <curScale type="Vector2" x="0.0" y="0.0"/>
+                    <scaleValue type="Vector2" x="0.01" y="0.01"/>
+                    <duration type="Float">0.8</duration>
+                </BreathComponent>
+                <IdleComponent/>
+                <StateComponent>
+                    <animation type="Integer">0</animation>
+                    <time type="Float">0.0</time>
+                </StateComponent>
+            </components>
+        </entity>
+        <entity>
+            <components>
+                <AnimationComponent>
+                    <animations type="IntMap" type="IntMap" subType="AnimationHolder">
+                        <_1 type="AnimationHolder" frameDuration="0.13" mode="LOOP">candle_fire</_1>
+                    </animations>
+                </AnimationComponent>
+                <NameComponent>
+                    <name type="String">oven_fire</name>
+                </NameComponent>
+                <TextureComponent>
+                    <region type="TextureRegionHolder">candle_fire</region>
+                </TextureComponent>
+                <StateComponent>
+                    <animation type="Integer">1</animation>
+                    <time type="Float">0.0</time>
+                </StateComponent>
+                <TransformComponent>
+                    <pos type="Vector2" x="0.5" y="1.85"/>
+                    <scale type="Vector2" x="10.0" y="1.0"/>
+                    <rotation type="Float">0.0</rotation>
+                    <z type="Integer">9</z>
+                    <flipHorizontal type="Boolean" type="null"/>
+                    <flipVertical type="Boolean" type="null"/>
+                </TransformComponent>
+                <InvisibilityComponent/>
+            </components>
+        </entity>
+        <entity>
+            <components>
+                <TextureComponent>
+                    <region type="TextureRegionHolder">holz</region>
+                </TextureComponent>
+                <TransformComponent>
+                    <pos type="Vector2" x="9.1187105" y="0.10340786"/>
+                    <scale type="Vector2" x="1.0" y="1.0"/>
+                    <rotation type="Float">0.0</rotation>
+                    <z type="Integer">0</z>
+                    <flipHorizontal type="Boolean" type="null"/>
+                    <flipVertical type="Boolean" type="null"/>
+                </TransformComponent>
+                <HotspotComponent>
+                    <origin type="Vector2" x="0.0" y="0.0"/>
+                    <targetPos type="Vector2" x="-0.35" y="0.2"/>
+                    <width type="Float">1.3</width>
+                    <height type="Float">0.7</height>
+                    <script type="String">Wood</script>
+                </HotspotComponent>
+                <NameComponent>
+                    <name type="String">wood</name>
+                </NameComponent>
+            </components>
+        </entity>
+    </entities>
+</scene>

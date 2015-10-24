@@ -21,8 +21,6 @@ public abstract class Assets {
     private static HashMap<String, Array<TextureRegion>> cachedRegionsScene = new HashMap<String, Array<TextureRegion>>();
 
     static {
-        manager.load("spritesheets/objects.atlas", TextureAtlas.class);
-        manager.load("spritesheets/inventory.atlas", TextureAtlas.class);
     }
 
     public static boolean loadScene(String scene) {
@@ -31,8 +29,18 @@ public abstract class Assets {
         if (scene.equals(currentScene)) return true;
 
         if(currentScene != null) {
-            manager.unload(currentScene);
+            manager.clear();
+            cachedRegionsInventory.clear();
             cachedRegionsScene.clear();
+            cachedRegionsChars.clear();
+            charsSheet = null;
+            sceneSheet = null;
+            inventorySheet = null;
+        }
+
+        if (charsSheet == null) {
+            manager.load("spritesheets/objects.atlas", TextureAtlas.class);
+            manager.load("spritesheets/inventory.atlas", TextureAtlas.class);
         }
 
         if (Gdx.files.internal(scene).exists()) {
