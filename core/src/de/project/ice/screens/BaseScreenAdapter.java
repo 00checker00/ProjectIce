@@ -5,13 +5,15 @@ import com.badlogic.gdx.InputProcessor;
 import de.project.ice.IceGame;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class BaseScreenAdapter implements BaseScreen {
+public abstract class BaseScreenAdapter implements BaseScreen
+{
     @NotNull
     protected final IceGame game;
     @NotNull
     protected InputProcessor inputProcessor;
 
-    public BaseScreenAdapter(@NotNull IceGame game) {
+    public BaseScreenAdapter(@NotNull IceGame game)
+    {
         this.game = game;
         inputProcessor = new InputAdapter();
     }
@@ -22,46 +24,56 @@ public abstract class BaseScreenAdapter implements BaseScreen {
      * @return The display priority of the screen, base implementation returns 0
      */
     @Override
-    public int getPriority () {
+    public int getPriority()
+    {
         return 0;
     }
 
     @Override
     @NotNull
-    public IceGame getGame() {
+    public IceGame getGame()
+    {
         return game;
     }
 
     @Override
-    public void show () {
+    public void show()
+    {
     }
 
     @Override
-    public void update (float delta) {
+    public void update(float delta)
+    {
     }
 
     @Override
-    public void render () {
+    public void render()
+    {
     }
 
     @Override
-    public void resize (int width, int height) {
+    public void resize(int width, int height)
+    {
     }
 
     @Override
-    public void pause () {
+    public void pause()
+    {
     }
 
     @Override
-    public void resume () {
+    public void resume()
+    {
     }
 
     @Override
-    public void hide () {
+    public void hide()
+    {
     }
 
     @Override
-    public void dispose () {
+    public void dispose()
+    {
     }
 
     /**
@@ -71,7 +83,8 @@ public abstract class BaseScreenAdapter implements BaseScreen {
      */
     @NotNull
     @Override
-    public InputProcessor getInputProcessor() {
+    public InputProcessor getInputProcessor()
+    {
         return inputProcessor;
     }
 }

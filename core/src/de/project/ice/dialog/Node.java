@@ -4,10 +4,13 @@ import com.badlogic.gdx.utils.Array;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class Node {
-    public enum Type {
+public class Node
+{
+    public enum Type
+    {
         Start, Node, Branch, Choice, Text, Set
     }
+
     @NotNull
     public Type type = Type.Node;
     @NotNull
@@ -25,7 +28,8 @@ public class Node {
     @Nullable
     public Branch branch = null;
 
-    public Node( @NotNull String id) {
+    public Node(@NotNull String id)
+    {
         this.id = id;
     }
 

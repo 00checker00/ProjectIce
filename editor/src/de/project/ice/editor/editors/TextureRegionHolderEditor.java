@@ -1,30 +1,29 @@
 package de.project.ice.editor.editors;
 
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.kotcrab.vis.ui.InputValidator;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.i18n.BundleText;
 import com.kotcrab.vis.ui.util.TableUtils;
-import com.kotcrab.vis.ui.util.Validators;
-import com.kotcrab.vis.ui.util.dialog.DialogUtils;
-import com.kotcrab.vis.ui.util.dialog.InputDialogListener;
 import com.kotcrab.vis.ui.widget.*;
 import de.project.ice.utils.Assets;
 
 
-public class TextureRegionHolderEditor extends HolderEditor<TextureRegion> {
+public class TextureRegionHolderEditor extends HolderEditor<TextureRegion>
+{
     @Override
-    protected void onEdit() {
-        EditTextureRegionDialog.showDialog(getStage(), "Select texture", new EditTextureRegionDialog.Listener() {
+    protected void onEdit()
+    {
+        EditTextureRegionDialog.showDialog(getStage(), "Select texture", new EditTextureRegionDialog.Listener()
+        {
             @Override
-            public void finished(String textureRegion) {
+            public void finished(String textureRegion)
+            {
                 Assets.Holder<TextureRegion> newHolder = Assets.findRegion(textureRegion);
                 setHolderName(newHolder.name);
                 setHolderData(newHolder.data);
@@ -32,13 +31,15 @@ public class TextureRegionHolderEditor extends HolderEditor<TextureRegion> {
         }, value);
     }
 
-    private static class EditTextureRegionDialog extends VisWindow {
+    private static class EditTextureRegionDialog extends VisWindow
+    {
         private Listener listener;
         private VisTextField textureRegion;
         private VisTextButton okButton;
         private VisTextButton cancelButton;
 
-        public EditTextureRegionDialog(String title, Listener listener, Assets.Holder<TextureRegion> holder) {
+        public EditTextureRegionDialog(String title, Listener listener, Assets.Holder<TextureRegion> holder)
+        {
             super(title);
             this.listener = listener;
 
@@ -70,32 +71,47 @@ public class TextureRegionHolderEditor extends HolderEditor<TextureRegion> {
             textureRegion.focusField();
         }
 
-        private void addListeners() {
-            okButton.addListener(new ChangeListener() {
+        private void addListeners()
+        {
+            okButton.addListener(new ChangeListener()
+            {
                 @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    try {
+                public void changed(ChangeEvent event, Actor actor)
+                {
+                    try
+                    {
                         listener.finished(textureRegion.getText());
                         fadeOut();
-                    } catch (NumberFormatException ignore) {}
+                    }
+                    catch (NumberFormatException ignore)
+                    {
+                    }
                 }
             });
 
-            cancelButton.addListener(new ChangeListener() {
+            cancelButton.addListener(new ChangeListener()
+            {
                 @Override
-                public void changed(ChangeEvent event, Actor actor) {
+                public void changed(ChangeEvent event, Actor actor)
+                {
                     close();
                 }
             });
 
-            InputListener enterListener = new InputListener() {
+            InputListener enterListener = new InputListener()
+            {
                 @Override
-                public boolean keyDown(InputEvent event, int keycode) {
-                    if (keycode == Input.Keys.ENTER && !okButton.isDisabled()) {
-                        try {
+                public boolean keyDown(InputEvent event, int keycode)
+                {
+                    if (keycode == Input.Keys.ENTER && !okButton.isDisabled())
+                    {
+                        try
+                        {
                             listener.finished(textureRegion.getText());
                             fadeOut();
-                        } catch (NumberFormatException ignore) {
+                        }
+                        catch (NumberFormatException ignore)
+                        {
                         }
                     }
 
@@ -106,44 +122,55 @@ public class TextureRegionHolderEditor extends HolderEditor<TextureRegion> {
         }
 
 
-        private static String get(EditTextureRegionDialog.Text text) {
+        private static String get(EditTextureRegionDialog.Text text)
+        {
             return VisUI.getDialogUtilsBundle().get(text.getName());
         }
 
-        private enum Text implements BundleText {
-            CANCEL {
-                public String getName() {
-                    return "cancel";
-                }
-            },
-            OK {
-                public String getName() {
-                    return "ok";
-                }
-            };
+        private enum Text implements BundleText
+        {
+            CANCEL
+                    {
+                        public String getName()
+                        {
+                            return "cancel";
+                        }
+                    },
+            OK
+                    {
+                        public String getName()
+                        {
+                            return "ok";
+                        }
+                    };
 
             @Override
-            public String get() {
+            public String get()
+            {
                 throw new UnsupportedOperationException();
             }
 
             @Override
-            public String format() {
+            public String format()
+            {
                 throw new UnsupportedOperationException();
             }
 
             @Override
-            public String format(Object... arguments) {
+            public String format(Object... arguments)
+            {
                 throw new UnsupportedOperationException();
             }
         }
 
-        public static void showDialog(Stage stage, String title, Listener listener, Assets.Holder<TextureRegion> holder) {
+        public static void showDialog(Stage stage, String title, Listener listener, Assets.Holder<TextureRegion> holder)
+        {
             EditTextureRegionDialog dialog = new EditTextureRegionDialog(title, listener, holder);
             stage.addActor(dialog.fadeIn());
         }
 
-        public interface Listener {
+        public interface Listener
+        {
             void finished(String textureRegion);
         }
     }

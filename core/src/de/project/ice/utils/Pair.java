@@ -5,7 +5,8 @@ package de.project.ice.utils;
  * @param <S> the type of the second
  * @author dermetfan
  */
-public class Pair<F, S> {
+public class Pair<F, S>
+{
 
     /**
      * the first
@@ -20,14 +21,16 @@ public class Pair<F, S> {
     /**
      * creates an empty pair ({@link #first} and {@link #second} are {@code null})
      */
-    public Pair () {
+    public Pair()
+    {
     }
 
     /**
      * @param first  the {@link #first}
      * @param second the {@link #second}
      */
-    public Pair (F first, S second) {
+    public Pair(F first, S second)
+    {
         this.first = first;
         this.second = second;
     }
@@ -35,7 +38,8 @@ public class Pair<F, S> {
     /**
      * @param pair the {@link Pair} to copy
      */
-    public Pair (Pair<F, S> pair) {
+    public Pair(Pair<F, S> pair)
+    {
         first = pair.first;
         second = pair.second;
     }
@@ -44,7 +48,8 @@ public class Pair<F, S> {
      * @param pair the Pair which {@link #first} and {@link #second} to use
      * @return this Pair for chaining
      */
-    public Pair<F, S> set (Pair<F, S> pair) {
+    public Pair<F, S> set(Pair<F, S> pair)
+    {
         first = pair.first;
         second = pair.second;
         return this;
@@ -55,7 +60,8 @@ public class Pair<F, S> {
      * @param value the {@link #second} to set
      * @return this Pair for chaining
      */
-    public Pair<F, S> set (F key, S value) {
+    public Pair<F, S> set(F key, S value)
+    {
         this.first = key;
         this.second = value;
         return this;
@@ -64,7 +70,8 @@ public class Pair<F, S> {
     /**
      * sets {@link #first} and {@link #second} to null
      */
-    public void clear () {
+    public void clear()
+    {
         first = null;
         second = null;
     }
@@ -75,16 +82,20 @@ public class Pair<F, S> {
      * @throws IllegalStateException if the classes of {@link #first} and {@link #second} are not {@link Class#isAssignableFrom(Class) assignable} from each other
      */
     @SuppressWarnings("unchecked")
-    public void swap () throws IllegalStateException {
+    public void swap() throws IllegalStateException
+    {
         if (first.getClass() != second.getClass())
+        {
             throw new IllegalStateException("first and second are not of the same type: " + first.getClass() + " & " + second.getClass());
+        }
         S oldValue = second;
         second = (S) first;
         first = (F) oldValue;
     }
 
     @Override
-    public int hashCode () {
+    public int hashCode()
+    {
         int result = first != null ? first.hashCode() : 0;
         result = 31 * result + (second != null ? second.hashCode() : 0);
         return result;
@@ -94,8 +105,10 @@ public class Pair<F, S> {
      * if the given object is a {@link Pair} instance, {@link Object#equals(Object) equals} comparison will be used on first and second
      */
     @Override
-    public boolean equals (Object obj) {
-        if (obj instanceof Pair) {
+    public boolean equals(Object obj)
+    {
+        if (obj instanceof Pair)
+        {
             Pair<?, ?> pair = (Pair<?, ?>) obj;
             return first.equals(pair.first) && second.equals(pair.second);
         }
@@ -106,7 +119,8 @@ public class Pair<F, S> {
      * @return [{@link #first} &amp; {@link #second}]
      */
     @Override
-    public String toString () {
+    public String toString()
+    {
         return "[" + first + " & " + second + ']';
     }
 
@@ -115,28 +129,32 @@ public class Pair<F, S> {
     /**
      * @return the {@link #first}
      */
-    public F getFirst () {
+    public F getFirst()
+    {
         return first;
     }
 
     /**
      * @param first the {@link #first} to set
      */
-    public void setFirst (F first) {
+    public void setFirst(F first)
+    {
         this.first = first;
     }
 
     /**
      * @return the {@link #second}
      */
-    public S getSecond () {
+    public S getSecond()
+    {
         return second;
     }
 
     /**
      * @param second the {@link #second} to set
      */
-    public void setSecond (S second) {
+    public void setSecond(S second)
+    {
         this.second = second;
     }
 

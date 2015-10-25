@@ -9,12 +9,14 @@ import de.project.ice.ecs.systems.AnimationSystem;
 import de.project.ice.scripting.Script;
 import de.project.ice.utils.Assets;
 
-public class Teapot extends Script {
+public class Teapot extends Script
+{
     private long counter = 0;
     Entity flame;
 
     @Override
-    public void onLoad() {
+    public void onLoad()
+    {
         super.onLoad();
         flame = Engine().createEntity();
 
@@ -40,19 +42,23 @@ public class Teapot extends Script {
     }
 
     @Override
-    public void onTick() {
+    public void onTick()
+    {
         super.onTick();
         counter++;
     }
 
     @Override
-    public void onUnload() {
+    public void onUnload()
+    {
         Engine().removeEntity(flame);
     }
 
     @Override
-    public void onUpdateEntity(Entity entity, float delta) {
-        if (counter == 0) {
+    public void onUpdateEntity(Entity entity, float delta)
+    {
+        if (counter == 0)
+        {
             Components.transform.get(flame).pos.set(Components.transform.get(entity).pos).add(0.01f, 0.45f);
             Engine().addEntity(flame);
             counter++;

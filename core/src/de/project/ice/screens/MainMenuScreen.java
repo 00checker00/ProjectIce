@@ -13,7 +13,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 
-public class MainMenuScreen extends BaseScreenAdapter {
+public class MainMenuScreen extends BaseScreenAdapter
+{
     protected static final String BUTTON_NEW_GAME_ID = "BTN_NEW_GAME";
     protected static final String BUTTON_SAVE_LOAD_ID = "BTN_SAVE_LOAD";
     protected static final String BUTTON_SETTINGS_ID = "BTN_SETTINGS";
@@ -30,7 +31,8 @@ public class MainMenuScreen extends BaseScreenAdapter {
     @NotNull
     private HashMap<String, TextButton> buttons = new HashMap<String, TextButton>();
 
-    public MainMenuScreen(@NotNull IceGame game) {
+    public MainMenuScreen(@NotNull IceGame game)
+    {
         super(game);
 
         stage = new Stage();
@@ -54,27 +56,35 @@ public class MainMenuScreen extends BaseScreenAdapter {
         menuLayout.space(5f);
         root.add(menuLayout);
 
-        createMenuButton(BUTTON_NEW_GAME_ID, "New Game", new InputListener() {
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+        createMenuButton(BUTTON_NEW_GAME_ID, "New Game", new InputListener()
+        {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
+            {
                 MainMenuScreen.this.game.startNewGame();
                 MainMenuScreen.this.game.removeScreen(MainMenuScreen.this);
                 return true;
             }
         });
-        createMenuButton(BUTTON_SAVE_LOAD_ID, "Save/Load", new InputListener() {
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+        createMenuButton(BUTTON_SAVE_LOAD_ID, "Save/Load", new InputListener()
+        {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
+            {
                 System.out.println("Save/Load");
                 return true;
             }
         });
-        createMenuButton(BUTTON_SETTINGS_ID, "Settings", new InputListener() {
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+        createMenuButton(BUTTON_SETTINGS_ID, "Settings", new InputListener()
+        {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
+            {
                 System.out.println("Settings");
                 return true;
             }
         });
-        createMenuButton(BUTTON_EXIT_ID, "Exit", new InputListener() {
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+        createMenuButton(BUTTON_EXIT_ID, "Exit", new InputListener()
+        {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
+            {
                 MainMenuScreen.this.game.exit();
                 return true;
             }
@@ -83,45 +93,57 @@ public class MainMenuScreen extends BaseScreenAdapter {
     }
 
     @Override
-    public int getPriority () {
+    public int getPriority()
+    {
         return 100;
     }
 
-    protected void insertMenuButton(@NotNull String id, @NotNull String text, @Nullable InputListener listener, String idAfter) {
+    protected void insertMenuButton(@NotNull String id, @NotNull String text, @Nullable InputListener listener, String idAfter)
+    {
         TextButton button = new TextButton(text, skin);
         if (listener != null)
+        {
             button.addListener(listener);
+        }
         menuLayout.addActorAfter(buttons.get(idAfter), button);
         buttons.put(id, button);
     }
 
-    protected void createMenuButton(@NotNull String id, @NotNull String text, @Nullable InputListener listener) {
+    protected void createMenuButton(@NotNull String id, @NotNull String text, @Nullable InputListener listener)
+    {
         TextButton button = new TextButton(text, skin);
         if (listener != null)
+        {
             button.addListener(listener);
+        }
         menuLayout.addActor(button);
         buttons.put(id, button);
     }
 
-    protected TextButton getButton(@NotNull String id) {
+    protected TextButton getButton(@NotNull String id)
+    {
         return buttons.get(id);
     }
 
-    public void resize (int width, int height) {
+    public void resize(int width, int height)
+    {
         stage.getViewport().update(width, height, true);
     }
 
     @Override
-    public void update(float delta) {
+    public void update(float delta)
+    {
         stage.act(delta);
     }
 
-    public void render () {
+    public void render()
+    {
         stage.getViewport().apply();
         stage.draw();
     }
 
-    public void dispose() {
+    public void dispose()
+    {
         stage.dispose();
     }
 }

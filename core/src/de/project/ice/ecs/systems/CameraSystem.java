@@ -10,27 +10,32 @@ import de.project.ice.ecs.components.CameraComponent;
  * all camera settings here
  * creation, settings
  */
-public class CameraSystem extends IteratingIceSystem {
+public class CameraSystem extends IteratingIceSystem
+{
     private RenderingSystem renderingSystem;
 
     @SuppressWarnings("unchecked")
-    public CameraSystem () {
+    public CameraSystem()
+    {
         super(Family.all(CameraComponent.class).get());
     }
 
     @Override
-    public void addedToEngine(IceEngine engine) {
+    public void addedToEngine(IceEngine engine)
+    {
         super.addedToEngine(engine);
         renderingSystem = engine.renderingSystem;
     }
 
     @Override
-    public void processEntity (Entity entity, float deltaTime) {
+    public void processEntity(Entity entity, float deltaTime)
+    {
         CameraComponent cam = Components.camera.get(entity);
     }
 
     @Override
-    public void update(float deltaTime) {
+    public void update(float deltaTime)
+    {
         super.update(deltaTime);
     }
 }

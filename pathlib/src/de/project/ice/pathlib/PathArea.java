@@ -11,7 +11,8 @@ import java.io.InputStream;
 import java.io.Reader;
 
 
-public class PathArea {
+public class PathArea
+{
     @NotNull
     public final Array<Shape> holes = new Array<Shape>();
     @NotNull
@@ -20,64 +21,78 @@ public class PathArea {
     public Shape shape = new Shape();
 
     @NotNull
-    public static PathArea load(String xml) {
+    public static PathArea load(String xml)
+    {
         return load(new XmlReader().parse(xml), 1f);
     }
 
     @NotNull
-    public static PathArea load(Reader reader) throws IOException {
+    public static PathArea load(Reader reader) throws IOException
+    {
         return load(new XmlReader().parse(reader), 1f);
     }
 
     @NotNull
-    public static PathArea load(InputStream input) throws IOException {
+    public static PathArea load(InputStream input) throws IOException
+    {
         return load(new XmlReader().parse(input), 1f);
     }
 
     @NotNull
-    public static PathArea load(FileHandle file) throws IOException {
+    public static PathArea load(FileHandle file) throws IOException
+    {
         return load(new XmlReader().parse(file), 1f);
     }
 
     @NotNull
-    public static PathArea load(String xml, float scale) {
+    public static PathArea load(String xml, float scale)
+    {
         return load(new XmlReader().parse(xml), scale);
     }
 
     @NotNull
-    public static PathArea load(Reader reader, float scale) throws IOException {
+    public static PathArea load(Reader reader, float scale) throws IOException
+    {
         return load(new XmlReader().parse(reader), scale);
     }
 
     @NotNull
-    public static PathArea load(InputStream input, float scale) throws IOException {
+    public static PathArea load(InputStream input, float scale) throws IOException
+    {
         return load(new XmlReader().parse(input), scale);
     }
 
     @NotNull
-    public static PathArea load(FileHandle file, float scale) throws IOException {
+    public static PathArea load(FileHandle file, float scale) throws IOException
+    {
         return load(new XmlReader().parse(file), scale);
     }
 
     @NotNull
-    private static PathArea load(XmlReader.Element root, float scale) {
+    private static PathArea load(XmlReader.Element root, float scale)
+    {
         PathArea area = new PathArea();
 
         boolean first = true;
-        for (int i = 0; i < root.getChildCount(); ++i) {
+        for (int i = 0; i < root.getChildCount(); ++i)
+        {
             XmlReader.Element shape = root.getChild(i);
             Shape s = new Shape();
             s.closed = true;
-            for (int j = 0; j < shape.getChildCount(); ++j) {
+            for (int j = 0; j < shape.getChildCount(); ++j)
+            {
                 XmlReader.Element vertex = shape.getChild(j);
                 float x = vertex.getFloat("x") * scale;
                 float y = vertex.getFloat("y") * scale;
                 s.vertices.add(new Vector2(x, y));
             }
-            if (first) {
+            if (first)
+            {
                 area.shape = s;
                 first = false;
-            } else {
+            }
+            else
+            {
                 area.holes.add(s);
             }
         }

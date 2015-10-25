@@ -6,21 +6,28 @@ import com.badlogic.gdx.utils.IntMap;
 
 import java.lang.reflect.Field;
 
-public class IntMapEditor extends BaseEditor {
+public class IntMapEditor extends BaseEditor
+{
     private Field field;
     private Object target;
     private IntMap<Object> map;
     private Array<Binder> binders = new Array<Binder>();
 
     @Override
-    public void act(float delta) {
+    public void act(float delta)
+    {
         super.act(delta);
-        for (Binder binder : binders) {
-            if (binder.oldKey != binder.key) {
+        for (Binder binder : binders)
+        {
+            if (binder.oldKey != binder.key)
+            {
                 Binder tmp = null;
-                if(map.containsKey(binder.key)) {
-                    for (int i = 0; i < binders.size; i++) {
-                        if (binders.get(i).oldKey == binder.key) {
+                if (map.containsKey(binder.key))
+                {
+                    for (int i = 0; i < binders.size; i++)
+                    {
+                        if (binders.get(i).oldKey == binder.key)
+                        {
                             tmp = binders.get(i);
                             break;
                         }
@@ -28,7 +35,8 @@ public class IntMapEditor extends BaseEditor {
                 }
                 map.remove(binder.oldKey);
                 map.put(binder.key, binder.value);
-                if (tmp != null) {
+                if (tmp != null)
+                {
                     map.put(binder.oldKey, tmp.value);
                     tmp.key = binder.oldKey;
                     tmp.oldKey = binder.oldKey;
@@ -36,28 +44,35 @@ public class IntMapEditor extends BaseEditor {
                 binder.oldKey = binder.key;
                 bind(field, target);
             }
-            if (binder.value != map.get(binder.key)) {
+            if (binder.value != map.get(binder.key))
+            {
                 map.put(binder.key, binder.value);
             }
         }
         if (map.size != binders.size)
+        {
             bind(field, target);
+        }
     }
 
     @Override
-    public void clear() {
+    public void clear()
+    {
         super.clear();
         binders.clear();
     }
 
     @Override
-    public IntMapEditor bind(Field field, Object target) {
+    public IntMapEditor bind(Field field, Object target)
+    {
         this.field = field;
         this.target = target;
         clear();
-        try {
+        try
+        {
             map = (IntMap<Object>) field.get(target);
-            for (IntMap.Entry<Object> entry : map) {
+            for (IntMap.Entry<Object> entry : map)
+            {
                 Binder binder = new Binder(entry.key, entry.value);
                 add(new NumberEditor.IntegerEditor().bind(Binder.class.getField("key"), binder));
                 add(Editors.editorForClass(entry.value.getClass())
@@ -65,20 +80,26 @@ public class IntMapEditor extends BaseEditor {
                         .row();
                 binders.add(binder);
             }
-        } catch (IllegalAccessException e) {
+        }
+        catch (IllegalAccessException e)
+        {
             e.printStackTrace();
-        } catch (NoSuchFieldException e) {
+        }
+        catch (NoSuchFieldException e)
+        {
             e.printStackTrace();
         }
         return this;
     }
 
-    public class Binder {
+    public class Binder
+    {
         public int oldKey;
         public int key;
         public Object value;
 
-        public Binder(int key, Object value) {
+        public Binder(int key, Object value)
+        {
             this.key = key;
             this.oldKey = key;
             this.value = value;

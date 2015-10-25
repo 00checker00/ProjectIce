@@ -3,7 +3,9 @@ package de.project.ice.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import de.project.ice.IceGame;
@@ -12,8 +14,10 @@ import de.project.ice.utils.DelegatingBlockingInputProcessor;
 import org.jetbrains.annotations.NotNull;
 
 
-public class MessageScreen extends BaseScreenAdapter {
-    @NotNull private Array<String> messages;
+public class MessageScreen extends BaseScreenAdapter
+{
+    @NotNull
+    private Array<String> messages;
 
     @NotNull
     private Stage stage;
@@ -24,7 +28,8 @@ public class MessageScreen extends BaseScreenAdapter {
     @NotNull
     private Label messageLabel;
 
-    public MessageScreen(@NotNull IceGame game, String... messages) {
+    public MessageScreen(@NotNull IceGame game, String... messages)
+    {
         super(game);
 
         this.messages = new Array<String>(messages);
@@ -51,9 +56,11 @@ public class MessageScreen extends BaseScreenAdapter {
         root.row().expand();
         root.add("");
 
-        inputProcessor = new DelegatingBlockingInputProcessor(stage) {
+        inputProcessor = new DelegatingBlockingInputProcessor(stage)
+        {
             @Override
-            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+            public boolean touchDown(int screenX, int screenY, int pointer, int button)
+            {
                 showNextMessage();
                 return true;
             }
@@ -62,8 +69,10 @@ public class MessageScreen extends BaseScreenAdapter {
         showNextMessage();
     }
 
-    private void showNextMessage() {
-        if (messages.size == 0) {
+    private void showNextMessage()
+    {
+        if (messages.size == 0)
+        {
             game.removeScreen(this);
             return;
         }
@@ -72,25 +81,30 @@ public class MessageScreen extends BaseScreenAdapter {
     }
 
     @Override
-    public int getPriority () {
+    public int getPriority()
+    {
         return 500;
     }
 
-    public void resize (int width, int height) {
+    public void resize(int width, int height)
+    {
         stage.getViewport().update(width, height, true);
     }
 
     @Override
-    public void update(float delta) {
+    public void update(float delta)
+    {
         stage.act(delta);
     }
 
-    public void render () {
+    public void render()
+    {
         stage.getViewport().apply();
         stage.draw();
     }
 
-    public void dispose() {
+    public void dispose()
+    {
         stage.dispose();
     }
 }

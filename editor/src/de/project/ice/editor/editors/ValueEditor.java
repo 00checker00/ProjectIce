@@ -3,11 +3,11 @@ package de.project.ice.editor.editors;
 
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
-import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 
-public class ValueEditor<T> extends BaseEditor {
+public class ValueEditor<T> extends BaseEditor
+{
     private String title;
     protected T value;
     private T oldValue;
@@ -18,33 +18,47 @@ public class ValueEditor<T> extends BaseEditor {
 
 
     @Override
-    public void act(float delta) {
+    public void act(float delta)
+    {
         super.act(delta);
-        if ((oldValue != null && !oldValue.equals(value)) || (oldValue == null && value != null)) {
+        if ((oldValue != null && !oldValue.equals(value)) || (oldValue == null && value != null))
+        {
             oldValue = value;
             setValue(field, target, value);
             fireValueChanged();
-        } else  {
-            try {
-                if (!value.equals(getValue(field, target))) {
+        }
+        else
+        {
+            try
+            {
+                if (!value.equals(getValue(field, target)))
+                {
                     value = (T) getValue(field, target);
                     updateValue();
                 }
-            } catch (NullPointerException ignore) {}
+            }
+            catch (NullPointerException ignore)
+            {
+            }
         }
     }
 
-    protected void updateValue() {
+    protected void updateValue()
+    {
 
     }
 
     @Override
-    public ValueEditor<T> bind(Field field, Object target) {
+    public ValueEditor<T> bind(Field field, Object target)
+    {
         this.target = target;
         this.field = field;
-        try {
+        try
+        {
             this.value = (T) field.get(target);
-        } catch (IllegalAccessException e) {
+        }
+        catch (IllegalAccessException e)
+        {
             e.printStackTrace();
         }
         this.oldValue = value;
@@ -56,31 +70,40 @@ public class ValueEditor<T> extends BaseEditor {
         return this;
     }
 
-    protected void createUi() {
+    protected void createUi()
+    {
 
     }
 
-    protected void fireValueChanged() {
-        try {
-            T t = (T) value;
+    protected void fireValueChanged()
+    {
+        try
+        {
+            T t = value;
             field.set(target, t);
-        } catch (IllegalAccessException e) {
+        }
+        catch (IllegalAccessException e)
+        {
             e.printStackTrace();
         }
-        for (ValueChangedListener<T> listener : listeners) {
+        for (ValueChangedListener<T> listener : listeners)
+        {
             listener.valueChanged(this, value);
         }
     }
 
-    public void addListener(ValueChangedListener<T> value) {
+    public void addListener(ValueChangedListener<T> value)
+    {
         listeners.add(value);
     }
 
-    public boolean removeListener(ValueChangedListener<T> value) {
+    public boolean removeListener(ValueChangedListener<T> value)
+    {
         return listeners.removeValue(value, true);
     }
 
-    public interface ValueChangedListener<T> {
+    public interface ValueChangedListener<T>
+    {
         void valueChanged(ValueEditor<T> sender, T value);
     }
 }

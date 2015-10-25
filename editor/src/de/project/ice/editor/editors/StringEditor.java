@@ -6,17 +6,22 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.kotcrab.vis.ui.widget.VisTextField;
 
-public class StringEditor extends ValueEditor<String> {
+public class StringEditor extends ValueEditor<String>
+{
     private VisTextField valueField;
 
     @Override
-    protected void createUi() {
+    protected void createUi()
+    {
 
-        valueField = new VisTextField(value != null ? value:"");
-        addListener(new InputListener() {
+        valueField = new VisTextField(value != null ? value : "");
+        addListener(new InputListener()
+        {
             @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if (button == Input.Buttons.MIDDLE) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
+            {
+                if (button == Input.Buttons.MIDDLE)
+                {
                     valueField.setText(valueField.getText() + Gdx.app.getClipboard().getContents());
                     return true;
                 }
@@ -27,13 +32,15 @@ public class StringEditor extends ValueEditor<String> {
     }
 
     @Override
-    public void act(float delta) {
+    public void act(float delta)
+    {
         value = valueField.getText();
         super.act(delta);
     }
 
     @Override
-    protected void updateValue() {
+    protected void updateValue()
+    {
         valueField.setText(value);
     }
 }

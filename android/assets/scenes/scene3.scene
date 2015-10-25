@@ -12,7 +12,7 @@
 					</camera>
 				</CameraComponent>
 				<NameComponent>
-					<name type="String">Kashamera</name>
+					<name type="String">Kamera</name>
 				</NameComponent>
 			</components>
 		</entity>

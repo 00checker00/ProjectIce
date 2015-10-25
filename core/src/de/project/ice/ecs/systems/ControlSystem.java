@@ -23,7 +23,8 @@ import de.project.ice.screens.CursorScreen;
 
 import static de.project.ice.config.Config.PIXELS_TO_METRES;
 
-public class ControlSystem extends IteratingIceSystem implements InputProcessor {
+public class ControlSystem extends IteratingIceSystem implements InputProcessor
+{
     private ImmutableArray<Entity> walkareas;
     private ImmutableArray<Entity> cameras;
     private ImmutableArray<Entity> hotspots;
@@ -50,25 +51,32 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
     private IceEngine engine;
 
     @SuppressWarnings("unchecked")
-    public ControlSystem() {
+    public ControlSystem()
+    {
         super(Families.controllable);
     }
 
     @Override
-    public void processEntity (Entity entity, float deltaTime) {
+    public void processEntity(Entity entity, float deltaTime)
+    {
         MovableComponent move = Components.movable.get(entity);
         ControlComponent control = Components.control.get(entity);
         TextureComponent texture = Components.texture.get(entity);
         TransformComponent transform = Components.transform.get(entity);
 
-        if (mouseDown) {
+        if (mouseDown)
+        {
             entity.remove(UseComponent.class);
-            if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) || Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
+            if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) || Gdx.input.isButtonPressed(Input.Buttons.RIGHT))
+            {
                 if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT) && active_item != null)
+                {
                     active_item = null;
+                }
 
                 activateHotspot(entity);
-                switch (getActiveCursor()) {
+                switch (getActiveCursor())
+                {
                     case Walk:
                     case Take:
                     case Look:
@@ -77,11 +85,14 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
                         float width = PIXELS_TO_METRES * (texture.region.data != null ? texture.region.data.getRegionWidth() : 0);
 
                         Vector2 target;
-                        if (hotspot_entity != null) {
+                        if (hotspot_entity != null)
+                        {
                             HotspotComponent hotspotComponent = Components.hotspot.get(hotspot_entity);
                             target = Components.transform.get(hotspot_entity).pos.cpy()
                                     .add(hotspotComponent.origin).add(hotspotComponent.targetPos);
-                        } else {
+                        }
+                        else
+                        {
                             Vector3 mouse_target = active_camera.unproject(new Vector3(pointerPos.x, pointerPos.y, 0f)); // unprojects UI coordinates to camera coordinates
                             target = new Vector2(mouse_target.x, mouse_target.y);
                         }
@@ -100,7 +111,8 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
 
                         move.targetPositions.clear();
 
-                        for (PathNode node : path) {
+                        for (PathNode node : path)
+                        {
                             move.targetPositions.add(node.getPos().cpy().sub(width / 2, 0));
                         }
                         break;
@@ -109,8 +121,10 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
         }
     }
 
-    private void activateHotspot(Entity entity) {
-        if (active_hotspot != null) {
+    private void activateHotspot(Entity entity)
+    {
+        if (active_hotspot != null)
+        {
             UseComponent useComponent = engine.createComponent(UseComponent.class);
             useComponent.target = hotspot_entity;
             useComponent.cursor = getActiveCursor();
@@ -119,25 +133,36 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
         }
     }
 
-    private CursorScreen.Cursor getActiveCursor() {
+    private CursorScreen.Cursor getActiveCursor()
+    {
         return Gdx.input.isButtonPressed(Input.Buttons.LEFT) || secondaryCursor == CursorScreen.Cursor.None ? primaryCursor : secondaryCursor;
     }
 
     @Override
-    public void update(float deltaTime) {
+    public void update(float deltaTime)
+    {
         // update the active camera
-        if(cameras.size() > 0)
+        if (cameras.size() > 0)
+        {
             active_camera = cameras.first().getComponent(CameraComponent.class).camera;
+        }
 
-        if(walkareas.size() > 0)
+        if (walkareas.size() > 0)
+        {
             walkarea = Components.walkarea.get(walkareas.first()).area;
+        }
 
         if (active_camera == null)
+        {
             return;
+        }
 
-        if (pointerDown && !pointerWasDown) {
+        if (pointerDown && !pointerWasDown)
+        {
             mouseDown = true;
-        } else if (!pointerDown && pointerWasDown) {
+        }
+        else if (!pointerDown && pointerWasDown)
+        {
             mouseUp = true;
         }
 
@@ -148,7 +173,8 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
     }
 
     @Override
-    public void addedToEngine(IceEngine engine) {
+    public void addedToEngine(IceEngine engine)
+    {
         super.addedToEngine(engine);
         this.engine = engine;
         cameras = engine.getEntitiesFor(Families.camera);
@@ -159,66 +185,79 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
     }
 
     @Override
-    public boolean keyDown(int keycode) {
+    public boolean keyDown(int keycode)
+    {
         return false;
     }
 
     @Override
-    public boolean keyUp(int keycode) {
+    public boolean keyUp(int keycode)
+    {
         return false;
     }
 
     @Override
-    public boolean keyTyped(char character) {
+    public boolean keyTyped(char character)
+    {
         return false;
     }
 
     @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+    public boolean touchDown(int screenX, int screenY, int pointer, int button)
+    {
         pointerPos.set(screenX, screenY);
         pointerDown = true;
         return false;
     }
 
     @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+    public boolean touchUp(int screenX, int screenY, int pointer, int button)
+    {
         pointerPos.set(screenX, screenY);
         pointerDown = false;
         return false;
     }
 
     @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
+    public boolean touchDragged(int screenX, int screenY, int pointer)
+    {
         return false;
     }
 
     @Override
-    public boolean mouseMoved(int screenX, int screenY) {
+    public boolean mouseMoved(int screenX, int screenY)
+    {
         pointerPos.set(screenX, screenY);
         primaryCursor = CursorScreen.Cursor.None;
         secondaryCursor = CursorScreen.Cursor.None;
         active_hotspot = null;
         hotspot_entity = null;
 
-        if (active_camera != null) {
+        if (active_camera != null)
+        {
             Vector3 coords = active_camera.unproject(new Vector3(screenX, screenY, 0f));
 
-            if (walkarea != null) {
-                if (mouseCalculator.IsInside(walkarea, new Vector2(coords.x, coords.y))) {
+            if (walkarea != null)
+            {
+                if (mouseCalculator.IsInside(walkarea, new Vector2(coords.x, coords.y)))
+                {
                     primaryCursor = CursorScreen.Cursor.Walk;
                 }
             }
 
-            for (Entity entity : hotspots) {
+            for (Entity entity : hotspots)
+            {
                 TransformComponent transform = Components.transform.get(entity);
                 HotspotComponent hotspot = Components.hotspot.get(entity);
 
                 if (new Rectangle(transform.pos.x + hotspot.origin.x,
                         transform.pos.y + hotspot.origin.y,
                         hotspot.width,
-                        hotspot.height).contains(coords.x, coords.y)) {
+                        hotspot.height).contains(coords.x, coords.y))
+                {
                     active_hotspot = hotspotManager.get(hotspot.script);
-                    if (active_hotspot != null) {
+                    if (active_hotspot != null)
+                    {
                         hotspot_entity = entity;
                         primaryCursor = active_hotspot.getPrimaryCursor();
                         secondaryCursor = active_hotspot.getSecondaryCursor();
@@ -231,12 +270,15 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor 
     }
 
     @Override
-    public boolean scrolled(int amount) {
+    public boolean scrolled(int amount)
+    {
         return false;
     }
 
-    public WalkAreaComponent getWalkArea () {
-        if (walkareas.size() > 0) {
+    public WalkAreaComponent getWalkArea()
+    {
+        if (walkareas.size() > 0)
+        {
             return Components.walkarea.get(walkareas.first());
         }
         return null;

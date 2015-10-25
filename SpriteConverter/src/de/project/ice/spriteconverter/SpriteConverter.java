@@ -15,14 +15,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class SpriteConverter {
-    public static void main (String[] argv) {
-        if (argv.length != 1) {
+public class SpriteConverter
+{
+    public static void main(String[] argv)
+    {
+        if (argv.length != 1)
+        {
             System.err.println("Usage:   java de.project.ice.spriteconverter.SpriteConverter <XmlFile>");
             System.err.println("Example: java ExampleDomShowNodes MyXmlFile.xml");
             System.exit(1);
         }
-        try {
+        try
+        {
             // ---- Parse XML file ----
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -37,7 +41,8 @@ public class SpriteConverter {
 
             ArrayList<Texture> textures = new ArrayList<Texture>(ndList.getLength());
 
-            for (int i = 0; i < ndList.getLength(); i++) {
+            for (int i = 0; i < ndList.getLength(); i++)
+            {
                 Node node = ndList.item(i);
                 NamedNodeMap attributes = node.getAttributes();
                 Texture texture = new Texture();
@@ -49,19 +54,31 @@ public class SpriteConverter {
                 texture.width = Integer.parseInt(attributes.getNamedItem("width").getNodeValue());
                 texture.height = Integer.parseInt(attributes.getNamedItem("height").getNodeValue());
                 if (attributes.getNamedItem("frameX") != null)
+                {
                     texture.offsetX = Integer.parseInt(attributes.getNamedItem("frameX").getNodeValue());
+                }
                 if (attributes.getNamedItem("frameY") != null)
+                {
                     texture.offsetX = Integer.parseInt(attributes.getNamedItem("frameY").getNodeValue());
+                }
 
                 if (attributes.getNamedItem("frameWidth") != null)
+                {
                     texture.origWidth = Integer.parseInt(attributes.getNamedItem("frameWidth").getNodeValue());
+                }
                 else
+                {
                     texture.origWidth = texture.width;
+                }
 
                 if (attributes.getNamedItem("frameHeight") != null)
+                {
                     texture.origHeight = Integer.parseInt(attributes.getNamedItem("frameHeight").getNodeValue());
+                }
                 else
+                {
                     texture.origHeight = texture.height;
+                }
                 textures.add(texture);
 
             }
@@ -71,7 +88,8 @@ public class SpriteConverter {
                     "format: RGBA8888\n" +
                     "filter: Linear,Linear\n" +
                     "repeat: none\n");
-            for (Texture texture : textures) {
+            for (Texture texture : textures)
+            {
                 fw.write(texture.name);
                 fw.write("\n");
                 fw.write("  rotate: ");
@@ -104,23 +122,32 @@ public class SpriteConverter {
             fw.close();
 
             // ---- Error handling ----
-        } catch (SAXParseException spe) {
+        }
+        catch (SAXParseException spe)
+        {
             System.out.println("\n** Parsing error, line " + spe.getLineNumber()
                     + ", uri " + spe.getSystemId());
             System.out.println("   " + spe.getMessage());
             Exception e = (spe.getException() != null) ? spe.getException() : spe;
             e.printStackTrace();
-        } catch (SAXException sxe) {
+        }
+        catch (SAXException sxe)
+        {
             Exception e = (sxe.getException() != null) ? sxe.getException() : sxe;
             e.printStackTrace();
-        } catch (ParserConfigurationException pce) {
+        }
+        catch (ParserConfigurationException pce)
+        {
             pce.printStackTrace();
-        } catch (IOException ioe) {
+        }
+        catch (IOException ioe)
+        {
             ioe.printStackTrace();
         }
     }
 
-    private static class Texture {
+    private static class Texture
+    {
         public String name = "";
         public boolean rotate = false;
         public int x = 0;

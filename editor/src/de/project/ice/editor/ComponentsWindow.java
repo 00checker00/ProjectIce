@@ -16,7 +16,8 @@ import de.project.ice.editor.undoredo.UndoRedoManager;
 import org.jetbrains.annotations.Nullable;
 
 
-public class ComponentsWindow extends VisWindow {
+public class ComponentsWindow extends VisWindow
+{
     @SuppressWarnings("unchecked")
     public static Class<? extends Component>[] components = new Class[]{
             AnimationComponent.class,
@@ -40,7 +41,8 @@ public class ComponentsWindow extends VisWindow {
     private IceEngine engine;
     private UndoRedoManager undoRedoManager;
 
-    public ComponentsWindow (IceEngine engine, UndoRedoManager undoRedoManager) throws IllegalStateException {
+    public ComponentsWindow(IceEngine engine, UndoRedoManager undoRedoManager) throws IllegalStateException
+    {
         super("Components");
         this.engine = engine;
         this.undoRedoManager = undoRedoManager;
@@ -53,21 +55,26 @@ public class ComponentsWindow extends VisWindow {
     }
 
     @Override
-    public void act(float delta) {
+    public void act(float delta)
+    {
         super.act(delta);
     }
 
-    private void createWidgets() {
+    private void createWidgets()
+    {
         componentsTable = new VisTable();
         componentsTable.defaults().align(Align.topLeft);
 
 
         final PopupMenu menu = new PopupMenu();
 
-        for (final Class<? extends Component> component : components) {
-            MenuItem item = new MenuItem(component.getSimpleName(), new ChangeListener() {
+        for (final Class<? extends Component> component : components)
+        {
+            MenuItem item = new MenuItem(component.getSimpleName(), new ChangeListener()
+            {
                 @Override
-                public void changed(ChangeEvent event, Actor actor) {
+                public void changed(ChangeEvent event, Actor actor)
+                {
                     undoRedoManager.addAction(new AddComponentAction(engine.createComponent(component), entity));
                     updateEntity();
                 }
@@ -75,9 +82,11 @@ public class ComponentsWindow extends VisWindow {
             menu.addItem(item);
         }
 
-        final VisTextButton btnAddComponent = new VisTextButton("Add component", new ChangeListener() {
+        final VisTextButton btnAddComponent = new VisTextButton("Add component", new ChangeListener()
+        {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(ChangeEvent event, Actor actor)
+            {
                 Vector2 stageCoord = localToStageCoordinates(new Vector2(actor.getX(), actor.getY()));
                 menu.showMenu(getStage(), stageCoord.x, stageCoord.y);
             }
@@ -89,15 +98,18 @@ public class ComponentsWindow extends VisWindow {
         add(scrollPane).fill();
     }
 
-    public void setEntity(@Nullable Entity entity) {
+    public void setEntity(@Nullable Entity entity)
+    {
         this.entity = entity;
         updateEntity();
     }
 
-    private void updateEntity() {
+    private void updateEntity()
+    {
         componentsTable.clear();
 
-        if (entity == null) {
+        if (entity == null)
+        {
             getTitleLabel().setText("Components");
             return;
         }
@@ -105,13 +117,16 @@ public class ComponentsWindow extends VisWindow {
         String name = new EntityEntry(entity).name;
         getTitleLabel().setText("Components of " + name);
 
-        for (final Component component : entity.getComponents()) {
+        for (final Component component : entity.getComponents())
+        {
             String componentName = component.getClass().getSimpleName();
             VisLabel label = new VisLabel(componentName);
             componentsTable.add(label).expandX();
-            VisTextButton removeBtn = new VisTextButton("-", new ChangeListener() {
+            VisTextButton removeBtn = new VisTextButton("-", new ChangeListener()
+            {
                 @Override
-                public void changed(ChangeEvent event, Actor actor) {
+                public void changed(ChangeEvent event, Actor actor)
+                {
                     undoRedoManager.addAction(new RemoveComponentAction(component, entity));
                     updateEntity();
                 }

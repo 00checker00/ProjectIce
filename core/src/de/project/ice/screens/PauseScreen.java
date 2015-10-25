@@ -7,21 +7,28 @@ import de.project.ice.IceGame;
 import de.project.ice.utils.DelegatingBlockingInputProcessor;
 import org.jetbrains.annotations.NotNull;
 
-public class PauseScreen extends MainMenuScreen {
+public class PauseScreen extends MainMenuScreen
+{
     protected static final String BUTTON_CONTINUE_ID = "BTN_CONTINUE";
 
-    public PauseScreen(@NotNull IceGame game) {
+    public PauseScreen(@NotNull IceGame game)
+    {
         super(game);
-        insertMenuButton(BUTTON_CONTINUE_ID, "Continue", new InputListener(){
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+        insertMenuButton(BUTTON_CONTINUE_ID, "Continue", new InputListener()
+        {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
+            {
                 PauseScreen.this.game.removeScreen(PauseScreen.this);
                 return true;
             }
         }, BUTTON_SETTINGS_ID);
-        inputProcessor = new DelegatingBlockingInputProcessor(this.inputProcessor) {
+        inputProcessor = new DelegatingBlockingInputProcessor(this.inputProcessor)
+        {
             @Override
-            public boolean keyDown(int keycode) {
-                if (keycode == Input.Keys.ESCAPE) {
+            public boolean keyDown(int keycode)
+            {
+                if (keycode == Input.Keys.ESCAPE)
+                {
                     PauseScreen.this.game.removeScreen(PauseScreen.this);
                     return true;
                 }
@@ -31,7 +38,8 @@ public class PauseScreen extends MainMenuScreen {
     }
 
     @Override
-    public int getPriority () {
+    public int getPriority()
+    {
         return 500;
     }
 }

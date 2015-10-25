@@ -1,7 +1,5 @@
 package de.project.ice.editor.editors;
 
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
@@ -9,16 +7,17 @@ import com.badlogic.gdx.utils.Array;
 import com.kotcrab.vis.ui.util.TableUtils;
 import com.kotcrab.vis.ui.widget.*;
 import de.project.ice.ecs.IceEngine;
-import org.jetbrains.annotations.Nullable;
 
 
-public class AudioWindow extends VisWindow {
+public class AudioWindow extends VisWindow
+{
 
     private IceEngine engine;
     private VisTextField musictext;
     private VisTextArea soundtext;
 
-    public AudioWindow(IceEngine engine) throws IllegalStateException {
+    public AudioWindow(IceEngine engine) throws IllegalStateException
+    {
         super("Audio");
         this.engine = engine;
 
@@ -31,10 +30,12 @@ public class AudioWindow extends VisWindow {
     }
 
 
-    public void setValues(String music, Array<String> sounds){
+    public void setValues(String music, Array<String> sounds)
+    {
         StringBuilder sb = new StringBuilder();
 
-        for(String sound: sounds){
+        for (String sound : sounds)
+        {
             sb.append(sound);
             sb.append("\n");
         }
@@ -44,8 +45,8 @@ public class AudioWindow extends VisWindow {
 
     }
 
-    private void createWidgets() {
-
+    private void createWidgets()
+    {
 
 
         VisLabel soundlabel = new VisLabel("Sounds:");
@@ -59,16 +60,19 @@ public class AudioWindow extends VisWindow {
         add(musictext).expandX().fill().row();
 
 
-
-        VisTextButton savebutton = new VisTextButton("Set", new ChangeListener() {
+        VisTextButton savebutton = new VisTextButton("Set", new ChangeListener()
+        {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(ChangeEvent event, Actor actor)
+            {
                 engine.soundSystem.unloadSounds();
                 engine.soundSystem.stopMusic();
                 engine.soundSystem.playMusic(musictext.getText());
 
-                if(!soundtext.getText().isEmpty()) {
-                    for (String sound : soundtext.getText().split("\n")) {
+                if (!soundtext.getText().isEmpty())
+                {
+                    for (String sound : soundtext.getText().split("\n"))
+                    {
                         engine.soundSystem.loadSound(sound);
                     }
                 }

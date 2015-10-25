@@ -5,12 +5,16 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.utils.*;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.DelayedRemovalArray;
+import com.badlogic.gdx.utils.LongMap;
+import com.badlogic.gdx.utils.ObjectMap;
 
 /**
  * Created by Phil & Marco on 23.10.2015.
  */
-public class SoundSystem extends IceSystem {
+public class SoundSystem extends IceSystem
+{
 
     private ObjectMap<String, Sound> sounds = new ObjectMap<String, Sound>();
     private LongMap<String> ids = new LongMap<String>();
@@ -19,27 +23,31 @@ public class SoundSystem extends IceSystem {
     private String musicname = new String();
 
     @Override
-    public void update(float deltaTime) {
+    public void update(float deltaTime)
+    {
         super.update(deltaTime);
 
         faders.begin();
 
-        for(Fader fader: faders){
-            if(fader.update(deltaTime)){
-                faders.removeValue(fader,true);
+        for (Fader fader : faders)
+        {
+            if (fader.update(deltaTime))
+            {
+                faders.removeValue(fader, true);
             }
         }
 
         faders.end();
 
 
-
     }
 
-    public void loadSound(String name){
+    public void loadSound(String name)
+    {
         FileHandle file = Gdx.files.internal("sounds/" + name + ".mp3");
 
-        if (!file.exists()) {
+        if (!file.exists())
+        {
             Gdx.app.log(getClass().getSimpleName(), "Sound file doesn'T exist: " + file.path());
             return;
         }
@@ -50,30 +58,36 @@ public class SoundSystem extends IceSystem {
 
     }
 
-    public long playSound(String name){
+    public long playSound(String name)
+    {
         Sound sound = sounds.get(name);
         long playID = sound.play();
-        ids.put(playID,name);
+        ids.put(playID, name);
         return playID;
     }
 
-    public void stopSound(long playID){
+    public void stopSound(long playID)
+    {
         sounds.get(ids.get(playID)).stop(playID);
     }
 
-    public void resumeSound(long playID){
+    public void resumeSound(long playID)
+    {
         sounds.get(ids.get(playID)).resume(playID);
     }
 
-    public void pauseSound(long playID){
+    public void pauseSound(long playID)
+    {
         sounds.get(ids.get(playID)).pause(playID);
     }
 
-    public void unloadSounds(){
+    public void unloadSounds()
+    {
         ids.clear();
 
 
-        for(Sound sound:sounds.values()) {
+        for (Sound sound : sounds.values())
+        {
             sound.dispose();
         }
 
@@ -82,29 +96,32 @@ public class SoundSystem extends IceSystem {
     }
 
 
-
-    public void playMusic(String name){
+    public void playMusic(String name)
+    {
 
         playMusic(name, true);
 
     }
 
-    public String getMusic() {
+    public String getMusic()
+    {
         return musicname;
     }
 
-    public Array<String> getSounds() {
+    public Array<String> getSounds()
+    {
         return sounds.keys().toArray();
     }
 
 
-
-    public void playMusic(String name, boolean loop){
+    public void playMusic(String name, boolean loop)
+    {
 
 
         FileHandle file = Gdx.files.internal("music/" + name + ".mp3");
 
-        if (!file.exists()) {
+        if (!file.exists())
+        {
             Gdx.app.log(getClass().getSimpleName(), "Music file doesn'T exist: " + file.path());
             return;
         }
@@ -114,11 +131,13 @@ public class SoundSystem extends IceSystem {
         music.setLooping(loop);
 
 
-
-        if(this.music != null){
+        if (this.music != null)
+        {
             faders.add(Fader.fadeCross(this.music, music));
 
-        }else{
+        }
+        else
+        {
             faders.add(Fader.fadeIn(music));
         }
         this.music = music;
@@ -127,29 +146,35 @@ public class SoundSystem extends IceSystem {
 
     }
 
-    public void stopMusic(){
+    public void stopMusic()
+    {
 
-        if(music!=null) {
+        if (music != null)
+        {
             faders.add(Fader.fadeOut(music));
             music = null;
         }
     }
 
-    public void pauseMusic(){
+    public void pauseMusic()
+    {
         music.pause();
     }
 
-    public void resumeMusic(){
+    public void resumeMusic()
+    {
         music.play();
     }
 
-    private static class Fader {
+    private static class Fader
+    {
         protected static float DURATION = 3f;
         protected Music music;
-        protected float start,end;
+        protected float start, end;
         protected float alpha;
 
-        private Fader(Music music, float start, float end) {
+        private Fader(Music music, float start, float end)
+        {
             this.music = music;
             this.start = start;
             this.end = end;
@@ -157,57 +182,67 @@ public class SoundSystem extends IceSystem {
             music.setVolume(start);
         }
 
-        public static Fader fadeIn(Music music){
+        public static Fader fadeIn(Music music)
+        {
             return new Fader(music, 0f, 1f);
         }
 
-        public static Fader fadeOut(Music music){
+        public static Fader fadeOut(Music music)
+        {
             return new FadeOut(music, 1f, 0f);
         }
 
-        public static Fader fadeCross(Music first, Music second){
+        public static Fader fadeCross(Music first, Music second)
+        {
             return new FadeCross(first, second);
         }
 
-        public boolean update(float delta){
-            alpha+=delta/DURATION;
+        public boolean update(float delta)
+        {
+            alpha += delta / DURATION;
             float volume = Interpolation.pow2.apply(start, end, alpha);
-                    music.setVolume(volume);
+            music.setVolume(volume);
 
-            return alpha >=1f;
+            return alpha >= 1f;
         }
 
 
-
     }
 
-private static class FadeOut extends Fader{
+    private static class FadeOut extends Fader
+    {
 
 
-    protected FadeOut(Music music, float start, float end) {
-        super(music, start, end);
-    }
-
-    @Override
-    public boolean update(float delta) {
-        if (super.update(delta)) {
-            music.dispose();
-            return true;
+        protected FadeOut(Music music, float start, float end)
+        {
+            super(music, start, end);
         }
-        return false;
-    }
-}
 
-    private static class FadeCross extends FadeOut {
+        @Override
+        public boolean update(float delta)
+        {
+            if (super.update(delta))
+            {
+                music.dispose();
+                return true;
+            }
+            return false;
+        }
+    }
+
+    private static class FadeCross extends FadeOut
+    {
         private Fader fadeIn;
 
-        private FadeCross(Music first, Music second ) {
+        private FadeCross(Music first, Music second)
+        {
             super(first, first.getVolume(), 0f);
             fadeIn = Fader.fadeIn(second);
         }
 
         @Override
-        public boolean update(float delta) {
+        public boolean update(float delta)
+        {
             fadeIn.update(delta);
             return super.update(delta);
         }

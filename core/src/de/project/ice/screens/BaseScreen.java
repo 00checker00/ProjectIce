@@ -16,7 +16,8 @@ import org.jetbrains.annotations.NotNull;
  *
  * @see Game
  */
-public interface BaseScreen {
+public interface BaseScreen
+{
     /**
      * The priority of the screen is used to calculate the order in which the screens are drawn.<br>
      * 0 meaning it's the topmost screen, Integer.MAX_VALUE will be behind every other screen.<br>
@@ -24,10 +25,11 @@ public interface BaseScreen {
      *
      * @return The display priority of the screen
      */
-    int getPriority ();
+    int getPriority();
 
     /**
      * Get the game to which this screen belongs
+     *
      * @return the game to which this screen belongs
      */
     IceGame getGame();
@@ -35,47 +37,48 @@ public interface BaseScreen {
     /**
      * Called when this screen becomes the current screen for a {@link Game}.
      */
-    void show ();
+    void show();
 
     /**
      * Called when the screen should update itself.
      *
      * @param delta The time in seconds since the last render.
      */
-    void update (float delta);
+    void update(float delta);
 
     /**
      * Called when the screen should render itself.
      */
-    void render ();
+    void render();
 
     /**
      * @see ApplicationListener#resize(int, int)
      */
-    void resize (int width, int height);
+    void resize(int width, int height);
 
     /**
      * @see ApplicationListener#pause()
      */
-    void pause ();
+    void pause();
 
     /**
      * @see ApplicationListener#resume()
      */
-    void resume ();
+    void resume();
 
     /**
      * Called when this screen is no longer the current screen for a {@link Game}.
      */
-    void hide ();
+    void hide();
 
     /**
      * Called when this screen should release all resources.
      */
-    void dispose ();
+    void dispose();
 
     /**
      * Get the InputProcessor for this screen
+     *
      * @return The InputProcessor for this screen
      */
     @NotNull

@@ -4,16 +4,19 @@ package de.project.ice.inventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class Teapot extends Inventory.Item {
+public class Teapot extends Inventory.Item
+{
     @NotNull
     @Override
-    public String getIcon() {
+    public String getIcon()
+    {
         return "teekanne";
     }
 
     @Nullable
     @Override
-    public String getDescription() {
+    public String getDescription()
+    {
         return "s3_teapot_desc";
     }
 }

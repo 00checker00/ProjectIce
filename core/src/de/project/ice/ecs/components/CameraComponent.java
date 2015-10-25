@@ -8,12 +8,14 @@ import org.jetbrains.annotations.NotNull;
 /**
  * ONLY one camera component should exist
  */
-public class CameraComponent extends Component implements Pool.Poolable {
+public class CameraComponent extends Component implements Pool.Poolable
+{
     @NotNull
     public OrthographicCamera camera = new OrthographicCamera(16, 9);
 
     @Override
-    public void reset () {
+    public void reset()
+    {
         camera = new OrthographicCamera();
         camera.viewportWidth = 16;
         camera.viewportHeight = 9;

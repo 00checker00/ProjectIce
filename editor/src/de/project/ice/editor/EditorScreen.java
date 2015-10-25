@@ -29,7 +29,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 
-public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.SelectionListener {
+public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.SelectionListener
+{
     private static final String VERSION = "0.0.1";
     private final AudioWindow audioWindow;
     private final PathScreen pathScreen;
@@ -52,7 +53,8 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
     private VisTextButton redoBtn;
     private VisTextButton undoBtn;
 
-    public EditorScreen(@NotNull final IceGame game) {
+    public EditorScreen(@NotNull final IceGame game)
+    {
         super(game);
         VisUI.load();
         FileChooser.setFavoritesPrefsName("de.project.ice.editor");
@@ -73,7 +75,8 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
         createMenus();
 
         pathScreen = new PathScreen(game);
-        if (storage.getBoolean("editor_pathscreen_visible", true)) {
+        if (storage.getBoolean("editor_pathscreen_visible", true))
+        {
             game.addScreen(pathScreen);
         }
 
@@ -97,50 +100,58 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
         stage.addActor(audioWindow);
 
 
-        inputProcessor = new DelegatingInputProcessor(stage) {
+        inputProcessor = new DelegatingInputProcessor(stage)
+        {
             @Override
-            public boolean keyDown(int keycode) {
-                if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
-                    switch (keycode) {
+            public boolean keyDown(int keycode)
+            {
+                if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT))
+                {
+                    switch (keycode)
+                    {
                         case Input.Keys.S:
                             save();
-                            break;
+                            return true;
 
                         case Input.Keys.O:
                             open();
-                            break;
+                            return true;
 
                         case Input.Keys.N:
                             newScene();
-                            break;
+                            return true;
+
                         case Input.Keys.P:
-                            if (game.isScreenVisible(pathScreen)) {
+                            if (game.isScreenVisible(pathScreen))
+                            {
                                 game.removeScreen(pathScreen, false);
-                            } else {
+                            }
+                            else
+                            {
                                 game.addScreen(pathScreen);
                             }
-
-
-                            break;
+                            return true;
 
                         case Input.Keys.Z:
-                            if (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
+                            if (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
+                            {
                                 undoRedoManager.redo();
-                            } else {
+                            }
+                            else
+                            {
                                 undoRedoManager.undo();
                             }
-                            break;
+                            return true;
 
                         case Input.Keys.H:
                             hideAllWindows();
-                            break;
+                            return true;
 
                         case Input.Keys.A:
                             showAllWindows();
-                            break;
+                            return true;
 
                     }
-                    return true;
                 }
                 return super.keyDown(keycode);
             }
@@ -151,91 +162,116 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
                 false);
     }
 
-    private void hideAllWindows () {
+    private void hideAllWindows()
+    {
         entitiesWindow.setVisible(false);
         componentsWindow.setVisible(false);
         audioWindow.setVisible(false);
         game.removeScreen(pathScreen, false);
     }
 
-    private void showAllWindows () {
+    private void showAllWindows()
+    {
         entitiesWindow.setVisible(true);
         componentsWindow.setVisible(true);
         audioWindow.setVisible(true);
         game.addScreen(pathScreen);
     }
 
-    private void createMenus () {
+    private void createMenus()
+    {
         Menu fileMenu = new Menu("File");
         Menu windowMenu = new Menu("Window");
         Menu testMenu = new Menu("Test");
         Menu helpMenu = new Menu("Help");
 
-        fileMenu.addItem(new MenuItem("New Scene", new ChangeListener() {
+        fileMenu.addItem(new MenuItem("New Scene", new ChangeListener()
+        {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(ChangeEvent event, Actor actor)
+            {
                 newScene();
             }
         }).setShortcut("Ctrl + N"));
-        fileMenu.addItem(new MenuItem("Open Scene", new ChangeListener() {
+        fileMenu.addItem(new MenuItem("Open Scene", new ChangeListener()
+        {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(ChangeEvent event, Actor actor)
+            {
                 open();
             }
         }).setShortcut("Ctrl + O"));
-        fileMenu.addItem(new MenuItem("Save Scene", new ChangeListener() {
+        fileMenu.addItem(new MenuItem("Save Scene", new ChangeListener()
+        {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(ChangeEvent event, Actor actor)
+            {
                 save(false);
             }
         }).setShortcut("Ctrl + S"));
-        fileMenu.addItem(new MenuItem("Save Scene As", new ChangeListener() {
+        fileMenu.addItem(new MenuItem("Save Scene As", new ChangeListener()
+        {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(ChangeEvent event, Actor actor)
+            {
                 save(true);
             }
         }).setShortcut("Ctrl + Shift + S"));
-        fileMenu.addItem(new MenuItem("Screenshot", new ChangeListener() {
+        fileMenu.addItem(new MenuItem("Screenshot", new ChangeListener()
+        {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(ChangeEvent event, Actor actor)
+            {
                 ScreenshotFactory.saveScreenshot();
             }
         }));
         fileMenu.addSeparator();
-        fileMenu.addItem(new MenuItem("Quit", new ChangeListener() {
+        fileMenu.addItem(new MenuItem("Quit", new ChangeListener()
+        {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(ChangeEvent event, Actor actor)
+            {
                 quit();
             }
         }));
 
-        windowMenu.addItem(new MenuItem("Show/Hide Entities Window", new ChangeListener() {
+        windowMenu.addItem(new MenuItem("Show/Hide Entities Window", new ChangeListener()
+        {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(ChangeEvent event, Actor actor)
+            {
                 entitiesWindow.setVisible(!entitiesWindow.isVisible());
             }
         }));
-        windowMenu.addItem(new MenuItem("Show/Hide Components Window", new ChangeListener() {
+        windowMenu.addItem(new MenuItem("Show/Hide Components Window", new ChangeListener()
+        {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(ChangeEvent event, Actor actor)
+            {
                 componentsWindow.setVisible(!componentsWindow.isVisible());
             }
         }));
 
-        windowMenu.addItem(new MenuItem("Show/Hide Audio Window", new ChangeListener() {
+        windowMenu.addItem(new MenuItem("Show/Hide Audio Window", new ChangeListener()
+        {
             @Override
-            public void changed (ChangeEvent event, Actor actor) {
+            public void changed(ChangeEvent event, Actor actor)
+            {
                 audioWindow.setVisible(!audioWindow.isVisible());
             }
         }));
 
-        windowMenu.addItem(new MenuItem("Show/Hide Path Screen ", new ChangeListener() {
+        windowMenu.addItem(new MenuItem("Show/Hide Path Screen ", new ChangeListener()
+        {
             @Override
-            public void changed (ChangeEvent event, Actor actor) {
-
-                if (game.isScreenVisible(pathScreen)) {
+            public void changed(ChangeEvent event, Actor actor)
+            {
+                if (game.isScreenVisible(pathScreen))
+                {
                     game.removeScreen(pathScreen, false);
-                } else {
+                }
+                else
+                {
                     game.addScreen(pathScreen);
                 }
 
@@ -243,23 +279,29 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
         }).setShortcut("Ctrl + P"));
 
 
-        windowMenu.addItem(new MenuItem("Show All Windows", new ChangeListener() {
+        windowMenu.addItem(new MenuItem("Show All Windows", new ChangeListener()
+        {
             @Override
-            public void changed (ChangeEvent event, Actor actor) {
+            public void changed(ChangeEvent event, Actor actor)
+            {
                 showAllWindows();
             }
         }));
 
-        windowMenu.addItem(new MenuItem("Hide All Windows", new ChangeListener() {
+        windowMenu.addItem(new MenuItem("Hide All Windows", new ChangeListener()
+        {
             @Override
-            public void changed (ChangeEvent event, Actor actor) {
+            public void changed(ChangeEvent event, Actor actor)
+            {
                 hideAllWindows();
             }
         }));
 
-        startPlaytest = new MenuItem("Start PlayTest", new ChangeListener() {
+        startPlaytest = new MenuItem("Start PlayTest", new ChangeListener()
+        {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(ChangeEvent event, Actor actor)
+            {
                 stopPlaytest.setDisabled(false);
                 startPlaytest.setDisabled(true);
                 storeState();
@@ -268,9 +310,11 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
         });
         testMenu.addItem(startPlaytest);
 
-        stopPlaytest = new MenuItem("Stop PlayTest", new ChangeListener() {
+        stopPlaytest = new MenuItem("Stop PlayTest", new ChangeListener()
+        {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(ChangeEvent event, Actor actor)
+            {
                 stopPlaytest.setDisabled(true);
                 startPlaytest.setDisabled(false);
                 restoreState();
@@ -280,9 +324,11 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
         stopPlaytest.setDisabled(true);
         testMenu.addItem(stopPlaytest);
 
-        helpMenu.addItem(new MenuItem("About", new ChangeListener() {
+        helpMenu.addItem(new MenuItem("About", new ChangeListener()
+        {
             @Override
-            public void changed (ChangeEvent event, Actor actor) {
+            public void changed(ChangeEvent event, Actor actor)
+            {
                 DialogUtils.showOKDialog(stage, "about", "ProjectIce Editor version " + VERSION);
             }
         }));
@@ -292,96 +338,127 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
         menuBar.addMenu(testMenu);
         menuBar.addMenu(helpMenu);
 
-        undoBtn = new VisTextButton("Undo", new ChangeListener() {
+        undoBtn = new VisTextButton("Undo", new ChangeListener()
+        {
             @Override
-            public void changed (ChangeEvent event, Actor actor) {
+            public void changed(ChangeEvent event, Actor actor)
+            {
                 undoRedoManager.undo();
             }
         });
         menuBar.getTable().add(undoBtn);
 
-        redoBtn = new VisTextButton("Redo", new ChangeListener() {
+        redoBtn = new VisTextButton("Redo", new ChangeListener()
+        {
             @Override
-            public void changed (ChangeEvent event, Actor actor) {
+            public void changed(ChangeEvent event, Actor actor)
+            {
                 undoRedoManager.redo();
             }
         });
         menuBar.getTable().add(redoBtn);
     }
 
-    private void storeState() {
+    private void storeState()
+    {
         StringWriter writer = new StringWriter();
         XmlWriter xml = new XmlWriter(writer);
         serializeScene(xml);
         storedState = writer.toString();
-        try {
+        try
+        {
             FileWriter fileWriter = new FileWriter("$stored_state$");
             fileWriter.write(storedState);
             fileWriter.close();
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
 
-    private void restoreState() {
+    private void restoreState()
+    {
         game.inventory.items.clear();
         if (storedState == null)
+        {
             return;
+        }
         game.engine.removeAllEntities();
-        try {
+        try
+        {
             SceneLoader.loadScene(game.engine, storedState);
             audioWindow.setValues(game.engine.soundSystem.getMusic(), game.engine.soundSystem.getSounds());
             storedState = null;
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
-        } catch (SceneLoader.LoadException e) {
+        }
+        catch (SceneLoader.LoadException e)
+        {
             e.printStackTrace();
         }
     }
 
-    private void clear(){
+    private void clear()
+    {
         filename = null;
         game.engine.removeAllEntities();
 
         game.pauseGame();
     }
 
-    private void newScene() {
+    private void newScene()
+    {
         clear();
-        DialogUtils.showInputDialog(stage, "Scene Name", "Name", new InputDialogListener() {
+        DialogUtils.showInputDialog(stage, "Scene Name", "Name", new InputDialogListener()
+        {
             @Override
-            public void finished(String input) {
+            public void finished(String input)
+            {
                 Assets.loadScene(input);
             }
 
             @Override
-            public void canceled() {
+            public void canceled()
+            {
             }
         });
     }
 
-    private void open() {
+    private void open()
+    {
         clear();
 
         FileChooser fileChooser = new FileChooser(FileChooser.Mode.OPEN);
         fileChooser.setDirectory(new FileHandle("."));
         fileChooser.setSelectionMode(FileChooser.SelectionMode.FILES);
-        fileChooser.setFileFilter(new FileFilter() {
+        fileChooser.setFileFilter(new FileFilter()
+        {
             @Override
-            public boolean accept(File pathname) {
+            public boolean accept(File pathname)
+            {
                 return pathname.getName().endsWith(".scene") || pathname.isDirectory();
             }
         });
-        fileChooser.setListener(new FileChooserAdapter() {
+        fileChooser.setListener(new FileChooserAdapter()
+        {
             @Override
-            public void selected (FileHandle file) {
-                try {
+            public void selected(FileHandle file)
+            {
+                try
+                {
                     SceneLoader.loadScene(game.engine, file.read());
                     audioWindow.setValues(game.engine.soundSystem.getMusic(), game.engine.soundSystem.getSounds());
                     filename = file.file().getCanonicalFile().getAbsolutePath();
-                } catch (IOException e) {
+                }
+                catch (IOException e)
+                {
                     DialogUtils.showErrorDialog(stage, "Couldn't save the scene.", e);
-                } catch (SceneLoader.LoadException e) {
+                }
+                catch (SceneLoader.LoadException e)
+                {
                     DialogUtils.showErrorDialog(stage, "Scene files is invalid", e);
                 }
             }
@@ -389,30 +466,42 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
         stage.addActor(fileChooser.fadeIn());
     }
 
-    private void save(){
+    private void save()
+    {
         save(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT));
     }
 
-    private void save(boolean forceFileDialog) {
-        if (filename == null || forceFileDialog) {
+    private void save(boolean forceFileDialog)
+    {
+        if (filename == null || forceFileDialog)
+        {
             FileChooser fileChooser = new FileChooser(FileChooser.Mode.SAVE);
             fileChooser.setDirectory(filename != null ? new FileHandle(filename).parent() : new FileHandle("."));
             fileChooser.setSelectionMode(FileChooser.SelectionMode.FILES);
-            fileChooser.setFileFilter(new FileFilter() {
+            fileChooser.setFileFilter(new FileFilter()
+            {
                 @Override
-                public boolean accept(File pathname) {
+                public boolean accept(File pathname)
+                {
                     return pathname.getName().endsWith(".scene") || pathname.isDirectory();
                 }
             });
-            fileChooser.setListener(new FileChooserAdapter() {
+            fileChooser.setListener(new FileChooserAdapter()
+            {
                 @Override
-                public void selected (FileHandle file) {
-                    try {
+                public void selected(FileHandle file)
+                {
+                    try
+                    {
                         filename = file.file().getCanonicalFile().getAbsolutePath();
                         if (!filename.endsWith(".scene"))
+                        {
                             filename += ".scene";
+                        }
                         save();
-                    } catch (IOException e) {
+                    }
+                    catch (IOException e)
+                    {
                         e.printStackTrace();
                     }
                 }
@@ -421,45 +510,59 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
             return;
         }
 
-        try {
-            if (storedState == null) {
+        try
+        {
+            if (storedState == null)
+            {
                 File file = new File(filename);
                 if (file.exists())
+                {
                     file.renameTo(new File(file.getParent() + "/" + file.getName() + ".bak"));
+                }
                 XmlWriter xml = new XmlWriter(new FileWriter(filename));
                 serializeScene(xml);
-            } else {
+            }
+            else
+            {
                 FileWriter writer = new FileWriter(filename);
                 BufferedWriter bufferedWriter = new BufferedWriter(writer);
                 bufferedWriter.write(storedState);
                 bufferedWriter.close();
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             DialogUtils.showErrorDialog(stage, "Couldn't access the file.", e);
         }
 
     }
 
-    private void serializeScene(XmlWriter xml) {
-        try {
+    private void serializeScene(XmlWriter xml)
+    {
+        try
+        {
             SceneWriter.serializeScene(Gdx.files.absolute(filename).nameWithoutExtension(), game.engine, xml);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             DialogUtils.showErrorDialog(stage, "Couldn't save the scene.", e);
         }
     }
 
 
-
-    private void quit() {
+    private void quit()
+    {
         Gdx.app.exit();
     }
 
     @Override
-    public int getPriority () {
+    public int getPriority()
+    {
         return 1;
     }
 
-    public void resize (int width, int height) {
+    public void resize(int width, int height)
+    {
         stage.getViewport().update(width, height, true);
         Storage.Global storage = Storage.getGlobal();
         storage.put("editor_screen_width", width);
@@ -468,21 +571,28 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
     }
 
     @Override
-    public void update(float delta) {
+    public void update(float delta)
+    {
         stage.act(delta);
         if (filename == null)
+        {
             Gdx.graphics.setTitle("Editor (Here be dragons)");
+        }
         else
+        {
             Gdx.graphics.setTitle("Editor (Here be dragons) [" + filename + "]");
+        }
         undoBtn.setDisabled(!undoRedoManager.canUndo());
         redoBtn.setDisabled(!undoRedoManager.canRedo());
     }
 
-    public void render () {
+    public void render()
+    {
         stage.draw();
     }
 
-    public void dispose() {
+    public void dispose()
+    {
         Storage.Global storage = Storage.getGlobal();
         storage.put("editor_components_x", componentsWindow.getX());
         storage.put("editor_components_y", componentsWindow.getY());
@@ -506,7 +616,8 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
     }
 
     @Override
-    public void selectionChanged(@Nullable Entity entity) {
+    public void selectionChanged(@Nullable Entity entity)
+    {
         componentsWindow.setEntity(entity);
     }
 }

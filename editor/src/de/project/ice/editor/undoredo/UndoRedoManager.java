@@ -4,7 +4,8 @@ import com.badlogic.gdx.utils.Array;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
-public class UndoRedoManager {
+public class UndoRedoManager
+{
     private Array<UndoableRedoableAction> actions;
 
     private int currentPosition;
@@ -13,13 +14,16 @@ public class UndoRedoManager {
 
     private SimpleBooleanProperty canRedo = new SimpleBooleanProperty(false);
 
-    public UndoRedoManager () {
+    public UndoRedoManager()
+    {
         actions = new Array<UndoableRedoableAction>();
         currentPosition = 0;
     }
 
-    public void addAction (UndoableRedoableAction action) {
-        for (int i = actions.size - 1; i >= currentPosition; i--) {
+    public void addAction(UndoableRedoableAction action)
+    {
+        for (int i = actions.size - 1; i >= currentPosition; i--)
+        {
             actions.removeIndex(i);
         }
         actions.add(action);
@@ -29,8 +33,10 @@ public class UndoRedoManager {
         action.redo();
     }
 
-    public void undo () {
-        if (currentPosition > 0) {
+    public void undo()
+    {
+        if (currentPosition > 0)
+        {
             currentPosition--;
             actions.get(currentPosition).undo();
             canUndo.set(canUndo());
@@ -38,8 +44,10 @@ public class UndoRedoManager {
         }
     }
 
-    public void redo () {
-        if (currentPosition < actions.size) {
+    public void redo()
+    {
+        if (currentPosition < actions.size)
+        {
             actions.get(currentPosition).redo();
             currentPosition++;
             canUndo.set(canUndo());
@@ -47,19 +55,23 @@ public class UndoRedoManager {
         }
     }
 
-    public boolean canUndo () {
+    public boolean canUndo()
+    {
         return currentPosition > 0;
     }
 
-    public boolean canRedo () {
+    public boolean canRedo()
+    {
         return currentPosition < actions.size;
     }
 
-    public BooleanProperty canUndoProperty () {
+    public BooleanProperty canUndoProperty()
+    {
         return canUndo;
     }
 
-    public BooleanProperty canRedoProperty () {
+    public BooleanProperty canRedoProperty()
+    {
         return canRedo;
     }
 

@@ -1,12 +1,12 @@
 package de.project.ice.ecs;
 
 import com.badlogic.ashley.core.Family;
-import de.project.ice.ecs.components.HotspotComponent;
 import de.project.ice.ecs.components.*;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unchecked")
-public abstract class Families {
+public abstract class Families
+{
     @NotNull
     public static final Family renderable = Family.all(TransformComponent.class, TextureComponent.class).exclude(InvisibilityComponent.class).get();
     @NotNull

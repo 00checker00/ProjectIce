@@ -9,32 +9,39 @@ import de.project.ice.ecs.IceEngine;
 
 import java.util.Comparator;
 
-public abstract class SortedIteratingIceSystem extends SortedIteratingSystem {
-    public SortedIteratingIceSystem(Family family, Comparator<Entity> comparator) {
+public abstract class SortedIteratingIceSystem extends SortedIteratingSystem
+{
+    public SortedIteratingIceSystem(Family family, Comparator<Entity> comparator)
+    {
         super(family, comparator);
     }
 
-    public SortedIteratingIceSystem(Family family, Comparator<Entity> comparator, int priority) {
+    public SortedIteratingIceSystem(Family family, Comparator<Entity> comparator, int priority)
+    {
         super(family, comparator, priority);
     }
 
     @Override
     @Deprecated
-    public void addedToEngine(Engine engine) {
+    public void addedToEngine(Engine engine)
+    {
         addedToEngine((IceEngine) engine);
     }
 
     @Override
     @Deprecated
-    public void removedFromEngine(Engine engine) {
+    public void removedFromEngine(Engine engine)
+    {
         removedFromEngine((IceEngine) engine);
     }
 
-    public void addedToEngine(IceEngine engine) {
+    public void addedToEngine(IceEngine engine)
+    {
         super.addedToEngine(engine);
     }
 
-    public void removedFromEngine(IceEngine engine) {
+    public void removedFromEngine(IceEngine engine)
+    {
         super.removedFromEngine(engine);
     }
 }

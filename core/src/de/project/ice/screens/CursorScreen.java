@@ -15,8 +15,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
-public class CursorScreen extends BaseScreenAdapter {
-    public enum Cursor {
+public class CursorScreen extends BaseScreenAdapter
+{
+    public enum Cursor
+    {
         None,
         Walk,
         Look,
@@ -33,7 +35,8 @@ public class CursorScreen extends BaseScreenAdapter {
     private final Viewport viewport;
     private final HashMap<Cursor, TextureRegion> cursors = new HashMap<Cursor, TextureRegion>();
 
-    public CursorScreen(@NotNull IceGame game) {
+    public CursorScreen(@NotNull IceGame game)
+    {
         super(game);
 
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -55,57 +58,71 @@ public class CursorScreen extends BaseScreenAdapter {
         cursors.put(Cursor.Walk, atlas.findRegion("cur_walk"));
         cursors.put(Cursor.Speak, atlas.findRegion("cur_speak"));
         cursors.put(Cursor.Look, atlas.findRegion("cur_look"));
-        cursors.put(Cursor.Take , atlas.findRegion("cur_take"));
+        cursors.put(Cursor.Take, atlas.findRegion("cur_take"));
     }
 
     @NotNull
-    public Cursor getPrimaryCursor() {
+    public Cursor getPrimaryCursor()
+    {
         return game.engine.controlSystem.primaryCursor;
     }
 
-    public void setPrimaryCursor(@NotNull Cursor primaryCursor) {
+    public void setPrimaryCursor(@NotNull Cursor primaryCursor)
+    {
         game.engine.controlSystem.primaryCursor = primaryCursor;
     }
 
     @NotNull
-    public Cursor getSecondaryCursor() {
+    public Cursor getSecondaryCursor()
+    {
         return game.engine.controlSystem.secondaryCursor;
     }
 
-    public void setSecondaryCursor(@NotNull Cursor secondaryCursor) {
+    public void setSecondaryCursor(@NotNull Cursor secondaryCursor)
+    {
         game.engine.controlSystem.secondaryCursor = secondaryCursor;
     }
 
     @Override
-    public int getPriority () {
+    public int getPriority()
+    {
         return 10;
     }
 
-    public void resize (int width, int height) {
+    public void resize(int width, int height)
+    {
         viewport.update(width, height, true);
     }
 
     @Override
-    public void update(float delta) {
+    public void update(float delta)
+    {
     }
 
-    public void render () {
+    public void render()
+    {
         viewport.apply();
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        batch.draw(cursor, Gdx.input.getX(), viewport.getScreenHeight()-Gdx.input.getY()-cursor.getRegionHeight());
-        if (game.engine.controlSystem.active_item == null) {
+        batch.draw(cursor, Gdx.input.getX(), viewport.getScreenHeight() - Gdx.input.getY() - cursor.getRegionHeight());
+        if (game.engine.controlSystem.active_item == null)
+        {
             batch.draw(cursors.get(game.engine.controlSystem.primaryCursor), Gdx.input.getX() + 10, viewport.getScreenHeight() - Gdx.input.getY() - 32 - 10, 32, 32);
             batch.draw(cursors.get(game.engine.controlSystem.secondaryCursor), Gdx.input.getX() + 2, viewport.getScreenHeight() - Gdx.input.getY() - 16 - 2, 16, 16);
-        } else {
+        }
+        else
+        {
             Assets.TextureRegionHolder item = Assets.findRegion(game.engine.controlSystem.active_item.getIcon());
             if (item.isValid())
+            {
                 batch.draw(item.data, Gdx.input.getX() + 10, viewport.getScreenHeight() - Gdx.input.getY() - 32 - 10, 32, 32);
+            }
         }
         batch.end();
     }
 
-    public void dispose() {
+    public void dispose()
+    {
         batch.dispose();
         atlas.dispose();
         manager.dispose();

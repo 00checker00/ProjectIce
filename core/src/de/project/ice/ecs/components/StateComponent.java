@@ -4,21 +4,25 @@ import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.utils.Pool;
 import de.project.ice.ecs.systems.AnimationSystem;
 
-public class StateComponent extends Component implements Pool.Poolable {
+public class StateComponent extends Component implements Pool.Poolable
+{
     public int animation = AnimationSystem.ANIMATION_DEFAULT;
     public float time = 0.0f;
 
-    public int getAnimation() {
+    public int getAnimation()
+    {
         return animation;
     }
 
-    public void setAnimation(int animation) {
+    public void setAnimation(int animation)
+    {
         this.animation = animation;
         time = 0.0f;
     }
 
     @Override
-    public void reset () {
+    public void reset()
+    {
         animation = AnimationSystem.ANIMATION_DEFAULT;
         time = 0.0f;
     }

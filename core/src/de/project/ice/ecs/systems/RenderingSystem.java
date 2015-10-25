@@ -22,7 +22,8 @@ import java.util.Comparator;
 import static de.project.ice.config.Config.PIXELS_TO_METRES;
 import static de.project.ice.config.Config.RENDER_DEBUG;
 
-public class RenderingSystem extends SortedIteratingIceSystem {
+public class RenderingSystem extends SortedIteratingIceSystem
+{
     private ImmutableArray<Entity> hotspots;
     private ImmutableArray<Entity> walkareas;
     /**
@@ -38,7 +39,8 @@ public class RenderingSystem extends SortedIteratingIceSystem {
     public OrthographicCamera active_camera = null;
 
     @Nullable
-    public OrthographicCamera getActive_camera () {
+    public OrthographicCamera getActive_camera()
+    {
         return active_camera;
     }
 
@@ -46,7 +48,8 @@ public class RenderingSystem extends SortedIteratingIceSystem {
     private SpriteBatch batch;
     private ShapeRenderer debugRenderer;
 
-    public RenderingSystem () {
+    public RenderingSystem()
+    {
         super(Families.renderable, new RenderingComparator());
         debugRenderer = new ShapeRenderer();
 
@@ -54,19 +57,25 @@ public class RenderingSystem extends SortedIteratingIceSystem {
     }
 
     @Override
-    public void addedToEngine(Engine engine) {
+    public void addedToEngine(Engine engine)
+    {
         super.addedToEngine(engine);
         cameras = engine.getEntitiesFor(Families.camera);
     }
 
     @Override
-    public void update (float deltaTime) {
+    public void update(float deltaTime)
+    {
         // update the active camera
-        if(cameras.size() > 0)
+        if (cameras.size() > 0)
+        {
             active_camera = cameras.first().getComponent(CameraComponent.class).camera;
+        }
 
         if (active_camera == null)
+        {
             return;
+        }
 
         active_camera.update();
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -74,14 +83,17 @@ public class RenderingSystem extends SortedIteratingIceSystem {
         batch.begin();
         super.update(deltaTime);
         batch.end();
-        if (RENDER_DEBUG) {
+        if (RENDER_DEBUG)
+        {
             debugRenderer.setProjectionMatrix(active_camera.combined);
             debugRenderer.begin(ShapeRenderer.ShapeType.Line);
             debugRenderer.setColor(Color.RED);
             super.update(deltaTime);
             debugRenderer.setColor(Color.BLUE);
             for (Entity hotspot : hotspots)
+            {
                 renderHotspot(hotspot);
+            }
 //            if (walkareas.size() > 0) {
 //                WalkAreaComponent component = Components.walkarea.get(walkareas.first());
 //                PathArea area = component.getArea();
@@ -128,22 +140,25 @@ public class RenderingSystem extends SortedIteratingIceSystem {
         forceSort();
     }
 
-    private void renderHotspot(Entity entity) {
+    private void renderHotspot(Entity entity)
+    {
         TransformComponent transform = Components.transform.get(entity);
         HotspotComponent hotspot = Components.hotspot.get(entity);
 
         Vector2 pos = transform.pos.cpy().add(hotspot.origin);
 
         debugRenderer.rect(pos.x, pos.y, hotspot.width, hotspot.height);
-        cross(pos.cpy().add(hotspot.origin).add(hotspot.width/2, hotspot.height/2));
+        cross(pos.cpy().add(hotspot.origin).add(hotspot.width / 2, hotspot.height / 2));
         cross(pos.cpy().add(hotspot.targetPos).add(hotspot.origin));
     }
 
     @Override
-    public void processEntity (Entity entity, float deltaTime) {
+    public void processEntity(Entity entity, float deltaTime)
+    {
         TextureComponent tex = Components.texture.get(entity);
 
-        if (tex.region.data == null) {
+        if (tex.region.data == null)
+        {
             return;
         }
 
@@ -152,7 +167,8 @@ public class RenderingSystem extends SortedIteratingIceSystem {
         float scaleX = t.scale.x;
         float scaleY = t.scale.y;
 
-        if (Components.breath.has(entity)) {
+        if (Components.breath.has(entity))
+        {
             BreathComponent breath = Components.breath.get(entity);
             scaleX += scaleX * breath.curScale.x;
             scaleY += scaleY * breath.curScale.y;
@@ -163,43 +179,55 @@ public class RenderingSystem extends SortedIteratingIceSystem {
         float originX = width * 0.5f;
         float originY = height * 0.5f;
 
-        if(batch.isDrawing()) {
+        if (batch.isDrawing())
+        {
 
             // draw the sprite in accordance with all calculated data (above)
             batch.draw(tex.region.data,
                     t.pos.x, t.pos.y,
                     originX, originY,
                     width, height,
-                    t.flipHorizontal?-1f:1f, t.flipVertical?-1f:1f,
+                    t.flipHorizontal ? -1f : 1f, t.flipVertical ? -1f : 1f,
                     MathUtils.radiansToDegrees * t.rotation);
 
-        } else if (debugRenderer.isDrawing()) {
+        }
+        else if (debugRenderer.isDrawing())
+        {
             debugRenderer.rect(t.pos.x, t.pos.y, width, height);
-            cross(t.pos.cpy().add(width/2, height/2).add(originX, originY));
+            cross(t.pos.cpy().add(width / 2, height / 2).add(originX, originY));
         }
     }
 
-    private void cross(Vector2 pos) {
-        debugRenderer.line(pos.x - 0.1f, pos.y,        pos.x + 0.1f, pos.y       );
-        debugRenderer.line(pos.x,        pos.y - 0.1f, pos.x,        pos.y + 0.1f);
+    private void cross(Vector2 pos)
+    {
+        debugRenderer.line(pos.x - 0.1f, pos.y, pos.x + 0.1f, pos.y);
+        debugRenderer.line(pos.x, pos.y - 0.1f, pos.x, pos.y + 0.1f);
     }
 
     @Override
-    public void addedToEngine(IceEngine engine) {
+    public void addedToEngine(IceEngine engine)
+    {
         hotspots = engine.getEntitiesFor(Families.hotspot);
         walkareas = engine.getEntitiesFor(Families.walkArea);
         super.addedToEngine(engine);
     }
 
-    public static class RenderingComparator implements Comparator<Entity> {
+    public static class RenderingComparator implements Comparator<Entity>
+    {
         @Override
-        public int compare(Entity entityA, Entity entityB) {
+        public int compare(Entity entityA, Entity entityB)
+        {
             int z = (int) Math.signum(Components.transform.get(entityB).z -
                     Components.transform.get(entityA).z);
             if (z == 0)
+            {
                 return (int) Math.signum(Components.transform.get(entityB).pos.y -
-                    Components.transform.get(entityA).pos.y);
-            else return z;
+                        Components.transform.get(entityA).pos.y);
+            }
+            else
+            {
+                return z;
+            }
         }
     }
 }

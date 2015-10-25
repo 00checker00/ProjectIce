@@ -2,29 +2,29 @@ package de.project.ice.editor.editors;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.kotcrab.vis.ui.InputValidator;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.i18n.BundleText;
 import com.kotcrab.vis.ui.util.TableUtils;
 import com.kotcrab.vis.ui.util.Validators;
-import com.kotcrab.vis.ui.util.dialog.DialogUtils;
-import com.kotcrab.vis.ui.util.dialog.InputDialogListener;
 import com.kotcrab.vis.ui.widget.*;
 import de.project.ice.utils.Assets;
 
 
-public class AnimationHolderEditor extends HolderEditor<Animation> {
+public class AnimationHolderEditor extends HolderEditor<Animation>
+{
     @Override
-    protected void onEdit() {
-        EditAnimationDialog.showDialog(getStage(), "Edit animation", new EditAnimationDialog.Listener() {
+    protected void onEdit()
+    {
+        EditAnimationDialog.showDialog(getStage(), "Edit animation", new EditAnimationDialog.Listener()
+        {
             @Override
-            public void finished(String textureRegion, Animation.PlayMode playMode, float frameTime) {
+            public void finished(String textureRegion, Animation.PlayMode playMode, float frameTime)
+            {
                 Assets.Holder<Animation> newHolder = Assets.createAnimation(textureRegion, frameTime, playMode);
                 setHolderData(newHolder.data);
                 setHolderName(newHolder.name);
@@ -32,7 +32,8 @@ public class AnimationHolderEditor extends HolderEditor<Animation> {
         }, value);
     }
 
-    public static class EditAnimationDialog extends VisWindow {
+    public static class EditAnimationDialog extends VisWindow
+    {
         private Listener listener;
         private VisTextField textureRegion;
         private VisTextField frameTime;
@@ -40,7 +41,8 @@ public class AnimationHolderEditor extends HolderEditor<Animation> {
         private VisTextButton okButton;
         private VisTextButton cancelButton;
 
-        public EditAnimationDialog(String title, Listener listener, Assets.Holder<Animation> holder) {
+        public EditAnimationDialog(String title, Listener listener, Assets.Holder<Animation> holder)
+        {
             super(title);
             this.listener = listener;
 
@@ -62,14 +64,18 @@ public class AnimationHolderEditor extends HolderEditor<Animation> {
 
             frameTime = new VisValidableTextField(new Validators.FloatValidator());
             if (holder.data != null)
+            {
                 frameTime.setText(String.valueOf(holder.data.getFrameDuration()));
+            }
             fieldTable.add(new VisLabel("Frame Time: "));
             fieldTable.add(frameTime).expand().fill().row();
 
             playMode = new VisSelectBox<Animation.PlayMode>();
             playMode.setItems(Animation.PlayMode.values());
             if (holder.data != null)
+            {
                 playMode.setSelected(holder.data.getPlayMode());
+            }
             fieldTable.add(new VisLabel("Mode: "));
             fieldTable.add(playMode).expand().fill();
 
@@ -86,32 +92,47 @@ public class AnimationHolderEditor extends HolderEditor<Animation> {
         }
 
 
-        private void addListeners() {
-            okButton.addListener(new ChangeListener() {
+        private void addListeners()
+        {
+            okButton.addListener(new ChangeListener()
+            {
                 @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    try {
+                public void changed(ChangeEvent event, Actor actor)
+                {
+                    try
+                    {
                         listener.finished(textureRegion.getText(), playMode.getSelected(), Float.parseFloat(frameTime.getText()));
                         fadeOut();
-                    } catch (NumberFormatException ignore) {}
+                    }
+                    catch (NumberFormatException ignore)
+                    {
+                    }
                 }
             });
 
-            cancelButton.addListener(new ChangeListener() {
+            cancelButton.addListener(new ChangeListener()
+            {
                 @Override
-                public void changed(ChangeEvent event, Actor actor) {
+                public void changed(ChangeEvent event, Actor actor)
+                {
                     close();
                 }
             });
 
-            InputListener enterListener = new InputListener() {
+            InputListener enterListener = new InputListener()
+            {
                 @Override
-                public boolean keyDown(InputEvent event, int keycode) {
-                    if (keycode == Input.Keys.ENTER && !okButton.isDisabled()) {
-                        try {
+                public boolean keyDown(InputEvent event, int keycode)
+                {
+                    if (keycode == Input.Keys.ENTER && !okButton.isDisabled())
+                    {
+                        try
+                        {
                             listener.finished(textureRegion.getText(), playMode.getSelected(), Float.parseFloat(textureRegion.getText()));
                             fadeOut();
-                        } catch (NumberFormatException ignore) {
+                        }
+                        catch (NumberFormatException ignore)
+                        {
                         }
                     }
 
@@ -123,44 +144,55 @@ public class AnimationHolderEditor extends HolderEditor<Animation> {
         }
 
 
-        private static String get(EditAnimationDialog.Text text) {
+        private static String get(EditAnimationDialog.Text text)
+        {
             return VisUI.getDialogUtilsBundle().get(text.getName());
         }
 
-        private enum Text implements BundleText {
-            CANCEL {
-                public String getName() {
-                    return "cancel";
-                }
-            },
-            OK {
-                public String getName() {
-                    return "ok";
-                }
-            };
+        private enum Text implements BundleText
+        {
+            CANCEL
+                    {
+                        public String getName()
+                        {
+                            return "cancel";
+                        }
+                    },
+            OK
+                    {
+                        public String getName()
+                        {
+                            return "ok";
+                        }
+                    };
 
             @Override
-            public String get() {
+            public String get()
+            {
                 throw new UnsupportedOperationException();
             }
 
             @Override
-            public String format() {
+            public String format()
+            {
                 throw new UnsupportedOperationException();
             }
 
             @Override
-            public String format(Object... arguments) {
+            public String format(Object... arguments)
+            {
                 throw new UnsupportedOperationException();
             }
         }
 
-        public static void showDialog(Stage stage, String title, Listener listener, Assets.Holder<Animation> holder) {
+        public static void showDialog(Stage stage, String title, Listener listener, Assets.Holder<Animation> holder)
+        {
             EditAnimationDialog dialog = new EditAnimationDialog(title, listener, holder);
             stage.addActor(dialog.fadeIn());
         }
 
-        public interface Listener {
+        public interface Listener
+        {
             void finished(String textureRegion, Animation.PlayMode playMode, float frameTime);
         }
     }

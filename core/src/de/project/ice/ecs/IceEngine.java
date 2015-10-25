@@ -10,7 +10,8 @@ import de.project.ice.ecs.systems.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class IceEngine extends PooledEngine {
+public class IceEngine extends PooledEngine
+{
     @NotNull
     public final StateSystem stateSystem;
     @NotNull
@@ -36,7 +37,8 @@ public class IceEngine extends PooledEngine {
     @NotNull
     private final ImmutableArray<Entity> namedEntities;
 
-    public IceEngine(@NotNull IceGame game) {
+    public IceEngine(@NotNull IceGame game)
+    {
         super();
         this.game = game;
         stateSystem = new StateSystem();
@@ -63,10 +65,15 @@ public class IceEngine extends PooledEngine {
     }
 
     @Nullable
-    public Entity getEntityByName(@NotNull String name) {
-        for(Entity entity : namedEntities)
+    public Entity getEntityByName(@NotNull String name)
+    {
+        for (Entity entity : namedEntities)
+        {
             if (name.equals(Components.name.get(entity).name))
+            {
                 return entity;
+            }
+        }
 
         return null;
     }

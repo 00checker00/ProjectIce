@@ -17,7 +17,8 @@ import de.project.ice.editor.undoredo.UndoRedoManager;
 import org.jetbrains.annotations.Nullable;
 
 
-public class EntitiesWindow extends VisWindow {
+public class EntitiesWindow extends VisWindow
+{
     private ImmutableArray<Entity> entities;
     private Array<EntityEntry> currentEntities = new Array<EntityEntry>();
     private VisList<EntityEntry> entityList;
@@ -26,7 +27,8 @@ public class EntitiesWindow extends VisWindow {
     private IceEngine engine;
     private UndoRedoManager undoRedoManager;
 
-    public EntitiesWindow (IceEngine engine, UndoRedoManager undoRedoManager) throws IllegalStateException {
+    public EntitiesWindow(IceEngine engine, UndoRedoManager undoRedoManager) throws IllegalStateException
+    {
         super("Entities");
         this.engine = engine;
         this.entities = engine.getEntities();
@@ -40,32 +42,46 @@ public class EntitiesWindow extends VisWindow {
         setSize(200, 400);
     }
 
-    public void setSelectionListener(SelectionListener selectionListener) {
+    public void setSelectionListener(SelectionListener selectionListener)
+    {
         this.selectionListener = selectionListener;
     }
 
     @Override
-    public void act(float delta) {
+    public void act(float delta)
+    {
         super.act(delta);
         if (entitiesChanged())
+        {
             updateEntities();
-        if (selectedEntry != entityList.getSelected()) {
+        }
+        if (selectedEntry != entityList.getSelected())
+        {
             selectedEntry = entityList.getSelected();
             if (selectionListener != null)
+            {
                 selectionListener.selectionChanged(selectedEntry == null ? null : selectedEntry.entity);
+            }
 
         }
     }
 
-    private boolean entitiesChanged() {
+    private boolean entitiesChanged()
+    {
         // Entities amount changed => we definitely need to update
         if (entities.size() != currentEntities.size)
+        {
             return true;
+        }
 
-        for (int i = 0; i < entities.size(); ++i) {
-            if (entities.get(i) != currentEntities.get(i).entity) {
+        for (int i = 0; i < entities.size(); ++i)
+        {
+            if (entities.get(i) != currentEntities.get(i).entity)
+            {
                 return true;
-            } else if(!currentEntities.get(i).name.equals(EntityEntry.generateName(entities.get(i)))) {
+            }
+            else if (!currentEntities.get(i).name.equals(EntityEntry.generateName(entities.get(i))))
+            {
                 currentEntities.get(i).name = EntityEntry.generateName(entities.get(i));
             }
         }
@@ -73,20 +89,26 @@ public class EntitiesWindow extends VisWindow {
         return false;
     }
 
-    private void updateEntities() {
+    private void updateEntities()
+    {
         currentEntities.clear();
 
-        for(Entity entity : entities)
+        for (Entity entity : entities)
+        {
             currentEntities.add(new EntityEntry(entity));
+        }
 
         entityList.setItems(currentEntities);
     }
 
-    private void createWidgets() {
+    private void createWidgets()
+    {
 
-        VisTextButton createEntityBtn = new VisTextButton("Create Entity", new ChangeListener() {
+        VisTextButton createEntityBtn = new VisTextButton("Create Entity", new ChangeListener()
+        {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(ChangeEvent event, Actor actor)
+            {
                 undoRedoManager.addAction(new AddEntityAction(engine.createEntity(), engine));
 
             }
@@ -104,7 +126,8 @@ public class EntitiesWindow extends VisWindow {
         add(scrollPane).fill();
     }
 
-    public interface SelectionListener {
+    public interface SelectionListener
+    {
         void selectionChanged(@Nullable Entity entity);
     }
 }

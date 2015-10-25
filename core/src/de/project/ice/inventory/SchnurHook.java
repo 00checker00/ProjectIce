@@ -6,16 +6,19 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by Antoni on 29.06.2015.
  */
-public class SchnurHook extends Inventory.Item{
+public class SchnurHook extends Inventory.Item
+{
     @NotNull
     @Override
-    public String getIcon() {
+    public String getIcon()
+    {
         return "hakenschnur_angel";
     }
 
     @Nullable
     @Override
-    public String getDescription() {
+    public String getDescription()
+    {
         return "s2_schnurhook_desc";
     }
 }
