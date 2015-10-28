@@ -149,7 +149,7 @@ public class RenderingSystem extends SortedIteratingIceSystem
 
         debugRenderer.rect(pos.x, pos.y, hotspot.width, hotspot.height);
         cross(pos.cpy().add(hotspot.origin).add(hotspot.width / 2, hotspot.height / 2));
-        cross(pos.cpy().add(hotspot.targetPos).add(hotspot.origin));
+        cross(pos.cpy().sub(hotspot.origin).add(hotspot.targetPos).add(hotspot.origin));
     }
 
     @Override
