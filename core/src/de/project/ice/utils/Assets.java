@@ -128,7 +128,7 @@ public abstract class Assets
         Pair<String, TextureAtlas> pair = loadedSpritesheets.get(atlas);
 
         // Check if the current atlas is loaded
-        if (!manager.isLoaded("spritesheets" + pair.getFirst() + ".atlas"))
+        if (!manager.isLoaded("spritesheets/" + pair.getFirst() + ".atlas"))
         {
             // The atlas isn't loaded, so we block here
             manager.finishLoading();
@@ -137,10 +137,10 @@ public abstract class Assets
         //  We may have to get the atlas if we only have the placeholder
         if (pair.getSecond() == ATLAS_PLACEHOLDER)
         {
-            pair.setSecond(manager.get("spritesheets" + pair.getFirst() + ".atlas", TextureAtlas.class));
+            pair.setSecond(manager.get("spritesheets/" + pair.getFirst() + ".atlas", TextureAtlas.class));
         }
 
-        getAllRegions().addAll(pair.getSecond().getRegions());
+        result.addAll(pair.getSecond().getRegions());
         return result;
     }
 
