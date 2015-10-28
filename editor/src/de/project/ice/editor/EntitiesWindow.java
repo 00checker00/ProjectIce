@@ -13,6 +13,7 @@ import com.kotcrab.vis.ui.widget.VisTextButton;
 import com.kotcrab.vis.ui.widget.VisWindow;
 import de.project.ice.ecs.IceEngine;
 import de.project.ice.editor.undoredo.AddEntityAction;
+import de.project.ice.editor.undoredo.RemoveEntityAction;
 import de.project.ice.editor.undoredo.UndoRedoManager;
 import org.jetbrains.annotations.Nullable;
 
@@ -110,10 +111,23 @@ public class EntitiesWindow extends VisWindow
             public void changed(ChangeEvent event, Actor actor)
             {
                 undoRedoManager.addAction(new AddEntityAction(engine.createEntity(), engine));
-
+                updateEntities();
+                entityList.setSelectedIndex(entityList.getItems().size-1);
             }
         });
-        add(createEntityBtn).expandX().fill().row();
+        add(createEntityBtn).expandX().fill();
+        VisTextButton deleteEntityBtn = new VisTextButton("Delete selected", new ChangeListener()
+        {
+            @Override
+            public void changed(ChangeEvent event, Actor actor)
+            {
+                if (entityList.getSelected() != null)
+                {
+                    undoRedoManager.addAction(new RemoveEntityAction(entityList.getSelected().entity, engine));
+                }
+            }
+        });
+        add(deleteEntityBtn).expandX().fill().row();
 
 
         entityList = new VisList<EntityEntry>();
@@ -123,7 +137,7 @@ public class EntitiesWindow extends VisWindow
         VisScrollPane scrollPane = new VisScrollPane(entityList);
 
         row().expand();
-        add(scrollPane).fill();
+        add(scrollPane).colspan(2).fill();
     }
 
     public interface SelectionListener

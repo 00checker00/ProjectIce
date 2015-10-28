@@ -2,6 +2,7 @@ package de.project.ice.editor;
 
 import com.badlogic.ashley.core.Entity;
 import de.project.ice.ecs.Components;
+import de.project.ice.ecs.IceEngine;
 import de.project.ice.ecs.components.NameComponent;
 
 class EntityEntry
@@ -23,14 +24,6 @@ class EntityEntry
 
     public static String generateName(Entity entity)
     {
-        NameComponent nameComponent = Components.name.get(entity);
-        if (nameComponent != null)
-        {
-            return nameComponent.name;
-        }
-        else
-        {
-            return "Unnamed(0x" + Long.toHexString(entity.getId()) + ")";
-        }
+        return IceEngine.getEntityName(entity);
     }
 }

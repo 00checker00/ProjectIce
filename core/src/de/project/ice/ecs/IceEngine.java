@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.Gdx;
 import de.project.ice.IceGame;
 import de.project.ice.ecs.components.NameComponent;
 import de.project.ice.ecs.systems.*;
@@ -76,5 +77,32 @@ public class IceEngine extends PooledEngine
         }
 
         return null;
+    }
+
+    public static String getEntityName(@NotNull Entity entity)
+    {
+        NameComponent nameComponent = Components.name.get(entity);
+        if (nameComponent != null)
+        {
+            return nameComponent.name;
+        }
+        else
+        {
+            return "Unnamed(0x" + Long.toHexString(entity.getId()) + ")";
+        }
+    }
+
+    @Override
+    public void addEntity(Entity entity)
+    {
+        super.addEntity(entity);
+        Gdx.app.log(getClass().getSimpleName(), "Added entity " + getEntityName(entity));
+    }
+
+    @Override
+    public void removeEntity(Entity entity)
+    {
+        super.removeEntity(entity);
+        Gdx.app.log(getClass().getSimpleName(), "Removed entity " + getEntityName(entity));
     }
 }

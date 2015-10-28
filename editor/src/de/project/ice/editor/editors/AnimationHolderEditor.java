@@ -2,6 +2,7 @@ package de.project.ice.editor.editors;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -12,6 +13,7 @@ import com.kotcrab.vis.ui.i18n.BundleText;
 import com.kotcrab.vis.ui.util.TableUtils;
 import com.kotcrab.vis.ui.util.Validators;
 import com.kotcrab.vis.ui.widget.*;
+import de.project.ice.editor.TextureList;
 import de.project.ice.utils.Assets;
 
 
@@ -36,6 +38,7 @@ public class AnimationHolderEditor extends HolderEditor<Animation>
     {
         private Listener listener;
         private VisTextField textureRegion;
+        private TextureList textureList;
         private VisTextField frameTime;
         private VisSelectBox<Animation.PlayMode> playMode;
         private VisTextButton okButton;
@@ -61,6 +64,13 @@ public class AnimationHolderEditor extends HolderEditor<Animation>
             textureRegion = new VisTextField(holder.name);
             fieldTable.add(new VisLabel("Texture Region: "));
             fieldTable.add(textureRegion).expand().fill().row();
+
+            textureList = new TextureList();
+            textureList.setWidth(Float.MAX_VALUE);
+
+            VisScrollPane scrollPane = new VisScrollPane(textureList);
+
+            fieldTable.add(scrollPane).maxHeight(200).colspan(2).expandX().fill().row();
 
             frameTime = new VisValidableTextField(new Validators.FloatValidator());
             if (holder.data != null)
@@ -141,6 +151,15 @@ public class AnimationHolderEditor extends HolderEditor<Animation>
             };
             textureRegion.addListener(enterListener);
             frameTime.addListener(enterListener);
+
+            textureList.addListener(new TextureList.SelectionChangedListener()
+            {
+                @Override
+                public void selectionChanged(TextureAtlas.AtlasRegion newSelection, int newIndex)
+                {
+                    textureRegion.setText(newSelection.name);
+                }
+            });
         }
 
 

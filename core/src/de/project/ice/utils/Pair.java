@@ -3,7 +3,6 @@ package de.project.ice.utils;
 /**
  * @param <F> the type of the first
  * @param <S> the type of the second
- * @author dermetfan
  */
 public class Pair<F, S>
 {
@@ -56,15 +55,24 @@ public class Pair<F, S>
     }
 
     /**
-     * @param key   the {@link #first} to set
-     * @param value the {@link #second} to set
+     * @param first  the {@link #first} to set
+     * @param second the {@link #second} to set
      * @return this Pair for chaining
      */
-    public Pair<F, S> set(F key, S value)
+    public Pair<F, S> set(F first, S second)
     {
-        this.first = key;
-        this.second = value;
+        this.first = first;this.second = second;
         return this;
+    }
+
+    /**
+     * @param first  the {@link #first} to set
+     * @param second the {@link #second} to set
+     * @return a new Pair containing the elements
+     */
+    public static <F, S> Pair<F, S> create(F first, S second)
+    {
+        return new Pair<F, S>(first, second);
     }
 
     /**
@@ -101,27 +109,35 @@ public class Pair<F, S>
         return result;
     }
 
-    /**
-     * if the given object is a {@link Pair} instance, {@link Object#equals(Object) equals} comparison will be used on first and second
-     */
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object o)
     {
-        if (obj instanceof Pair)
+        if (this == o)
         {
-            Pair<?, ?> pair = (Pair<?, ?>) obj;
-            return first.equals(pair.first) && second.equals(pair.second);
+            return true;
         }
-        return super.equals(obj);
+        if (o == null || getClass() != o.getClass())
+        {
+            return false;
+        }
+
+        Pair<?, ?> pair = (Pair<?, ?>) o;
+
+        if (first != null ? !first.equals(pair.first) : pair.first != null)
+        {
+            return false;
+        }
+        return !(second != null ? !second.equals(pair.second) : pair.second != null);
+
     }
 
-    /**
-     * @return [{@link #first} &amp; {@link #second}]
-     */
     @Override
     public String toString()
     {
-        return "[" + first + " & " + second + ']';
+        return "Pair{" +
+                first +
+                ", " + second +
+                '}';
     }
 
     // getters and setters
@@ -157,5 +173,4 @@ public class Pair<F, S>
     {
         this.second = second;
     }
-
 }

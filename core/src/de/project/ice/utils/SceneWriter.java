@@ -19,15 +19,34 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-public abstract class SceneWriter
+public class SceneWriter
 {
-    public static void serializeScene(String sceneName, @NotNull IceEngine engine, @NotNull XmlWriter xml) throws IOException
+    @NotNull
+    private String sceneName;
+    @NotNull
+    private String onloadScript;
+    @NotNull
+    private IceEngine engine;
+    @NotNull
+    private XmlWriter xml;
+
+    private SceneWriter(@NotNull String sceneName, @NotNull String onloadScript, @NotNull IceEngine engine, @NotNull XmlWriter writer)
+    {
+        this.sceneName = sceneName;
+        this.onloadScript = onloadScript;
+        this.engine = engine;
+        this.xml = writer;
+    }
+
+    public void serializeScene() throws IOException
     {
         xml.element("scene")
-                .attribute("name", sceneName);
+                .attribute("name", sceneName)
+                .attribute("onload", onloadScript);
 
 
         serializeAudio(xml, engine.soundSystem);
+        serializeSpritesheets(xml);
 
         xml.element("entities");
         for (Entity entity : engine.getEntities())
@@ -64,6 +83,18 @@ public abstract class SceneWriter
         xml.pop();
         xml.pop();
         xml.close();
+    }
+
+    private static void serializeSpritesheets(XmlWriter xml) throws IOException
+    {
+        xml.element("spritesheets");
+
+        for (String s : Assets.getLoadedSpritesheets())
+        {
+            xml.element("spritesheet").text(s).pop();
+        }
+
+        xml.pop();
     }
 
     private static void serializeAudio(XmlWriter xml, SoundSystem sound) throws IOException
@@ -202,6 +233,47 @@ public abstract class SceneWriter
         else
         {
             xml.attribute("type", "null");
+        }
+    }
+
+    public static class Builder
+    {
+        private String sceneName = "";
+        private String onloadScript = "";
+        private IceEngine engine = null;
+        private XmlWriter writer = null;
+
+        public Builder sceneName(String sceneName)
+        {
+            this.sceneName = sceneName;
+            return this;
+        }
+
+        public Builder onloadScript(String onloadScript)
+        {
+            this.onloadScript = onloadScript;
+            return this;
+        }
+
+        public Builder engine(IceEngine engine)
+        {
+            this.engine = engine;
+            return this;
+        }
+
+        public Builder writer(XmlWriter writer)
+        {
+            this.writer = writer;
+            return this;
+        }
+
+        public SceneWriter create()
+        {
+            if (engine == null || writer == null)
+            {
+                throw new RuntimeException("Trying to create SceneWriter without XmlWriter or Engine");
+            }
+            return new SceneWriter(sceneName, onloadScript, engine, writer);
         }
     }
 }

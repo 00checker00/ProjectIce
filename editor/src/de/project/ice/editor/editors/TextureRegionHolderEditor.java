@@ -1,16 +1,15 @@
 package de.project.ice.editor.editors;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.i18n.BundleText;
 import com.kotcrab.vis.ui.util.TableUtils;
 import com.kotcrab.vis.ui.widget.*;
+import de.project.ice.editor.TextureList;
 import de.project.ice.utils.Assets;
 
 
@@ -22,9 +21,25 @@ public class TextureRegionHolderEditor extends HolderEditor<TextureRegion>
         EditTextureRegionDialog.showDialog(getStage(), "Select texture", new EditTextureRegionDialog.Listener()
         {
             @Override
-            public void finished(String textureRegion)
+            public void ok(String textureRegion)
             {
                 Assets.Holder<TextureRegion> newHolder = Assets.findRegion(textureRegion);
+                setHolderName(newHolder.name);
+                setHolderData(newHolder.data);
+            }
+
+            @Override
+            public void changed(String textureRegion)
+            {
+                Assets.Holder<TextureRegion> newHolder = Assets.findRegion(textureRegion);
+                setHolderName(newHolder.name);
+                setHolderData(newHolder.data);
+            }
+
+            @Override
+            public void cancel(String originalRegion)
+            {
+                Assets.Holder<TextureRegion> newHolder = Assets.findRegion(originalRegion);
                 setHolderName(newHolder.name);
                 setHolderData(newHolder.data);
             }
@@ -37,11 +52,14 @@ public class TextureRegionHolderEditor extends HolderEditor<TextureRegion>
         private VisTextField textureRegion;
         private VisTextButton okButton;
         private VisTextButton cancelButton;
+        private final TextureList textureList;
+        private String backup;
 
         public EditTextureRegionDialog(String title, Listener listener, Assets.Holder<TextureRegion> holder)
         {
             super(title);
             this.listener = listener;
+            this.backup = holder.name;
 
             TableUtils.setSpacingDefaults(this);
             setModal(true);
@@ -57,7 +75,14 @@ public class TextureRegionHolderEditor extends HolderEditor<TextureRegion>
 
             textureRegion = new VisTextField(holder.name);
             fieldTable.add(new VisLabel("Texture Region: "));
-            fieldTable.add(textureRegion).expand().fill().row();
+            fieldTable.add(textureRegion).expandX().fill().row();
+
+            textureList = new TextureList();
+            textureList.setWidth(Float.MAX_VALUE);
+
+            VisScrollPane scrollPane = new VisScrollPane(textureList);
+
+            fieldTable.add(scrollPane).maxHeight(200).colspan(2).expandX().fill().row();
 
             add(fieldTable).padTop(3).spaceBottom(4);
             row();
@@ -80,7 +105,7 @@ public class TextureRegionHolderEditor extends HolderEditor<TextureRegion>
                 {
                     try
                     {
-                        listener.finished(textureRegion.getText());
+                        listener.ok(textureRegion.getText());
                         fadeOut();
                     }
                     catch (NumberFormatException ignore)
@@ -94,6 +119,7 @@ public class TextureRegionHolderEditor extends HolderEditor<TextureRegion>
                 @Override
                 public void changed(ChangeEvent event, Actor actor)
                 {
+                    listener.cancel(backup);
                     close();
                 }
             });
@@ -107,18 +133,34 @@ public class TextureRegionHolderEditor extends HolderEditor<TextureRegion>
                     {
                         try
                         {
-                            listener.finished(textureRegion.getText());
+                            listener.ok(textureRegion.getText());
                             fadeOut();
                         }
                         catch (NumberFormatException ignore)
                         {
                         }
                     }
-
                     return super.keyDown(event, keycode);
+                }
+
+                @Override
+                public boolean keyUp(InputEvent event, int keycode)
+                {
+                    listener.changed(textureRegion.getText());
+                    return super.keyUp(event, keycode);
                 }
             };
             textureRegion.addListener(enterListener);
+
+            textureList.addListener(new TextureList.SelectionChangedListener()
+            {
+                @Override
+                public void selectionChanged(TextureAtlas.AtlasRegion newSelection, int newIndex)
+                {
+                    listener.changed(newSelection.name);
+                    textureRegion.setText(newSelection.name);
+                }
+            });
         }
 
 
@@ -171,7 +213,9 @@ public class TextureRegionHolderEditor extends HolderEditor<TextureRegion>
 
         public interface Listener
         {
-            void finished(String textureRegion);
+            void ok(String textureRegion);
+            void changed(String textureRegion);
+            void cancel(String originalRegion);
         }
     }
 }

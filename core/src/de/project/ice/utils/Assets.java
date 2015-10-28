@@ -2,126 +2,163 @@ package de.project.ice.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
-
-import java.util.HashMap;
+import com.badlogic.gdx.utils.ObjectMap;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class Assets
 {
-
+    @NotNull
+    private static final TextureAtlas ATLAS_PLACEHOLDER = new TextureAtlas((TextureAtlas.TextureAtlasData)null);
+    @NotNull
     public static AssetManager manager = new AssetManager();
-    private static TextureAtlas charsSheet = null;
-    private static TextureAtlas inventorySheet = null;
-    private static TextureAtlas sceneSheet = null;
-    private static String currentScene = null;
-    private static HashMap<String, Array<TextureRegion>> cachedRegionsChars = new HashMap<String, Array<TextureRegion>>();
-    private static HashMap<String, Array<TextureRegion>> cachedRegionsInventory = new HashMap<String, Array<TextureRegion>>();
-    private static HashMap<String, Array<TextureRegion>> cachedRegionsScene = new HashMap<String, Array<TextureRegion>>();
+    @NotNull
+    private static ObjectMap<String, Array<TextureRegion>> cachedRegions = new ObjectMap<String, Array<TextureRegion>>();
+    @NotNull
+    private static ObjectMap<String, Pair<String, TextureAtlas>> loadedSpritesheets = new ObjectMap<String, Pair<String, TextureAtlas>>();
 
-    static
+    public static boolean loadAtlas(String name)
     {
-    }
-
-    public static boolean loadScene(String scene)
-    {
-        scene = "spritesheets/" + scene + ".atlas";
-
-        if (scene.equals(currentScene))
+        if (loadedSpritesheets.containsKey(name))
         {
             return true;
         }
 
-        if (currentScene != null)
-        {
-            manager.clear();
-            cachedRegionsInventory.clear();
-            cachedRegionsScene.clear();
-            cachedRegionsChars.clear();
-            charsSheet = null;
-            sceneSheet = null;
-            inventorySheet = null;
-        }
+        FileHandle file = Gdx.files.internal("spritesheets/" + name + ".atlas");
 
-        if (charsSheet == null)
+        if (!file.exists())
         {
-            manager.load("spritesheets/objects.atlas", TextureAtlas.class);
-            manager.load("spritesheets/inventory.atlas", TextureAtlas.class);
-        }
-
-        if (Gdx.files.internal(scene).exists())
-        {
-            currentScene = scene;
-            manager.load(currentScene, TextureAtlas.class);
-            return true;
-        }
-        else
-        {
-            currentScene = null;
-            sceneSheet = null;
+            Gdx.app.log(Assets.class.getSimpleName(), "Unable to load spritesheet \"" + file.path() + "\": File not found");
             return false;
         }
+
+        manager.load(file.path(), TextureAtlas.class);
+
+        loadedSpritesheets.put(name, Pair.create(name, ATLAS_PLACEHOLDER));
+
+
+        System.out.println("Loaded assets: " + name);
+        return true;
     }
+
+//    public static boolean loadScene(String scene)
+//    {
+//        scene = "spritesheets/" + scene + ".atlas";
+//
+//        if (scene.equals(currentScene))
+//        {
+//            return true;
+//        }
+//
+//        if (currentScene != null)
+//        {
+//            clear();
+//        }
+//
+//        if (Gdx.files.internal(scene).exists())
+//        {
+//            currentScene = scene;
+//            manager.load(currentScene, TextureAtlas.class);
+//            return true;
+//        }
+//        else
+//        {
+//            currentScene = null;
+//            sceneSheet = null;
+//            return false;
+//        }
+//    }
 
     public static TextureRegionsHolder findRegions(String name)
     {
-        if (charsSheet == null)
+        // Look if region is already cached
+        if (cachedRegions.containsKey(name))
         {
-            manager.finishLoading();
-            charsSheet = manager.get("spritesheets/objects.atlas", TextureAtlas.class);
-        }
-        if (inventorySheet == null)
-        {
-            manager.finishLoading();
-            inventorySheet = manager.get("spritesheets/inventory.atlas", TextureAtlas.class);
-        }
-        if (sceneSheet == null && currentScene != null)
-        {
-            manager.finishLoading();
-            sceneSheet = manager.get(currentScene, TextureAtlas.class);
+            return new TextureRegionsHolder(cachedRegions.get(name), name);
         }
 
-        if (cachedRegionsChars.containsKey(name))
-        {
-            return new TextureRegionsHolder(cachedRegionsChars.get(name), name);
-        }
 
-        if (cachedRegionsInventory.containsKey(name))
-        {
-            return new TextureRegionsHolder(cachedRegionsInventory.get(name), name);
-        }
-        if (cachedRegionsScene.containsKey(name))
-        {
-            return new TextureRegionsHolder(cachedRegionsScene.get(name), name);
-        }
-
+        // The region isn't cached, so lets try to find it
         Array<TextureRegion> regions = new Array<TextureRegion>();
-        regions.addAll(charsSheet.findRegions(name));
-
-        if (regions.size == 0 && sceneSheet != null)
+        for (Pair<String, TextureAtlas> pair: loadedSpritesheets.values())
         {
-            regions.addAll(inventorySheet.findRegions(name));
+            // Check if the current atlas is loaded
+            if (!manager.isLoaded("spritesheets/" + pair.getFirst() + ".atlas"))
+            {
+                // The atlas isn't loaded, so we block here
+                manager.finishLoading();
+            }
+
+            //  We may have to get the atlas if we only have the placeholder
+            if (pair.getSecond() == ATLAS_PLACEHOLDER)
+            {
+                pair.setSecond(manager.get("spritesheets/" + pair.getFirst() + ".atlas", TextureAtlas.class));
+            }
+
+            regions.addAll(pair.getSecond().findRegions(name));
+
+            // Check if we found the region
             if (regions.size > 0)
             {
-                cachedRegionsInventory.put(name, regions);
+                // Cache the result
+                cachedRegions.put(name, regions);
+
+                return new TextureRegionsHolder(regions, name);
             }
-            else
-            {
-                regions.addAll(sceneSheet.findRegions(name));
-                if (regions.size > 0)
-                {
-                    cachedRegionsScene.put(name, regions);
-                }
-            }
-        }
-        else
-        {
-            cachedRegionsChars.put(name, regions);
         }
 
         return new TextureRegionsHolder(regions, name);
+    }
+
+    public static Array<TextureAtlas.AtlasRegion> getAllRegionsFromAltas(String atlas)
+    {
+        Array<TextureAtlas.AtlasRegion> result = new Array<TextureAtlas.AtlasRegion>();
+
+        // No atlas with the name found
+        if (!loadedSpritesheets.containsKey(atlas))
+        {
+            // Return empty list
+            return result;
+        }
+
+        Pair<String, TextureAtlas> pair = loadedSpritesheets.get(atlas);
+
+        // Check if the current atlas is loaded
+        if (!manager.isLoaded("spritesheets" + pair.getFirst() + ".atlas"))
+        {
+            // The atlas isn't loaded, so we block here
+            manager.finishLoading();
+        }
+
+        //  We may have to get the atlas if we only have the placeholder
+        if (pair.getSecond() == ATLAS_PLACEHOLDER)
+        {
+            pair.setSecond(manager.get("spritesheets" + pair.getFirst() + ".atlas", TextureAtlas.class));
+        }
+
+        getAllRegions().addAll(pair.getSecond().getRegions());
+        return result;
+    }
+
+    public static Array<TextureAtlas.AtlasRegion> getAllRegions()
+    {
+        Array<TextureAtlas.AtlasRegion> regions = new Array<TextureAtlas.AtlasRegion>();
+
+        for (String atlas: loadedSpritesheets.keys())
+        {
+            regions.addAll(getAllRegionsFromAltas(atlas));
+        }
+
+        return regions;
+    }
+
+    public static Array<String> getLoadedSpritesheets()
+    {
+        return loadedSpritesheets.keys().toArray();
     }
 
     public static TextureRegionHolder findRegion(String name)
@@ -229,5 +266,20 @@ public abstract class Assets
     public static void update()
     {
         manager.update();
+    }
+
+    public static void finishAll()
+    {
+        manager.finishLoading();
+    }
+
+    public static void clear()
+    {
+        manager.clear();
+        cachedRegions.clear();
+        loadedSpritesheets.clear();
+        manager.finishLoading();
+
+        System.out.println("Cleared assets");
     }
 }

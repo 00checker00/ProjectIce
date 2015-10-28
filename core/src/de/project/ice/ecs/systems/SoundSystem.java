@@ -15,11 +15,10 @@ import com.badlogic.gdx.utils.ObjectMap;
  */
 public class SoundSystem extends IceSystem
 {
-
     private ObjectMap<String, Sound> sounds = new ObjectMap<String, Sound>();
     private LongMap<String> ids = new LongMap<String>();
     private Music music = null;
-    private DelayedRemovalArray<Fader> faders = new DelayedRemovalArray<Fader>();
+    private DelayedRemovalArray<Fade> faders = new DelayedRemovalArray<Fade>();
     private String musicname = new String();
 
     @Override
@@ -29,11 +28,11 @@ public class SoundSystem extends IceSystem
 
         faders.begin();
 
-        for (Fader fader : faders)
+        for (Fade fade : faders)
         {
-            if (fader.update(deltaTime))
+            if (fade.update(deltaTime))
             {
-                faders.removeValue(fader, true);
+                faders.removeValue(fade, true);
             }
         }
 
@@ -42,24 +41,31 @@ public class SoundSystem extends IceSystem
 
     }
 
-    public void loadSound(String name)
+    public boolean loadSound(String name)
     {
         FileHandle file = Gdx.files.internal("sounds/" + name + ".mp3");
 
         if (!file.exists())
         {
             Gdx.app.log(getClass().getSimpleName(), "Sound file doesn'T exist: " + file.path());
-            return;
+            return false;
         }
 
         Sound sound = Gdx.audio.newSound(file);
         sounds.put(name, sound);
 
-
+        return true;
     }
 
     public long playSound(String name)
     {
+        if (!sounds.containsKey(name))
+        {
+            if (!loadSound(name))
+            {
+                return -1;
+            }
+        }
         Sound sound = sounds.get(name);
         long playID = sound.play();
         ids.put(playID, name);
@@ -85,22 +91,18 @@ public class SoundSystem extends IceSystem
     {
         ids.clear();
 
-
         for (Sound sound : sounds.values())
         {
             sound.dispose();
         }
 
         sounds.clear();
-
     }
 
 
     public void playMusic(String name)
     {
-
         playMusic(name, true);
-
     }
 
     public String getMusic()
@@ -116,8 +118,6 @@ public class SoundSystem extends IceSystem
 
     public void playMusic(String name, boolean loop)
     {
-
-
         FileHandle file = Gdx.files.internal("music/" + name + ".mp3");
 
         if (!file.exists())
@@ -133,25 +133,23 @@ public class SoundSystem extends IceSystem
 
         if (this.music != null)
         {
-            faders.add(Fader.fadeCross(this.music, music));
+            faders.add(Fade.fadeCross(this.music, music));
 
         }
         else
         {
-            faders.add(Fader.fadeIn(music));
+            faders.add(Fade.fadeIn(music));
         }
         this.music = music;
 
         music.play();
-
     }
 
     public void stopMusic()
     {
-
         if (music != null)
         {
-            faders.add(Fader.fadeOut(music));
+            faders.add(Fade.fadeOut(music));
             music = null;
         }
     }
@@ -166,14 +164,14 @@ public class SoundSystem extends IceSystem
         music.play();
     }
 
-    private static class Fader
+    private static class Fade
     {
         protected static float DURATION = 3f;
         protected Music music;
         protected float start, end;
         protected float alpha;
 
-        private Fader(Music music, float start, float end)
+        private Fade(Music music, float start, float end)
         {
             this.music = music;
             this.start = start;
@@ -182,17 +180,17 @@ public class SoundSystem extends IceSystem
             music.setVolume(start);
         }
 
-        public static Fader fadeIn(Music music)
+        public static Fade fadeIn(Music music)
         {
-            return new Fader(music, 0f, 1f);
+            return new Fade(music, 0f, 1f);
         }
 
-        public static Fader fadeOut(Music music)
+        public static Fade fadeOut(Music music)
         {
             return new FadeOut(music, 1f, 0f);
         }
 
-        public static Fader fadeCross(Music first, Music second)
+        public static Fade fadeCross(Music first, Music second)
         {
             return new FadeCross(first, second);
         }
@@ -205,14 +203,10 @@ public class SoundSystem extends IceSystem
 
             return alpha >= 1f;
         }
-
-
     }
 
-    private static class FadeOut extends Fader
+    private static class FadeOut extends Fade
     {
-
-
         protected FadeOut(Music music, float start, float end)
         {
             super(music, start, end);
@@ -232,12 +226,12 @@ public class SoundSystem extends IceSystem
 
     private static class FadeCross extends FadeOut
     {
-        private Fader fadeIn;
+        private Fade fadeIn;
 
         private FadeCross(Music first, Music second)
         {
             super(first, first.getVolume(), 0f);
-            fadeIn = Fader.fadeIn(second);
+            fadeIn = Fade.fadeIn(second);
         }
 
         @Override
@@ -247,7 +241,6 @@ public class SoundSystem extends IceSystem
             return super.update(delta);
         }
     }
-
 
 }
 

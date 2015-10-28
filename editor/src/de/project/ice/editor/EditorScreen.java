@@ -17,22 +17,20 @@ import com.kotcrab.vis.ui.widget.file.FileChooser;
 import com.kotcrab.vis.ui.widget.file.FileChooserAdapter;
 import de.project.ice.IceGame;
 import de.project.ice.Storage;
-import de.project.ice.editor.editors.AudioWindow;
 import de.project.ice.editor.undoredo.UndoRedoManager;
 import de.project.ice.screens.BaseScreenAdapter;
-import de.project.ice.utils.Assets;
-import de.project.ice.utils.DelegatingInputProcessor;
-import de.project.ice.utils.SceneLoader;
-import de.project.ice.utils.SceneWriter;
+import de.project.ice.utils.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 
+import static de.project.ice.utils.SceneLoader.SceneProperties;
+import static de.project.ice.utils.SceneLoader.ScenePropertiesBuilder;
+
 public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.SelectionListener
 {
     private static final String VERSION = "0.0.1";
-    private final AudioWindow audioWindow;
     private final PathScreen pathScreen;
     @NotNull
     private Stage stage;
@@ -47,7 +45,8 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
     ComponentsWindow componentsWindow;
     @NotNull
     private UndoRedoManager undoRedoManager = new UndoRedoManager();
-
+    @NotNull
+    private SceneProperties sceneProperties;
     private String filename = null;
     private String storedState = null;
     private VisTextButton redoBtn;
@@ -93,12 +92,7 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
         componentsWindow.setVisible(storage.getBoolean("editor_components_visible", true));
         stage.addActor(componentsWindow);
 
-        audioWindow = new AudioWindow(game.engine);
-        audioWindow.setPosition(storage.getFloat("editor_audio_x", 0f), storage.getFloat("editor_audio_y", 0f));
-        audioWindow.setSize(storage.getFloat("editor_audio_width", 200f), storage.getFloat("editor_audio_height", 400f));
-        audioWindow.setVisible(storage.getBoolean("editor_audio_visible", true));
-        stage.addActor(audioWindow);
-
+        sceneProperties = new ScenePropertiesBuilder().engine(game.engine).create();
 
         inputProcessor = new DelegatingInputProcessor(stage)
         {
@@ -166,7 +160,6 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
     {
         entitiesWindow.setVisible(false);
         componentsWindow.setVisible(false);
-        audioWindow.setVisible(false);
         game.removeScreen(pathScreen, false);
     }
 
@@ -174,7 +167,6 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
     {
         entitiesWindow.setVisible(true);
         componentsWindow.setVisible(true);
-        audioWindow.setVisible(true);
         game.addScreen(pathScreen);
     }
 
@@ -182,6 +174,7 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
     {
         Menu fileMenu = new Menu("File");
         Menu windowMenu = new Menu("Window");
+        Menu assetsMenu = new Menu("Assets");
         Menu testMenu = new Menu("Test");
         Menu helpMenu = new Menu("Help");
 
@@ -217,6 +210,38 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
                 save(true);
             }
         }).setShortcut("Ctrl + Shift + S"));
+
+        fileMenu.addItem(new MenuItem("Scene Properties", new ChangeListener()
+        {
+            @Override
+            public void changed(ChangeEvent event, Actor actor)
+            {
+                ScenePropertiesDialog scenePropertiesDialog = new ScenePropertiesDialog(sceneProperties);
+                scenePropertiesDialog.addListener(new DialogListener<SceneProperties>()
+                {
+                    @Override
+                    public void onResult(SceneProperties result)
+                    {
+                        sceneProperties = result;
+
+                        game.engine.soundSystem.unloadSounds();
+                        game.engine.soundSystem.stopMusic();
+                        game.engine.soundSystem.playMusic(result.music());
+
+                        for (String sound : result.sounds())
+                        {
+                            game.engine.soundSystem.loadSound(sound);
+                        }
+                    }
+
+                    @Override
+                    public void onCancel()
+                    {
+
+                    }
+                }).show(stage);
+            }
+        }));
         fileMenu.addItem(new MenuItem("Screenshot", new ChangeListener()
         {
             @Override
@@ -249,15 +274,6 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
             public void changed(ChangeEvent event, Actor actor)
             {
                 componentsWindow.setVisible(!componentsWindow.isVisible());
-            }
-        }));
-
-        windowMenu.addItem(new MenuItem("Show/Hide Audio Window", new ChangeListener()
-        {
-            @Override
-            public void changed(ChangeEvent event, Actor actor)
-            {
-                audioWindow.setVisible(!audioWindow.isVisible());
             }
         }));
 
@@ -294,6 +310,16 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
             public void changed(ChangeEvent event, Actor actor)
             {
                 hideAllWindows();
+            }
+        }));
+
+        assetsMenu.addItem(new MenuItem("Reload Assets", new ChangeListener()
+        {
+            @Override
+            public void changed(ChangeEvent event, Actor actor)
+            {
+                Assets.clear();
+                Assets.finishAll();
             }
         }));
 
@@ -335,6 +361,7 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
 
         menuBar.addMenu(fileMenu);
         menuBar.addMenu(windowMenu);
+        menuBar.addMenu(assetsMenu);
         menuBar.addMenu(testMenu);
         menuBar.addMenu(helpMenu);
 
@@ -385,10 +412,15 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
             return;
         }
         game.engine.removeAllEntities();
+
+        // Probably not "right", but works?
+        // Otherwise engine will "randomly" delete
+        // entities from the new scene
+        game.engine.update(0);
+
         try
         {
             SceneLoader.loadScene(game.engine, storedState);
-            audioWindow.setValues(game.engine.soundSystem.getMusic(), game.engine.soundSystem.getSounds());
             storedState = null;
         }
         catch (IOException e)
@@ -405,6 +437,7 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
     {
         filename = null;
         game.engine.removeAllEntities();
+        Assets.clear();
 
         game.pauseGame();
     }
@@ -415,9 +448,9 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
         DialogUtils.showInputDialog(stage, "Scene Name", "Name", new InputDialogListener()
         {
             @Override
-            public void finished(String input)
+            public void finished(String name)
             {
-                Assets.loadScene(input);
+                sceneProperties = new ScenePropertiesBuilder().engine(game.engine).name(name).create();
             }
 
             @Override
@@ -449,8 +482,7 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
             {
                 try
                 {
-                    SceneLoader.loadScene(game.engine, file.read());
-                    audioWindow.setValues(game.engine.soundSystem.getMusic(), game.engine.soundSystem.getSounds());
+                    sceneProperties = SceneLoader.loadScene(game.engine, file.read());
                     filename = file.file().getCanonicalFile().getAbsolutePath();
                 }
                 catch (IOException e)
@@ -541,7 +573,13 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
     {
         try
         {
-            SceneWriter.serializeScene(Gdx.files.absolute(filename).nameWithoutExtension(), game.engine, xml);
+            new SceneWriter.Builder()
+                    .engine(game.engine)
+                    .writer(xml)
+                    .sceneName(sceneProperties.name())
+                    .onloadScript(sceneProperties.onloadScript())
+                    .create()
+                    .serializeScene();
         }
         catch (IOException e)
         {
@@ -604,11 +642,6 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
         storage.put("editor_entities_width", entitiesWindow.getWidth());
         storage.put("editor_entities_height", entitiesWindow.getHeight());
         storage.put("editor_entities_visible", entitiesWindow.isVisible());
-        storage.put("editor_audio_x", audioWindow.getX());
-        storage.put("editor_audio_y", audioWindow.getY());
-        storage.put("editor_audio_width", audioWindow.getWidth());
-        storage.put("editor_audio_height", audioWindow.getHeight());
-        storage.put("editor_audio_visible", audioWindow.isVisible());
         storage.put("editor_pathscreen_visible", game.isScreenVisible(pathScreen));
         storage.save();
         stage.dispose();

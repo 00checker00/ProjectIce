@@ -163,6 +163,11 @@ public class IceGame extends ApplicationAdapter
         }
         for (BaseScreen screen : screensToAdd)
         {
+            if (screens.contains(screen, true))
+            {
+                continue;
+            }
+
             int index = -1;
             for (int i = 0; i < screens.size; i++)
             {
