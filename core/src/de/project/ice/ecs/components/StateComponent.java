@@ -1,10 +1,8 @@
 package de.project.ice.ecs.components;
 
-import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.utils.Pool;
 import de.project.ice.ecs.systems.AnimationSystem;
 
-public class StateComponent extends Component implements Pool.Poolable
+public class StateComponent implements IceComponent
 {
     public int animation = AnimationSystem.ANIMATION_DEFAULT;
     public float time = 0.0f;

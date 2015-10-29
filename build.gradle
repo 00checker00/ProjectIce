@@ -6,7 +6,7 @@ buildscript {
     }
     dependencies {
         classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
-        classpath 'com.android.tools.build:gradle:1.0.0'
+        classpath 'com.android.tools.build:gradle:1.1.1'
         classpath 'org.robovm:robovm-gradle-plugin:1.0.0'
     }
 }
@@ -18,11 +18,11 @@ allprojects {
     version = '1.0'
     ext {
         appName = 'Project Ice'
-        gdxVersion = '1.6.3'
+        gdxVersion = '1.7.0'
         roboVMVersion = '1.0.0'
-        ashleyVersion = '1.5.0'
-        aiVersion = '1.5.0'
-        visuiVersion = '0.8.0'
+        ashleyVersion = '1.6.0'
+        aiVersion = '1.6.0'
+        visuiVersion = '0.9.1'
     }
 
     repositories {
@@ -37,7 +37,7 @@ project(":pathlib") {
 
     dependencies {
         compile project(":config")
-        compile "com.badlogicgames.gdx:gdx-ai:1.5.0"
+        compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
         compile "org.jetbrains:annotations:13.0"
     }
 }
@@ -113,7 +113,7 @@ project(":html") {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
         compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
         compile "com.badlogicgames.ashley:ashley:$ashleyVersion:sources"
-        compile "com.kotcrab.vis:vis-ui:0.7.4:sources"
+        compile "com.kotcrab.vis:vis-ui:$visuiVersion:sources"
     }
 }
 
@@ -126,7 +126,7 @@ project(":core") {
         compile project(":pathlib")
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
-        compile "com.kotcrab.vis:vis-ui:0.7.4"
+        compile "com.kotcrab.vis:vis-ui:$visuiVersion"
         compile "org.jetbrains:annotations:13.0"
     }
 }

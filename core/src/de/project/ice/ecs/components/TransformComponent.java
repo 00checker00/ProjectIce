@@ -1,11 +1,9 @@
 package de.project.ice.ecs.components;
 
-import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Pool;
 import org.jetbrains.annotations.NotNull;
 
-public class TransformComponent extends Component implements Pool.Poolable
+public class TransformComponent implements IceComponent
 {
     @NotNull
     public Vector2 pos = new Vector2();

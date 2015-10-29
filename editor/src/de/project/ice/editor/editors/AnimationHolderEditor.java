@@ -3,11 +3,9 @@ package de.project.ice.editor.editors;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.i18n.BundleText;
 import com.kotcrab.vis.ui.util.TableUtils;
@@ -15,6 +13,7 @@ import com.kotcrab.vis.ui.util.Validators;
 import com.kotcrab.vis.ui.widget.*;
 import de.project.ice.editor.TextureList;
 import de.project.ice.utils.Assets;
+import de.project.ice.utils.DialogListener;
 
 
 public class AnimationHolderEditor extends HolderEditor<Animation>
@@ -22,21 +21,34 @@ public class AnimationHolderEditor extends HolderEditor<Animation>
     @Override
     protected void onEdit()
     {
-        EditAnimationDialog.showDialog(getStage(), "Edit animation", new EditAnimationDialog.Listener()
+        EditAnimationDialog.showDialog(getStage(), "Edit animation", new DialogListener<AnimationDialogResult>()
         {
             @Override
-            public void finished(String textureRegion, Animation.PlayMode playMode, float frameTime)
+            public void onResult(AnimationDialogResult result)
             {
-                Assets.Holder<Animation> newHolder = Assets.createAnimation(textureRegion, frameTime, playMode);
+                Assets.Holder<Animation> newHolder = Assets.createAnimation(
+                        result.name,
+                        result.frameTime,
+                        result.playMode);
                 setHolderData(newHolder.data);
                 setHolderName(newHolder.name);
+            }
+
+            @Override
+            public void onChange(AnimationDialogResult result)
+            {
+            }
+
+            @Override
+            public void onCancel()
+            {
             }
         }, value);
     }
 
-    public static class EditAnimationDialog extends VisWindow
+    public static class EditAnimationDialog extends VisDialog
     {
-        private Listener listener;
+        private DialogListener<AnimationDialogResult> listener;
         private VisTextField textureRegion;
         private TextureList textureList;
         private VisTextField frameTime;
@@ -44,41 +56,33 @@ public class AnimationHolderEditor extends HolderEditor<Animation>
         private VisTextButton okButton;
         private VisTextButton cancelButton;
 
-        public EditAnimationDialog(String title, Listener listener, Assets.Holder<Animation> holder)
+        public EditAnimationDialog(String title, DialogListener<AnimationDialogResult> listener, Assets.Holder<Animation> holder)
         {
             super(title);
             this.listener = listener;
 
             TableUtils.setSpacingDefaults(this);
-            setModal(true);
 
-            addCloseButton();
-            closeOnEscape();
-
-            VisTable buttonsTable = new VisTable(true);
-            buttonsTable.add(cancelButton = new VisTextButton(get(EditAnimationDialog.Text.CANCEL)));
-            buttonsTable.add(okButton = new VisTextButton(get(EditAnimationDialog.Text.OK)));
-
-            VisTable fieldTable = new VisTable(true);
+            Table contentTable = getContentTable();
 
             textureRegion = new VisTextField(holder.name);
-            fieldTable.add(new VisLabel("Texture Region: "));
-            fieldTable.add(textureRegion).expand().fill().row();
+            contentTable.add(new VisLabel("Texture Region: "));
+            contentTable.add(textureRegion).expand().fill().row();
 
             textureList = new TextureList();
             textureList.setWidth(Float.MAX_VALUE);
 
             VisScrollPane scrollPane = new VisScrollPane(textureList);
 
-            fieldTable.add(scrollPane).maxHeight(200).colspan(2).expandX().fill().row();
+            contentTable.add(scrollPane).maxHeight(200).colspan(2).expandX().fill().row();
 
-            frameTime = new VisValidableTextField(new Validators.FloatValidator());
+            frameTime = new VisValidatableTextField(new Validators.FloatValidator());
             if (holder.data != null)
             {
                 frameTime.setText(String.valueOf(holder.data.getFrameDuration()));
             }
-            fieldTable.add(new VisLabel("Frame Time: "));
-            fieldTable.add(frameTime).expand().fill().row();
+            contentTable.add(new VisLabel("Frame Time: "));
+            contentTable.add(frameTime).expand().fill().row();
 
             playMode = new VisSelectBox<Animation.PlayMode>();
             playMode.setItems(Animation.PlayMode.values());
@@ -86,72 +90,49 @@ public class AnimationHolderEditor extends HolderEditor<Animation>
             {
                 playMode.setSelected(holder.data.getPlayMode());
             }
-            fieldTable.add(new VisLabel("Mode: "));
-            fieldTable.add(playMode).expand().fill();
+            contentTable.add(new VisLabel("Mode: "));
+            contentTable.add(playMode).expand().fill();
 
-            add(fieldTable).padTop(3).spaceBottom(4);
+            add(contentTable).padTop(3).spaceBottom(4);
             row();
-            add(buttonsTable).padBottom(3);
 
             addListeners();
 
-            pack();
-            centerWindow();
-
             textureRegion.focusField();
+
+            button(get(Text.CANCEL), "cancel");
+            key(Input.Keys.ESCAPE, "cancel");
+            button(get(Text.OK), "ok");
+            key(Input.Keys.ENTER, "ok");
+        }
+
+        @Override
+        public VisDialog show(Stage stage, Action action)
+        {
+            VisDialog result = super.show(stage, action);
+            stage.setScrollFocus(textureList);
+            return result;
         }
 
 
+        @Override
+        protected void result(Object object)
+        {
+            if ("ok".equals(object))
+            {
+                listener.onResult(new AnimationDialogResult(
+                        textureRegion.getText(),
+                        Float.parseFloat(frameTime.getText()),
+                        playMode.getSelected()));
+            }
+            else
+            {
+                listener.onCancel();
+            }
+        }
+
         private void addListeners()
         {
-            okButton.addListener(new ChangeListener()
-            {
-                @Override
-                public void changed(ChangeEvent event, Actor actor)
-                {
-                    try
-                    {
-                        listener.finished(textureRegion.getText(), playMode.getSelected(), Float.parseFloat(frameTime.getText()));
-                        fadeOut();
-                    }
-                    catch (NumberFormatException ignore)
-                    {
-                    }
-                }
-            });
-
-            cancelButton.addListener(new ChangeListener()
-            {
-                @Override
-                public void changed(ChangeEvent event, Actor actor)
-                {
-                    close();
-                }
-            });
-
-            InputListener enterListener = new InputListener()
-            {
-                @Override
-                public boolean keyDown(InputEvent event, int keycode)
-                {
-                    if (keycode == Input.Keys.ENTER && !okButton.isDisabled())
-                    {
-                        try
-                        {
-                            listener.finished(textureRegion.getText(), playMode.getSelected(), Float.parseFloat(textureRegion.getText()));
-                            fadeOut();
-                        }
-                        catch (NumberFormatException ignore)
-                        {
-                        }
-                    }
-
-                    return super.keyDown(event, keycode);
-                }
-            };
-            textureRegion.addListener(enterListener);
-            frameTime.addListener(enterListener);
-
             textureList.addListener(new TextureList.SelectionChangedListener()
             {
                 @Override
@@ -161,7 +142,6 @@ public class AnimationHolderEditor extends HolderEditor<Animation>
                 }
             });
         }
-
 
         private static String get(EditAnimationDialog.Text text)
         {
@@ -204,15 +184,24 @@ public class AnimationHolderEditor extends HolderEditor<Animation>
             }
         }
 
-        public static void showDialog(Stage stage, String title, Listener listener, Assets.Holder<Animation> holder)
+        public static void showDialog(Stage stage, String title, DialogListener<AnimationDialogResult> listener, Assets.Holder<Animation> holder)
         {
             EditAnimationDialog dialog = new EditAnimationDialog(title, listener, holder);
-            stage.addActor(dialog.fadeIn());
+            dialog.show(stage);
         }
+    }
 
-        public interface Listener
+    private static class AnimationDialogResult
+    {
+        public final String name;
+        public final float frameTime;
+        public final Animation.PlayMode playMode;
+
+        public AnimationDialogResult(String name, float frameTime, Animation.PlayMode playMode)
         {
-            void finished(String textureRegion, Animation.PlayMode playMode, float frameTime);
+            this.name = name;
+            this.frameTime = frameTime;
+            this.playMode = playMode;
         }
     }
 }

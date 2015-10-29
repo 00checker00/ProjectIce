@@ -208,5 +208,29 @@
 				</NameComponent>
 			</components>
 		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">WalkArea</name>
+				</NameComponent>
+				<WalkAreaComponent>
+					<area type="PathArea">
+						<shape type="Shape" closed="true">
+							<vertices>
+								<vertex type="Vector2" x="0.21862555" y="1.8847125"/>
+								<vertex type="Vector2" x="3.7579515" y="2.1199284"/>
+								<vertex type="Vector2" x="6.9641643" y="2.1068606"/>
+								<vertex type="Vector2" x="10.100979" y="1.8847125"/>
+								<vertex type="Vector2" x="10.149557" y="0.36234236"/>
+								<vertex type="Vector2" x="6.9017053" y="0.38194394"/>
+								<vertex type="Vector2" x="3.542816" y="0.4734168"/>
+								<vertex type="Vector2" x="0.253325" y="0.24473453"/>
+							</vertices>
+						</shape>
+						<holes/>
+					</area>
+				</WalkAreaComponent>
+			</components>
+		</entity>
 	</entities>
 </scene>

@@ -45,7 +45,7 @@ public class CursorScreen extends BaseScreenAdapter
 
         cursorPixmap = new Pixmap(32, 32, Pixmap.Format.RGBA8888);
 
-        Gdx.input.setCursorImage(cursorPixmap, 0, 0);
+        Gdx.graphics.newCursor(cursorPixmap, 0, 0).setSystemCursor();
 
         batch = new SpriteBatch();
 

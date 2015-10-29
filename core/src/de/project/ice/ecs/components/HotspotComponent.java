@@ -1,10 +1,8 @@
 package de.project.ice.ecs.components;
 
-import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Pool;
 
-public class HotspotComponent extends Component implements Pool.Poolable
+public class HotspotComponent implements IceComponent
 {
     public Vector2 origin = new Vector2(0f, 0f);
     public Vector2 targetPos = new Vector2(0f, 0f);

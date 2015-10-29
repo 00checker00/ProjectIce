@@ -1,13 +1,11 @@
 package de.project.ice.ecs.components;
 
-import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Pool;
 
 /**
  * Component for idle breathing animation of characters
  */
-public class BreathComponent extends Component implements Pool.Poolable
+public class BreathComponent implements IceComponent
 {
 
     public Vector2 curScale = new Vector2(0f, 0f);

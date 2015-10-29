@@ -237,7 +237,11 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
                     @Override
                     public void onCancel()
                     {
+                    }
 
+                    @Override
+                    public void onChange(SceneProperties result)
+                    {
                     }
                 }).show(stage);
             }

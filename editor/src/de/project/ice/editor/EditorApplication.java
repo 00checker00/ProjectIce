@@ -13,6 +13,6 @@ public class EditorApplication extends IceGame
         pauseGame();
         addScreen(new EditGameScreen(this));
         addScreen(new EditorScreen(this));
-        Gdx.input.setCursorImage(null, 0, 0);
+        Gdx.graphics.newCursor(null, 0, 0).setSystemCursor();
     }
 }
