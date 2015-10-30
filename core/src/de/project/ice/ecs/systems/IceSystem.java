@@ -41,4 +41,10 @@ public class IceSystem extends EntitySystem
     {
         super.addedToEngine(engine);
     }
+
+    @Override
+    public IceEngine getEngine()
+    {
+        return (IceEngine) super.getEngine();
+    }
 }

@@ -14,8 +14,6 @@ import org.jetbrains.annotations.Nullable;
 public class IceEngine extends PooledEngine
 {
     @NotNull
-    public final StateSystem stateSystem;
-    @NotNull
     public final AnimationSystem animationSystem;
     @NotNull
     public final RenderingSystem renderingSystem;
@@ -32,6 +30,8 @@ public class IceEngine extends PooledEngine
     @NotNull
     public final SoundSystem soundSystem;
     @NotNull
+    public final PathSystem pathSystem;
+    @NotNull
     public final IceGame game;
 
 
@@ -42,7 +42,6 @@ public class IceEngine extends PooledEngine
     {
         super();
         this.game = game;
-        stateSystem = new StateSystem();
         animationSystem = new AnimationSystem();
         cameraSystem = new CameraSystem();
         renderingSystem = new RenderingSystem();
@@ -51,8 +50,8 @@ public class IceEngine extends PooledEngine
         controlSystem = new ControlSystem();
         breathSystem = new BreathSystem();
         soundSystem = new SoundSystem();
+        pathSystem = new PathSystem();
 
-        addSystem(stateSystem);
         addSystem(animationSystem);
         addSystem(cameraSystem);
         addSystem(renderingSystem);
@@ -61,6 +60,7 @@ public class IceEngine extends PooledEngine
         addSystem(controlSystem);
         addSystem(breathSystem);
         addSystem(soundSystem);
+        addSystem(pathSystem);
 
         namedEntities = getEntitiesFor(Family.all(NameComponent.class).get());
     }

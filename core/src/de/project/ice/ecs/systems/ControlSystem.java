@@ -5,9 +5,6 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.ai.pfa.DefaultGraphPath;
-import com.badlogic.gdx.ai.pfa.GraphPath;
-import com.badlogic.gdx.ai.pfa.indexed.IndexedAStarPathFinder;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -18,18 +15,17 @@ import de.project.ice.ecs.IceEngine;
 import de.project.ice.ecs.components.*;
 import de.project.ice.hotspot.HotspotManager;
 import de.project.ice.inventory.Inventory;
-import de.project.ice.pathlib.*;
+import de.project.ice.pathlib.PathArea;
+import de.project.ice.pathlib.PathCalculator;
 import de.project.ice.screens.CursorScreen;
 
 import static de.project.ice.config.Config.PIXELS_TO_METRES;
 
 public class ControlSystem extends IteratingIceSystem implements InputProcessor
 {
-    private ImmutableArray<Entity> walkareas;
     private ImmutableArray<Entity> cameras;
     private ImmutableArray<Entity> hotspots;
     OrthographicCamera active_camera = null;
-    PathArea walkarea = null;
     HotspotManager.Hotspot active_hotspot = null;
     Entity hotspot_entity = null;
     HotspotManager hotspotManager;
@@ -43,7 +39,6 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
     private CameraSystem cameraSystem;
 
     private PathCalculator mouseCalculator = new PathCalculator(0f);
-    private PathCalculator pathCalculator = new PathCalculator(0.01f);
 
     public CursorScreen.Cursor primaryCursor = CursorScreen.Cursor.None;
     public CursorScreen.Cursor secondaryCursor = CursorScreen.Cursor.None;
@@ -59,8 +54,6 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
     @Override
     public void processEntity(Entity entity, float deltaTime)
     {
-        MovableComponent move = Components.movable.get(entity);
-        ControlComponent control = Components.control.get(entity);
         TextureComponent texture = Components.texture.get(entity);
         TransformComponent transform = Components.transform.get(entity);
 
@@ -97,24 +90,14 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
                             target = new Vector2(mouse_target.x, mouse_target.y);
                         }
 
-                        walkarea.waypoints.clear();
-                        PathNode startNode = new PathNode(transform.pos.cpy().add(width / 2, 0));
-                        walkarea.waypoints.add(startNode);
-                        PathNode endNode = new PathNode(target);
-                        walkarea.waypoints.add(endNode);
-                        PathGraph graph = pathCalculator.computeGraph(walkarea);
+                        Vector2 start = transform.pos.cpy();
+                        target = target.sub(width / 2, 0);
 
-                        GraphPath<PathNode> path = new DefaultGraphPath<PathNode>();
+                        PathPlanningComponent pathPlanningComponent = engine.createComponent(PathPlanningComponent.class);
+                        pathPlanningComponent.target = target;
+                        pathPlanningComponent.start = start;
 
-                        IndexedAStarPathFinder<PathNode> astar = new IndexedAStarPathFinder<PathNode>(graph);
-                        astar.searchNodePath(startNode, endNode, new PathHeuristic(), path);
-
-                        move.targetPositions.clear();
-
-                        for (PathNode node : path)
-                        {
-                            move.targetPositions.add(node.getPos().cpy().sub(width / 2, 0));
-                        }
+                        entity.add(pathPlanningComponent);
                         break;
                 }
             }
@@ -128,7 +111,7 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
             UseComponent useComponent = engine.createComponent(UseComponent.class);
             useComponent.target = hotspot_entity;
             useComponent.cursor = getActiveCursor();
-            useComponent.item = active_item;
+            useComponent.withItem = active_item;
             entity.add(useComponent);
         }
     }
@@ -145,11 +128,6 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
         if (cameras.size() > 0)
         {
             active_camera = cameras.first().getComponent(CameraComponent.class).camera;
-        }
-
-        if (walkareas.size() > 0)
-        {
-            walkarea = Components.walkarea.get(walkareas.first()).area;
         }
 
         if (active_camera == null)
@@ -179,7 +157,6 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
         this.engine = engine;
         cameras = engine.getEntitiesFor(Families.camera);
         cameraSystem = engine.cameraSystem;
-        walkareas = engine.getEntitiesFor(Families.walkArea);
         hotspots = engine.getEntitiesFor(Families.hotspot);
         hotspotManager = engine.game.hotspotManager;
     }
@@ -237,6 +214,7 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
         {
             Vector3 coords = active_camera.unproject(new Vector3(screenX, screenY, 0f));
 
+            PathArea walkarea = engine.pathSystem.getWalkArea();
             if (walkarea != null)
             {
                 if (mouseCalculator.IsInside(walkarea, new Vector2(coords.x, coords.y)))
@@ -273,14 +251,5 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
     public boolean scrolled(int amount)
     {
         return false;
-    }
-
-    public WalkAreaComponent getWalkArea()
-    {
-        if (walkareas.size() > 0)
-        {
-            return Components.walkarea.get(walkareas.first());
-        }
-        return null;
     }
 }

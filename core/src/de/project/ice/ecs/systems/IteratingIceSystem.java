@@ -41,4 +41,10 @@ public abstract class IteratingIceSystem extends IteratingSystem
     {
         super.removedFromEngine(engine);
     }
+
+    @Override
+    public IceEngine getEngine()
+    {
+        return (IceEngine) super.getEngine();
+    }
 }

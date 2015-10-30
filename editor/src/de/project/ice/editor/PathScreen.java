@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.project.ice.IceGame;
-import de.project.ice.ecs.components.WalkAreaComponent;
 import de.project.ice.pathlib.PathArea;
 import de.project.ice.pathlib.Shape;
 import de.project.ice.screens.BaseScreenAdapter;
@@ -219,11 +218,7 @@ public class PathScreen extends BaseScreenAdapter
     public void update(float delta)
     {
         camera = game.engine.renderingSystem.getActive_camera();
-        WalkAreaComponent walkAreaComponent = game.engine.controlSystem.getWalkArea();
-        if (walkAreaComponent != null)
-        {
-            pathArea = walkAreaComponent.area;
-        }
+        pathArea = game.engine.pathSystem.getWalkArea();
     }
 
     @Override

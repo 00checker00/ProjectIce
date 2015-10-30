@@ -27,13 +27,13 @@ public class ComponentsWindow extends VisWindow
             HotspotComponent.class,
             IdleComponent.class,
             InvisibilityComponent.class,
-            MovableComponent.class,
+            MoveComponent.class,
             NameComponent.class,
             ScriptComponent.class,
-            StateComponent.class,
             TextureComponent.class,
             TransformComponent.class,
             WalkAreaComponent.class,
+            WalkingComponent.class,
     };
 
     private Entity entity = null;

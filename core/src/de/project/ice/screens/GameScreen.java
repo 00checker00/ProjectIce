@@ -56,7 +56,6 @@ public class GameScreen extends BaseScreenAdapter
             }
         };
         SystemsToPause = new EntitySystem[]{
-                engine.stateSystem,
                 engine.cameraSystem,
                 engine.animationSystem,
                 engine.controlSystem,

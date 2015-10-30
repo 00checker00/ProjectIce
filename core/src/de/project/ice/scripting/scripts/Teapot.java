@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import de.project.ice.ecs.Components;
 import de.project.ice.ecs.components.*;
-import de.project.ice.ecs.systems.AnimationSystem;
 import de.project.ice.scripting.Script;
 import de.project.ice.utils.Assets;
 
@@ -24,14 +23,11 @@ public class Teapot extends Script
         transformComponent.scale.set(1f, 0.1f);
         flame.add(transformComponent);
 
-        StateComponent stateComponent = Engine().createComponent(StateComponent.class);
-        flame.add(stateComponent);
-
         TextureComponent textureComponent = Engine().createComponent(TextureComponent.class);
         flame.add(textureComponent);
 
         AnimationComponent animationComponent = Engine().createComponent(AnimationComponent.class);
-        animationComponent.animations.put(AnimationSystem.ANIMATION_DEFAULT, Assets.createAnimation("candle_fire", 0.13f, Animation.PlayMode.LOOP));
+        animationComponent.animations.put(0, Assets.createAnimation("candle_fire", 0.13f, Animation.PlayMode.LOOP));
         flame.add(animationComponent);
 
         ScriptComponent scriptComponent = Engine().createComponent(ScriptComponent.class);

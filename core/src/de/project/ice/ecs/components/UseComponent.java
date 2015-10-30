@@ -8,13 +8,13 @@ public class UseComponent implements IceComponent
 {
     public Entity target = null;
     public CursorScreen.Cursor cursor = CursorScreen.Cursor.None;
-    public Inventory.Item item = null;
+    public Inventory.Item withItem = null;
 
     @Override
     public void reset()
     {
         target = null;
-        item = null;
+        withItem = null;
         cursor = CursorScreen.Cursor.None;
     }
 }

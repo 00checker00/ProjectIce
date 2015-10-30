@@ -3,33 +3,29 @@ package de.project.ice.ecs.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.math.Vector2;
-import de.project.ice.IceGame;
 import de.project.ice.ecs.Components;
 import de.project.ice.ecs.IceEngine;
-import de.project.ice.ecs.components.*;
-import de.project.ice.hotspot.HotspotManager;
+import de.project.ice.ecs.components.MoveComponent;
+import de.project.ice.ecs.components.TransformComponent;
 
 public class MovementSystem extends IteratingIceSystem
 {
-    private IceGame game;
-
     @SuppressWarnings("unchecked")
     public MovementSystem()
     {
-        super(Family.all(MovableComponent.class).get());
+        super(Family.all(MoveComponent.class).get());
     }
 
     @Override
     public void addedToEngine(IceEngine engine)
     {
         super.addedToEngine(engine);
-        game = engine.game;
     }
 
     @Override
     public void processEntity(Entity entity, float deltaTime)
     {
-        MovableComponent move = Components.movable.get(entity);
+        MoveComponent move = Components.move.get(entity);
         TransformComponent t = Components.transform.get(entity);
 
         if (move.targetPositions.size() > 0)
@@ -53,6 +49,12 @@ public class MovementSystem extends IteratingIceSystem
                 {
                     t.flipHorizontal = false;
                 }
+
+                // Start walk animation
+                if (Components.walking.has(entity))
+                {
+                    Components.walking.get(entity).isWalking = true;
+                }
             }
             else
             {
@@ -63,51 +65,15 @@ public class MovementSystem extends IteratingIceSystem
                 // Target reached
                 if (move.targetPositions.isEmpty())
                 {
-                    onTargetReached(entity);
-                }
-            }
-            if (Components.state.has(entity))
-            {
-                StateComponent state = Components.state.get(entity);
-                if (state.animation == AnimationSystem.ANIMATION_WALK && !move.isMoving)
-                {
-                    state.setAnimation(AnimationSystem.ANIMATION_DEFAULT);
-                }
-                else if (state.animation != AnimationSystem.ANIMATION_WALK && move.isMoving)
-                {
-                    state.setAnimation(AnimationSystem.ANIMATION_WALK);
+                    entity.remove(MoveComponent.class);
+
+                    // Stop walk animation
+                    if (Components.walking.has(entity))
+                    {
+                        Components.walking.get(entity).isWalking = false;
+                    }
                 }
             }
         }
-    }
-
-    private void onTargetReached(Entity entity)
-    {
-        if (Components.use.has(entity))
-        {
-            UseComponent component = Components.use.get(entity);
-            if (component.target == null ||
-                    !Components.transform.has(component.target) ||
-                    !Components.hotspot.has(component.target))
-            {
-                throw new RuntimeException("Target is invalid");
-            }
-            HotspotComponent hotspotComponent = Components.hotspot.get(component.target);
-
-            HotspotManager.Hotspot hotspot = game.hotspotManager.get(hotspotComponent.script);
-
-            if (hotspot != null)
-            {
-                if (component.item != null)
-                {
-                    hotspot.useWith(component.item);
-                }
-                else
-                {
-                    hotspot.use(component.cursor);
-                }
-            }
-        }
-        entity.remove(UseComponent.class);
     }
 }

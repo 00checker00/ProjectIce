@@ -150,7 +150,7 @@ public class PathCalculator
         return (r > 0 && r < 1) && (s > 0 && s < 1);
     }
 
-    public PathGraph computeGraph(PathArea pathArea)
+    public PathGraph computeGraph(PathArea pathArea, Array<PathNode> waypoints)
     {
         PathGraph graph = new PathGraph();
 
@@ -167,7 +167,7 @@ public class PathCalculator
             }
         }
 
-        for (PathNode waypoint : pathArea.waypoints)
+        for (PathNode waypoint : waypoints)
         {
             if (!IsInside(pathArea, waypoint.pos))
             {
