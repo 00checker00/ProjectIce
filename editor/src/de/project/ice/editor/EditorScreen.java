@@ -154,6 +154,21 @@ public class EditorScreen extends BaseScreenAdapter implements EntitiesWindow.Se
         Gdx.graphics.setDisplayMode(storage.getInteger("editor_screen_width", 800),
                 storage.getInteger("editor_screen_height", 600),
                 false);
+
+        FileHandle file = Gdx.files.internal("scenes/scene3.scene");
+        try
+        {
+            sceneProperties = SceneLoader.loadScene(game.engine, file.read());
+            filename = file.file().getCanonicalFile().getAbsolutePath();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        catch (SceneLoader.LoadException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     private void hideAllWindows()
