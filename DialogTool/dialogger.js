@@ -443,7 +443,7 @@ joint.shapes.dialogue.SetView = joint.shapes.dialogue.BaseView.extend(
 		var field = this.$box.find('input.value');
 		if (!field.is(':focus'))
 			field.val(this.model.get('value'));
-	},
+	}
 });
 
 function gameData()
@@ -461,6 +461,7 @@ function gameData()
 			{
 				type: cell.type.slice('dialogue.'.length),
 				id: cell.id,
+				y: cell.position.y
 			};
 			if (node.type == 'Branch')
 			{
@@ -517,12 +518,16 @@ function gameData()
 						source.choices = [];
 						delete source.next;
 					}
-					source.choices.push(target.id);
+					source.choices.push({id: target.id, index: target.y});
 				}
 				else
 					source.next = target ? target.id : null;
 			}
 		}
+	}
+
+	for (var i = 0; i < nodes.length; i++) {
+		delete nodes.y;
 	}
 	return nodes;
 }

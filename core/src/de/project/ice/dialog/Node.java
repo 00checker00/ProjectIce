@@ -1,6 +1,7 @@
 package de.project.ice.dialog;
 
 import com.badlogic.gdx.utils.Array;
+import de.project.ice.utils.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,7 +25,7 @@ public class Node
     @NotNull
     public String text = "";
     @NotNull
-    public final Array<Node> choices = new Array<Node>(0);
+    public final Array<Pair<Node, Integer>> choices = new Array<Pair<Node, Integer>>(0);
     @Nullable
     public Branch branch = null;
 

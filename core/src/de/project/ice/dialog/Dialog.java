@@ -3,9 +3,11 @@ package de.project.ice.dialog;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
+import de.project.ice.utils.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Comparator;
 import java.util.HashMap;
 
 public abstract class Dialog
@@ -59,9 +61,17 @@ public abstract class Dialog
 
             if (value.has("choices"))
             {
-                for (String choiceId : value.get("choices").asStringArray())
+                for (JsonValue choice : value.get("choices"))
                 {
-                    node.choices.add(loadNode(choiceId, nodes));
+                    node.choices.add(Pair.create(loadNode(choice.getString("id"), nodes), choice.getInt("index", 0)));
+                    node.choices.sort(new Comparator<Pair<Node, Integer>>()
+                    {
+                        @Override
+                        public int compare(Pair<Node, Integer> o1, Pair<Node, Integer> o2)
+                        {
+                            return o1.getSecond() - o2.getSecond();
+                        }
+                    });
                 }
             }
 
