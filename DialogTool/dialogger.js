@@ -878,7 +878,11 @@ $('#paper').contextmenu(
 		{ text: 'New', alias: '2-5', action: clear },
 		{ text: 'Export', id: 'export', alias: '2-6', action: exportFile },
 		{ text: 'Export game file', id: 'export-game', alias: '2-7', action: exportGameFile },
-	]
+	],
+	onShow: function () {
+		panning = false;
+		$('body').css('cursor', 'default');
+	}
 });  
 $(window).load(function() {
     clear();
