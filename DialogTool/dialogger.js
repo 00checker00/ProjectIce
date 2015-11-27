@@ -65,7 +65,6 @@ function validateConnection(cellViewS, magnetS, cellViewT, magnetT, end, linkVie
 
 	var sourceType = cellViewS.model.attributes.type;
 	var targetType = cellViewT.model.attributes.type;
-	var valid = false;
 	for (var i = 0; i < allowableConnections.length; i++)
 	{
 		var rule = allowableConnections[i];
@@ -78,6 +77,7 @@ function validateConnection(cellViewS, magnetS, cellViewT, magnetT, end, linkVie
 	if (!valid)
 		return false;
 
+
 	var links = graph.getConnectedLinks(cellViewS.model);
 	for (var i = 0; i < links.length; i++)
 	{
@@ -87,8 +87,6 @@ function validateConnection(cellViewS, magnetS, cellViewT, magnetT, end, linkVie
 			var targetCell = graph.getCell(link.attributes.target.id);
 			if (targetCell.attributes.type !== targetType)
 				return false; // We can only connect to multiple targets of the same type
-			if (targetCell == cellViewT.model)
-				return false; // Already connected
 		} 
 	}
 
