@@ -605,16 +605,20 @@ function doSave()
 {
 	if (filename)
 	{
+		var json = JSON.parse(JSON.stringify(graph));
+		json.position = {x: $("#container").scrollLeft(), y: $("#container").scrollTop()};
+		var data = JSON.stringify(json);
+
 		if (fs)
 		{
-			fs.writeFileSync(filename, JSON.stringify(graph), 'utf8');
+			fs.writeFileSync(filename, data, 'utf8');
 			fs.writeFileSync(gameFilenameFromNormalFilename(filename), JSON.stringify(gameData()), 'utf8');
 		}
 		else
 		{
 			if (!localStorage[filename])
 				addFileEntry(filename);
-			localStorage[filename] = JSON.stringify(graph);
+			localStorage[filename] = data;
 		}
 		flash('Saved ' + filename);
 	}
@@ -634,12 +638,25 @@ function load()
 			{
 				graph.clear();
 				filename = files[0];
-				graph.fromJSON(JSON.parse(fs.readFileSync(filename, 'utf8')));
+				var json = JSON.parse(fs.readFileSync(filename, 'utf8'));
+
+				doLoad(json);
 			}
 		});
 	}
 	else
 		$('#menu').show();
+}
+
+function doLoad(json) {
+	graph.fromJSON(json);
+
+	position = json.position;
+	if (typeof position === 'undefined') {
+		position = {x: 0, y: 0}
+	}
+	$("#container").scrollLeft(position.x);
+	$("#container").scrollTop(position.y);
 }
 
 function exportFile()
@@ -847,7 +864,7 @@ function addFileEntry(name)
 	entry.on('click', function(event)
 	{
 		graph.clear();
-		graph.fromJSON(JSON.parse(localStorage[name]));
+		doLoad(JSON.parse(localStorage[name]));
 		filename = name;
 		$('#menu').hide();
 	});
