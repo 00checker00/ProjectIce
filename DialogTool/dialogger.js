@@ -671,15 +671,17 @@ function importFile()
 		$('#file').click();
 }
 
-function add(constructor)
+function add(constructor, position)
 {
 	return function()
 	{
-		var position = $('#cmroot').position();
+		if (typeof position === 'undefined') {
+			position = contextMenuPosition
+		}
 		var container = $('#container')[0];
 		var element = new constructor(
 		{
-			position: { x: position.left + container.scrollLeft, y: position.top + container.scrollTop },
+			position: {x: position.x + container.scrollLeft, y: position.y + container.scrollTop},
 		});
 		graph.addCells([element]);
 	};
@@ -688,7 +690,9 @@ function add(constructor)
 function clear()
 {
 	graph.clear();
-    add(joint.shapes.dialogue.Start)();
+	$("#container").scrollLeft(8000);
+	$("#container").scrollTop(4000);
+	add(joint.shapes.dialogue.Start, {x: $(window).width() / 8, y: $(window).height() / 2})();
 	filename = null;
 }
 
@@ -710,6 +714,8 @@ var paper = new joint.dia.Paper(
 
 var panning = false;
 var mousePosition = { x: 0, y: 0 };
+var contextMenuPosition = {x: 0, y: 0};
+
 paper.on('blank:pointerdown', function(e, x, y)
 {
 	panning = true;
@@ -882,6 +888,8 @@ $('#paper').contextmenu(
 	onShow: function () {
 		panning = false;
 		$('body').css('cursor', 'default');
+		contextMenuPosition.x = mousePosition.x;
+		contextMenuPosition.y = mousePosition.y;
 	}
 });  
 $(window).load(function() {
