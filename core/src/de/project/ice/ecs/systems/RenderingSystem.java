@@ -10,10 +10,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import de.project.ice.config.Config;
 import de.project.ice.ecs.Components;
 import de.project.ice.ecs.Families;
 import de.project.ice.ecs.IceEngine;
 import de.project.ice.ecs.components.*;
+import de.project.ice.utils.Assets;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -82,7 +84,14 @@ public class RenderingSystem extends SortedIteratingIceSystem
         batch.setProjectionMatrix(active_camera.combined);
         batch.begin();
         super.update(deltaTime);
+
+        for (Entity hotspot : hotspots)
+        {
+            renderHotspot(hotspot);
+        }
+
         batch.end();
+
         if (RENDER_DEBUG)
         {
             debugRenderer.setProjectionMatrix(active_camera.combined);
@@ -146,10 +155,20 @@ public class RenderingSystem extends SortedIteratingIceSystem
         HotspotComponent hotspot = Components.hotspot.get(entity);
 
         Vector2 pos = transform.pos.cpy().add(hotspot.origin);
+        Vector2 origin = pos.cpy().add(hotspot.origin);
+        Vector2 center = origin.cpy().add(hotspot.width / 2, hotspot.height / 2);
 
-        debugRenderer.rect(pos.x, pos.y, hotspot.width, hotspot.height);
-        cross(pos.cpy().add(hotspot.origin).add(hotspot.width / 2, hotspot.height / 2));
-        cross(pos.cpy().sub(hotspot.origin).add(hotspot.targetPos).add(hotspot.origin));
+        if (batch.isDrawing() && Gdx.input.isKeyPressed(Config.HOTSPOT_KEY))
+        {
+            Assets.TextureRegionHolder region = Assets.findRegion("hotspot");
+            batch.draw(region.data, center.x - 0.25f, center.y - 0.25f, 0.5f, 0.5f);
+        }
+        else if (debugRenderer.isDrawing())
+        {
+            debugRenderer.rect(origin.x, origin.y, hotspot.width, hotspot.height);
+            cross(origin);
+            cross(pos.cpy().sub(hotspot.origin).add(hotspot.targetPos).add(hotspot.origin));
+        }
     }
 
     @Override

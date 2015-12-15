@@ -4,7 +4,7 @@ import de.project.ice.scripting.Script;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ScriptComponent implements IceComponent
+public class ScriptComponent implements IceComponent<ScriptComponent>
 {
     @Nullable
     public Script script = null;
@@ -22,5 +22,11 @@ public class ScriptComponent implements IceComponent
     {
         script = null;
         scriptName = "";
+    }
+
+    @Override
+    public void copyTo(ScriptComponent copy)
+    {
+        copy.scriptName = scriptName;
     }
 }

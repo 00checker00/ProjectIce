@@ -276,7 +276,60 @@ joint.shapes.dialogue.Text = joint.shapes.devs.Model.extend(
 		joint.shapes.dialogue.Base.prototype.defaults
 	),
 });
-joint.shapes.dialogue.TextView = joint.shapes.dialogue.BaseView;
+joint.shapes.dialogue.TextView = joint.shapes.dialogue.BaseView.extend({
+	template: [
+		'<div class="node">',
+		'<span class="label"></span>',
+		'<button class="delete">x</button>',
+		'<button class="color"> </button>',
+		'<input type="text" class="name" placeholder="Text" />',
+		'<input type="text" class="face" placeholder="Face" />',
+		'</div>',
+	].join(''),
+
+	initialize: function () {
+		joint.shapes.dialogue.BaseView.prototype.initialize.apply(this, arguments);
+
+		this.$box.find('input.face').on('change', _.bind(function (evt) {
+			this.model.set('value', $(evt.target).val());
+		}, this));
+
+		var color = this.model.get('color');
+		if (typeof color === 'undefined') color = "#000000";
+		console.log(color);
+
+		var that = this;
+		this.$box.find('button.color').spectrum({
+			color: color,
+			showInput: true,
+			togglePaletteMoreText: '',
+			togglePaletteLessText: '',
+			showPalette: true,
+			containerClassName: 'colorpicker',
+			preferredFormat: "hex",
+			showSelectionPalette: true,
+			maxSelectionSize: 20,
+			showButtons: false,
+			showInitial: true,
+			palette: [],
+			localStorageKey: "spectrum.palette",
+			move: function (color) {
+				that.$box.find('button.color').css('background-color', color.toHexString());
+				that.model.set('color', color.toHexString());
+			}
+		});
+
+		this.$box.find('button.color').css('background-color', color);
+
+		this.updateSize();
+	},
+
+	updateSize: function () {
+		var textField = this.$box.find('input.name');
+		var height = textField.outerHeight(true);
+		this.model.set('size', {width: 200, height: 100 + height});
+	}
+});
 
 joint.shapes.dialogue.Choice = joint.shapes.devs.Model.extend(
 {

@@ -13,6 +13,7 @@ import com.kotcrab.vis.ui.widget.VisTextButton;
 import com.kotcrab.vis.ui.widget.VisWindow;
 import de.project.ice.ecs.IceEngine;
 import de.project.ice.editor.undoredo.AddEntityAction;
+import de.project.ice.editor.undoredo.DuplicateEntityAction;
 import de.project.ice.editor.undoredo.RemoveEntityAction;
 import de.project.ice.editor.undoredo.UndoRedoManager;
 import org.jetbrains.annotations.Nullable;
@@ -105,7 +106,7 @@ public class EntitiesWindow extends VisWindow
     private void createWidgets()
     {
 
-        VisTextButton createEntityBtn = new VisTextButton("Create Entity", new ChangeListener()
+        VisTextButton createEntityBtn = new VisTextButton("Create", new ChangeListener()
         {
             @Override
             public void changed(ChangeEvent event, Actor actor)
@@ -116,7 +117,19 @@ public class EntitiesWindow extends VisWindow
             }
         });
         add(createEntityBtn).expandX().fill();
-        VisTextButton deleteEntityBtn = new VisTextButton("Delete selected", new ChangeListener()
+        VisTextButton duplicateEntityBtn = new VisTextButton("Duplicate", new ChangeListener()
+        {
+            @Override
+            public void changed(ChangeEvent event, Actor actor)
+            {
+                if (entityList.getSelected() != null)
+                {
+                    undoRedoManager.addAction(new DuplicateEntityAction(entityList.getSelected().entity, engine));
+                }
+            }
+        });
+        add(duplicateEntityBtn).expandX().fill();
+        VisTextButton deleteEntityBtn = new VisTextButton("Delete", new ChangeListener()
         {
             @Override
             public void changed(ChangeEvent event, Actor actor)

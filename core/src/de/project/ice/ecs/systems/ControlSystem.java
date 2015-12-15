@@ -13,7 +13,8 @@ import de.project.ice.ecs.Components;
 import de.project.ice.ecs.Families;
 import de.project.ice.ecs.IceEngine;
 import de.project.ice.ecs.components.*;
-import de.project.ice.hotspot.HotspotManager;
+import de.project.ice.hotspot.Hotspot;
+import de.project.ice.hotspot.Hotspots;
 import de.project.ice.inventory.Inventory;
 import de.project.ice.pathlib.PathArea;
 import de.project.ice.pathlib.PathCalculator;
@@ -26,17 +27,13 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
     private ImmutableArray<Entity> cameras;
     private ImmutableArray<Entity> hotspots;
     OrthographicCamera active_camera = null;
-    HotspotManager.Hotspot active_hotspot = null;
-    Entity hotspot_entity = null;
-    HotspotManager hotspotManager;
+    Hotspot active_hotspot = null;
+    public Entity hotspot_entity = null;
 
     private Vector2 pointerPos = new Vector2();
     private boolean pointerDown = false;
     private boolean pointerWasDown = false;
-    private boolean mouseUp = false;
     private boolean mouseDown = false;
-
-    private CameraSystem cameraSystem;
 
     private PathCalculator mouseCalculator = new PathCalculator(0f);
 
@@ -114,6 +111,7 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
             useComponent.withItem = active_item;
             entity.add(useComponent);
         }
+        active_item = null;
     }
 
     private CursorScreen.Cursor getActiveCursor()
@@ -139,13 +137,8 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
         {
             mouseDown = true;
         }
-        else if (!pointerDown && pointerWasDown)
-        {
-            mouseUp = true;
-        }
 
         super.update(deltaTime);
-        mouseUp = false;
         mouseDown = false;
         pointerWasDown = pointerDown;
     }
@@ -156,9 +149,7 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
         super.addedToEngine(engine);
         this.engine = engine;
         cameras = engine.getEntitiesFor(Families.camera);
-        cameraSystem = engine.cameraSystem;
         hotspots = engine.getEntitiesFor(Families.hotspot);
-        hotspotManager = engine.game.hotspotManager;
     }
 
     @Override
@@ -215,12 +206,9 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
             Vector3 coords = active_camera.unproject(new Vector3(screenX, screenY, 0f));
 
             PathArea walkarea = engine.pathSystem.getWalkArea();
-            if (walkarea != null)
+            if (mouseCalculator.IsInside(walkarea, new Vector2(coords.x, coords.y)))
             {
-                if (mouseCalculator.IsInside(walkarea, new Vector2(coords.x, coords.y)))
-                {
-                    primaryCursor = CursorScreen.Cursor.Walk;
-                }
+                primaryCursor = CursorScreen.Cursor.Walk;
             }
 
             for (Entity entity : hotspots)
@@ -228,17 +216,17 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
                 TransformComponent transform = Components.transform.get(entity);
                 HotspotComponent hotspot = Components.hotspot.get(entity);
 
-                if (new Rectangle(transform.pos.x + hotspot.origin.x,
-                        transform.pos.y + hotspot.origin.y,
-                        hotspot.width,
-                        hotspot.height).contains(coords.x, coords.y))
+                Vector2 pos = transform.pos.cpy().add(hotspot.origin);
+                Vector2 origin = pos.cpy().add(hotspot.origin);
+
+                if (new Rectangle(origin.x, origin.y, hotspot.width, hotspot.height).contains(coords.x, coords.y))
                 {
-                    active_hotspot = hotspotManager.get(hotspot.script);
+                    active_hotspot = Hotspots.get(hotspot.script);
                     if (active_hotspot != null)
                     {
                         hotspot_entity = entity;
-                        primaryCursor = active_hotspot.getPrimaryCursor();
-                        secondaryCursor = active_hotspot.getSecondaryCursor();
+                        primaryCursor = active_hotspot.primaryCursor;
+                        secondaryCursor = active_hotspot.secondaryCursor;
                     }
                     break;
                 }

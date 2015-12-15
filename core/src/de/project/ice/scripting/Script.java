@@ -12,7 +12,6 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Base class for scripts
  * Note that all scripts have to be inside the "de.project.ice.scripting.scripts" package
- * or Have to be added to IceGame.gwt.xml for reflection to work inside the Browser
  */
 public abstract class Script
 {
@@ -20,13 +19,6 @@ public abstract class Script
     private IceEngine engine = null;
     @Nullable
     private IceGame game = null;
-
-    /**
-     * Called when the script is loaded
-     */
-    public void onLoad()
-    {
-    }
 
     /**
      * Call once every cycle after all onUpdateEntity
@@ -43,6 +35,24 @@ public abstract class Script
      * @param delta the delta time in seconds
      */
     public void onUpdateEntity(Entity entity, float delta)
+    {
+    }
+
+    /**
+     * Called when this script is attached to an Entity
+     *
+     * @param entity the entity the script has been attached to
+     */
+    public void onAttachedToEntity(Entity entity)
+    {
+    }
+
+    /**
+     * Called when the Entity this script is attached to has been removed from the engine
+     *
+     * @param entity the entity which has been removed
+     */
+    public void onAttachedEntityRemoved(Entity entity)
     {
     }
 
@@ -81,7 +91,6 @@ public abstract class Script
             Script script = ClassReflection.newInstance(clazz);
             script.engine = game.engine;
             script.game = game;
-            script.onLoad();
             return script;
         }
         catch (ReflectionException e)
@@ -89,10 +98,5 @@ public abstract class Script
             Gdx.app.log(Script.class.getSimpleName(), "Unable to load script: " + scriptName);
         }
         return null;
-    }
-
-    public void onUnload()
-    {
-
     }
 }

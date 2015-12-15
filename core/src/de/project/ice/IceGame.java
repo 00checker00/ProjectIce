@@ -8,7 +8,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.I18NBundle;
 import de.project.ice.dialog.Dialog;
 import de.project.ice.ecs.IceEngine;
-import de.project.ice.hotspot.HotspotManager;
 import de.project.ice.inventory.Inventory;
 import de.project.ice.screens.*;
 import de.project.ice.utils.Assets;
@@ -30,8 +29,6 @@ public class IceGame extends ApplicationAdapter
     @NotNull
     public Inventory inventory;
     @NotNull
-    public HotspotManager hotspotManager;
-    @NotNull
     public I18NBundle strings;
     private boolean paused = false;
 
@@ -44,7 +41,6 @@ public class IceGame extends ApplicationAdapter
     {
         I18NBundle.setSimpleFormatter(true);
         inventory = new Inventory(this);
-        hotspotManager = new HotspotManager(this);
         engine = new IceEngine(this);
         strings = I18NBundle.createBundle(Gdx.files.internal("strings/ProjectIce"));
 
@@ -60,6 +56,8 @@ public class IceGame extends ApplicationAdapter
     {
         addScreen(new MainMenuScreen(this));
         Gdx.input.setInputProcessor(new InputMultiplexer());
+
+
     }
 
     public void pauseGame()

@@ -90,7 +90,7 @@ public class InventoryScreen extends BaseScreenAdapter
                     case Input.Buttons.RIGHT:
                         if (item != null)
                         {
-                            game.showMessages(game.strings.get(item.getDescription()));
+                            game.showMessages(game.strings.get(item.description));
                         }
                         break;
                 }
@@ -163,7 +163,7 @@ public class InventoryScreen extends BaseScreenAdapter
         batch.draw(skin.getRegion("inventory_bg"), 0f, 0f, 1024f, 1024f);
         for (Inventory.Item item : game.inventory.items)
         {
-            Assets.TextureRegionHolder holder = Assets.findRegion(item.getIcon());
+            Assets.TextureRegionHolder holder = Assets.findRegion(item.icon);
             if (holder.data != null)
             {
                 Vector2 pos = calcPos(row, column);

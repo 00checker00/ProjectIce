@@ -3,7 +3,7 @@ package de.project.ice.ecs.components;
 import com.badlogic.gdx.math.Vector2;
 import org.jetbrains.annotations.NotNull;
 
-public class TransformComponent implements IceComponent
+public class TransformComponent implements IceComponent<TransformComponent>
 {
     @NotNull
     public Vector2 pos = new Vector2();
@@ -17,11 +17,22 @@ public class TransformComponent implements IceComponent
     @Override
     public void reset()
     {
-        pos.set(new Vector2());
-        scale.set(1.0f, 1.0f);
+        pos = new Vector2();
+        scale = new Vector2();
         rotation = 0.0f;
         z = 0;
         flipHorizontal = false;
         flipVertical = false;
+    }
+
+    @Override
+    public void copyTo(TransformComponent copy)
+    {
+        copy.pos = pos.cpy();
+        copy.scale = scale.cpy();
+        copy.rotation = rotation;
+        copy.z = z;
+        copy.flipHorizontal = flipHorizontal;
+        copy.flipVertical = flipVertical;
     }
 }

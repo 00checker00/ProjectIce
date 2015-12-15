@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Component for movable objects and characters
  */
-public class MoveComponent implements IceComponent
+public class MoveComponent implements IceComponent<MoveComponent>
 {
     public boolean isMoving = false;
     public List<Vector2> targetPositions = new LinkedList<Vector2>();
@@ -20,5 +20,16 @@ public class MoveComponent implements IceComponent
         isMoving = false;
         speed = 2.0f;
         targetPositions.clear();
+    }
+
+    @Override
+    public void copyTo(MoveComponent copy)
+    {
+        copy.isMoving = isMoving;
+        copy.speed = speed;
+        for (Vector2 pos : targetPositions)
+        {
+            copy.targetPositions.add(pos.cpy());
+        }
     }
 }

@@ -1,7 +1,7 @@
 package de.project.ice.ecs.components;
 
 
-public class NameComponent implements IceComponent
+public class NameComponent implements IceComponent<NameComponent>
 {
     public String name = "";
 
@@ -9,5 +9,11 @@ public class NameComponent implements IceComponent
     public void reset()
     {
         name = "";
+    }
+
+    @Override
+    public void copyTo(NameComponent copy)
+    {
+        copy.name = name;
     }
 }

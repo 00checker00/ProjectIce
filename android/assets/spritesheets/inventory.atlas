@@ -16,6 +16,13 @@ haken_angel
   orig: 173 ,173
   offset: 0 ,0
   index:0
+hotspot
+  rotate: false
+  xy: 326 ,363
+  size: 173 ,173
+  orig: 173 ,173
+  offset: 0 ,0
+  index:0
 hakenschnur_angel
   rotate: false
   xy: 0 ,0

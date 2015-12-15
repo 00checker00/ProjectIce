@@ -9,11 +9,14 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import de.project.ice.IceGame;
 import de.project.ice.Storage;
+import de.project.ice.config.Config;
 import de.project.ice.dialog.Node;
 import de.project.ice.utils.DelegatingBlockingInputProcessor;
+import de.project.ice.utils.Pair;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.MissingResourceException;
 
 public class DialogScreen extends BaseScreenAdapter
 {
@@ -34,7 +37,11 @@ public class DialogScreen extends BaseScreenAdapter
         super(game);
 
         stage = new Stage();
-        stage.setDebugAll(true);
+        if (Config.RENDER_DEBUG)
+        {
+            stage.setDebugAll(true);
+        }
+
         stage.setViewport(new ScreenViewport());
 
         skin = new Skin(Gdx.files.internal("ui/skin.json"));
@@ -57,7 +64,7 @@ public class DialogScreen extends BaseScreenAdapter
             game.removeScreen(this);
             return;
         }
-        else if (node.type == Node.Type.Node || node.type == Node.Type.Start)
+        else if ((node.type == Node.Type.Node || node.type == Node.Type.Start) && node.choices.size == 0)
         {
             // Empty node => Skip to next
             showNode(node.next);
@@ -96,10 +103,11 @@ public class DialogScreen extends BaseScreenAdapter
         {
             float pad = 50;
 
-            for (Node choice : node.choices)
+            for (Pair<Node, Integer> pair : node.choices)
             {
+                Node choice = pair.getFirst();
                 choiceTable.row();
-                TextButton btn = new TextButton(choice.text, skin);
+                TextButton btn = new TextButton(game.strings.get(choice.text), skin);
                 final Node next = choice.next;
                 btn.addListener(new InputListener()
                 {
@@ -120,11 +128,24 @@ public class DialogScreen extends BaseScreenAdapter
 
         ((InputProcessor) inputProcessor).next = node.next;
         ((InputProcessor) inputProcessor).nextEnabled = node.choices.size == 0;
-
-        Label textLabel = new Label(game.strings.get(node.text), skin);
-        textLabel.setAlignment(Align.center);
-        ScrollPane scrollPane = new ScrollPane(textLabel, skin);
-        root.add(scrollPane).height(50f).fill();
+        if (!node.text.isEmpty())
+        {
+            String text;
+            try
+            {
+                text = game.strings.get(node.text);
+            }
+            catch (MissingResourceException ignore)
+            {
+                // Missing a translation line => fallback to text id
+                text = node.text;
+                Gdx.app.log(getClass().getSimpleName(), "Missing translation for: " + node.text);
+            }
+            Label textLabel = new Label(text, skin);
+            textLabel.setAlignment(Align.center);
+            ScrollPane scrollPane = new ScrollPane(textLabel, skin);
+            root.add(scrollPane).height(50f).fill();
+        }
 
     }
 

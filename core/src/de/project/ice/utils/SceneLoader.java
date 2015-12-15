@@ -2,7 +2,6 @@ package de.project.ice.utils;
 
 
 import com.badlogic.ashley.core.Component;
-import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -19,7 +18,6 @@ import de.project.ice.ecs.IceEngine;
 import de.project.ice.ecs.systems.RenderingSystem;
 import de.project.ice.pathlib.PathArea;
 import de.project.ice.pathlib.Shape;
-import de.project.ice.scripting.Script;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -122,17 +120,6 @@ public abstract class SceneLoader
         {
             builder.music(music.getText());
             engine.soundSystem.playMusic(music.getText(), true);
-        }
-
-        String onLoadScript = scene.getAttribute("onload", "");
-        if (!onLoadScript.isEmpty())
-        {
-            builder.onloadScript(onLoadScript);
-            Script sceneScript = Script.loadScript(onLoadScript, engine.game);
-            if (sceneScript != null)
-            {
-                sceneScript.onLoad();
-            }
         }
         return builder.create();
     }
@@ -499,7 +486,7 @@ public abstract class SceneLoader
 
         public ScenePropertiesBuilder engine(IceEngine engine)
         {
-            this.engine = engine;;
+            this.engine = engine;
             return this;
         }
 

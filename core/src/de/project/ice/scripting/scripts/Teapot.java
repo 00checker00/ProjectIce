@@ -10,54 +10,43 @@ import de.project.ice.utils.Assets;
 
 public class Teapot extends Script
 {
-    private long counter = 0;
-    Entity flame;
-
     @Override
-    public void onLoad()
+    public void onAttachedToEntity(Entity entity)
     {
-        super.onLoad();
-        flame = Engine().createEntity();
+        Entity flame = Engine().createEntity();
 
         TransformComponent transformComponent = Engine().createComponent(TransformComponent.class);
         transformComponent.scale.set(1f, 0.1f);
+        transformComponent.pos.set(Components.transform.get(entity).pos).add(0.01f, 0.45f);
         flame.add(transformComponent);
 
         TextureComponent textureComponent = Engine().createComponent(TextureComponent.class);
         flame.add(textureComponent);
 
         AnimationComponent animationComponent = Engine().createComponent(AnimationComponent.class);
-        animationComponent.animations.put(0, Assets.createAnimation("candle_fire", 0.13f, Animation.PlayMode.LOOP));
+        animationComponent.animations.put(1, Assets.createAnimation("candle_fire", 0.13f, Animation.PlayMode.LOOP));
+        animationComponent.animation = 1;
         flame.add(animationComponent);
 
         ScriptComponent scriptComponent = Engine().createComponent(ScriptComponent.class);
         scriptComponent.scriptName = "TeapotFlame";
         flame.add(scriptComponent);
 
+        NameComponent nameComponent = Engine().createComponent(NameComponent.class);
+        nameComponent.name = "teapot_" + entity.getId() + "_flame";
+        flame.add(nameComponent);
+
         flame.add(new InvisibilityComponent());
+        Engine().addEntity(flame);
     }
 
     @Override
-    public void onTick()
+    public void onAttachedEntityRemoved(Entity entity)
     {
-        super.onTick();
-        counter++;
-    }
-
-    @Override
-    public void onUnload()
-    {
-        Engine().removeEntity(flame);
-    }
-
-    @Override
-    public void onUpdateEntity(Entity entity, float delta)
-    {
-        if (counter == 0)
+        Entity flame = Engine().getEntityByName("teapot_" + entity.getId() + "_flame");
+        if (flame != null)
         {
-            Components.transform.get(flame).pos.set(Components.transform.get(entity).pos).add(0.01f, 0.45f);
-            Engine().addEntity(flame);
-            counter++;
+            Engine().removeEntity(flame);
         }
     }
 }

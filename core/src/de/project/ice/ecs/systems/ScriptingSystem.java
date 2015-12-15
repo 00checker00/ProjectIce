@@ -61,10 +61,10 @@ public class ScriptingSystem extends IntervalIceSystem implements EntityListener
                 component.script = Script.loadScript(component.scriptName, engine.game);
                 if (component.script != null)
                 {
-                    component.script.onLoad();
+                    component.script.onAttachedToEntity(entity);
                 }
             }
-            if (script != null)
+            else
             {
                 activeScripts.add(script);
                 script.onUpdateEntity(entity, deltaTime);
@@ -100,7 +100,7 @@ public class ScriptingSystem extends IntervalIceSystem implements EntityListener
             Script script = Components.script.get(entity).script;
             if (script != null)
             {
-                script.onUnload();
+                script.onAttachedEntityRemoved(entity);
             }
         }
     }

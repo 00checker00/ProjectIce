@@ -11,6 +11,9 @@ import java.lang.reflect.Method;
 
 public class BaseEditor extends VisTable
 {
+    protected Method setter = null;
+    protected Method getter = null;
+
     public BaseEditor()
     {
         defaults().align(Align.topLeft);
@@ -24,34 +27,56 @@ public class BaseEditor extends VisTable
 
     public BaseEditor bind(Field field, Object target)
     {
+        String name = field.getName();
+        field.setAccessible(true);
+
+        try
+        {
+            // Try to find setter for the field
+            String setterName = "set" + name.substring(0, 1).toUpperCase() + name.substring(1);
+            setter = target.getClass().getMethod(setterName, field.getType());
+            setter.setAccessible(true);
+        }
+        catch (NoSuchMethodException ignore)
+        {
+            // No setter
+        }
+
+        try
+        {
+            // Try to find getter for the field
+            String setterName = "get" + name.substring(0, 1).toUpperCase() + name.substring(1);
+            getter = target.getClass().getMethod(setterName, field.getType());
+            getter.setAccessible(true);
+        }
+        catch (NoSuchMethodException ignore)
+        {
+            // No getter
+        }
+
         return this;
     }
 
-    @Nullable
-    protected static boolean setValue(Field field, Object target, Object value)
+    protected static boolean setValue(Field field, Object target, Object value, @Nullable Method setter)
     {
         try
         {
-            String name = field.getName();
+            if (setter != null)
+            {
+                try
+                {
+                    setter.invoke(target, value);
+                    return true;
+                }
+                catch (InvocationTargetException ignore)
+                {
+                }
+                catch (IllegalAccessException ignore)
+                {
+                }
+            }
 
-            try
-            {
-                // Try to find and call a setter for the field
-                String setterName = "set" + name.substring(0, 1).toUpperCase() + name.substring(1);
-                Method setter = target.getClass().getMethod(setterName, value.getClass());
-                setter.invoke(target, value);
-                return true;
-            }
-            catch (NoSuchMethodException ignore)
-            {
-            }
-            catch (InvocationTargetException ignore)
-            {
-            }
-            catch (IllegalAccessException ignore)
-            {
-            }
-            // No setter, just set the value
+            // Error calling the setter, just set the value
             field.set(target, value);
             return true;
         }
@@ -63,28 +88,23 @@ public class BaseEditor extends VisTable
     }
 
     @Nullable
-    protected static Object getValue(Field field, Object target)
+    protected static Object getValue(Field field, Object target, @Nullable Method getter)
     {
 
         try
         {
-            String name = field.getName();
-
-            try
+            if (getter != null)
             {
-                // Try to find and call a getter for the field
-                String getterName = "get" + name.substring(0, 1).toUpperCase() + name.substring(1);
-                Method setter = target.getClass().getMethod(getterName);
-                return setter.invoke(target);
-            }
-            catch (NoSuchMethodException ignore)
-            {
-            }
-            catch (InvocationTargetException ignore)
-            {
-            }
-            catch (IllegalAccessException ignore)
-            {
+                try
+                {
+                    return getter.invoke(target);
+                }
+                catch (InvocationTargetException ignore)
+                {
+                }
+                catch (IllegalAccessException ignore)
+                {
+                }
             }
             // No getter, just get the value
             return field.get(target);

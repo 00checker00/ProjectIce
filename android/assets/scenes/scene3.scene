@@ -1,4 +1,4 @@
-<scene name="scene3" onload="scene3_load">
+<scene name="scene3" onload="">
 	<music>mafia3</music>
 	<sounds>
 		<sound>piano</sound>
@@ -116,7 +116,7 @@
 					<name type="String">ofen</name>
 				</NameComponent>
 				<HotspotComponent>
-					<origin type="Vector2" x="0.7" y="0.4"/>
+					<origin type="Vector2" x="0.4" y="0.2"/>
 					<targetPos type="Vector2" x="1.6" y="-0.2"/>
 					<width type="Float">1.0</width>
 					<height type="Float">1.0</height>
@@ -177,10 +177,10 @@
 					<region type="TextureRegionHolder">prinzessin_atmung</region>
 				</TextureComponent>
 				<BreathComponent>
-					<curScale type="Vector2" x="-0.008084878" y="-0.008084878"/>
+					<curScale type="Vector2" x="-7.0703257E-4" y="-7.0703257E-4"/>
 					<scaleValue type="Vector2" x="0.01" y="0.01"/>
 					<duration type="Float">0.8</duration>
-					<time type="Float">83.69131</time>
+					<time type="Float">105.5009</time>
 				</BreathComponent>
 				<IdleComponent/>
 			</components>

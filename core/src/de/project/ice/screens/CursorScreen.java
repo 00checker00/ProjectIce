@@ -2,6 +2,7 @@ package de.project.ice.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -104,7 +105,14 @@ public class CursorScreen extends BaseScreenAdapter
         viewport.apply();
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
+
+        if (game.engine.controlSystem.hotspot_entity != null)
+        {
+            batch.setColor(Color.GREEN);
+        }
+
         batch.draw(cursor, Gdx.input.getX(), viewport.getScreenHeight() - Gdx.input.getY() - cursor.getRegionHeight());
+        batch.setColor(Color.WHITE);
         if (game.engine.controlSystem.active_item == null)
         {
             batch.draw(cursors.get(game.engine.controlSystem.primaryCursor), Gdx.input.getX() + 10, viewport.getScreenHeight() - Gdx.input.getY() - 32 - 10, 32, 32);
@@ -112,7 +120,7 @@ public class CursorScreen extends BaseScreenAdapter
         }
         else
         {
-            Assets.TextureRegionHolder item = Assets.findRegion(game.engine.controlSystem.active_item.getIcon());
+            Assets.TextureRegionHolder item = Assets.findRegion(game.engine.controlSystem.active_item.icon);
             if (item.isValid())
             {
                 batch.draw(item.data, Gdx.input.getX() + 10, viewport.getScreenHeight() - Gdx.input.getY() - 32 - 10, 32, 32);

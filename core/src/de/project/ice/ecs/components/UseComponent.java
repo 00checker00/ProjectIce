@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import de.project.ice.inventory.Inventory;
 import de.project.ice.screens.CursorScreen;
 
-public class UseComponent implements IceComponent
+public class UseComponent implements IceComponent<UseComponent>
 {
     public Entity target = null;
     public CursorScreen.Cursor cursor = CursorScreen.Cursor.None;
@@ -16,5 +16,13 @@ public class UseComponent implements IceComponent
         target = null;
         withItem = null;
         cursor = CursorScreen.Cursor.None;
+    }
+
+    @Override
+    public void copyTo(UseComponent copy)
+    {
+        copy.target = target;
+        copy.cursor = cursor;
+        copy.withItem = withItem;
     }
 }

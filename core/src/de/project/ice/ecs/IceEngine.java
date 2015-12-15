@@ -32,6 +32,8 @@ public class IceEngine extends PooledEngine
     @NotNull
     public final PathSystem pathSystem;
     @NotNull
+    public final UseSystem useSystem;
+    @NotNull
     public final IceGame game;
 
 
@@ -51,6 +53,7 @@ public class IceEngine extends PooledEngine
         breathSystem = new BreathSystem();
         soundSystem = new SoundSystem();
         pathSystem = new PathSystem();
+        useSystem = new UseSystem();
 
         addSystem(animationSystem);
         addSystem(cameraSystem);
@@ -61,6 +64,7 @@ public class IceEngine extends PooledEngine
         addSystem(breathSystem);
         addSystem(soundSystem);
         addSystem(pathSystem);
+        addSystem(useSystem);
 
         namedEntities = getEntitiesFor(Family.all(NameComponent.class).get());
     }

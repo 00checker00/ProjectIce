@@ -2,7 +2,6 @@ package de.project.ice.editor.editors;
 
 
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
 
 import java.lang.reflect.Field;
 
@@ -14,26 +13,25 @@ public class ValueEditor<T> extends BaseEditor
     protected Field field;
 
     protected Object target;
-    private Array<ValueChangedListener<T>> listeners = new Array<ValueChangedListener<T>>(0);
-
 
     @Override
     public void act(float delta)
     {
         super.act(delta);
+
         if ((oldValue != null && !oldValue.equals(value)) || (oldValue == null && value != null))
         {
             oldValue = value;
-            setValue(field, target, value);
+            setValue(field, target, value, setter);
             fireValueChanged();
         }
         else
         {
             try
             {
-                if (!value.equals(getValue(field, target)))
+                if (!value.equals(getValue(field, target, getter)))
                 {
-                    value = (T) getValue(field, target);
+                    value = (T) getValue(field, target, getter);
                     updateValue();
                 }
             }
@@ -53,6 +51,7 @@ public class ValueEditor<T> extends BaseEditor
     {
         this.target = target;
         this.field = field;
+        this.field.setAccessible(true);
         try
         {
             this.value = (T) field.get(target);
@@ -86,24 +85,5 @@ public class ValueEditor<T> extends BaseEditor
         {
             e.printStackTrace();
         }
-        for (ValueChangedListener<T> listener : listeners)
-        {
-            listener.valueChanged(this, value);
-        }
-    }
-
-    public void addListener(ValueChangedListener<T> value)
-    {
-        listeners.add(value);
-    }
-
-    public boolean removeListener(ValueChangedListener<T> value)
-    {
-        return listeners.removeValue(value, true);
-    }
-
-    public interface ValueChangedListener<T>
-    {
-        void valueChanged(ValueEditor<T> sender, T value);
     }
 }

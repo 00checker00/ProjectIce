@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import de.project.ice.IceGame;
+import de.project.ice.config.Config;
 import de.project.ice.utils.DelegatingBlockingInputProcessor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,12 +32,15 @@ public class MainMenuScreen extends BaseScreenAdapter
     @NotNull
     private HashMap<String, TextButton> buttons = new HashMap<String, TextButton>();
 
-    public MainMenuScreen(@NotNull IceGame game)
+    public MainMenuScreen(@NotNull final IceGame game)
     {
         super(game);
 
         stage = new Stage();
-        stage.setDebugAll(true);
+        if (Config.RENDER_DEBUG)
+        {
+            stage.setDebugAll(true);
+        }
         stage.setViewport(new ScreenViewport());
 
         skin = new Skin(Gdx.files.internal("ui/skin.json"));
