@@ -71,7 +71,7 @@ public class RenderingSystem extends SortedIteratingIceSystem
         // update the active camera
         if (cameras.size() > 0)
         {
-            active_camera = cameras.first().getComponent(CameraComponent.class).camera;
+            active_camera = cameras.first().getComponent(CameraComponent.class).getCamera();
         }
 
         if (active_camera == null)
@@ -154,20 +154,20 @@ public class RenderingSystem extends SortedIteratingIceSystem
         TransformComponent transform = Components.transform.get(entity);
         HotspotComponent hotspot = Components.hotspot.get(entity);
 
-        Vector2 pos = transform.pos.cpy().add(hotspot.origin);
-        Vector2 origin = pos.cpy().add(hotspot.origin);
-        Vector2 center = origin.cpy().add(hotspot.width / 2, hotspot.height / 2);
+        Vector2 pos = transform.getPos().cpy().add(hotspot.getOrigin());
+        Vector2 origin = pos.cpy().add(hotspot.getOrigin());
+        Vector2 center = origin.cpy().add(hotspot.getWidth() / 2, hotspot.getHeight() / 2);
 
         if (batch.isDrawing() && Gdx.input.isKeyPressed(Config.HOTSPOT_KEY))
         {
-            Assets.TextureRegionHolder region = Assets.findRegion("hotspot");
-            batch.draw(region.data, center.x - 0.25f, center.y - 0.25f, 0.5f, 0.5f);
+            Assets.Holder.TextureRegion region = Assets.INSTANCE.findRegion("hotspot");
+            batch.draw(region.getData(), center.x - 0.25f, center.y - 0.25f, 0.5f, 0.5f);
         }
         else if (debugRenderer.isDrawing())
         {
-            debugRenderer.rect(origin.x, origin.y, hotspot.width, hotspot.height);
+            debugRenderer.rect(origin.x, origin.y, hotspot.getWidth(), hotspot.getHeight());
             cross(origin);
-            cross(pos.cpy().sub(hotspot.origin).add(hotspot.targetPos).add(hotspot.origin));
+            cross(pos.cpy().sub(hotspot.getOrigin()).add(hotspot.getTargetPos()).add(hotspot.getOrigin()));
         }
     }
 
@@ -176,25 +176,25 @@ public class RenderingSystem extends SortedIteratingIceSystem
     {
         TextureComponent tex = Components.texture.get(entity);
 
-        if (tex.region.data == null)
+        if (tex.getRegion().getData() == null)
         {
             return;
         }
 
         TransformComponent t = Components.transform.get(entity);
 
-        float scaleX = t.scale.x;
-        float scaleY = t.scale.y;
+        float scaleX = t.getScale().x;
+        float scaleY = t.getScale().y;
 
         if (Components.breath.has(entity))
         {
             BreathComponent breath = Components.breath.get(entity);
-            scaleX += scaleX * breath.curScale.x;
-            scaleY += scaleY * breath.curScale.y;
+            scaleX += scaleX * breath.getCurScale().x;
+            scaleY += scaleY * breath.getCurScale().y;
         }
 
-        float width = tex.region.data.getRegionWidth() * PIXELS_TO_METRES * scaleX;
-        float height = tex.region.data.getRegionHeight() * PIXELS_TO_METRES * scaleY;
+        float width = tex.getRegion().getData().getRegionWidth() * PIXELS_TO_METRES * scaleX;
+        float height = tex.getRegion().getData().getRegionHeight() * PIXELS_TO_METRES * scaleY;
         float originX = width * 0.5f;
         float originY = height * 0.5f;
 
@@ -202,18 +202,18 @@ public class RenderingSystem extends SortedIteratingIceSystem
         {
 
             // draw the sprite in accordance with all calculated data (above)
-            batch.draw(tex.region.data,
-                    t.pos.x, t.pos.y,
+            batch.draw(tex.getRegion().getData(),
+                    t.getPos().x, t.getPos().y,
                     originX, originY,
                     width, height,
-                    t.flipHorizontal ? -1f : 1f, t.flipVertical ? -1f : 1f,
-                    MathUtils.radiansToDegrees * t.rotation);
+                    t.getFlipHorizontal() ? -1f : 1f, t.getFlipVertical() ? -1f : 1f,
+                    MathUtils.radiansToDegrees * t.getRotation());
 
         }
         else if (debugRenderer.isDrawing())
         {
-            debugRenderer.rect(t.pos.x, t.pos.y, width, height);
-            cross(t.pos.cpy().add(width / 2, height / 2).add(originX, originY));
+            debugRenderer.rect(t.getPos().x, t.getPos().y, width, height);
+            cross(t.getPos().cpy().add(width / 2, height / 2).add(originX, originY));
         }
     }
 
@@ -236,12 +236,12 @@ public class RenderingSystem extends SortedIteratingIceSystem
         @Override
         public int compare(Entity entityA, Entity entityB)
         {
-            int z = (int) Math.signum(Components.transform.get(entityB).z -
-                    Components.transform.get(entityA).z);
+            int z = (int) Math.signum(Components.transform.get(entityB).getZ() -
+                    Components.transform.get(entityA).getZ());
             if (z == 0)
             {
-                return (int) Math.signum(Components.transform.get(entityB).pos.y -
-                        Components.transform.get(entityA).pos.y);
+                return (int) Math.signum(Components.transform.get(entityB).getPos().y -
+                        Components.transform.get(entityA).getPos().y);
             }
             else
             {

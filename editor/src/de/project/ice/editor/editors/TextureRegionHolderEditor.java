@@ -25,33 +25,30 @@ public class TextureRegionHolderEditor extends HolderEditor<TextureRegion>
     @Override
     protected void onEdit()
     {
-        final String currentTexture = value.name;
+        final String currentTexture = value.getName();
         EditTextureRegionDialog.showDialog(getStage(), "Select texture", new DialogListener<String>()
         {
             @Override
             public void onResult(String textureRegion)
             {
-                Assets.Holder<TextureRegion> newHolder = Assets.findRegion(textureRegion);
-                setHolderName(newHolder.name);
-                setHolderData(newHolder.data);
+                Assets.Holder<TextureRegion> newHolder = Assets.INSTANCE.findRegion(textureRegion);
+                setHolderData(newHolder.getData());
             }
 
             @Override
             public void onChange(String textureRegion)
             {
-                Assets.Holder<TextureRegion> newHolder = Assets.findRegion(textureRegion);
-                setHolderName(newHolder.name);
-                setHolderData(newHolder.data);
+                Assets.Holder<TextureRegion> newHolder = Assets.INSTANCE.findRegion(textureRegion);
+                setHolderData(newHolder.getData());
             }
 
             @Override
             public void onCancel()
             {
-                Assets.Holder<TextureRegion> newHolder = Assets.findRegion(currentTexture);
-                setHolderName(newHolder.name);
-                setHolderData(newHolder.data);
+                Assets.Holder<TextureRegion> newHolder = Assets.INSTANCE.findRegion(currentTexture);
+                setHolderData(newHolder.getData());
             }
-        }, value.name);
+        }, value.getName());
     }
 
     private static class EditTextureRegionDialog extends VisDialog

@@ -114,7 +114,7 @@ public class ComponentsWindow extends VisWindow
             return;
         }
 
-        String name = new EntityEntry(entity).name;
+        String name = new EntityEntry(entity).getName();
         getTitleLabel().setText("Components of " + name);
 
         for (final Component component : entity.getComponents())

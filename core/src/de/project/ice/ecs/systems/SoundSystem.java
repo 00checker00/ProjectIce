@@ -10,9 +10,7 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.badlogic.gdx.utils.LongMap;
 import com.badlogic.gdx.utils.ObjectMap;
 
-/**
- * Created by Phil & Marco on 23.10.2015.
- */
+
 public class SoundSystem extends IceSystem
 {
     private ObjectMap<String, Sound> sounds = new ObjectMap<String, Sound>();
@@ -20,6 +18,12 @@ public class SoundSystem extends IceSystem
     private Music music = null;
     private DelayedRemovalArray<Fade> faders = new DelayedRemovalArray<Fade>();
     private String musicname = new String();
+
+    public enum Type
+    {
+        Voice,
+        Effect
+    }
 
     @Override
     public void update(float deltaTime)
@@ -41,35 +45,58 @@ public class SoundSystem extends IceSystem
 
     }
 
-    public boolean loadSound(String name)
+    public boolean loadSound(String name, Type type)
     {
-        FileHandle file = Gdx.files.internal("sounds/" + name + ".mp3");
+        String dir;
+        if (type == Type.Effect)
+        {
+            dir = "sounds";
+        }
+        else
+        {
+            dir = "voices";
+        }
+        FileHandle file = Gdx.files.internal(dir + "/" + name + ".mp3");
 
         if (!file.exists())
         {
-            Gdx.app.log(getClass().getSimpleName(), "Sound file doesn'T exist: " + file.path());
-            return false;
+            file = Gdx.files.internal(dir + "/" + name + ".ogg");
+            if (!file.exists())
+            {
+                Gdx.app.log(getClass().getSimpleName(), "Sound file doesn't exist: " + file.pathWithoutExtension() + " {.ogg, .mp3} ");
+                return false;
+            }
         }
 
         Sound sound = Gdx.audio.newSound(file);
-        sounds.put(name, sound);
+        sounds.put(name + "_" + type.toString(), sound);
 
         return true;
     }
 
-    public long playSound(String name)
+    public boolean loadSound(String name)
     {
-        if (!sounds.containsKey(name))
+        return loadSound(name, Type.Effect);
+    }
+
+    public long playSound(String name, Type type)
+    {
+        if (!sounds.containsKey(name + "_" + type.toString()))
         {
-            if (!loadSound(name))
+            if (!loadSound(name, type))
             {
                 return -1;
             }
         }
-        Sound sound = sounds.get(name);
+        Sound sound = sounds.get(name + "_" + type.toString());
         long playID = sound.play();
         ids.put(playID, name);
         return playID;
+    }
+
+    public long playSound(String name)
+    {
+        return playSound(name, Type.Effect);
     }
 
     public void stopSound(long playID)

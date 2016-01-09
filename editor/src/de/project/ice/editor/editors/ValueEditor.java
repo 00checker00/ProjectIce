@@ -22,16 +22,16 @@ public class ValueEditor<T> extends BaseEditor
         if ((oldValue != null && !oldValue.equals(value)) || (oldValue == null && value != null))
         {
             oldValue = value;
-            setValue(field, target, value, setter);
+            Companion.setValue(field, target, value, getSetter());
             fireValueChanged();
         }
         else
         {
             try
             {
-                if (!value.equals(getValue(field, target, getter)))
+                if (!value.equals(Companion.getValue(field, target, getGetter())))
                 {
-                    value = (T) getValue(field, target, getter);
+                    value = (T) Companion.getValue(field, target, getGetter());
                     updateValue();
                 }
             }

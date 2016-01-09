@@ -42,11 +42,11 @@ public abstract class Editors
         {
             return new StringEditor();
         }
-        else if (Assets.TextureRegionHolder.class.equals(type))
+        else if (Assets.Holder.TextureRegion.class.equals(type))
         {
             return new TextureRegionHolderEditor();
         }
-        else if (Assets.AnimationHolder.class.equals(type))
+        else if (Assets.Holder.Animation.class.equals(type))
         {
             return new AnimationHolderEditor();
         }

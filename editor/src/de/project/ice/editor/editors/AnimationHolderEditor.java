@@ -26,12 +26,11 @@ public class AnimationHolderEditor extends HolderEditor<Animation>
             @Override
             public void onResult(AnimationDialogResult result)
             {
-                Assets.Holder<Animation> newHolder = Assets.createAnimation(
+                Assets.Holder<Animation> newHolder = Assets.INSTANCE.createAnimation(
                         result.name,
                         result.frameTime,
                         result.playMode);
-                setHolderData(newHolder.data);
-                setHolderName(newHolder.name);
+                setHolderData(newHolder.getData());
             }
 
             @Override
@@ -65,7 +64,7 @@ public class AnimationHolderEditor extends HolderEditor<Animation>
 
             Table contentTable = getContentTable();
 
-            textureRegion = new VisTextField(holder.name);
+            textureRegion = new VisTextField(holder.getName());
             contentTable.add(new VisLabel("Texture Region: "));
             contentTable.add(textureRegion).expand().fill().row();
 
@@ -77,18 +76,18 @@ public class AnimationHolderEditor extends HolderEditor<Animation>
             contentTable.add(scrollPane).maxHeight(200).colspan(2).expandX().fill().row();
 
             frameTime = new VisValidatableTextField(new Validators.FloatValidator());
-            if (holder.data != null)
+            if (holder.getData() != null)
             {
-                frameTime.setText(String.valueOf(holder.data.getFrameDuration()));
+                frameTime.setText(String.valueOf(holder.getData().getFrameDuration()));
             }
             contentTable.add(new VisLabel("Frame Time: "));
             contentTable.add(frameTime).expand().fill().row();
 
             playMode = new VisSelectBox<Animation.PlayMode>();
             playMode.setItems(Animation.PlayMode.values());
-            if (holder.data != null)
+            if (holder.getData() != null)
             {
-                playMode.setSelected(holder.data.getPlayMode());
+                playMode.setSelected(holder.getData().getPlayMode());
             }
             contentTable.add(new VisLabel("Mode: "));
             contentTable.add(playMode).expand().fill();

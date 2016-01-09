@@ -50,13 +50,13 @@ public class PathSystem extends IceSystem
             return;
         }
 
-        PathArea walkarea = Components.walkarea.get(walkareaEntities.first()).area;
+        PathArea walkarea = Components.walkarea.get(walkareaEntities.first()).getArea();
 
         Array<PathNode> waypoints = new Array<PathNode>(pathplanningEntities.size() * 2);
         for (int i = 0; i < pathplanningEntities.size(); ++i)
         {
             PathPlanningComponent pathPlanningComponent = Components.pathplanning.get(pathplanningEntities.get(i));
-            waypoints.addAll(new PathNode(pathPlanningComponent.start), new PathNode(pathPlanningComponent.target));
+            waypoints.addAll(new PathNode(pathPlanningComponent.getStart()), new PathNode(pathPlanningComponent.getTarget()));
         }
 
         PathGraph graph = pathCalculator.computeGraph(walkarea, waypoints);
@@ -74,7 +74,7 @@ public class PathSystem extends IceSystem
 
             for (PathNode node : result)
             {
-                moveComponent.targetPositions.add(node.getPos().cpy());
+                moveComponent.getTargetPositions().add(node.getPos().cpy());
             }
 
             result.clear();
@@ -86,7 +86,7 @@ public class PathSystem extends IceSystem
     {
         if (walkareaEntities.size() > 0)
         {
-            return Components.walkarea.get(walkareaEntities.first()).area;
+            return Components.walkarea.get(walkareaEntities.first()).getArea();
         }
         return new PathArea();
     }

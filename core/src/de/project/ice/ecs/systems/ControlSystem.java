@@ -72,14 +72,14 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
                     case Look:
                     case Speak:
 
-                        float width = PIXELS_TO_METRES * (texture.region.data != null ? texture.region.data.getRegionWidth() : 0);
+                        float width = PIXELS_TO_METRES * (texture.getRegion().getData() != null ? texture.getRegion().getData().getRegionWidth() : 0);
 
                         Vector2 target;
                         if (hotspot_entity != null)
                         {
                             HotspotComponent hotspotComponent = Components.hotspot.get(hotspot_entity);
-                            target = Components.transform.get(hotspot_entity).pos.cpy()
-                                    .add(hotspotComponent.origin).add(hotspotComponent.targetPos);
+                            target = Components.transform.get(hotspot_entity).getPos().cpy()
+                                    .add(hotspotComponent.getOrigin()).add(hotspotComponent.getTargetPos());
                         }
                         else
                         {
@@ -87,12 +87,12 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
                             target = new Vector2(mouse_target.x, mouse_target.y);
                         }
 
-                        Vector2 start = transform.pos.cpy();
+                        Vector2 start = transform.getPos().cpy();
                         target = target.sub(width / 2, 0);
 
                         PathPlanningComponent pathPlanningComponent = engine.createComponent(PathPlanningComponent.class);
-                        pathPlanningComponent.target = target;
-                        pathPlanningComponent.start = start;
+                        pathPlanningComponent.setTarget(target);
+                        pathPlanningComponent.setStart(start);
 
                         entity.add(pathPlanningComponent);
                         break;
@@ -106,9 +106,9 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
         if (active_hotspot != null)
         {
             UseComponent useComponent = engine.createComponent(UseComponent.class);
-            useComponent.target = hotspot_entity;
-            useComponent.cursor = getActiveCursor();
-            useComponent.withItem = active_item;
+            useComponent.setTarget(hotspot_entity);
+            useComponent.setCursor(getActiveCursor());
+            useComponent.setWithItem(active_item);
             entity.add(useComponent);
         }
         active_item = null;
@@ -125,7 +125,7 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
         // update the active camera
         if (cameras.size() > 0)
         {
-            active_camera = cameras.first().getComponent(CameraComponent.class).camera;
+            active_camera = cameras.first().getComponent(CameraComponent.class).getCamera();
         }
 
         if (active_camera == null)
@@ -205,7 +205,7 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
         {
             Vector3 coords = active_camera.unproject(new Vector3(screenX, screenY, 0f));
 
-            PathArea walkarea = engine.pathSystem.getWalkArea();
+            PathArea walkarea = engine.getPathSystem().getWalkArea();
             if (mouseCalculator.IsInside(walkarea, new Vector2(coords.x, coords.y)))
             {
                 primaryCursor = CursorScreen.Cursor.Walk;
@@ -216,17 +216,17 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
                 TransformComponent transform = Components.transform.get(entity);
                 HotspotComponent hotspot = Components.hotspot.get(entity);
 
-                Vector2 pos = transform.pos.cpy().add(hotspot.origin);
-                Vector2 origin = pos.cpy().add(hotspot.origin);
+                Vector2 pos = transform.getPos().cpy().add(hotspot.getOrigin());
+                Vector2 origin = pos.cpy().add(hotspot.getOrigin());
 
-                if (new Rectangle(origin.x, origin.y, hotspot.width, hotspot.height).contains(coords.x, coords.y))
+                if (new Rectangle(origin.x, origin.y, hotspot.getWidth(), hotspot.getHeight()).contains(coords.x, coords.y))
                 {
-                    active_hotspot = Hotspots.get(hotspot.script);
+                    active_hotspot = Hotspots.INSTANCE.get(hotspot.getScript());
                     if (active_hotspot != null)
                     {
                         hotspot_entity = entity;
-                        primaryCursor = active_hotspot.primaryCursor;
-                        secondaryCursor = active_hotspot.secondaryCursor;
+                        primaryCursor = active_hotspot.getPrimaryCursor();
+                        secondaryCursor = active_hotspot.getSecondaryCursor();
                     }
                     break;
                 }

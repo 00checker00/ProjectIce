@@ -51,7 +51,7 @@ public class EditGameScreen extends BaseScreenAdapter
             {
                 if (game.isGamePaused())
                 {
-                    ImmutableArray<Entity> cameras = game.engine.getEntitiesFor(Families.camera);
+                    ImmutableArray<Entity> cameras = game.getEngine().getEntitiesFor(Families.camera);
                     if (cameras.size() == 0)
                     {
                         return false;
@@ -59,10 +59,10 @@ public class EditGameScreen extends BaseScreenAdapter
 
                     Entity activeCamera = cameras.first();
                     CameraComponent cameraComponent = Components.camera.get(activeCamera);
-                    Vector3 coords = cameraComponent.camera.unproject(new Vector3(screenX, screenY, 0f));
+                    Vector3 coords = cameraComponent.getCamera().unproject(new Vector3(screenX, screenY, 0f));
                     if (button == Input.Buttons.LEFT)
                     {
-                        Array<Entity> entities = new Array<Entity>(game.engine.getEntitiesFor(Families.renderable).toArray());
+                        Array<Entity> entities = new Array<Entity>(game.getEngine().getEntitiesFor(Families.renderable).toArray());
                         entities.sort(new RenderingSystem.RenderingComparator());
                         entities.reverse();
                         for (Entity entity : entities)
@@ -70,19 +70,19 @@ public class EditGameScreen extends BaseScreenAdapter
                             TransformComponent transform = Components.transform.get(entity);
                             TextureComponent texture = Components.texture.get(entity);
 
-                            if (!texture.region.isValid())
+                            if (!texture.getRegion().isValid())
                             {
                                 continue;
                             }
 
-                            float width = texture.region.data.getRegionWidth() * PIXELS_TO_METRES;
-                            float height = texture.region.data.getRegionHeight() * PIXELS_TO_METRES;
+                            float width = texture.getRegion().getData().getRegionWidth() * PIXELS_TO_METRES;
+                            float height = texture.getRegion().getData().getRegionHeight() * PIXELS_TO_METRES;
 
-                            if (new Rectangle(transform.pos.x, transform.pos.y, width, height).contains(coords.x, coords.y))
+                            if (new Rectangle(transform.getPos().x, transform.getPos().y, width, height).contains(coords.x, coords.y))
                             {
                                 dragComponent = transform;
-                                dragOriginX = coords.x - transform.pos.x;
-                                dragOriginY = coords.y - transform.pos.y;
+                                dragOriginX = coords.x - transform.getPos().x;
+                                dragOriginY = coords.y - transform.getPos().y;
                                 return false;
                             }
                         }
@@ -91,7 +91,7 @@ public class EditGameScreen extends BaseScreenAdapter
                     else if (button == Input.Buttons.MIDDLE)
                     {
                         cameraDragDown.set(screenX, screenY);
-                        cameraDrag = cameraComponent.camera;
+                        cameraDrag = cameraComponent.getCamera();
                     }
                 }
                 return false;
@@ -102,7 +102,7 @@ public class EditGameScreen extends BaseScreenAdapter
             {
                 if (dragComponent != null)
                 {
-                    ImmutableArray<Entity> cameras = game.engine.getEntitiesFor(Families.camera);
+                    ImmutableArray<Entity> cameras = game.getEngine().getEntitiesFor(Families.camera);
                     if (cameras.size() == 0)
                     {
                         return false;
@@ -110,9 +110,9 @@ public class EditGameScreen extends BaseScreenAdapter
 
                     Entity activeCamera = cameras.first();
                     CameraComponent cameraComponent = Components.camera.get(activeCamera);
-                    Vector3 coords = cameraComponent.camera.unproject(new Vector3(screenX, screenY, 0f));
+                    Vector3 coords = cameraComponent.getCamera().unproject(new Vector3(screenX, screenY, 0f));
 
-                    dragComponent.pos.set(new Vector2(coords.x - dragOriginX, coords.y - dragOriginY));
+                    dragComponent.getPos().set(new Vector2(coords.x - dragOriginX, coords.y - dragOriginY));
                 }
                 else if (cameraDrag != null)
                 {
