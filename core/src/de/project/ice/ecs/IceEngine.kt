@@ -20,6 +20,7 @@ class IceEngine(val game: IceGame) : PooledEngine() {
     val soundSystem: SoundSystem by lazy { SoundSystem() }
     val pathSystem: PathSystem by lazy { PathSystem() }
     val useSystem: UseSystem by lazy { UseSystem() }
+    val distanceScaleSytem: DistanceScaleSystem by lazy { DistanceScaleSystem() }
 
 
     private val namedEntities: ImmutableArray<Entity>
@@ -35,6 +36,7 @@ class IceEngine(val game: IceGame) : PooledEngine() {
         addSystem(soundSystem)
         addSystem(pathSystem)
         addSystem(useSystem)
+        addSystem(distanceScaleSytem)
 
         namedEntities = getEntitiesFor(Family.all(NameComponent::class.java).get())
     }

@@ -34,6 +34,7 @@ public class ComponentsWindow extends VisWindow
             TransformComponent.class,
             WalkAreaComponent.class,
             WalkingComponent.class,
+            DistanceScaleComponent.class,
     };
 
     private Entity entity = null;
