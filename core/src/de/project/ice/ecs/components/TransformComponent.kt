@@ -12,7 +12,7 @@ class TransformComponent : CopyableIceComponent {
 
     override fun reset() {
         pos.set(0f, 0f)
-        scale.set(0f, 0f)
+        scale.set(1f, 1f)
         rotation = 0.0f
         z = 0
         flipHorizontal = false
