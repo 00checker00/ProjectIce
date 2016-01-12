@@ -196,6 +196,8 @@ class EditorScreen(game: IceGame) : BaseScreenAdapter(game), EntitiesWindow.Sele
                         for (sound in result.sounds()) {
                             game.engine.soundSystem.loadSound(sound)
                         }
+
+                        reloadAssets()
                     }
 
                     override fun onCancel() {
@@ -255,8 +257,7 @@ class EditorScreen(game: IceGame) : BaseScreenAdapter(game), EntitiesWindow.Sele
 
         assetsMenu.addItem(MenuItem("Reload Assets", object : ChangeListener() {
             override fun changed(event: ChangeListener.ChangeEvent, actor: Actor) {
-                Assets.clear()
-                Assets.finishAll()
+                reloadAssets()
             }
         }))
 
@@ -321,6 +322,15 @@ class EditorScreen(game: IceGame) : BaseScreenAdapter(game), EntitiesWindow.Sele
             e.printStackTrace()
         }
 
+    }
+
+    private fun reloadAssets() {
+        Assets.clear()
+        Assets.finishAll()
+        for (spritesheet in sceneProperties.spritesheets()) {
+            Assets.loadAtlas(spritesheet)
+        }
+        Assets.finishAll()
     }
 
     private fun restoreState() {

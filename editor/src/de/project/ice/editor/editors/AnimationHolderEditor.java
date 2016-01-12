@@ -30,7 +30,7 @@ public class AnimationHolderEditor extends HolderEditor<Animation>
                         result.name,
                         result.frameTime,
                         result.playMode);
-                setHolderData(newHolder.getData());
+                setHolderData(newHolder);
             }
 
             @Override

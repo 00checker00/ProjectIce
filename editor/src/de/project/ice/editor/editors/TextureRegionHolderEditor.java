@@ -32,21 +32,21 @@ public class TextureRegionHolderEditor extends HolderEditor<TextureRegion>
             public void onResult(String textureRegion)
             {
                 Assets.Holder<TextureRegion> newHolder = Assets.INSTANCE.findRegion(textureRegion);
-                setHolderData(newHolder.getData());
+                setHolderData(newHolder);
             }
 
             @Override
             public void onChange(String textureRegion)
             {
                 Assets.Holder<TextureRegion> newHolder = Assets.INSTANCE.findRegion(textureRegion);
-                setHolderData(newHolder.getData());
+                setHolderData(newHolder);
             }
 
             @Override
             public void onCancel()
             {
                 Assets.Holder<TextureRegion> newHolder = Assets.INSTANCE.findRegion(currentTexture);
-                setHolderData(newHolder.getData());
+                setHolderData(newHolder);
             }
         }, value.getName());
     }

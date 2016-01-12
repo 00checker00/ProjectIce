@@ -17,18 +17,22 @@ abstract class HolderEditor<T> : ValueEditor<Assets.Holder<T>>() {
             return "invalid"
         }
 
-    protected var holderData: T?
+    protected var holderData: Assets.Holder<T>?
         get() {
             if (value != null) {
-                return value.data
+                return value
             }
             return null
         }
         set(data) {
-            if (value != null) {
-                val field = Assets.Holder::class.java.getDeclaredField("data")
-                field.isAccessible = true
-                field.set(value, data)
+            if (value != null && data != null) {
+                val dataField = Assets.Holder::class.java.getDeclaredField("data")
+                dataField.isAccessible = true
+                dataField.set(value, data.data)
+
+                val nameField = Assets.Holder::class.java.getDeclaredField("name")
+                nameField.isAccessible = true
+                nameField.set(value, data.name)
             }
         }
 
