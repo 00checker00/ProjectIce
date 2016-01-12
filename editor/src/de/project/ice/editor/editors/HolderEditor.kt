@@ -5,8 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener
 import com.kotcrab.vis.ui.widget.VisTextButton
 import com.kotcrab.vis.ui.widget.VisTextField
 import de.project.ice.utils.Assets
-import kotlin.reflect.jvm.javaField
-import kotlin.reflect.memberProperties
 
 abstract class HolderEditor<T> : ValueEditor<Assets.Holder<T>>() {
     private var valueField: VisTextField? = null
@@ -28,7 +26,9 @@ abstract class HolderEditor<T> : ValueEditor<Assets.Holder<T>>() {
         }
         set(data) {
             if (value != null) {
-                Assets.Holder::class.memberProperties.find { prop -> prop.name == value.name }?.javaField?.set(value, data)
+                val field = Assets.Holder::class.java.getDeclaredField("data")
+                field.isAccessible = true
+                field.set(value, data)
             }
         }
 
