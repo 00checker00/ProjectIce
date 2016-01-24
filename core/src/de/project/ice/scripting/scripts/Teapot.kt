@@ -35,7 +35,7 @@ class Teapot : Script() {
         flame.add(scriptComponent)
 
         val nameComponent = Engine().createComponent(NameComponent::class.java)
-        nameComponent.name = "teapot_" + entity.id + "_flame"
+        nameComponent.name = "teapot_flame"
         flame.add(nameComponent)
 
         flame.add(InvisibilityComponent())
@@ -43,7 +43,7 @@ class Teapot : Script() {
     }
 
     override fun onAttachedEntityRemoved(entity: Entity) {
-        val flame = Engine().getEntityByName("teapot_" + entity.id + "_flame")
+        val flame = Engine().getEntityByName("teapot_flame")
         if (flame != null) {
             Engine().removeEntity(flame)
         }

@@ -68,7 +68,7 @@ class IceEngine(val game: IceGame) : PooledEngine() {
             if (nameComponent != null) {
                 return nameComponent.name
             } else {
-                return "Unnamed(0x" + java.lang.Long.toHexString(entity.id) + ")"
+                return "Unnamed"
             }
         }
     }

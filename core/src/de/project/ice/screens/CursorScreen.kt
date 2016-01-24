@@ -40,7 +40,9 @@ class CursorScreen(game: IceGame) : BaseScreenAdapter(game) {
 
         cursorPixmap = Pixmap(32, 32, Pixmap.Format.RGBA8888)
 
-        Gdx.graphics.newCursor(cursorPixmap, 0, 0).setSystemCursor()
+
+        Gdx.graphics.setCursor(Gdx.graphics.newCursor(cursorPixmap, 0, 0))
+
 
         batch = SpriteBatch()
 

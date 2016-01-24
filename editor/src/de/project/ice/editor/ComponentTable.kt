@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener
 import com.badlogic.gdx.utils.Align
 import com.kotcrab.vis.ui.widget.VisTable
 import com.kotcrab.vis.ui.widget.VisTextButton
+import de.project.ice.annotations.Property
 import de.project.ice.ecs.components.AnimationComponent
 import de.project.ice.editor.editors.Editors
 import de.project.ice.utils.Assets
@@ -49,6 +50,14 @@ class ComponentTable(component: Component) : VisTable() {
         for (property in clazz.memberProperties) {
 
             val f = property.javaField ?: continue
+
+            val annotations = f.annotations
+            val propertyAnnotation = f.annotations.find {
+                it is Property
+            }
+            if (propertyAnnotation != null && propertyAnnotation is Property) {
+                println("Found property annotation: Description = ${propertyAnnotation.Description}")
+            }
 
             f.isAccessible = true
             addField(f, component)

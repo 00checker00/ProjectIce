@@ -10,6 +10,6 @@ class EditorApplication : IceGame() {
         pauseGame()
         addScreen(EditGameScreen(this))
         addScreen(EditorScreen(this))
-        Gdx.graphics.newCursor(null, 0, 0).setSystemCursor()
+        Gdx.graphics.setCursor(Gdx.graphics.newCursor(null, 0, 0))
     }
 }
