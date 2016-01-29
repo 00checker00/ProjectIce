@@ -1,14 +1,17 @@
 package de.project.ice.ecs.components
 
-import com.badlogic.gdx.math.Vector2
+import de.project.ice.annotations.Property
 import java.util.*
 
 /**
  * Component for movable objects and characters
  */
 class MoveComponent : CopyableIceComponent {
+    @Property("Whether the entity is currently moving or not", true)
     var isMoving = false
+    @Property("The position to where this entity is walking")
     val targetPositions = ArrayList<Vector2>()
+    @Property("The moving speed of this entity")
     var speed = 2.0f
 
     override fun reset() {

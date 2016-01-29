@@ -11,16 +11,16 @@ public class OrthographicCameraEditor extends BaseEditor
     private OrthographicCamera camera;
 
     @Override
-    public BaseEditor bind(Field field, Object target)
+    public BaseEditor bind(Field field, Object target, String description)
     {
         try
         {
             add(field.getName() + ":").row();
             camera = (OrthographicCamera) field.get(target);
             Field position = OrthographicCamera.class.getField("position");
-            add(new Vector3Editor().bind(position, camera)).padLeft(10f).row();
+            add(new Vector3Editor().bind(position, camera, "The position of the camera")).padLeft(10f).row();
             Field viewportScale = OrthographicCameraEditor.class.getDeclaredField("viewportScale");
-            add(new NumberEditor.FloatEditor().bind(viewportScale, this)).padLeft(10f).row();
+            add(new NumberEditor.FloatEditor().bind(viewportScale, this, "The size of the viewport")).padLeft(10f).row();
         }
         catch (NoSuchFieldException e)
         {

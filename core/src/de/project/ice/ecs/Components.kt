@@ -1,14 +1,12 @@
 package de.project.ice.ecs
 
-import com.badlogic.ashley.core.ComponentMapper
-import com.badlogic.ashley.core.Entity
 import de.project.ice.ecs.components.*
 
 object Components {
     val animation = ComponentMapper.getFor(AnimationComponent::class.java)
     val camera = ComponentMapper.getFor(CameraComponent::class.java)
     val texture = ComponentMapper.getFor(TextureComponent::class.java)
-    val transform = ComponentMapper.getFor(TransformComponent::class.java)
+    @JvmField val transform = ComponentMapper.getFor(TransformComponent::class.java)
     val disabled = ComponentMapper.getFor(DisabledComponent::class.java)
     val script = ComponentMapper.getFor(ScriptComponent::class.java)
     val control = ComponentMapper.getFor(ControlComponent::class.java)

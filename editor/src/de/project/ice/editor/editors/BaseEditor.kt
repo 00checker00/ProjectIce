@@ -1,9 +1,6 @@
 package de.project.ice.editor.editors
 
 
-import com.badlogic.gdx.utils.Align
-import com.kotcrab.vis.ui.widget.VisTable
-
 import java.lang.reflect.Field
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
@@ -21,7 +18,7 @@ open class BaseEditor : VisTable() {
 
     }
 
-    open fun bind(field: Field, target: Any): BaseEditor {
+    open fun bind(field: Field, target: Any, description: String?): BaseEditor {
         val name = field.name
         field.isAccessible = true
 
@@ -48,7 +45,7 @@ open class BaseEditor : VisTable() {
 
     companion object {
 
-        protected operator fun setValue(field: Field, target: Any, value: Any, setter: Method?): Boolean {
+        operator fun setValue(field: Field, target: Any, value: Any, setter: Method?): Boolean {
             try {
                 if (setter != null) {
                     try {
@@ -70,7 +67,7 @@ open class BaseEditor : VisTable() {
             return false
         }
 
-        protected operator fun getValue(field: Field, target: Any, getter: Method?): Any? {
+        operator fun getValue(field: Field, target: Any, getter: Method?): Any? {
 
             try {
                 if (getter != null) {

@@ -12,6 +12,7 @@ public class IntMapEditor extends BaseEditor
     private Object target;
     private IntMap<Object> map;
     private Array<Binder> binders = new Array<Binder>();
+    private String description;
 
     @Override
     public void act(float delta)
@@ -42,7 +43,7 @@ public class IntMapEditor extends BaseEditor
                     tmp.oldKey = binder.oldKey;
                 }
                 binder.oldKey = binder.key;
-                bind(field, target);
+                bind(field, target, "");
             }
             if (binder.value != map.get(binder.key))
             {
@@ -51,7 +52,7 @@ public class IntMapEditor extends BaseEditor
         }
         if (map.size != binders.size)
         {
-            bind(field, target);
+            bind(field, target, "");
         }
     }
 
@@ -63,10 +64,11 @@ public class IntMapEditor extends BaseEditor
     }
 
     @Override
-    public IntMapEditor bind(Field field, Object target)
+    public IntMapEditor bind(Field field, Object target, String description)
     {
         this.field = field;
         this.target = target;
+        this.description = description;
         clear();
         try
         {
@@ -74,9 +76,9 @@ public class IntMapEditor extends BaseEditor
             for (IntMap.Entry<Object> entry : map)
             {
                 Binder binder = new Binder(entry.key, entry.value);
-                add(new NumberEditor.IntegerEditor().bind(Binder.class.getField("key"), binder));
-                add(Editors.editorForClass(entry.value.getClass())
-                        .bind(Binder.class.getField("value"), binder))
+                add(new NumberEditor.IntegerEditor().bind(Binder.class.getField("key"), binder, "The " + entry.key + ". entry"));
+                add(Editors.Companion.editorForClass(entry.value.getClass())
+                        .bind(Binder.class.getField("value"), binder, description))
                         .row();
                 binders.add(binder);
             }

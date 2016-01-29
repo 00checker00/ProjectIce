@@ -1,11 +1,12 @@
 package de.project.ice.ecs.components
 
-import com.badlogic.gdx.graphics.OrthographicCamera
+import de.project.ice.annotations.Property
 
 /**
  * ONLY one camera component should exist
  */
 class CameraComponent : CopyableIceComponent {
+    @Property("The camera")
     var camera = OrthographicCamera(16f, 9f)
 
     override fun reset() {

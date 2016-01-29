@@ -1,12 +1,17 @@
 package de.project.ice.ecs.components
 
-import com.badlogic.gdx.math.Vector2
+import de.project.ice.annotations.Property
 
 class HotspotComponent : CopyableIceComponent {
+    @Property("The position of the hotspot")
     val origin = Vector2(0f, 0f)
+    @Property("Position to which characters walk when interacting with the hotspot. Relative to the origin")
     val targetPos = Vector2(0f, 0f)
+    @Property("Width of the hotspot")
     var width = 0f
+    @Property("Height of the hotspot")
     var height = 0f
+    @Property("Name of the Script (Classname)")
     var script = ""
 
     override fun reset() {

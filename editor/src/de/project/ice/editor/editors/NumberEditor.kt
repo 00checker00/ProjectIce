@@ -1,8 +1,5 @@
 package de.project.ice.editor.editors
 
-import com.kotcrab.vis.ui.widget.NumberSelector
-import com.kotcrab.vis.ui.widget.VisTextField
-
 import java.text.ParseException
 
 abstract class NumberEditor<T : Number> : ValueEditor<T>() {
@@ -65,7 +62,7 @@ abstract class NumberEditor<T : Number> : ValueEditor<T>() {
         private var numberSelector: NumberSelector? = null
 
         override fun createUi() {
-            numberSelector = NumberSelector(null, value.toFloat(), 0f, Integer.MAX_VALUE.toFloat(), 1.0f, 0)
+            numberSelector = NumberSelector(null, value!!.toFloat(), 0f, Integer.MAX_VALUE.toFloat(), 1.0f, 0)
             add<NumberSelector>(numberSelector)
         }
 
@@ -74,7 +71,7 @@ abstract class NumberEditor<T : Number> : ValueEditor<T>() {
         }
 
         override fun updateValue() {
-            numberSelector!!.value = value.toFloat()
+            numberSelector!!.value = value!!.toFloat()
         }
 
         @Throws(ParseException::class)

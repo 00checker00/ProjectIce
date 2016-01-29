@@ -1,14 +1,18 @@
 package de.project.ice.ecs.components
 
-import com.badlogic.gdx.math.Vector2
+import de.project.ice.annotations.Property
 
 /**
  * Component for idle breathing animation of characters
  */
 class BreathComponent : CopyableIceComponent {
+    @Property("The current scaling factor", true)
     val curScale = Vector2(0f, 0f)
+    @Property("The maximal scale of a breath")
     val scaleValue = Vector2(0f, 0f)
+    @Property("The duration of a breath")
     var duration = 1f
+    @Property("The current animation time", true)
     var time = 0.0f
 
     override fun reset() {
