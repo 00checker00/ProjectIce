@@ -1,5 +1,21 @@
 package de.project.ice.editor
 
+import com.badlogic.ashley.core.Entity
+import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.Input
+import com.badlogic.gdx.InputProcessor
+import com.badlogic.gdx.files.FileHandle
+import com.badlogic.gdx.scenes.scene2d.Actor
+import com.badlogic.gdx.scenes.scene2d.Stage
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener
+import com.badlogic.gdx.utils.XmlWriter
+import com.badlogic.gdx.utils.viewport.ScreenViewport
+import com.kotcrab.vis.ui.VisUI
+import com.kotcrab.vis.ui.util.dialog.Dialogs
+import com.kotcrab.vis.ui.util.dialog.InputDialogListener
+import com.kotcrab.vis.ui.widget.*
+import com.kotcrab.vis.ui.widget.file.FileChooser
+import com.kotcrab.vis.ui.widget.file.FileChooserAdapter
 import de.project.ice.IceGame
 import de.project.ice.Storage
 import de.project.ice.editor.undoredo.UndoRedoManager
@@ -365,17 +381,16 @@ class EditorScreen(game: IceGame) : BaseScreenAdapter(game), EntitiesWindow.Sele
         fileChooser.selectionMode = FileChooser.SelectionMode.FILES
         fileChooser.fileFilter = FileFilter { pathname -> pathname.name.endsWith(".scene") || pathname.isDirectory }
         fileChooser.setListener(object : FileChooserAdapter() {
-            override fun selected(files: Array<FileHandle>) {
-                val file = files.first()
+            override fun selected(files: com.badlogic.gdx.utils.Array<FileHandle>) {
+                val file = files.first()!!
                 try {
-                    sceneProperties = SceneLoader.loadScene(game.engine, file!!.read())
+                    sceneProperties = SceneLoader.loadScene(game.engine, file.read())
                     filename = file.file().canonicalFile.absolutePath
                 } catch (e: IOException) {
                     Dialogs.showErrorDialog(stage, "Couldn't save the scene.", e)
                 } catch (e: SceneLoader.LoadException) {
                     Dialogs.showErrorDialog(stage, "Scene files is invalid", e)
                 }
-
             }
         })
         stage.addActor(fileChooser.fadeIn())
@@ -388,9 +403,9 @@ class EditorScreen(game: IceGame) : BaseScreenAdapter(game), EntitiesWindow.Sele
             fileChooser.selectionMode = FileChooser.SelectionMode.FILES
             fileChooser.fileFilter = FileFilter { pathname -> pathname.name.endsWith(".scene") || pathname.isDirectory }
             fileChooser.setListener(object : FileChooserAdapter() {
-                override fun selected(file: Array<FileHandle>) {
+                override fun selected(files: com.badlogic.gdx.utils.Array<FileHandle>?) {
                     try {
-                        filename = file.first().file().canonicalFile.absolutePath
+                        filename = files!!.first().file().canonicalFile.absolutePath
                         if (!filename!!.endsWith(".scene")) {
                             filename += ".scene"
                         }
@@ -398,7 +413,6 @@ class EditorScreen(game: IceGame) : BaseScreenAdapter(game), EntitiesWindow.Sele
                     } catch (e: IOException) {
                         e.printStackTrace()
                     }
-
                 }
             })
             stage.addActor(fileChooser.fadeIn())

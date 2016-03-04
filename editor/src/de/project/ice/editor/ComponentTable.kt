@@ -31,7 +31,7 @@ class ComponentTable(component: Component) : VisTable() {
             row()
             val addAnimationButton = VisTextButton("Add animation", object : ChangeListener() {
                 override fun changed(event: ChangeListener.ChangeEvent, actor: Actor) {
-                    val animationComponent = component
+                    val animationComponent = component as AnimationComponent
                     var lastId = 0
                     for (entry in animationComponent.animations) {
                         lastId = entry.key

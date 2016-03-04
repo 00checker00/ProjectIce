@@ -46,6 +46,7 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
     public ControlSystem()
     {
         super(Families.controllable);
+
     }
 
     @Override
