@@ -1,22 +1,5 @@
 package de.project.ice.editor
 
-import com.badlogic.ashley.core.Entity
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.Input
-import com.badlogic.gdx.InputProcessor
-import com.badlogic.gdx.files.FileHandle
-import com.badlogic.gdx.scenes.scene2d.Actor
-import com.badlogic.gdx.scenes.scene2d.Stage
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener
-import com.badlogic.gdx.utils.Array
-import com.badlogic.gdx.utils.XmlWriter
-import com.badlogic.gdx.utils.viewport.ScreenViewport
-import com.kotcrab.vis.ui.VisUI
-import com.kotcrab.vis.ui.util.dialog.Dialogs
-import com.kotcrab.vis.ui.util.dialog.InputDialogListener
-import com.kotcrab.vis.ui.widget.*
-import com.kotcrab.vis.ui.widget.file.FileChooser
-import com.kotcrab.vis.ui.widget.file.FileChooserAdapter
 import de.project.ice.IceGame
 import de.project.ice.Storage
 import de.project.ice.editor.undoredo.UndoRedoManager
@@ -426,7 +409,7 @@ class EditorScreen(game: IceGame) : BaseScreenAdapter(game), EntitiesWindow.Sele
             if (storedState == null) {
                 val file = File(filename)
                 if (file.exists()) {
-                    file.renameTo(File(file.parent + "/" + file.name + ".bak"))
+                    file.renameTo(File(file.parentFile.name + "/" + file.name + ".bak"))
                 }
                 val xml = XmlWriter(FileWriter(filename))
                 serializeScene(xml)
