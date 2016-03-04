@@ -4,9 +4,12 @@ package de.project.ice.hotspot
 import com.badlogic.gdx.utils.ObjectMap
 import de.project.ice.IceGame
 import de.project.ice.Storage
+import de.project.ice.ecs.Components
+import de.project.ice.ecs.components.AnimationComponent
 import de.project.ice.ecs.components.InvisibilityComponent
 
 import de.project.ice.screens.CursorScreen.Cursor
+import java.awt.Component
 
 object Hotspots {
     val hotspots = ObjectMap<String, Hotspot>()
@@ -78,6 +81,26 @@ object Hotspots {
                         game.showMessages(game.strings.get("s3_wood_desc"))
                     }
                 }).build())
+
+        addHotspot(Hotspot.Builder().id("NathanScript").primaryCursor(Cursor.Speak).use(object: Use.Adapter() {
+            override fun speak(game: IceGame) {
+                game.showDialog("s2_dlg_nathan")
+            }
+        }).build())
+
+        addHotspot(Hotspot.Builder().id("s2_wurm").secondaryCursor(Cursor.Look).primaryCursor(Cursor.Take).use(object: Use.Take("Worm","Koederwurm"){
+            override fun take(game: IceGame) {
+                super.take(game)
+                game.engine.getEntityByName("Andi_Player")?.getComponent(AnimationComponent::class.java)?.animation = 3
+            }
+
+
+            override fun look(game: IceGame) {
+                game.showMessages("s2_wormhole_desc")
+            }
+        }).build())
+
+
     }
 
     init {

@@ -21,6 +21,8 @@ class TextureRegionHolderEditor : HolderEditor<TextureRegion>() {
     override fun onEdit() {
         val currentTexture = value!!.name
         EditTextureRegionDialog.showDialog(stage, "Select texture", object : DialogListener<String> {
+
+
             override fun onResult(textureRegion: String) {
                 val newHolder = Assets.findRegion(textureRegion)
                 holderData = newHolder
@@ -67,9 +69,9 @@ class TextureRegionHolderEditor : HolderEditor<TextureRegion>() {
 
             textureRegion.focusField()
 
-            button("cancel")
+            button("cancel", "cancel")
             key(Input.Keys.ESCAPE, "cancel")
-            button("ok")
+            button("ok", "ok")
             key(Input.Keys.ENTER, "ok")
         }
 

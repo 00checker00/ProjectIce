@@ -28,9 +28,9 @@ class MovementSystem : IteratingIceSystem(Family.all(MoveComponent::class.java).
                 t.pos.add(movementVector.x, movementVector.y)
                 move.isMoving = true
                 if (directionVector.x > 0) {
-                    t.flipHorizontal = true
-                } else if (directionVector.x < 0) {
                     t.flipHorizontal = false
+                } else if (directionVector.x < 0) {
+                    t.flipHorizontal = true
                 }
 
                 // Start walk animation

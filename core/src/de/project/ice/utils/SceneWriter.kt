@@ -121,7 +121,7 @@ class SceneWriter private constructor(private val sceneName: String, private val
             is Assets.Holder.Animation -> {
                 xml.attribute("type", o.javaClass.simpleName)
                 if (o.data != null) xml
-                        .attribute("frameDuration", o.data.animationDuration)
+                        .attribute("frameDuration", o.data.frameDuration)
                         .attribute("mode", o.data.playMode).text(o.name)
             }
             is Assets.Holder.TextureRegion -> {

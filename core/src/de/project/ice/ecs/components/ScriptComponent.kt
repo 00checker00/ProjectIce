@@ -4,8 +4,8 @@ import de.project.ice.annotations.Property
 import de.project.ice.scripting.Script
 
 class ScriptComponent : CopyableIceComponent {
-    @Property("The name if the Script (Classname)")
     var script: Script? = null
+    @Property("The name if the Script (Classname)")
     var scriptName = ""
         set(scriptName) {
             field = scriptName

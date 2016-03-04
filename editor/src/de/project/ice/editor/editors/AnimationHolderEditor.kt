@@ -79,9 +79,9 @@ class AnimationHolderEditor : HolderEditor<Animation>() {
 
             textureRegion.focusField()
 
-            button("cancel")
+            button("cancel", "cancel")
             key(Input.Keys.ESCAPE, "cancel")
-            button("ok")
+            button("ok", "ok")
             key(Input.Keys.ENTER, "ok")
         }
 

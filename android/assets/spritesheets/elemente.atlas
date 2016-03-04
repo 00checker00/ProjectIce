@@ -1,0 +1,25 @@
+elemente.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+nathan
+  rotate: false
+  xy: 0 ,0
+  size: 81 ,180
+  orig: 81 ,180
+  offset: 0 ,0
+  index:0
+schneemann
+  rotate: false
+  xy: 81 ,0
+  size: 277 ,256
+  orig: 277 ,256
+  offset: 0 ,0
+  index:0
+wurm
+  rotate: false
+  xy: 358 ,0
+  size: 24 ,35
+  orig: 24 ,35
+  offset: 0 ,0
+  index:0
