@@ -1,6 +1,8 @@
 package de.project.ice.editor.editors
 
 
+import com.badlogic.gdx.utils.Align
+import com.kotcrab.vis.ui.widget.VisTable
 import java.lang.reflect.Field
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method

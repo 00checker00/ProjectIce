@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.XmlWriter
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.kotcrab.vis.ui.VisUI
-import com.kotcrab.vis.ui.util.dialog.DialogUtils
+import com.kotcrab.vis.ui.util.dialog.Dialogs
 import com.kotcrab.vis.ui.util.dialog.InputDialogListener
 import com.kotcrab.vis.ui.widget.*
 import com.kotcrab.vis.ui.widget.file.FileChooser
@@ -127,9 +127,8 @@ class EditorScreen(game: IceGame) : BaseScreenAdapter(game), EntitiesWindow.Sele
 
         sceneProperties = ScenePropertiesBuilder().engine(game.engine).create()
 
-        Gdx.graphics.setDisplayMode(storage.getInteger("editor_screen_width", 800),
-                storage.getInteger("editor_screen_height", 600),
-                false)
+        Gdx.graphics.setWindowedMode(storage.getInteger("editor_screen_width", 800),
+                storage.getInteger("editor_screen_height", 600))
 
         val file = Gdx.files.internal("scenes/scene3.scene")
         try {
@@ -285,7 +284,7 @@ class EditorScreen(game: IceGame) : BaseScreenAdapter(game), EntitiesWindow.Sele
 
         helpMenu.addItem(MenuItem("About", object : ChangeListener() {
             override fun changed(event: ChangeListener.ChangeEvent, actor: Actor) {
-                DialogUtils.showOKDialog(stage, "about", "ProjectIce Editor version " + VERSION)
+                Dialogs.showOKDialog(stage, "about", "ProjectIce Editor version " + VERSION)
             }
         }))
 
@@ -365,7 +364,7 @@ class EditorScreen(game: IceGame) : BaseScreenAdapter(game), EntitiesWindow.Sele
 
     private fun newScene() {
         clear()
-        DialogUtils.showInputDialog(stage, "Scene Name", "Name", object : InputDialogListener {
+        Dialogs.showInputDialog(stage, "Scene Name", "Name", object : InputDialogListener {
             override fun finished(name: String) {
                 sceneProperties = ScenePropertiesBuilder().engine(game.engine).name(name).create()
             }
@@ -389,9 +388,9 @@ class EditorScreen(game: IceGame) : BaseScreenAdapter(game), EntitiesWindow.Sele
                     sceneProperties = SceneLoader.loadScene(game.engine, file!!.read())
                     filename = file.file().canonicalFile.absolutePath
                 } catch (e: IOException) {
-                    DialogUtils.showErrorDialog(stage, "Couldn't save the scene.", e)
+                    Dialogs.showErrorDialog(stage, "Couldn't save the scene.", e)
                 } catch (e: SceneLoader.LoadException) {
-                    DialogUtils.showErrorDialog(stage, "Scene files is invalid", e)
+                    Dialogs.showErrorDialog(stage, "Scene files is invalid", e)
                 }
 
             }
@@ -427,7 +426,7 @@ class EditorScreen(game: IceGame) : BaseScreenAdapter(game), EntitiesWindow.Sele
             if (storedState == null) {
                 val file = File(filename)
                 if (file.exists()) {
-                    file.renameTo(File(file.getParent() + "/" + file.name + ".bak"))
+                    file.renameTo(File(file.parent + "/" + file.name + ".bak"))
                 }
                 val xml = XmlWriter(FileWriter(filename))
                 serializeScene(xml)
@@ -438,7 +437,7 @@ class EditorScreen(game: IceGame) : BaseScreenAdapter(game), EntitiesWindow.Sele
                 bufferedWriter.close()
             }
         } catch (e: IOException) {
-            DialogUtils.showErrorDialog(stage, "Couldn't access the file.", e)
+            Dialogs.showErrorDialog(stage, "Couldn't access the file.", e)
         }
 
     }
@@ -447,7 +446,7 @@ class EditorScreen(game: IceGame) : BaseScreenAdapter(game), EntitiesWindow.Sele
         try {
             SceneWriter.Builder().engine(game.engine).writer(xml).sceneName(sceneProperties.name()).onloadScript(sceneProperties.onloadScript()).create().serializeScene()
         } catch (e: IOException) {
-            DialogUtils.showErrorDialog(stage, "Couldn't save the scene.", e)
+            Dialogs.showErrorDialog(stage, "Couldn't save the scene.", e)
         }
 
     }

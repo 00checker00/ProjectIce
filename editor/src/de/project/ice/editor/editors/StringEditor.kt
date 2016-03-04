@@ -1,5 +1,11 @@
 package de.project.ice.editor.editors
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.kotcrab.vis.ui.widget.VisTextField;
+
 class StringEditor : ValueEditor<String>() {
     private var valueField: VisTextField? = null
 

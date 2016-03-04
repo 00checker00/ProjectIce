@@ -1,5 +1,13 @@
 package de.project.ice.editor.editors
 
+import com.badlogic.gdx.Input
+import com.badlogic.gdx.graphics.g2d.Animation
+import com.badlogic.gdx.graphics.g2d.TextureAtlas
+import com.badlogic.gdx.scenes.scene2d.Action
+import com.badlogic.gdx.scenes.scene2d.Stage
+import com.kotcrab.vis.ui.util.TableUtils
+import com.kotcrab.vis.ui.util.Validators
+import com.kotcrab.vis.ui.widget.*
 import de.project.ice.editor.TextureList
 import de.project.ice.utils.Assets
 import de.project.ice.utils.DialogListener

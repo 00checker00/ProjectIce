@@ -1,5 +1,6 @@
 package de.project.ice.ecs.components
 
+import com.badlogic.gdx.utils.IntMap
 import de.project.ice.annotations.Property
 import de.project.ice.utils.Assets
 

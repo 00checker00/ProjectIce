@@ -1,5 +1,6 @@
 package de.project.ice.ecs.components
 
+import com.badlogic.gdx.graphics.OrthographicCamera
 import de.project.ice.annotations.Property
 
 /**

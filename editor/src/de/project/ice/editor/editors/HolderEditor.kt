@@ -1,5 +1,9 @@
 package de.project.ice.editor.editors
 
+import com.badlogic.gdx.scenes.scene2d.Actor
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener
+import com.kotcrab.vis.ui.widget.VisTextButton
+import com.kotcrab.vis.ui.widget.VisTextField
 import de.project.ice.utils.Assets
 
 abstract class HolderEditor<T> : ValueEditor<Assets.Holder<T>>() {

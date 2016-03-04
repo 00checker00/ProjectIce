@@ -1,6 +1,9 @@
 package de.project.ice.editor.editors
 
-import java.lang.reflect.Field
+import com.badlogic.gdx.math.Vector2;
+import com.kotcrab.vis.ui.widget.Tooltip
+import com.kotcrab.vis.ui.widget.VisLabel
+import java.lang.reflect.Field;
 
 internal class Vector2Editor : BaseEditor() {
     override fun bind(field: Field, target: Any, description: String?): BaseEditor {

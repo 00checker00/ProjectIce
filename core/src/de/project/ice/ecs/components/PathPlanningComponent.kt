@@ -1,5 +1,6 @@
 package de.project.ice.ecs.components
 
+import com.badlogic.gdx.math.Vector2
 import de.project.ice.annotations.Property
 
 class PathPlanningComponent : CopyableIceComponent {

@@ -1,6 +1,10 @@
 package de.project.ice.editor.editors
 
-import de.project.ice.utils.Assets
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.IntMap;
+import de.project.ice.utils.Assets;
 
 public class Editors {
     companion object {

@@ -1,6 +1,9 @@
 package de.project.ice.editor.editors
 
 
+import com.badlogic.gdx.utils.Align;
+import com.kotcrab.vis.ui.widget.Tooltip
+import com.kotcrab.vis.ui.widget.VisLabel
 import java.lang.reflect.Field
 
 open class ValueEditor<T> : BaseEditor() {

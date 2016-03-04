@@ -1,5 +1,7 @@
 package de.project.ice.ecs
 
+import com.badlogic.ashley.core.ComponentMapper
+import com.badlogic.ashley.core.Entity
 import de.project.ice.ecs.components.*
 
 object Components {

@@ -1,5 +1,7 @@
 package de.project.ice.editor.editors
 
+import com.kotcrab.vis.ui.widget.NumberSelector
+import com.kotcrab.vis.ui.widget.VisTextField
 import java.text.ParseException
 
 abstract class NumberEditor<T : Number> : ValueEditor<T>() {
