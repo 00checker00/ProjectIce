@@ -7,15 +7,14 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.kotcrab.vis.ui.widget.VisTextField;
 
 class StringEditor : ValueEditor<String>() {
-    private var valueField: VisTextField? = null
+    private var valueField: VisTextField = VisTextField()
 
     override fun createUi() {
-
-        valueField = VisTextField(if (value != null) value else "")
+        valueField.text = if (value != null) value else ""
         addListener(object : InputListener() {
             override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean {
                 if (button == Input.Buttons.MIDDLE) {
-                    valueField!!.text = valueField!!.text + Gdx.app.clipboard.contents
+                    valueField.text += Gdx.app.clipboard.contents
                     return true
                 }
                 return super.touchDown(event, x, y, pointer, button)
@@ -25,11 +24,11 @@ class StringEditor : ValueEditor<String>() {
     }
 
     override fun act(delta: Float) {
-        value = valueField!!.text
+        value = valueField.text
         super.act(delta)
     }
 
     override fun updateValue() {
-        valueField!!.text = value
+        valueField.text = value
     }
 }

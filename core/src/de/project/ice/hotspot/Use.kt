@@ -9,8 +9,7 @@ interface Use {
     abstract class Adapter : Use {
         override fun use(game: IceGame, cursor: CursorScreen.Cursor) {
             when (cursor) {
-                CursorScreen.Cursor.None -> {
-                }
+                CursorScreen.Cursor.None -> {}
                 CursorScreen.Cursor.Walk -> walk(game)
                 CursorScreen.Cursor.Look -> look(game)
                 CursorScreen.Cursor.Speak -> speak(game)
@@ -54,3 +53,9 @@ interface Use {
     }
 }
 
+
+interface UseWith {
+    val useableItems: Set<String>
+
+    fun useWith(game: IceGame, item: String)
+}

@@ -50,59 +50,63 @@ object SceneLoader {
 
     @Throws(LoadException::class)
     private fun loadScene(engine: IceEngine, scene: Element?): SceneProperties {
-        val builder = ScenePropertiesBuilder().engine(engine)
-
-        if (scene == null || scene.name != "scene") {
-            throw LoadException("Invalid scene file (Not a scene file)")
-        }
-
-        val sceneName: String
         try {
-            sceneName = scene.getAttribute("name")
-            builder.name(sceneName)
-        } catch (ignore: Exception) {
-            throw LoadException("Invalid scene file (Missing scene name)")
-        }
+            val builder = ScenePropertiesBuilder().engine(engine)
 
-        val spritesheets = scene.getChildByName("spritesheets")
-        if (spritesheets != null) {
-            for (i in 0..spritesheets.childCount - 1) {
-                val child = spritesheets.getChild(i)
-                if (child.name == "spritesheet") {
-                    builder.spritesheet(child.text)
-                    Assets.loadAtlas(child.text)
+            if (scene == null || scene.name != "scene") {
+                throw LoadException("Invalid scene file (Not a scene file)")
+            }
+
+            val sceneName: String
+            try {
+                sceneName = scene.getAttribute("name")
+                builder.name(sceneName)
+            } catch (ignore: Exception) {
+                throw LoadException("Invalid scene file (Missing scene name)")
+            }
+
+            val spritesheets = scene.getChildByName("spritesheets")
+            if (spritesheets != null) {
+                for (i in 0..spritesheets.childCount - 1) {
+                    val child = spritesheets.getChild(i)
+                    if (child.name == "spritesheet") {
+                        builder.spritesheet(child.text)
+                        Assets.loadAtlas(child.text)
+                    }
+                }
+                Assets.finishAll()
+            }
+
+            val entities = scene.getChildByName("entities") ?: throw LoadException("Invalid scene file (No entities entry)")
+
+            for (i in 0..entities.childCount - 1) {
+                val child = entities.getChild(i)
+                if (child.name.endsWith("entity")) {
+                    engine.addEntity(loadEntity(engine, child))
                 }
             }
-            Assets.finishAll()
-        }
-
-        val entities = scene.getChildByName("entities") ?: throw LoadException("Invalid scene file (No entities entry)")
-
-        for (i in 0..entities.childCount - 1) {
-            val child = entities.getChild(i)
-            if (child.name.endsWith("entity")) {
-                engine.addEntity(loadEntity(engine, child))
-            }
-        }
 
 
-        val sounds = scene.getChildByName("sounds")
-        if (sounds != null) {
-            for (i in 0..sounds.childCount - 1) {
-                val child = sounds.getChild(i)
-                if (child.name == "sound") {
-                    builder.sound(child.text)
-                    engine.soundSystem.loadSound(child.text)
+            val sounds = scene.getChildByName("sounds")
+            if (sounds != null) {
+                for (i in 0..sounds.childCount - 1) {
+                    val child = sounds.getChild(i)
+                    if (child.name == "sound") {
+                        builder.sound(child.text)
+                        engine.soundSystem.loadSound(child.text)
+                    }
                 }
             }
-        }
 
-        val music = scene.getChildByName("music")
-        if (music != null && music.text != null) {
-            builder.music(music.text)
-            engine.soundSystem.playMusic(music.text, true)
+            val music = scene.getChildByName("music")
+            if (music != null && music.text != null) {
+                builder.music(music.text)
+                engine.soundSystem.playMusic(music.text, true)
+            }
+            return builder.create()
+        } catch (ex: Exception) {
+            throw LoadException("Unknown error", ex)
         }
-        return builder.create()
     }
 
     @Throws(LoadException::class)
@@ -162,32 +166,32 @@ object SceneLoader {
         return component
     }
 
+    internal fun String?.equalsIgnoreCase(other: String?) = equals(other, true)
+
     @Throws(LoadException::class)
     private fun loadValue(type: String, element: Element): Any {
-        if (type.equals("Float", ignoreCase = true)) {
-            return loadFloat(element)
-        } else if (type.equals("Integer", ignoreCase = true)) {
-            return loadInt(element)
-        } else if (type.equals("Boolean", ignoreCase = true)) {
-            return loadBoolean(element)
-        } else if (type.equals("String", ignoreCase = true)) {
-            return if (element.text == null) "" else element.text.replace("&gt", ">").replace("&lt", "<").replace("&amp", "&")
-        } else if (type.equals("OrthographicCamera", ignoreCase = true)) {
-            return loadOrthographicCamera(element)
-        } else if (type.equals("Vector2", ignoreCase = true)) {
-            return loadVector2(element)
-        } else if (type.equals("Vector3", ignoreCase = true)) {
-            return loadVector3(element)
-        } else if (type.equals("IntMap", ignoreCase = true)) {
-            return loadIntMap(element)
-        } else if (type.equals("TextureRegion", ignoreCase = true)) {
-            return loadTextureRegion(element)
-        } else if (type.equals("Animation", ignoreCase = true)) {
-            return loadAnimation(element)
-        } else if (type.equals("PathArea", ignoreCase = true)) {
-            return loadPathArea(element)
-        } else {
-            throw LoadException("Invalid scene file (Unknown Component type: $type)")
+        return when {
+            type.equalsIgnoreCase("Float")                  -> loadFloat(element)
+            type.equalsIgnoreCase("Integer")                -> loadInt(element)
+            type.equalsIgnoreCase("Boolean")                -> loadBoolean(element)
+            type.equalsIgnoreCase("String")                 -> loadString(element)
+            type.equalsIgnoreCase("OrthographicCamera")     -> loadOrthographicCamera(element)
+            type.equalsIgnoreCase("Vector2")                -> loadVector2(element)
+            type.equalsIgnoreCase("Vector3")                -> loadVector3(element)
+            type.equalsIgnoreCase("IntMap")                 -> loadIntMap(element)
+            type.equalsIgnoreCase("TextureRegion")          -> loadTextureRegion(element)
+            type.equalsIgnoreCase("Animation")              -> loadAnimation(element)
+            type.equalsIgnoreCase("PathArea")               -> loadPathArea(element)
+            type.equalsIgnoreCase("Enum")                   -> loadEnum(element)
+            else ->  throw LoadException("Invalid scene file (Unknown Component type: $type)")
+        }
+    }
+
+    private fun loadString(element: Element): String {
+        return element.text.apply {
+            replace("&gt", ">")
+            replace("&lt", "<")
+            replace("&amp", "&")
         }
     }
 
@@ -283,6 +287,14 @@ object SceneLoader {
         return Vector2(element.getFloatAttribute("x", 0f), element.getFloatAttribute("y", 0f))
     }
 
+    private fun loadEnum(element: Element): Any {
+        val classname = element.getAttribute("subtype")
+        val enumclass = Class.forName(classname)
+        val valueOf = enumclass.getMethod("valueOf", String::class.java)
+        val enumValue = valueOf.invoke(null, element.text)
+        return enumValue
+    }
+
     class LoadException : Exception {
         constructor() {
         }
@@ -297,30 +309,21 @@ object SceneLoader {
         }
     }
 
-    class SceneProperties internal constructor(private val name: String, private val spritesheets: Array<String>, private val sounds: Array<String>, private val music: String, private val onloadScript: String, private val engine: IceEngine) {
+    data class SceneProperties internal constructor (
+            var name: String,
+            var spritesheets: Array<String>,
+            var sounds: Array<String>,
+            var music: String,
+            var onloadScript: String,
+            var engine: IceEngine) {
 
-        fun name(): String {
-            return name
-        }
-
-        fun spritesheets(): Array<String> {
-            return spritesheets
-        }
-
-        fun sounds(): Array<String> {
-            return sounds
-        }
-
-        fun music(): String {
-            return music
-        }
-
-        fun onloadScript(): String {
-            return onloadScript
-        }
-
-        fun engine(): IceEngine {
-            return engine
+        infix fun assignTo(other: SceneProperties) {
+            other.name = name
+            other.spritesheets = spritesheets
+            other.sounds = sounds
+            other.music = music
+            other.onloadScript = onloadScript
+            other.engine = engine
         }
     }
 

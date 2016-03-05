@@ -116,7 +116,9 @@
 				<HotspotComponent>
 					<height type="Float">1.0</height>
 					<origin type="Vector2" x="0.4" y="0.2"/>
-					<script type="String">Oven</script>
+					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</primaryCursor>
+					<script type="String">scene3.Oven</script>
+					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">None</secondaryCursor>
 					<targetPos type="Vector2" x="1.6" y="-0.2"/>
 					<width type="Float">1.0</width>
 				</HotspotComponent>
@@ -141,7 +143,9 @@
 				<HotspotComponent>
 					<height type="Float">0.6</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
-					<script type="String">Teapot</script>
+					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Take</primaryCursor>
+					<script type="String">scene3.Teapot</script>
+					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
 					<targetPos type="Vector2" x="1.54" y="-1.29"/>
 					<width type="Float">0.9</width>
 				</HotspotComponent>
@@ -163,7 +167,9 @@
 				<HotspotComponent>
 					<height type="Float">2.55</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
-					<script type="String">PrincessIgloo</script>
+					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</primaryCursor>
+					<script type="String">scene3.PrincessIgloo</script>
+					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
 					<targetPos type="Vector2" x="-0.5" y="0.0"/>
 					<width type="Float">1.75</width>
 				</HotspotComponent>
@@ -198,7 +204,9 @@
 				<HotspotComponent>
 					<height type="Float">0.7</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
-					<script type="String">Wood</script>
+					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Take</primaryCursor>
+					<script type="String">scene3.Wood</script>
+					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
 					<targetPos type="Vector2" x="-0.35" y="0.2"/>
 					<width type="Float">1.3</width>
 				</HotspotComponent>

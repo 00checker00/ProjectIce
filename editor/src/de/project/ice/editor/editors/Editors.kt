@@ -4,37 +4,28 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.IntMap;
+import de.project.ice.screens.CursorScreen
 import de.project.ice.utils.Assets;
 
-public class Editors {
+class Editors {
     companion object {
         fun editorForClass(type: Class<*>): BaseEditor {
-            if (Float::class.java == type || type == java.lang.Float.TYPE) {
-                return NumberEditor.FloatEditor()
-            } else if (Double::class.java == type || type == java.lang.Double.TYPE) {
-                return NumberEditor.DoubleEditor()
-            } else if (Short::class.java == type || type == java.lang.Short.TYPE) {
-                return NumberEditor.ShortEditor()
-            } else if (Int::class.java == type || type == Integer.TYPE) {
-                return NumberEditor.IntegerEditor()
-            } else if (Long::class.java == type || type == java.lang.Long.TYPE) {
-                return NumberEditor.LongEditor()
-            } else if (Vector2::class.java == type) {
-                return Vector2Editor()
-            } else if (Vector3::class.java == type) {
-                return Vector3Editor()
-            } else if (String::class.java == type) {
-                return StringEditor()
-            } else if (Assets.Holder.TextureRegion::class.java == type) {
-                return TextureRegionHolderEditor()
-            } else if (Assets.Holder.Animation::class.java == type) {
-                return AnimationHolderEditor()
-            } else if (IntMap::class.java == type) {
-                return IntMapEditor()
-            } else if (OrthographicCamera::class.java == type) {
-                return OrthographicCameraEditor()
+            return when(type) {
+                Float::class.java, java.lang.Float.TYPE     -> NumberEditor.FloatEditor()
+                Double::class.java, java.lang.Double.TYPE   -> NumberEditor.DoubleEditor()
+                Short::class.java, java.lang.Short.TYPE     -> NumberEditor.ShortEditor()
+                Int::class.java, java.lang.Integer.TYPE     -> NumberEditor.IntegerEditor()
+                Long::class.java, java.lang.Long.TYPE       -> NumberEditor.LongEditor()
+                Vector2::class.java                         -> Vector2Editor()
+                Vector3::class.java                         -> Vector3Editor()
+                String::class.java                          -> StringEditor()
+                Assets.Holder.TextureRegion::class.java     -> TextureRegionHolderEditor()
+                Assets.Holder.Animation::class.java         -> AnimationHolderEditor()
+                IntMap::class.java                          -> IntMapEditor()
+                OrthographicCamera::class.java              -> OrthographicCameraEditor()
+                CursorScreen.Cursor::class.java             -> CursorEditor()
+                else                                        -> BaseEditor()
             }
-            return BaseEditor()
         }
     }
 }

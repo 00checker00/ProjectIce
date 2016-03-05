@@ -44,7 +44,7 @@ class InventoryScreen(game: IceGame) : BaseScreenAdapter(game) {
                 Input.Buttons.LEFT -> game.engine.controlSystem.active_item = item
 
                 Input.Buttons.RIGHT -> if (item != null) {
-                    game.showMessages(game.strings.get(item.description))
+                    game.showMessages(item.description)
                 }
             }
             return true

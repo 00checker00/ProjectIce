@@ -14,7 +14,6 @@ import de.project.ice.ecs.Families;
 import de.project.ice.ecs.IceEngine;
 import de.project.ice.ecs.components.*;
 import de.project.ice.hotspot.Hotspot;
-import de.project.ice.hotspot.Hotspots;
 import de.project.ice.inventory.Inventory;
 import de.project.ice.pathlib.PathArea;
 import de.project.ice.pathlib.PathCalculator;
@@ -222,12 +221,12 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
 
                 if (new Rectangle(origin.x, origin.y, hotspot.getWidth(), hotspot.getHeight()).contains(coords.x, coords.y))
                 {
-                    active_hotspot = Hotspots.INSTANCE.get(hotspot.getScript());
+                    active_hotspot = Hotspot.Companion.get(hotspot.getScript());
                     if (active_hotspot != null)
                     {
                         hotspot_entity = entity;
-                        primaryCursor = active_hotspot.getPrimaryCursor();
-                        secondaryCursor = active_hotspot.getSecondaryCursor();
+                        primaryCursor = hotspot.getPrimaryCursor();
+                        secondaryCursor = hotspot.getSecondaryCursor();
                     }
                     break;
                 }

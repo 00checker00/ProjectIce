@@ -6,24 +6,29 @@ import com.badlogic.gdx.Preferences
 
 abstract class Storage internal constructor(internal var prefs: Preferences) {
 
-    fun put(key: String, `val`: Boolean): Preferences {
-        return prefs.putString(key, java.lang.Boolean.toString(`val`))
+    fun put(key: String, `val`: Boolean): Storage {
+        prefs.putString(key, java.lang.Boolean.toString(`val`))
+        return this
     }
 
-    fun put(key: String, `val`: Int): Preferences {
-        return prefs.putString(key, Integer.toString(`val`))
+    fun put(key: String, `val`: Int): Storage {
+        prefs.putString(key, Integer.toString(`val`))
+        return this
     }
 
-    fun put(key: String, `val`: Long): Preferences {
-        return prefs.putString(key, java.lang.Long.toString(`val`))
+    fun put(key: String, `val`: Long): Storage {
+        prefs.putString(key, java.lang.Long.toString(`val`))
+        return this
     }
 
-    fun put(key: String, `val`: Float): Preferences {
-        return prefs.putString(key, java.lang.Float.toString(`val`))
+    fun put(key: String, `val`: Float): Storage {
+        prefs.putString(key, java.lang.Float.toString(`val`))
+        return this
     }
 
-    fun put(key: String, `val`: String): Preferences {
-        return prefs.putString(key, `val`)
+    fun put(key: String, `val`: String): Storage {
+        prefs.putString(key, `val`)
+        return this
     }
 
     fun getBoolean(key: String): Boolean {

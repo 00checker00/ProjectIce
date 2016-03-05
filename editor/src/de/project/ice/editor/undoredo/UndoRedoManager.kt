@@ -18,7 +18,6 @@ class UndoRedoManager {
         currentPosition++
         canUndo.set(canUndo())
         canRedo.set(canRedo())
-        action.redo()
     }
 
     fun undo() {

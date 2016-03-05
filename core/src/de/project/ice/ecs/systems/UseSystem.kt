@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Family
 import de.project.ice.ecs.Components
 import de.project.ice.ecs.components.MoveComponent
 import de.project.ice.ecs.components.UseComponent
-import de.project.ice.hotspot.Hotspots
+import de.project.ice.hotspot.Hotspot
 
 class UseSystem : IteratingIceSystem(Family.all(UseComponent::class.java).exclude(MoveComponent::class.java).get()) {
 
@@ -18,7 +18,7 @@ class UseSystem : IteratingIceSystem(Family.all(UseComponent::class.java).exclud
         val hotspotComponent = Components.hotspot.get(use.target)
 
 
-        val hotspot = Hotspots[hotspotComponent.script]
+        val hotspot = Hotspot[hotspotComponent.script]
 
         if (hotspot != null) {
             if (use.withItem != null) {

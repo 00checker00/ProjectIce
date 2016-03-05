@@ -2,6 +2,7 @@ package de.project.ice.ecs.components
 
 import com.badlogic.gdx.math.Vector2
 import de.project.ice.annotations.Property
+import de.project.ice.screens.CursorScreen
 
 class HotspotComponent : CopyableIceComponent {
     @Property("The position of the hotspot")
@@ -14,6 +15,10 @@ class HotspotComponent : CopyableIceComponent {
     var height = 0f
     @Property("Name of the Script (Classname)")
     var script = ""
+    @Property("Primary cursor (Left click)")
+    var primaryCursor = CursorScreen.Cursor.None
+    @Property("Secondary cursor (Right click)")
+    var secondaryCursor = CursorScreen.Cursor.None
 
     override fun reset() {
         origin.set(0f, 0f)
@@ -21,6 +26,8 @@ class HotspotComponent : CopyableIceComponent {
         width = 0f
         height = 0f
         script = ""
+        primaryCursor = CursorScreen.Cursor.None
+        secondaryCursor = CursorScreen.Cursor.None
     }
 
     override fun copyTo(copy: CopyableIceComponent) {
@@ -30,6 +37,8 @@ class HotspotComponent : CopyableIceComponent {
             copy.width = width
             copy.height = height
             copy.script = script
+            copy.primaryCursor = primaryCursor
+            copy.secondaryCursor = secondaryCursor
         }
     }
 }

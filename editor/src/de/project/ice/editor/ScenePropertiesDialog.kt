@@ -14,7 +14,7 @@ import de.project.ice.utils.join
 
 
 class ScenePropertiesDialog @Throws(IllegalStateException::class)
-constructor(properties: SceneLoader.SceneProperties) : VisDialog("Scene Properties") {
+constructor(private val properties: SceneLoader.SceneProperties) : VisDialog("Scene Properties") {
     private val engine: IceEngine
     private var musicText: VisTextField? = null
     private var soundText: VisTextArea? = null
@@ -24,16 +24,16 @@ constructor(properties: SceneLoader.SceneProperties) : VisDialog("Scene Properti
     private val dialogListeners = Array<DialogListener<SceneLoader.SceneProperties>>()
 
     init {
-        this.engine = properties.engine()
+        this.engine = properties.engine
 
         TableUtils.setSpacingDefaults(this)
         createWidgets()
 
-        sceneNameText!!.text = properties.name()
-        musicText!!.text = properties.music()
-        onloadText!!.text = properties.onloadScript()
-        soundText!!.text = properties.sounds().join("\n")
-        spritesheetsText!!.text = properties.spritesheets().join("\n")
+        sceneNameText!!.text = properties.name
+        musicText!!.text = properties.music
+        onloadText!!.text = properties.onloadScript
+        soundText!!.text = properties.sounds.join("\n")
+        spritesheetsText!!.text = properties.spritesheets.join("\n")
 
         setPosition(0f, 0f, Align.topRight)
         isResizable = true
@@ -85,10 +85,18 @@ constructor(properties: SceneLoader.SceneProperties) : VisDialog("Scene Properti
 
     override fun result(`object`: Any?) {
         if ("ok" == `object`) {
-            val sceneProperties = SceneLoader.ScenePropertiesBuilder().engine(engine).name(sceneNameText!!.text).music(musicText!!.text).onloadScript(onloadText!!.text).sounds(Array(soundText!!.text.split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray())).spritesheets(Array(spritesheetsText!!.text.split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray())).create()
+            properties.apply {
+                engine = engine
+                name = sceneNameText!!.text
+                music = musicText!!.text
+                onloadScript = onloadText!!.text
+                sounds = Array(soundText!!.text.split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray())
+                spritesheets = Array(spritesheetsText!!.text.split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray())
+            }
+
 
             for (listener in dialogListeners) {
-                listener.onResult(sceneProperties)
+                listener.onResult(properties)
             }
         } else {
             for (listener in dialogListeners) {

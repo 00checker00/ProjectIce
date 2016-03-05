@@ -36,6 +36,12 @@ public class PathGraph implements IndexedGraph<PathNode>
     }
 
     @Override
+    public int getIndex(PathNode node)
+    {
+        return node.getIndex();
+    }
+
+    @Override
     public Array<Connection<PathNode>> getConnections(PathNode pathNode)
     {
         return pathNode.connections;

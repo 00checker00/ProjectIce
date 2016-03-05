@@ -12,15 +12,14 @@ import com.kotcrab.vis.ui.widget.VisScrollPane
 import com.kotcrab.vis.ui.widget.VisTextButton
 import com.kotcrab.vis.ui.widget.VisWindow
 import de.project.ice.ecs.IceEngine
-import de.project.ice.editor.undoredo.AddEntityAction
-import de.project.ice.editor.undoredo.DuplicateEntityAction
-import de.project.ice.editor.undoredo.RemoveEntityAction
-import de.project.ice.editor.undoredo.UndoRedoManager
+import de.project.ice.ecs.components.CopyableIceComponent
+import de.project.ice.ecs.components.IceComponent
+import de.project.ice.editor.undoredo.*
 
 
 class EntitiesWindow @Throws(IllegalStateException::class)
-constructor(private val engine: IceEngine, private val undoRedoManager: UndoRedoManager) : VisWindow("Entities") {
-    private val entities: ImmutableArray<Entity> = engine.entities
+constructor(private val app: EditorApplication, private val undoRedoManager: UndoRedoManager) : VisWindow("Entities") {
+    private val entities: ImmutableArray<Entity> = app.engine.entities
     private val currentEntities = Array<EntityEntry>()
     private var entityList: VisList<EntityEntry>? = null
     private var selectedEntry: EntityEntry? = null
@@ -84,7 +83,9 @@ constructor(private val engine: IceEngine, private val undoRedoManager: UndoRedo
 
         val createEntityBtn = VisTextButton("Create", object : ChangeListener() {
             override fun changed(event: ChangeListener.ChangeEvent, actor: Actor) {
-                undoRedoManager.addAction(AddEntityAction(engine.createEntity(), engine))
+                undoRedoManager.addAction(ModifySceneAction.record(app.engine, app.sceneProperties) {
+                    it.addEntity(it.createEntity())
+                })
                 updateEntities()
                 entityList!!.selectedIndex = entityList!!.items.size - 1
             }
@@ -93,7 +94,22 @@ constructor(private val engine: IceEngine, private val undoRedoManager: UndoRedo
         val duplicateEntityBtn = VisTextButton("Duplicate", object : ChangeListener() {
             override fun changed(event: ChangeListener.ChangeEvent, actor: Actor) {
                 if (entityList!!.selected != null) {
-                    undoRedoManager.addAction(DuplicateEntityAction(entityList!!.selected.entity, engine))
+                    val entity = entityList!!.selected.entity
+                    undoRedoManager.addAction(ModifySceneAction.record(app.engine, app.sceneProperties) {
+                        val duplicate = it.createEntity()
+                        for (component in entity.components) {
+                            val iceComponent = component as IceComponent
+
+                            if (iceComponent is CopyableIceComponent) {
+                                val dupeComponent = it.createComponent(iceComponent.javaClass)
+
+                                iceComponent.copyTo(dupeComponent)
+
+                                duplicate.add(dupeComponent)
+                            }
+                        }
+                        it.addEntity(duplicate)
+                    })
                 }
             }
         })
@@ -101,7 +117,10 @@ constructor(private val engine: IceEngine, private val undoRedoManager: UndoRedo
         val deleteEntityBtn = VisTextButton("Delete", object : ChangeListener() {
             override fun changed(event: ChangeListener.ChangeEvent, actor: Actor) {
                 if (entityList!!.selected != null) {
-                    undoRedoManager.addAction(RemoveEntityAction(entityList!!.selected.entity, engine))
+                    val entity = entityList!!.selected.entity
+                    undoRedoManager.addAction(ModifySceneAction.record(app.engine, app.sceneProperties) {
+                        it.removeEntity(entity)
+                    })
                 }
             }
         })

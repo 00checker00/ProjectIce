@@ -12,6 +12,7 @@ import de.project.ice.ecs.systems.SoundSystem
 import de.project.ice.pathlib.PathArea
 import de.project.ice.pathlib.Shape
 import java.io.IOException
+import java.io.StringWriter
 import kotlin.reflect.jvm.javaField
 import kotlin.reflect.memberProperties
 
@@ -172,6 +173,11 @@ class SceneWriter private constructor(private val sceneName: String, private val
                 }
                 xml.pop()
             }
+            is Enum<*> -> {
+                xml.attribute("type", "enum")
+                xml.attribute("subtype", o.javaClass.name)
+                xml.text(o.name)
+            }
             else -> {
                 xml.attribute("type", "null")
                 return
@@ -211,5 +217,16 @@ class SceneWriter private constructor(private val sceneName: String, private val
             }
             return SceneWriter(sceneName, onloadScript, engine!!, writer!!)
         }
+    }
+
+    companion object {
+        fun serializeToString(engine: IceEngine, properties: SceneLoader.SceneProperties) =
+                StringWriter().apply {
+                    SceneWriter.Builder().engine(engine)
+                            .writer(XmlWriter(this))
+                            .sceneName(properties.name)
+                            .onloadScript(properties.onloadScript)
+                            .create().serializeScene()
+                }.toString()
     }
 }

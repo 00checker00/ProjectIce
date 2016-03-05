@@ -14,6 +14,7 @@ import de.project.ice.utils.Assets
 import de.project.ice.utils.SceneLoader
 
 import java.io.IOException
+import java.util.*
 
 open class IceGame : ApplicationAdapter() {
     private val screens = Array<BaseScreen>()
@@ -58,7 +59,8 @@ open class IceGame : ApplicationAdapter() {
     }
 
     fun showMessages(vararg messages: String) {
-        addScreen(MessageScreen(this, *messages))
+        addScreen(MessageScreen(this, *messages.map {
+            try { strings.get(it) } catch (ex: MissingResourceException) { "$$$it$$" } }.toTypedArray()))
     }
 
     override fun dispose() {
