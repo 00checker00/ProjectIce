@@ -125,7 +125,7 @@ public class ControlSystem extends IteratingIceSystem implements InputProcessor
         // update the active camera
         if (cameras.size() > 0)
         {
-            active_camera = cameras.first().getComponent(CameraComponent.class).getCamera();
+            active_camera = Components.camera.get(cameras.first()).getCamera();
         }
 
         if (active_camera == null)

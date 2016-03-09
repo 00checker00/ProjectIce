@@ -15,4 +15,5 @@ object Families {
     @JvmField val walkArea = Family.all(WalkAreaComponent::class.java).exclude(DisabledComponent::class.java).get()
     @JvmField val controllable = Family.all(ControlComponent::class.java, TextureComponent::class.java, TransformComponent::class.java).exclude(DisabledComponent::class.java).get()
     @JvmField val distanceScale = Family.all(DistanceScaleComponent::class.java, TransformComponent::class.java).get()
+    @JvmField val assets = Family.one(TextureComponent::class.java, AnimationComponent::class.java).get()
 }

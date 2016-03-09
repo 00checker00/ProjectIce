@@ -21,7 +21,8 @@ object Components {
     @JvmField val pathplanning = ComponentMapper.getFor(PathPlanningComponent::class.java)
     @JvmField val walking = ComponentMapper.getFor(WalkingComponent::class.java)
     @JvmField val distanceScale = ComponentMapper.getFor(DistanceScaleComponent::class.java)
+    @JvmField val timeout = ComponentMapper.getFor(TimeoutComponent::class.java)
 }
 
-fun Entity.hasComponent(mapper: ComponentMapper<IceComponent>): Boolean = mapper.has(this)
+fun Entity.hasComponent(mapper: ComponentMapper<out IceComponent>): Boolean = mapper.has(this)
 fun <T : IceComponent> Entity.getComponent(mapper: ComponentMapper<T>): T = mapper.get(this)

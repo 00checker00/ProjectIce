@@ -7,11 +7,17 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ObjectMap
+import java.util.*
 
 object Assets {
     var manager = AssetManager()
     private val cachedRegions = ObjectMap<String, Array<TextureRegion>>()
     private val loadedSpritesheets = ObjectMap<String, Holder.TextureAtlas>()
+    private val loadedAssets = HashSet<Holder<*>>()
+
+    private fun getAtlas(name: String): Holder.TextureAtlas {
+        return Holder.TextureAtlas(name, manager.get("spritesheets/$name.atlas", com.badlogic.gdx.graphics.g2d.TextureAtlas::class.java))
+    }
 
     fun loadAtlas(name: String): Boolean {
         if (loadedSpritesheets.containsKey(name)) {
@@ -28,7 +34,7 @@ object Assets {
         manager.load(file.path(), TextureAtlas::class.java)
         manager.finishLoadingAsset(file.path())
 
-        loadedSpritesheets.put(name, Holder.TextureAtlas(name, manager.get("spritesheets/${name}.atlas", com.badlogic.gdx.graphics.g2d.TextureAtlas::class.java)))
+        loadedSpritesheets.put(name, getAtlas(name))
 
 
         println("Loaded assets: " + name)
@@ -148,25 +154,60 @@ object Assets {
 
     fun createAnimation(name: String, frameDuration: Float, playMode: Animation.PlayMode): Holder.Animation {
         val regions = findRegions(name)
-        if (!regions.isValid) {
-            return Holder.Animation(name)
-        }
-        val animation = Animation(frameDuration, regions.data, playMode)
-        return Holder.Animation(name, animation)
+
+        return Holder.Animation(name, Animation(frameDuration, if (regions.isValid) regions.data else Array(0), playMode))
     }
 
-    open class Holder<T> constructor(val name: String = "null", val data: T? = null) {
-        val isValid = data != null
+    open class Holder<T> constructor(val name: String = "null", open val data: T? = null) {
+        open val isValid = data != null
+        var isInvalidated = false
+            private set
 
-        class TextureRegion(name: String = "null", data: com.badlogic.gdx.graphics.g2d.TextureRegion? = null) : Holder<com.badlogic.gdx.graphics.g2d.TextureRegion>(name, data)
-        class TextureRegions(name: String = "null", data: Array<com.badlogic.gdx.graphics.g2d.TextureRegion>? = null) : Holder<Array<com.badlogic.gdx.graphics.g2d.TextureRegion>>(name, data)
-        class Animation(name: String = "null", data: com.badlogic.gdx.graphics.g2d.Animation? = null) : Holder<com.badlogic.gdx.graphics.g2d.Animation>(name, data)
-        class TextureAtlas(name: String = "null", data: com.badlogic.gdx.graphics.g2d.TextureAtlas? = null) : Holder<com.badlogic.gdx.graphics.g2d.TextureAtlas>(name, data)
+        fun invalidate() { isInvalidated = true }
+
+        init {
+            Assets.loadedAssets.add(this)
+        }
+
+        class TextureRegion(name: String = "null", data: com.badlogic.gdx.graphics.g2d.TextureRegion? = null)
+            : Holder<com.badlogic.gdx.graphics.g2d.TextureRegion>(name, data)
+
+        class TextureRegions(name: String = "null", data: Array<com.badlogic.gdx.graphics.g2d.TextureRegion>? = null)
+            : Holder<Array<com.badlogic.gdx.graphics.g2d.TextureRegion>>(name, data)
+
+        class Animation(name: String = "null",
+                        data: com.badlogic.gdx.graphics.g2d.Animation = com.badlogic.gdx.graphics.g2d.Animation(0.0f, Array(0)))
+            : Holder<com.badlogic.gdx.graphics.g2d.Animation>(name, data) {
+            override val isValid = data.keyFrames.isNotEmpty()
+            override val data: com.badlogic.gdx.graphics.g2d.Animation
+                get() = super.data!!
+        }
+
+        class TextureAtlas(name: String = "null", data: com.badlogic.gdx.graphics.g2d.TextureAtlas? = null)
+            : Holder<com.badlogic.gdx.graphics.g2d.TextureAtlas>(name, data)
+    }
+
+    fun reload(holder: Holder.Animation): Holder.Animation {
+        return createAnimation(holder.name, holder.data.frameDuration, holder.data.playMode)
+    }
+
+    fun reload(holder: Holder.TextureRegion): Holder.TextureRegion {
+        return findRegion(holder.name)
+    }
+
+    fun reload(holder: Holder.TextureRegions): Holder.TextureRegions {
+        return findRegions(holder.name)
+    }
+
+    fun reload(holder: Holder.TextureAtlas): Holder.TextureAtlas {
+        loadAtlas(holder.name)
+        return getAtlas(holder.name)
     }
 
 
     fun update() {
         manager.update()
+        loadedAssets.removeAll(loadedAssets.filter { it.isInvalidated })
     }
 
     fun finishAll() {
@@ -178,6 +219,8 @@ object Assets {
         cachedRegions.clear()
         loadedSpritesheets.clear()
         manager.finishLoading()
+        loadedAssets.forEach { it.invalidate() }
+        loadedAssets.clear()
 
         println("Cleared assets")
     }
