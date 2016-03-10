@@ -17,10 +17,15 @@ import com.kotcrab.vis.ui.widget.*
 import com.kotcrab.vis.ui.widget.file.FileChooser
 import com.kotcrab.vis.ui.widget.file.FileChooserAdapter
 import de.project.ice.Storage
+import de.project.ice.hotspot.Hotspot
 import de.project.ice.screens.BaseScreenAdapter
 import de.project.ice.utils.*
 import de.project.ice.utils.SceneLoader.SceneProperties
 import de.project.ice.utils.SceneLoader.ScenePropertiesBuilder
+import org.apache.commons.vfs2.FileChangeEvent
+import org.apache.commons.vfs2.FileListener
+import org.apache.commons.vfs2.VFS
+import org.apache.commons.vfs2.impl.DefaultFileMonitor
 import java.io.*
 
 class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app), EntitiesWindow.SelectionListener {
@@ -37,6 +42,27 @@ class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app),
     private var storedState: String? = null
     private var redoBtn: VisTextButton? = null
     private var undoBtn: VisTextButton? = null
+    private var hotspotsNeedReload = false
+    private val hotspotsMonitor = DefaultFileMonitor(object: FileListener {
+
+        override fun fileChanged(event: FileChangeEvent) {
+            hotspotsNeedReload = true
+        }
+
+        override fun fileDeleted(event: FileChangeEvent) {
+            hotspotsNeedReload = true
+        }
+
+        override fun fileCreated(event: FileChangeEvent) {
+            hotspotsNeedReload = true
+        }
+
+    }).apply {
+        isRecursive = true
+        delay = 1000
+        addFile(VFS.getManager().resolveFile(File("hotspots").absolutePath))
+        start()
+    }
 
     override val inputProcessor: InputProcessor = object : DelegatingInputProcessor(stage) {
         override fun keyDown(keycode: Int): Boolean {
@@ -136,6 +162,7 @@ class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app),
             }
         }
 
+
     }
 
     private fun hideAllWindows() {
@@ -153,7 +180,7 @@ class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app),
     private fun createMenus() {
         val fileMenu = Menu("File")
         val windowMenu = Menu("Window")
-        val assetsMenu = Menu("Assets")
+        val reloadMenu = Menu("Reload")
         val testMenu = Menu("Test")
         val helpMenu = Menu("Help")
 
@@ -241,9 +268,15 @@ class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app),
             }
         }))
 
-        assetsMenu.addItem(MenuItem("Reload Assets", object : ChangeListener() {
+        reloadMenu.addItem(MenuItem("Reload Assets", object : ChangeListener() {
             override fun changed(event: ChangeListener.ChangeEvent, actor: Actor) {
                 reloadAssets()
+            }
+        }))
+
+        reloadMenu.addItem(MenuItem("Reload Hotspots", object : ChangeListener() {
+            override fun changed(event: ChangeListener.ChangeEvent, actor: Actor) {
+                reloadHotspots()
             }
         }))
 
@@ -276,7 +309,7 @@ class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app),
 
         menuBar.addMenu(fileMenu)
         menuBar.addMenu(windowMenu)
-        menuBar.addMenu(assetsMenu)
+        menuBar.addMenu(reloadMenu)
         menuBar.addMenu(testMenu)
         menuBar.addMenu(helpMenu)
 
@@ -317,6 +350,15 @@ class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app),
             Assets.loadAtlas(spritesheet)
         }
         Assets.finishAll()
+    }
+
+    private fun reloadHotspots() {
+        val scene = SceneWriter.serializeToString(app.engine, app.sceneProperties)
+        app.engine.removeAllEntities()
+        app.engine.update(0.0f)
+        Hotspot.reloadHotspots()
+        SceneLoader.loadScene(app.engine, scene)
+        hotspotsNeedReload = false
     }
 
     private fun restoreState() {
@@ -463,6 +505,10 @@ class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app),
     }
 
     override fun update(delta: Float) {
+        if (hotspotsNeedReload) {
+            reloadHotspots()
+        }
+
         stage.act(delta)
         if (filename == null) {
             Gdx.graphics.setTitle("Editor (Here be dragons)")

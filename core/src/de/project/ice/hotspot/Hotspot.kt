@@ -23,24 +23,32 @@ class Hotspot internal constructor(val id: String, val scriptObject: Any? = null
     }
 
     companion object {
-        val hotspots = ObjectMap<String, Hotspot>()
+        private var _loader: HotspotLoader? = null
+        private val loader: HotspotLoader
+            get() = _loader ?: HotspotLoader().apply { _loader = this }
+        private val hotspots = ObjectMap<String, Hotspot>()
 
         operator fun get(id: String): Hotspot? {
             var hotspot: Hotspot? = hotspots.get(id, null)
             if (hotspot == null) {
                 val classname = "de.project.ice.hotspot.hotspots.$id"
                 try {
-                    val clazz = Class.forName(classname)
+                    val clazz = loader.loadClass(classname)
                     val obj = clazz.newInstance()
                     hotspot = Hotspot(id, obj)
                 } catch (ex: Exception) {
-                    println("Error while loading hotspot with id: $id, cause by: ")
+                    println("Error while loading hotspot with id: $id, caused by: ")
                     ex.printStackTrace()
                     hotspot = Hotspot(id)
                 }
                 hotspots.put(id, hotspot)
             }
             return hotspot
+        }
+
+        fun reloadHotspots() {
+            _loader = null
+            hotspots.clear()
         }
     }
 }
