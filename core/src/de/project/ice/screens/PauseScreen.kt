@@ -22,7 +22,7 @@ class PauseScreen(game: IceGame) : MainMenuScreen(game) {
         }
 
     init {
-        insertMenuButton(BUTTON_CONTINUE_ID, "Continue", object : InputListener() {
+        createMenuButtonAfter(BUTTON_CONTINUE_ID, "Continue", object : InputListener() {
             override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean {
                 this@PauseScreen.game.removeScreen(this@PauseScreen)
                 return true
