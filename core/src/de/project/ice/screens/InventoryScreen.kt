@@ -14,9 +14,10 @@ import de.project.ice.config.Config.INVENTORY_KEY
 import de.project.ice.config.Config.MENU_KEY
 import de.project.ice.inventory.Inventory
 import de.project.ice.utils.Assets
+import de.project.ice.utils.FreetypeSkin
 
 class InventoryScreen(game: IceGame) : BaseScreenAdapter(game) {
-    private val skin = Skin(Gdx.files.internal("ui/skin.json"))
+    private val skin = FreetypeSkin(Gdx.files.internal("ui/skin.json"))
     private val batch = SpriteBatch()
     private val camera = OrthographicCamera(Gdx.graphics.width.toFloat(), Gdx.graphics.height.toFloat())
     private val viewport = FitViewport(VIEWPORT_SIZE, VIEWPORT_SIZE, camera)

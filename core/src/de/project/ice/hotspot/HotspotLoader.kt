@@ -34,7 +34,7 @@ class HotspotLoader(parent: ClassLoader = ClassLoader.getSystemClassLoader()): C
     }
 
     private fun loadClassData(name: String): ByteArray {
-        val file = File("hotspots/${name.replace(".", "/")}.class")
+              val file = File("hotspots/${name.replace(".", "/")}.class")
 
         if (!file.exists())
             throw ClassNotFoundException("Class for Hotspot \"$name\" not found")

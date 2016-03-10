@@ -2,6 +2,8 @@ package de.project.ice.screens
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputProcessor
+import com.badlogic.gdx.graphics.g2d.BitmapFont
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Stage
@@ -14,11 +16,13 @@ import de.project.ice.config.Config
 import de.project.ice.dialog.Node
 import de.project.ice.ecs.systems.SoundSystem
 import de.project.ice.utils.DelegatingBlockingInputProcessor
+import de.project.ice.utils.FreetypeSkin
 import java.util.*
 
 class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
     private val stage = Stage()
-    private val skin = Skin(Gdx.files.internal("ui/skin.json"))
+    private val skin = FreetypeSkin(Gdx.files.internal("ui/skin.json"))
+
     private val root = Table()
     private val buttons = HashMap<String, TextButton>()
     private var choiceTable: Table? = null
@@ -98,7 +102,7 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
             }
         }
 
-        root.add<Table>(choiceTable).top().left()
+        root.add<Table>(choiceTable).bottom().center()
 
         root.row().expandX()
 
