@@ -161,7 +161,8 @@ public class RenderingSystem extends SortedIteratingIceSystem
         if (batch.isDrawing() && Gdx.input.isKeyPressed(Config.HOTSPOT_KEY))
         {
             Assets.Holder.TextureRegion region = Assets.INSTANCE.findRegion("hotspot");
-            batch.draw(region.getData(), center.x - 0.25f, center.y - 0.25f, 0.5f, 0.5f);
+            if (region.isValid())
+                batch.draw(region.getData(), center.x - 0.25f, center.y - 0.25f, 0.5f, 0.5f);
         }
         else if (debugRenderer.isDrawing())
         {
