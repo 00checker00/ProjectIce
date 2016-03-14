@@ -5,6 +5,8 @@ import com.badlogic.ashley.core.Family
 import de.project.ice.ecs.Components
 import de.project.ice.ecs.IceEngine
 import de.project.ice.ecs.components.MoveComponent
+import de.project.ice.ecs.getComponent
+import de.project.ice.ecs.hasComponent
 
 class MovementSystem : IteratingIceSystem(Family.all(MoveComponent::class.java).get()) {
 
