@@ -3,13 +3,9 @@ package de.project.ice.hotspot.hotspots.scene2
 import de.project.ice.IceGame
 import de.project.ice.hotspot.Use
 
-/**
- * Created by tony on 14.03.16.
- */
-class Horizont : Use.Adapter(){
 
+class Schneemann : Use.Adapter() {
     override fun look(game: IceGame) {
-      //  game.showDialog("s2")
-        game.showMessages("s2_horizon_desc")
+        game.showMessages("s2_snowman_desc");
     }
 }
