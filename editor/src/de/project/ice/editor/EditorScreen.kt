@@ -33,8 +33,6 @@ class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app),
     private val stage: Stage by lazy { Stage() }
     private val root: VisTable by lazy { VisTable(true) }
     private val menuBar: MenuBar by lazy { MenuBar() }
-    private var stopPlaytest: MenuItem? = null
-    private var startPlaytest: MenuItem? = null
     internal val entitiesWindow: EntitiesWindow by lazy { EntitiesWindow(app, undoRedoManager) }
     internal val componentsWindow: ComponentsWindow by lazy { ComponentsWindow(app, undoRedoManager) }
     private val undoRedoManager = app.undoManager
@@ -42,6 +40,8 @@ class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app),
     private var storedState: String? = null
     private var redoBtn: VisTextButton? = null
     private var undoBtn: VisTextButton? = null
+    private var startPlaytestItem: MenuItem? = null;
+    private var stopPlaytestItem: MenuItem? = null;
     private var hotspotsNeedReload = false
     private val hotspotsMonitor = DefaultFileMonitor(object: FileListener {
 
@@ -112,6 +112,14 @@ class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app),
                     }
                 }
             }
+            when (keycode) {
+                Input.Keys.F5 -> {
+                    if (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
+                        stopPlaytest()
+                    else
+                        startPlaytest()
+                }
+            }
             return super.keyDown(keycode)
         }
     }
@@ -162,7 +170,6 @@ class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app),
             }
         }
 
-
     }
 
     private fun hideAllWindows() {
@@ -175,6 +182,20 @@ class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app),
         entitiesWindow.isVisible = true
         componentsWindow.isVisible = true
         game.addScreen(pathScreen)
+    }
+
+    private fun stopPlaytest() {
+        stopPlaytestItem!!.isDisabled = true
+        startPlaytestItem!!.isDisabled = false
+        restoreState()
+        game.pauseGame()
+    }
+
+    private fun startPlaytest() {
+        stopPlaytestItem!!.isDisabled = false
+        startPlaytestItem!!.isDisabled = true
+        storeState()
+        game.resumeGame()
     }
 
     private fun createMenus() {
@@ -280,26 +301,20 @@ class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app),
             }
         }))
 
-        startPlaytest = MenuItem("Start PlayTest", object : ChangeListener() {
+        startPlaytestItem = MenuItem("Start PlayTest", object : ChangeListener() {
             override fun changed(event: ChangeListener.ChangeEvent, actor: Actor) {
-                stopPlaytest!!.isDisabled = false
-                startPlaytest!!.isDisabled = true
-                storeState()
-                game.resumeGame()
+                startPlaytest()
             }
-        })
-        testMenu.addItem(startPlaytest)
+        }).apply { setShortcut("F5") }
+        testMenu.addItem(startPlaytestItem)
 
-        stopPlaytest = MenuItem("Stop PlayTest", object : ChangeListener() {
+        stopPlaytestItem = MenuItem("Stop PlayTest", object : ChangeListener() {
             override fun changed(event: ChangeListener.ChangeEvent, actor: Actor) {
-                stopPlaytest!!.isDisabled = true
-                startPlaytest!!.isDisabled = false
-                restoreState()
-                game.pauseGame()
+                stopPlaytest()
             }
-        })
-        stopPlaytest!!.isDisabled = true
-        testMenu.addItem(stopPlaytest)
+        }).apply { setShortcut("Shift + F5") }
+        stopPlaytestItem!!.isDisabled = true
+        testMenu.addItem(stopPlaytestItem)
 
         helpMenu.addItem(MenuItem("About", object : ChangeListener() {
             override fun changed(event: ChangeListener.ChangeEvent, actor: Actor) {
