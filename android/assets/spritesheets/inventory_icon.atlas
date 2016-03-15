@@ -1,0 +1,123 @@
+inventory_icon.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+icon_hotspot
+  rotate: false
+  xy: 0 ,0
+  size: 200 ,200
+  orig: 200 ,200
+  offset: 0 ,0
+  index:0
+inv_felicia
+  rotate: false
+  xy: 200 ,0
+  size: 200 ,200
+  orig: 200 ,200
+  offset: 0 ,0
+  index:0
+inv_fishing_rod
+  rotate: false
+  xy: 400 ,0
+  size: 200 ,200
+  orig: 200 ,200
+  offset: 0 ,0
+  index:0
+inv_fishing_rod_nohook
+  rotate: false
+  xy: 600 ,0
+  size: 200 ,200
+  orig: 200 ,200
+  offset: 0 ,0
+  index:0
+inv_fishing_rod_worm
+  rotate: false
+  xy: 800 ,0
+  size: 200 ,200
+  orig: 200 ,200
+  offset: 0 ,0
+  index:0
+inv_hook
+  rotate: false
+  xy: 1000 ,0
+  size: 200 ,200
+  orig: 200 ,200
+  offset: 0 ,0
+  index:0
+inv_nick
+  rotate: false
+  xy: 1200 ,0
+  size: 200 ,200
+  orig: 200 ,200
+  offset: 0 ,0
+  index:0
+inv_note
+  rotate: false
+  xy: 1400 ,0
+  size: 200 ,200
+  orig: 200 ,200
+  offset: 0 ,0
+  index:0
+inv_note_shred_1
+  rotate: false
+  xy: 1600 ,0
+  size: 200 ,200
+  orig: 200 ,200
+  offset: 0 ,0
+  index:0
+inv_note_shred_1_2
+  rotate: false
+  xy: 0 ,200
+  size: 200 ,200
+  orig: 200 ,200
+  offset: 0 ,0
+  index:0
+inv_note_shred_2
+  rotate: false
+  xy: 200 ,200
+  size: 200 ,200
+  orig: 200 ,200
+  offset: 0 ,0
+  index:0
+inv_note_shred_3
+  rotate: false
+  xy: 400 ,200
+  size: 200 ,200
+  orig: 200 ,200
+  offset: 0 ,0
+  index:0
+inv_note_shred_3_4
+  rotate: false
+  xy: 600 ,200
+  size: 200 ,200
+  orig: 200 ,200
+  offset: 0 ,0
+  index:0
+inv_note_shred_4
+  rotate: false
+  xy: 800 ,200
+  size: 200 ,200
+  orig: 200 ,200
+  offset: 0 ,0
+  index:0
+inv_shaft
+  rotate: false
+  xy: 1000 ,200
+  size: 200 ,200
+  orig: 200 ,200
+  offset: 0 ,0
+  index:0
+inv_string
+  rotate: false
+  xy: 1200 ,200
+  size: 200 ,200
+  orig: 200 ,200
+  offset: 0 ,0
+  index:0
+inv_worm
+  rotate: false
+  xy: 1400 ,200
+  size: 200 ,200
+  orig: 200 ,200
+  offset: 0 ,0
+  index:0

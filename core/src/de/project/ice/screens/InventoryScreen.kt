@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import de.project.ice.IceGame
 import de.project.ice.config.Config.INVENTORY_KEY
 import de.project.ice.config.Config.MENU_KEY
+import de.project.ice.inventory.Combinations
 import de.project.ice.inventory.Inventory
 import de.project.ice.utils.Assets
 
@@ -41,7 +42,18 @@ class InventoryScreen(game: IceGame) : BaseScreenAdapter(game) {
         override fun touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
             val item = itemAt(screenX.toFloat(), screenY.toFloat())
             when (button) {
-                Input.Buttons.LEFT -> game.engine.controlSystem.active_item = item
+                Input.Buttons.LEFT -> {
+                    var active_item = game.engine.controlSystem.active_item;
+                    if ( active_item != null && item != null) {
+                      if (Combinations.canCombine(active_item, item)) {
+                          Combinations.combine(active_item, item)
+                          game.engine.controlSystem.active_item = null
+
+                      }
+                    } else {
+                        game.engine.controlSystem.active_item = item
+                    }
+                }
 
                 Input.Buttons.RIGHT -> if (item != null) {
                     game.showMessages(item.description)

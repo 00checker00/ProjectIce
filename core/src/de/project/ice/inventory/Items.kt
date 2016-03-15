@@ -22,13 +22,25 @@ object Items {
     }
 
     fun loadAllItems() {
-        addItem(Item("AngelAngel", "angel_angel", "s2_angelangel_desc", null))
-        addItem(Item("Hook", "haken_angel", "s2_hook_desc", null))
-        addItem(Item("Schnur", "schnur_angel", "s2_schnur_desc", null))
-        addItem(Item("SchnurHook", "hakenschnur_angel", "s2_schnurhook_desc", null))
-        addItem(Item("Stick", "stock_angel", "s2_stock_desc", null))
-        addItem(Item("Teapot", "teekanne", "s3_teapot_desc", null))
-        addItem(Item("Wood", "holz", "s3_wood_desc", null))
+
+        addItem(Item("inv_worm", "inv_worm", "inv_worm_desc", null))
+        addItem(Item("inv_fishing_rod", "inv_fishing_rod", "inv_fishing_rod_desc", null))
+        addItem(Item("inv_fishing_rod_nohook", "inv_fishing_rod_nohook", "inv_fishing_rod_nohook_desc", null))
+
+
+        addItem(Item("inv_nick", "inv_nick", "inv_nick_desc", null))
+        addItem(Item("inv_felicia", "inv_felicia", "inv_felicia_desc", null))
+        addItem(Item("inv_shaft", "inv_shaft", "inv_shaft_desc", null))
+        addItem(Item("inv_fishing_rod_worm", "inv_fishing_rod_worm", "inv_fishing_rod_worm_desc", null))
+        addItem(Item("inv_hook", "inv_hook", "inv_hook_desc", null))
+
+        addItem(Item("inv_note", "inv_note", "inv_note_desc", null))
+        addItem(Item("inv_note_shred_1", "inv_note_shred_1", "inv_note_shred_1_desc", null))
+        addItem(Item("inv_note_shred_2", "inv_note_shred_2", "inv_note_shred_2_desc", null))
+        addItem(Item("inv_note_shred_3", "inv_note_shred_3", "inv_note_shred_3_desc", null))
+        addItem(Item("inv_note_shred_4", "inv_note_shred_4", "inv_note_shred_4_desc", null))
+        addItem(Item("inv_note_shred_1_2", "inv_note_shred_1_2", "inv_note_shred_1_2_desc", null))
+
     }
 
     init {

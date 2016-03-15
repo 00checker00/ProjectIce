@@ -6,10 +6,15 @@ import de.project.ice.ecs.getComponent
 import de.project.ice.hotspot.Use
 
 
-class Wurm: Use.Take("Worm", "Koederwurm") {
+class Wurm: Use.Take("Worm", "inv_worm") {
     override fun take(game: IceGame) {
-        super.take(game)
-        game.engine.getEntityByName("Andi_Player")?.getComponent(Components.animation)?.animation = 3
+        val andi = game.engine.getEntityByName("Andi_Player")
+        val animation = andi?.getComponent(Components.animation)
+
+        animation?.animation = 3
+        var duration = animation?.animations?.get(3)?.data?.animationDuration?: 0.0f
+
+        game.engine.timeout( duration-0.5f , { super.take(game)})
     }
 
     override fun look(game: IceGame) {

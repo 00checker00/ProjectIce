@@ -1,4 +1,4 @@
-package de.project.ice.hotspot.hotspots.scene2
+package de.project.ice.hotspot.hotspots.scene3
 
 import de.project.ice.IceGame
 import de.project.ice.hotspot.Use

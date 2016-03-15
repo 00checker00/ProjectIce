@@ -1,6 +1,7 @@
 package de.project.ice.inventory
 
 import com.badlogic.gdx.utils.ObjectMap
+import de.project.ice.IceGame
 
 object Combinations {
     private val combinations = ObjectMap<String, Combinator>()
@@ -25,8 +26,20 @@ object Combinations {
         }
     }
 
+    public fun canCombine(item1: Inventory.Item, item2: Inventory.Item): Boolean {
+        return combinations.containsKey("${item1.name}:${item2.name}")
+    }
+
+    public fun combine(item1: Inventory.Item, item2: Inventory.Item) {
+        combinations.get("${item1.name}:${item2.name}", null)?.combine(item1.inventory!!, item1.name, item2.name);
+    }
+
     init {
-        addCombination("Schnur", "Hook", ItemCombinator("SchnurHook"))
-        addCombination("SchnurHook", "Stick", ItemCombinator("AngelAngel"))
+        addCombination("inv_fishing_rod", "inv_worm", ItemCombinator("inv_fishing_rod_worm"))
+       // addCombination("SchnurHook", "Stick", ItemCombinator("AngelAngel"))
+
+
+
+
     }
 }

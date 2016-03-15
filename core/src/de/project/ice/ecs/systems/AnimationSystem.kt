@@ -27,7 +27,9 @@ class AnimationSystem : IteratingIceSystem(Families.animated) {
                 tex.region = Assets.Holder.TextureRegion(animation.name, animation.data.getKeyFrame(anim.time))
             } catch (ignore: ArithmeticException) {
             }
-
+            if (animation.data.isAnimationFinished(anim.time)) {
+                anim.animation = 1
+            }
         }
     }
 }
