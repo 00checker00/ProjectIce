@@ -201,7 +201,7 @@ class PathScreen(game: IceGame) : BaseScreenAdapter(game) {
     }
 
     override fun update(delta: Float) {
-        camera = game.engine.renderingSystem.getActive_camera()
+        camera = game.engine.renderingSystem.activeCamera?.camera
         pathArea = game.engine.pathSystem.walkArea
     }
 
