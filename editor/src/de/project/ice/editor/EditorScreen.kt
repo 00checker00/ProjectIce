@@ -114,10 +114,10 @@ class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app),
             }
             when (keycode) {
                 Input.Keys.F5 -> {
-                    if (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
-                        stopPlaytest()
-                    else
+                    if (game.isGamePaused)
                         startPlaytest()
+                    else
+                        stopPlaytest()
                 }
             }
             return super.keyDown(keycode)
@@ -312,7 +312,7 @@ class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app),
             override fun changed(event: ChangeListener.ChangeEvent, actor: Actor) {
                 stopPlaytest()
             }
-        }).apply { setShortcut("Shift + F5") }
+        }).apply { setShortcut("F5") }
         stopPlaytestItem!!.isDisabled = true
         testMenu.addItem(stopPlaytestItem)
 
