@@ -7,8 +7,9 @@ import de.project.ice.hotspot.Use
 class NathanScript: Use.Adapter() {
     override fun speak(game: IceGame) {
         game.showDialog("s2_dlg_nathan")
+    }
 
-
-
+    override fun look(game: IceGame) {
+        game.showMessages("s2_nathan_desc")
     }
 }
