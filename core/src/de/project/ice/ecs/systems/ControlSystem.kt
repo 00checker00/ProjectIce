@@ -54,32 +54,30 @@ constructor() : IteratingIceSystem(Families.controllable), InputProcessor {
                 }
 
                 activateHotspot(entity)
-                when (activeCursor) {
-                    CursorScreen.Cursor.Walk, CursorScreen.Cursor.Take, CursorScreen.Cursor.Look, CursorScreen.Cursor.Speak -> {
+                if (activeCursor!= CursorScreen.Cursor.None) {
 
-                        val width = PIXELS_TO_METRES * if (texture.region.data != null) texture.region.data!!.regionWidth else 0
 
-                        var target: Vector2
-                        if (hotspot_entity != null) {
-                            val hotspotComponent = Components.hotspot.get(hotspot_entity)
-                            target = Components.transform.get(hotspot_entity).pos.cpy().add(hotspotComponent.origin).add(hotspotComponent.targetPos)
-                        } else {
-                            val mouse_target = active_camera!!.unproject(Vector3(pointerPos.x, pointerPos.y, 0f)) // unprojects UI coordinates to camera coordinates
-                            target = Vector2(mouse_target.x, mouse_target.y)
-                        }
+                    val width = PIXELS_TO_METRES * if (texture.region.data != null) texture.region.data!!.regionWidth else 0
 
-                        val start = transform.pos.cpy()
-                        target = target.sub(width / 2, 0f)
-
-                        val control = entity.getComponent(Components.control)
-
-                        val pathPlanningComponent = engine!!.createComponent(PathPlanningComponent::class.java)
-                        pathPlanningComponent.speed = control.speed
-                        pathPlanningComponent.target = target
-                        pathPlanningComponent.start = start
-
-                        entity.add(pathPlanningComponent)
+                    var target: Vector2
+                    if (hotspot_entity != null) {
+                        val hotspotComponent = Components.hotspot.get(hotspot_entity)
+                        target = Components.transform.get(hotspot_entity).pos.cpy().add(hotspotComponent.origin).add(hotspotComponent.targetPos)
+                    } else {
+                        val mouse_target = active_camera!!.unproject(Vector3(pointerPos.x, pointerPos.y, 0f)) // unprojects UI coordinates to camera coordinates
+                        target = Vector2(mouse_target.x, mouse_target.y)
                     }
+
+                    val start = transform.pos.cpy()
+                    target = target.sub(width / 2, 0f)
+
+                    val pathPlanningComponent = engine!!.createComponent(PathPlanningComponent::class.java)
+                    pathPlanningComponent.target = target
+                    pathPlanningComponent.start = start
+
+                    entity.add(pathPlanningComponent)
+
+
                 }
             }
         }

@@ -20,7 +20,8 @@ class CursorScreen(game: IceGame) : BaseScreenAdapter(game) {
         Walk,
         Look,
         Speak,
-        Take
+        Take,
+        Use
     }
 
     private val cursorPixmap: Pixmap
@@ -56,6 +57,7 @@ class CursorScreen(game: IceGame) : BaseScreenAdapter(game) {
         cursors.put(Cursor.Speak, atlas.findRegion("cur_speak"))
         cursors.put(Cursor.Look, atlas.findRegion("cur_look"))
         cursors.put(Cursor.Take, atlas.findRegion("cur_take"))
+        cursors.put(Cursor.Use, atlas.findRegion("cur_take"))
     }
 
     var primaryCursor: Cursor
