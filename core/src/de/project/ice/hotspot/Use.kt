@@ -14,6 +14,7 @@ interface Use {
                 CursorScreen.Cursor.Look -> look(game)
                 CursorScreen.Cursor.Speak -> speak(game)
                 CursorScreen.Cursor.Take -> take(game)
+                CursorScreen.Cursor.Use -> use(game)
             }
         }
 
@@ -28,6 +29,11 @@ interface Use {
 
         protected open fun take(game: IceGame) {
         }
+
+        protected open fun use(game: IceGame){
+
+        }
+
     }
 
     open class Take(private val entityName: String, private val itemName: String) : Adapter() {
