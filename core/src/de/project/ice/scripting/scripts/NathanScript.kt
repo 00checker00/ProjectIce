@@ -15,7 +15,7 @@ class NathanScript: Script() {
 
         if(Storage.SAVESTATE.getString("s2_angelrute")=="true" && Storage.SAVESTATE.getBoolean("s2_angelrutebekommen")==false)
         {
-            Game().inventory.addItem("AngelAngel")
+            Game().inventory.addItem("inv_fishing_rod")
             Storage.SAVESTATE.put("s2_angelrutebekommen",true)
         }
 
