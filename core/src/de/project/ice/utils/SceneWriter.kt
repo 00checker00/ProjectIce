@@ -1,6 +1,7 @@
 package de.project.ice.utils
 
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
@@ -177,6 +178,9 @@ class SceneWriter private constructor(private val sceneName: String, private val
                 xml.attribute("type", "enum")
                 xml.attribute("subtype", o.javaClass.name)
                 xml.text(o.name)
+            }
+            is Color -> {
+                xml.text(o.toIntBits())
             }
             else -> {
                 xml.attribute("type", "null")

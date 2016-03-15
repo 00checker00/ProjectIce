@@ -4,6 +4,7 @@ package de.project.ice.utils
 import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.files.FileHandle
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.Animation
 import com.badlogic.gdx.math.Vector2
@@ -183,6 +184,7 @@ object SceneLoader {
             type.equalsIgnoreCase("Animation")              -> loadAnimation(element)
             type.equalsIgnoreCase("PathArea")               -> loadPathArea(element)
             type.equalsIgnoreCase("Enum")                   -> loadEnum(element)
+            type.equalsIgnoreCase("Color")                  -> loadColor(element)
             else ->  throw LoadException("Invalid scene file (Unknown Component type: $type)")
         }
     }
@@ -293,6 +295,10 @@ object SceneLoader {
         val valueOf = enumclass.getMethod("valueOf", String::class.java)
         val enumValue = valueOf.invoke(null, element.text)
         return enumValue
+    }
+
+    private fun loadColor(element: Element): Color {
+        return Color(element.text.toInt())
     }
 
     class LoadException : Exception {

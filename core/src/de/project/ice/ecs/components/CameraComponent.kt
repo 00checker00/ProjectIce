@@ -1,5 +1,6 @@
 package de.project.ice.ecs.components
 
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.OrthographicCamera
 import de.project.ice.annotations.Property
 
@@ -9,12 +10,14 @@ import de.project.ice.annotations.Property
 class CameraComponent : CopyableIceComponent {
     @Property("The camera")
     var camera = OrthographicCamera(16f, 9f)
+    @Property("Blend color")
+    var color = Color.WHITE
 
     override fun reset() {
         camera = OrthographicCamera()
         camera.viewportWidth = 16f
         camera.viewportHeight = 9f
-        camera.javaClass
+        color = Color.WHITE
     }
 
     override fun copyTo(copy: CopyableIceComponent) {

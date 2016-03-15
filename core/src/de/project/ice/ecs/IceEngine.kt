@@ -5,7 +5,9 @@ import com.badlogic.ashley.core.Family
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.ashley.utils.ImmutableArray
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.Color
 import de.project.ice.IceGame
+import de.project.ice.ecs.components.BlendComponent
 import de.project.ice.ecs.components.NameComponent
 import de.project.ice.ecs.components.TimeoutComponent
 import de.project.ice.ecs.systems.*
@@ -24,6 +26,7 @@ class IceEngine(val game: IceGame) : PooledEngine() {
     val distanceScaleSytem: DistanceScaleSystem by lazy { DistanceScaleSystem() }
     val timeoutSystem: TimeoutSystem by lazy { TimeoutSystem() }
     val reloadAssetsSystem: ReloadAssetsSystem by lazy { ReloadAssetsSystem() }
+    val blendSystem: BlendSystem by lazy { BlendSystem() }
 
 
     private val namedEntities: ImmutableArray<Entity>
@@ -42,6 +45,7 @@ class IceEngine(val game: IceGame) : PooledEngine() {
         addSystem(distanceScaleSytem)
         addSystem(timeoutSystem)
         addSystem(reloadAssetsSystem)
+        addSystem(blendSystem)
 
         namedEntities = getEntitiesFor(Family.all(NameComponent::class.java).get())
     }
@@ -73,6 +77,16 @@ class IceEngine(val game: IceGame) : PooledEngine() {
                 this.timeout = time
             })
         })
+    }
+
+    fun blendScreen(duration: Float, to: Color, from: Color = Color.WHITE) {
+        renderingSystem.activeCameraEntity?.apply {
+            add(createComponent(BlendComponent::class.java).apply {
+                this.duration = duration
+                start = from
+                target = to
+            })
+        }
     }
 
     companion object {
