@@ -71,7 +71,10 @@ constructor() : IteratingIceSystem(Families.controllable), InputProcessor {
                         val start = transform.pos.cpy()
                         target = target.sub(width / 2, 0f)
 
+                        val control = entity.getComponent(Components.control)
+
                         val pathPlanningComponent = engine!!.createComponent(PathPlanningComponent::class.java)
+                        pathPlanningComponent.speed = control.speed
                         pathPlanningComponent.target = target
                         pathPlanningComponent.start = start
 
