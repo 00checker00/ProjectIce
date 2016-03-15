@@ -140,7 +140,8 @@ project(":hotspots") {
     }
 }
 
-project(":core").assemble.finalizedBy project(":hotspots").getTasksByName("copyClasses", false).first()
+project(":editor").getTasksByName("run", false).first().dependsOn project(":hotspots").getTasksByName("copyClasses", false).first()
+project(":desktop").getTasksByName("run", false).first().dependsOn project(":hotspots").getTasksByName("copyClasses", false).first()
 
 tasks.eclipse.doLast {
     delete ".project"
