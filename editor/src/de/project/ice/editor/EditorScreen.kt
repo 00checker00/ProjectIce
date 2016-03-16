@@ -19,6 +19,7 @@ import com.kotcrab.vis.ui.widget.file.FileChooserAdapter
 import de.project.ice.Storage
 import de.project.ice.hotspot.Hotspot
 import de.project.ice.screens.BaseScreenAdapter
+import de.project.ice.scripting.Script
 import de.project.ice.utils.*
 import de.project.ice.utils.SceneLoader.SceneProperties
 import de.project.ice.utils.SceneLoader.ScenePropertiesBuilder
@@ -61,6 +62,27 @@ class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app),
         isRecursive = true
         delay = 1000
         addFile(VFS.getManager().resolveFile(File("hotspots").absolutePath))
+        start()
+    }
+    private var scriptsNeedReload = false
+    private val scriptsMonitor = DefaultFileMonitor(object: FileListener {
+
+        override fun fileChanged(event: FileChangeEvent) {
+            scriptsNeedReload = true
+        }
+
+        override fun fileDeleted(event: FileChangeEvent) {
+            scriptsNeedReload = true
+        }
+
+        override fun fileCreated(event: FileChangeEvent) {
+            scriptsNeedReload = true
+        }
+
+    }).apply {
+        isRecursive = true
+        delay = 1000
+        addFile(VFS.getManager().resolveFile(File("scripts").absolutePath))
         start()
     }
 
@@ -301,6 +323,12 @@ class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app),
             }
         }))
 
+        reloadMenu.addItem(MenuItem("Reload Scripts", object : ChangeListener() {
+            override fun changed(event: ChangeListener.ChangeEvent, actor: Actor) {
+                reloadScripts()
+            }
+        }))
+
         startPlaytestItem = MenuItem("Start PlayTest", object : ChangeListener() {
             override fun changed(event: ChangeListener.ChangeEvent, actor: Actor) {
                 startPlaytest()
@@ -372,6 +400,15 @@ class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app),
         app.engine.removeAllEntities()
         app.engine.update(0.0f)
         Hotspot.reloadHotspots()
+        SceneLoader.loadScene(app.engine, scene)
+        hotspotsNeedReload = false
+    }
+
+    private fun reloadScripts() {
+        val scene = SceneWriter.serializeToString(app.engine, app.sceneProperties)
+        app.engine.removeAllEntities()
+        app.engine.update(0.0f)
+        Script.reloadScripts()
         SceneLoader.loadScene(app.engine, scene)
         hotspotsNeedReload = false
     }
@@ -522,6 +559,9 @@ class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app),
     override fun update(delta: Float) {
         if (hotspotsNeedReload) {
             reloadHotspots()
+        }
+        if (scriptsNeedReload) {
+            reloadScripts()
         }
 
         stage.act(delta)
