@@ -32,24 +32,24 @@ class ScriptingSystem() : IntervalIceSystem(1f), EntityListener {
             val component = Components.script.get(entity)
             val script = component.script
             if (script == null) {
-                component.script = Script.loadScript(component.scriptName, engine!!.game)
+                component.script = Script[component.scriptName]
                 if (component.script != null) {
-                    component.script!!.onAttachedToEntity(entity)
+                    component.script!!.onAttachedToEntity(engine!!.game, entity)
                 }
             } else {
                 activeScripts.add(script)
-                script.onUpdateEntity(entity, deltaTime)
+                script.onUpdateEntity(engine!!.game, entity, deltaTime)
             }
         }
         for (script in activeScripts) {
-            script.onUpdate(deltaTime)
+            script.onUpdate(engine!!.game, deltaTime)
         }
         super.update(deltaTime)
     }
 
     override fun updateInterval() {
         for (script in activeScripts) {
-            script.onTick()
+            script.onTick(engine!!.game)
         }
     }
 
@@ -60,7 +60,7 @@ class ScriptingSystem() : IntervalIceSystem(1f), EntityListener {
     override fun entityRemoved(entity: Entity) {
         if (Components.script.has(entity)) {
             val script = Components.script.get(entity).script
-            script?.onAttachedEntityRemoved(entity)
+            script?.onAttachedEntityRemoved(engine!!.game, entity)
         }
     }
 }
