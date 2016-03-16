@@ -10,11 +10,13 @@ class PathPlanningComponent : CopyableIceComponent {
     var target = Vector2(0f, 0f)
     @Property("The moving speed of this entity")
     var speed = 2.0f
+    var callback: (()->Unit)? = null;
 
     override fun reset() {
         start = Vector2()
         target = Vector2()
         speed = 2.0f
+        callback = null;
     }
 
     override fun copyTo(copy: CopyableIceComponent) {
@@ -22,6 +24,7 @@ class PathPlanningComponent : CopyableIceComponent {
             copy.start = start.cpy()
             copy.target = target.cpy()
             copy.speed = speed
+            copy.callback = callback
         }
     }
 }
