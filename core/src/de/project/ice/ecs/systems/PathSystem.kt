@@ -1,5 +1,6 @@
 package de.project.ice.ecs.systems
 
+import com.badlogic.ashley.core.ComponentMapper
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.Family
 import com.badlogic.ashley.utils.ImmutableArray
@@ -56,6 +57,7 @@ class PathSystem : IceSystem() {
             val pathPlanningComponent = entity.getComponent(Components.pathplanning)
             astar.searchNodePath(waypoints.get(2 * i), waypoints.get(2 * i + 1), PathHeuristic(), result)
             val moveComponent = engine!!.createComponent(MoveComponent::class.java)
+            moveComponent.callback = pathPlanningComponent.callback
             moveComponent.speed = pathPlanningComponent.speed
             entity.remove(PathPlanningComponent::class.java)
             entity.add(moveComponent)

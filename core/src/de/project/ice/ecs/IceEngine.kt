@@ -89,6 +89,13 @@ class IceEngine(val game: IceGame) : PooledEngine() {
         }
     }
 
+    fun removeEntity(name : String){
+        val entity = getEntityByName(name)
+        if(entity!=null){
+            removeEntity(entity)
+        }
+    }
+
     companion object {
 
         fun getEntityName(entity: Entity): String {
