@@ -28,6 +28,8 @@ open class IceGame : ApplicationAdapter() {
     val strings: I18NBundle by lazy { I18NBundle.createBundle(Gdx.files.internal("strings/ProjectIce")) }
     var isGamePaused = false
         private set
+    var BlockInteraction = false;
+    var BlockSaving = false;
 
     override fun create() {
         I18NBundle.setSimpleFormatter(true)
