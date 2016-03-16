@@ -2,25 +2,25 @@ package de.project.ice.scripting
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.utils.ObjectMap
 import com.badlogic.gdx.utils.reflect.ClassReflection
 import com.badlogic.gdx.utils.reflect.ReflectionException
 import de.project.ice.IceGame
 import de.project.ice.ecs.IceEngine
+import de.project.ice.hotspot.Hotspot
+import de.project.ice.hotspot.HotspotLoader
 
 /**
  * Base class for scripts
  * Note that all scripts have to be inside the "de.project.ice.scripting.scripts" package
  */
 abstract class Script {
-    private var engine: IceEngine? = null
-    private var game: IceGame? = null
-
     /**
      * Call once every cycle after all onUpdateEntity
 
      * @param delta the delta time in seconds
      */
-    fun onUpdate(delta: Float) {
+    fun onUpdate(game: IceGame, delta: Float) {
     }
 
     /**
@@ -28,7 +28,7 @@ abstract class Script {
 
      * @param delta the delta time in seconds
      */
-    open fun onUpdateEntity(entity: Entity, delta: Float) {
+    open fun onUpdateEntity(game: IceGame, entity: Entity, delta: Float) {
     }
 
     /**
@@ -36,7 +36,7 @@ abstract class Script {
 
      * @param entity the entity the script has been attached to
      */
-    open fun onAttachedToEntity(entity: Entity) {
+    open fun onAttachedToEntity(game: IceGame, entity: Entity) {
     }
 
     /**
@@ -44,45 +44,40 @@ abstract class Script {
 
      * @param entity the entity which has been removed
      */
-    open fun onAttachedEntityRemoved(entity: Entity) {
+    open fun onAttachedEntityRemoved(game: IceGame, entity: Entity) {
     }
 
     /**
      * Called approximately every second
      */
-    fun onTick() {
-    }
-
-    @Throws(IllegalStateException::class)
-    fun Engine(): IceEngine {
-        if (engine == null) {
-            throw IllegalStateException("An unloaded script tried to access the Engine")
-        }
-        return engine!!
-    }
-
-    @Throws(IllegalStateException::class)
-    fun Game(): IceGame {
-        if (game == null) {
-            throw IllegalStateException("An unloaded script tried to access the Game")
-        }
-        return game!!
+    fun onTick(game: IceGame) {
     }
 
     companion object {
+        private var _loader: ScriptLoader? = null
+        private val loader: ScriptLoader
+            get() = _loader ?: ScriptLoader().apply { _loader = this }
+        private val scripts = ObjectMap<String, Script>()
 
-        fun loadScript(scriptName: String, game: IceGame): Script? {
-            try {
-                val clazz = ClassReflection.forName("de.project.ice.scripting.scripts." + scriptName)
-                val script = ClassReflection.newInstance<Script>(clazz as Class<Script>?)
-                script.engine = game.engine
-                script.game = game
-                return script
-            } catch (e: ReflectionException) {
-                Gdx.app.log(Script::class.java.simpleName, "Unable to load script: " + scriptName)
+        operator fun get(id: String): Script? {
+            var script: Script? = scripts.get(id, null)
+            if (script == null) {
+                val classname = "de.project.ice.scripting.scripts.$id"
+                try {
+                    val clazz = loader.loadClass(classname)
+                    script = clazz.newInstance() as? Script
+                } catch (ex: Exception) {
+                    println("Error while loading script with id: $id")
+                    script = null
+                }
+                scripts.put(id, script)
             }
+            return script
+        }
 
-            return null
+        fun reloadScripts() {
+            _loader = null
+            scripts.clear()
         }
     }
 }
