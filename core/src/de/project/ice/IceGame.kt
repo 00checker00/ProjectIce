@@ -58,6 +58,12 @@ open class IceGame : ApplicationAdapter() {
         addScreen(DialogScreen(this, Dialog.load(Gdx.files.internal("dialog/$dialog.dlz"))))
     }
 
+    fun showDialog(dialog: String, callback: ()->Unit) {
+        addScreen(DialogScreen(this, Dialog.load(Gdx.files.internal("dialog/$dialog.dlz"))).apply {
+            this.callback = callback
+        })
+    }
+
     fun showMessages(vararg messages: String) {
         addScreen(MessageScreen(this, *messages.map {
             try { strings.get(it) } catch (ex: MissingResourceException) { "$$$it$$" } }.toTypedArray()))
