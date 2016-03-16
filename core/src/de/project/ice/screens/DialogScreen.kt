@@ -23,6 +23,7 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
     private val buttons = HashMap<String, TextButton>()
     private var choiceTable: Table? = null
     public override val inputProcessor: InputProcessor = DialogScreenInputProcessor(stage)
+    var callback: (()->Unit)? = null
 
     init {
         if (Config.RENDER_DEBUG) {
@@ -42,6 +43,7 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
         if (node == null) {
             // Reached end of dialog
             game.removeScreen(this)
+            callback?.invoke()
             return
         } else if ((node.type == Node.Type.Node || node.type == Node.Type.Start) && node.choices.size == 0) {
             // Empty node => Skip to next
