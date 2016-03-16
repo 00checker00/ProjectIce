@@ -140,8 +140,16 @@ project(":hotspots") {
     }
 }
 
-project(":editor").getTasksByName("run", false).first().dependsOn project(":hotspots").getTasksByName("copyClasses", false).first()
-project(":desktop").getTasksByName("run", false).first().dependsOn project(":hotspots").getTasksByName("copyClasses", false).first()
+project(":scripts") {
+    apply plugin: "java"
+
+    dependencies {
+        compile project(":core")
+    }
+}
+
+project(":core").getTasksByName("jar" , false).first().finalizedBy project(":hotspots").getTasksByName("copyClasses", false).first()
+project(":core").getTasksByName("jar" , false).first().finalizedBy project(":scripts").getTasksByName("copyClasses", false).first()
 
 tasks.eclipse.doLast {
     delete ".project"

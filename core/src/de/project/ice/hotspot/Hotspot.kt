@@ -37,8 +37,7 @@ class Hotspot internal constructor(val id: String, val scriptObject: Any? = null
                     val obj = clazz.newInstance()
                     hotspot = Hotspot(id, obj)
                 } catch (ex: Exception) {
-                    println("Error while loading hotspot with id: $id, caused by: ")
-                    ex.printStackTrace()
+                    println("Error while loading hotspot with id: $id")
                     hotspot = Hotspot(id)
                 }
                 hotspots.put(id, hotspot)
