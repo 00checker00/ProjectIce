@@ -44,6 +44,8 @@ class MovementSystem : IteratingIceSystem(Family.all(MoveComponent::class.java).
                 move.isMoving = false
                 move.targetPositions.removeAt(0) // remove path
 
+                move.callback?.invoke()
+
                 // Target reached
                 if (move.targetPositions.isEmpty()) {
                     entity.remove(MoveComponent::class.java)
