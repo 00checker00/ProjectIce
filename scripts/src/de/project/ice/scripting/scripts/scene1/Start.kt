@@ -3,6 +3,7 @@ package de.project.ice.scripting.scripts.scene1
 import com.badlogic.ashley.core.Entity
 import de.project.ice.IceGame
 import de.project.ice.ecs.Components
+import de.project.ice.ecs.components.AnimationComponent
 import de.project.ice.ecs.components.MoveComponent
 import de.project.ice.ecs.components.PathPlanningComponent
 import de.project.ice.ecs.getComponent
@@ -42,6 +43,7 @@ class Start : Script() {
                 game.blockSaving {
 
                 game.showDialog("s1_dlg_intro"){
+                    game.engine.soundSystem.playSound("s1_dlg_rein_fall_intro_1")
 
                 runOnce("falls_went_to_igloo") {
 
@@ -71,6 +73,26 @@ class Start : Script() {
 
 
                     }
+
+                    game.engine.timeout(1.0f){
+                        game.showDialog("s1_dlg_intro"){
+                            game.engine.getEntityByName("Andi_Player")?.add(game.engine.createComponent(PathPlanningComponent::class.java).apply {
+                                speed = 1.0f
+                                start = game.engine.getEntityByName("Andi_Player")?.getComponent(Components.transform)?.pos!!
+                                target = game.engine.getEntityByName("go_andi_to_kai")?.getComponent(Components.transform)?.pos!!
+                                callback = {
+                                    game.engine.getEntityByName("Kai")?.add(game.engine.createComponent(AnimationComponent::class.java).apply {
+
+                                    })
+                                }
+                            })
+                        }
+
+
+                    }
+
+
+
 
 
                 }
