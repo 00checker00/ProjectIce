@@ -1,6 +1,7 @@
 package de.project.ice.dialog
 
 import com.badlogic.gdx.files.FileHandle
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.utils.JsonReader
 import java.util.*
 
@@ -30,6 +31,8 @@ object Dialog {
             } else if ("Text" == type) {
                 node.type = Node.Type.Text
                 node.text = value.getString("name")
+                node.speaker = value.getString("speaker", "")
+                node.color = Color.valueOf(value.getString("color", "#000000"))
             } else if ("Set" == type) {
                 node.type = Node.Type.Set
                 node.variable_name = value.getString("variable")
