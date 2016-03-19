@@ -283,20 +283,23 @@ joint.shapes.dialogue.TextView = joint.shapes.dialogue.BaseView.extend({
 		'<button class="delete">x</button>',
 		'<button class="color"> </button>',
 		'<input type="text" class="name" placeholder="Text" />',
-		'<input type="text" class="face" placeholder="Face" />',
+		'<input type="text" class="speaker" placeholder="Speaker" />',
 		'</div>',
 	].join(''),
 
 	initialize: function () {
 		joint.shapes.dialogue.BaseView.prototype.initialize.apply(this, arguments);
 
-		this.$box.find('input.face').on('change', _.bind(function (evt) {
-			this.model.set('value', $(evt.target).val());
+		var speaker = this.model.get('speaker');
+		this.$box.find("input.speaker").val(speaker);
+
+		this.$box.find('input.speaker').on('change', _.bind(function (evt) {
+			this.model.set('speaker', $(evt.target).val());
 		}, this));
+
 
 		var color = this.model.get('color');
 		if (typeof color === 'undefined') color = "#000000";
-		console.log(color);
 
 		var that = this;
 		this.$box.find('button.color').spectrum({
@@ -529,6 +532,13 @@ function gameData()
 				node.variable = cell.name;
 				node.value = cell.value;
 				node.next = null;
+			}
+			else if (node.type == 'Text')
+			{
+				node.name = cell.name;
+				node.next = null;
+				node.color = cell.color;
+				node.speaker = cell.speaker;
 			}
 			else
 			{
