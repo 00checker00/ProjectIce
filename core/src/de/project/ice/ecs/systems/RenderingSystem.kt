@@ -162,6 +162,7 @@ class RenderingSystem : SortedIteratingIceSystem(Families.renderable, RenderingS
             scaleY += scaleY * breath.curScale.y
         }
 
+
         val width = tex.region.data!!.regionWidth.toFloat() * PIXELS_TO_METRES * scaleX
         val height = tex.region.data!!.regionHeight.toFloat() * PIXELS_TO_METRES * scaleY
         val originX = width * 0.5f
@@ -171,15 +172,15 @@ class RenderingSystem : SortedIteratingIceSystem(Families.renderable, RenderingS
 
             // draw the sprite in accordance with all calculated data (above)
             batch.draw(tex.region.data,
-                    t.pos.x, t.pos.y,
+                    t.pos.x - width/2, t.pos.y,
                     originX, originY,
                     width, height,
                     if (t.flipHorizontal) -1f else 1f, if (t.flipVertical) -1f else 1f,
                     MathUtils.radiansToDegrees * t.rotation)
 
         } else if (debugRenderer.isDrawing) {
-            debugRenderer.rect(t.pos.x, t.pos.y, width, height)
-            cross(t.pos.cpy().add(width / 2, height / 2).add(originX, originY))
+            debugRenderer.rect(t.pos.x-width/2, t.pos.y, width, height)
+            // cross(t.pos.cpy().add(0.0f, height / 2).add(originX, originY))
         }
     }
 

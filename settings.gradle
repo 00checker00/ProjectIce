@@ -1,1 +1,1 @@
-include 'desktop', /*'android',*/ 'core', 'config', 'SpriteConverter', "pathlib", "editor", "hotspots"
+include 'desktop', /*'android',*/ 'core', 'config', 'SpriteConverter', "pathlib", "editor", "hotspots", "scripts"

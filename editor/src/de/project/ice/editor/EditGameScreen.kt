@@ -64,7 +64,7 @@ class EditGameScreen(app: EditorApplication) : BaseScreenAdapter(app) {
                         val width = texture.region.data!!.regionWidth * PIXELS_TO_METRES
                         val height = texture.region.data!!.regionHeight * PIXELS_TO_METRES
 
-                        if (Rectangle(transform.pos.x, transform.pos.y, width, height).contains(coords.x, coords.y)) {
+                        if (Rectangle(transform.pos.x-width/2, transform.pos.y, width, height).contains(coords.x, coords.y)) {
                             dragComponent = transform
                             dragOriginX = coords.x - transform.pos.x
                             dragOriginY = coords.y - transform.pos.y
