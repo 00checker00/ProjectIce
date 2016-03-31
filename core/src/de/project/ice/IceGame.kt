@@ -28,6 +28,8 @@ open class IceGame : ApplicationAdapter() {
     val strings: I18NBundle by lazy { I18NBundle.createBundle(Gdx.files.internal("strings/ProjectIce")) }
     var isGamePaused = false
         private set
+    var BlockInteraction = false;
+    var BlockSaving = false;
 
     override fun create() {
         I18NBundle.setSimpleFormatter(true)
@@ -56,6 +58,12 @@ open class IceGame : ApplicationAdapter() {
 
     fun showDialog(dialog: String) {
         addScreen(DialogScreen(this, Dialog.load(Gdx.files.internal("dialog/$dialog.dlz"))))
+    }
+
+    fun showDialog(dialog: String, callback: ()->Unit) {
+        addScreen(DialogScreen(this, Dialog.load(Gdx.files.internal("dialog/$dialog.dlz"))).apply {
+            this.callback = callback
+        })
     }
 
     fun showMessages(vararg messages: String) {
