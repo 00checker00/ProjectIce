@@ -1,0 +1,60 @@
+inventory_bag.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+beutel
+  rotate: false
+  xy: 0 ,0
+  size: 866 ,581
+  orig: 866 ,581
+  offset: 0 ,0
+  index:0
+beutel_ebene
+  rotate: false
+  xy: 866 ,0
+  size: 619 ,480
+  orig: 619 ,480
+  offset: 0 ,0
+  index:0
+home_button_hover
+  rotate: false
+  xy: 0 ,581
+  size: 142 ,140
+  orig: 142 ,140
+  offset: 0 ,0
+  index:0
+home_button_none
+  rotate: false
+  xy: 142 ,581
+  size: 142 ,140
+  orig: 142 ,140
+  offset: 0 ,0
+  index:0
+load_button_hover
+  rotate: false
+  xy: 284 ,581
+  size: 125 ,125
+  orig: 125 ,125
+  offset: 0 ,0
+  index:0
+load_button_none
+  rotate: false
+  xy: 409 ,581
+  size: 125 ,125
+  orig: 125 ,125
+  offset: 0 ,0
+  index:0
+save_button_hover
+  rotate: false
+  xy: 534 ,581
+  size: 142 ,140
+  orig: 142 ,140
+  offset: 0 ,0
+  index:0
+save_button_none
+  rotate: false
+  xy: 676 ,581
+  size: 142 ,140
+  orig: 142 ,140
+  offset: 0 ,0
+  index:0
