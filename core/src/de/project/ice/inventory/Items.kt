@@ -21,26 +21,58 @@ object Items {
         items.put(item.name, item)
     }
 
+    class ItemBuilder() {
+        private var name: String? = null
+        private var icon: String? = null
+        private var description: String? = null
+        private var listener: Inventory.ItemListener? = null
+
+        fun name(func: ()->String) { name = func.invoke() }
+        fun icon(func: ()->String) { icon = func.invoke() }
+        fun description(func: ()->String) { description = func.invoke() }
+        fun onClick(func:()->Unit) {
+            listener = object: Inventory.ItemListener{
+                override fun itemClicked() {
+                    func.invoke()
+                }
+            }
+        }
+
+        fun build(): Item = Item(
+                name ?: throw NullPointerException("Item name not set!"),
+                icon ?: name!!,
+                description ?: name + "_desc",
+                listener)
+    }
+
+    class Builder() {
+        fun item(func: ItemBuilder.()->Unit) { addItem(ItemBuilder().apply { func() }.build()) }
+    }
+
+    private fun items(func: Builder.()->Unit) {
+        Builder().func()
+    }
+
     fun loadAllItems() {
+        items {
+            item { name { "inv_worm" } }
+            item { name { "inv_fishing_rod" } }
+            item { name { "inv_fishing_rod_nohook" } }
 
-        addItem(Item("inv_worm", "inv_worm", "inv_worm_desc", null))
-        addItem(Item("inv_fishing_rod", "inv_fishing_rod", "inv_fishing_rod_desc", null))
-        addItem(Item("inv_fishing_rod_nohook", "inv_fishing_rod_nohook", "inv_fishing_rod_nohook_desc", null))
 
+            item { name { "inv_nick" } }
+            item { name { "inv_felicia" } }
+            item { name { "inv_shaft" } }
+            item { name { "inv_fishing_rod_worm" } }
+            item { name { "inv_hook" } }
 
-        addItem(Item("inv_nick", "inv_nick", "inv_nick_desc", null))
-        addItem(Item("inv_felicia", "inv_felicia", "inv_felicia_desc", null))
-        addItem(Item("inv_shaft", "inv_shaft", "inv_shaft_desc", null))
-        addItem(Item("inv_fishing_rod_worm", "inv_fishing_rod_worm", "inv_fishing_rod_worm_desc", null))
-        addItem(Item("inv_hook", "inv_hook", "inv_hook_desc", null))
-
-        addItem(Item("inv_note", "inv_note", "inv_note_desc", null))
-        addItem(Item("inv_note_shred_1", "inv_note_shred_1", "inv_note_shred_1_desc", null))
-        addItem(Item("inv_note_shred_2", "inv_note_shred_2", "inv_note_shred_2_desc", null))
-        addItem(Item("inv_note_shred_3", "inv_note_shred_3", "inv_note_shred_3_desc", null))
-        addItem(Item("inv_note_shred_4", "inv_note_shred_4", "inv_note_shred_4_desc", null))
-        addItem(Item("inv_note_shred_1_2", "inv_note_shred_1_2", "inv_note_shred_1_2_desc", null))
-
+            item { name { "inv_note" } }
+            item { name { "inv_note_shred_1" } }
+            item { name { "inv_note_shred_2" } }
+            item { name { "inv_note_shred_3" } }
+            item { name { "inv_note_shred_4" } }
+            item { name { "inv_note_shred_1_2" } }
+        }
     }
 
     init {

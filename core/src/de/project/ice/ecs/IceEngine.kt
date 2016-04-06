@@ -88,6 +88,12 @@ class IceEngine(val game: IceGame) : PooledEngine() {
             })
         }
     }
+    fun flashScreen(color: Color = Color.RED, duration: Float = 0.05f) {
+        blendScreen(duration/2, color)
+        timeout(duration/2) {
+            blendScreen(duration/2, Color.WHITE)
+        }
+    }
 
     fun removeEntity(name : String){
         val entity = getEntityByName(name)
