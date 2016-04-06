@@ -56,9 +56,6 @@ constructor() : IteratingIceSystem(Families.controllable), InputProcessor {
                 activateHotspot(entity)
                 if (activeCursor!= CursorScreen.Cursor.None) {
 
-
-                    val width = PIXELS_TO_METRES * if (texture.region.data != null) texture.region.data!!.regionWidth else 0
-
                     var target: Vector2
                     if (hotspot_entity != null) {
                         val hotspotComponent = Components.hotspot.get(hotspot_entity)
@@ -69,9 +66,8 @@ constructor() : IteratingIceSystem(Families.controllable), InputProcessor {
                     }
 
                     val start = transform.pos.cpy()
-                    target = target.sub(width / 2, 0f)
 
-                    val pathPlanningComponent = engine!!.createComponent(PathPlanningComponent::class.java)
+                    val pathPlanningComponent = engine.createComponent(PathPlanningComponent::class.java)
                     pathPlanningComponent.target = target
                     pathPlanningComponent.start = start
 

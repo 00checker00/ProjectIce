@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input
 import com.badlogic.gdx.InputAdapter
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
@@ -15,9 +16,11 @@ import de.project.ice.config.Config.MENU_KEY
 import de.project.ice.inventory.Combinations
 import de.project.ice.inventory.Inventory
 import de.project.ice.utils.Assets
+import de.project.ice.utils.FreetypeSkin
 
 class InventoryScreen(game: IceGame) : BaseScreenAdapter(game) {
-    private val skin = Skin(Gdx.files.internal("ui/skin.json"))
+    private val skin = FreetypeSkin(Gdx.files.internal("ui/skin.json"))
+    private val bag: TextureRegion by lazy { skin.getRegion("beutel") }
     private val batch = SpriteBatch()
     private val camera = OrthographicCamera(Gdx.graphics.width.toFloat(), Gdx.graphics.height.toFloat())
     private val viewport = FitViewport(VIEWPORT_SIZE, VIEWPORT_SIZE, camera)
@@ -46,7 +49,7 @@ class InventoryScreen(game: IceGame) : BaseScreenAdapter(game) {
                     var active_item = game.engine.controlSystem.active_item;
                     if ( active_item != null && item != null) {
                       if (Combinations.canCombine(active_item, item)) {
-                          Combinations.combine(active_item, item)
+                          Combinations.combine(game, active_item, item)
                           game.engine.controlSystem.active_item = null
 
                       }
@@ -108,7 +111,8 @@ class InventoryScreen(game: IceGame) : BaseScreenAdapter(game) {
         batch.begin()
         var column = 0
         var row = 0
-        batch.draw(skin.getRegion("inventory_bg"), 0f, 0f, 1024f, 1024f)
+        var bag_ratio = bag.regionWidth.toFloat()/bag.regionHeight
+        batch.draw(bag, 0f, 0f, 1024f, 1024f*bag_ratio)
         for (item in game.inventory.items) {
             val holder = Assets.findRegion(item.icon)
             if (holder.data != null) {
