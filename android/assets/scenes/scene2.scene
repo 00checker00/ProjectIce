@@ -50,6 +50,8 @@
 					<followMinX type="Float">1.4E-45</followMinX>
 					<followOffset type="Float">1.0</followOffset>
 					<followType type="enum" subtype="de.project.ice.ecs.systems.CameraSystem$FollowType">None</followType>
+					<targetScale type="Float">0.5</targetScale>
+					<targetY type="Float">4.0</targetY>
 				</CameraComponent>
 			</components>
 		</entity>
@@ -61,7 +63,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="1.213167" y="0.31086624"/>
+					<pos type="Vector2" x="1.1017685" y="0.27528688"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="0.8" y="0.8"/>
 					<z type="Integer">0</z>
@@ -90,6 +92,9 @@
 					<speed type="Float">2.0</speed>
 					<targetPositions type="null"/>
 				</MoveComponent>
+				<DistanceScaleComponent>
+					<currentScale type="Float">0.9655891</currentScale>
+				</DistanceScaleComponent>
 			</components>
 		</entity>
 		<entity>
@@ -328,9 +333,6 @@
 		</entity>
 		<entity>
 			<components>
-				<ScriptComponent>
-					<scriptName type="String">Scene2</scriptName>
-				</ScriptComponent>
 				<NameComponent>
 					<name type="String">Scene2 beginScript</name>
 				</NameComponent>

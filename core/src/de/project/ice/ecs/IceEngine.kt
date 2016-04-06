@@ -7,10 +7,10 @@ import com.badlogic.ashley.utils.ImmutableArray
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import de.project.ice.IceGame
-import de.project.ice.ecs.components.BlendComponent
 import de.project.ice.ecs.components.NameComponent
-import de.project.ice.ecs.components.TimeoutComponent
 import de.project.ice.ecs.systems.*
+import de.project.ice.utils.addEntity
+import de.project.ice.utils.editComponents
 
 class IceEngine(val game: IceGame) : PooledEngine() {
     val animationSystem: AnimationSystem by lazy { AnimationSystem() }
@@ -71,21 +71,21 @@ class IceEngine(val game: IceGame) : PooledEngine() {
     }
 
     fun timeout(time: Float, function: ()->Unit) {
-        addEntity(createEntity().apply {
-            add(createComponent(TimeoutComponent::class.java).apply {
+        addEntity {
+            TimeoutComponent {
                 this.function = function
                 this.timeout = time
-            })
-        })
+            }
+        }
     }
 
     fun blendScreen(duration: Float, to: Color, from: Color = Color.WHITE) {
-        renderingSystem.activeCameraEntity?.apply {
-            add(createComponent(BlendComponent::class.java).apply {
+        renderingSystem.activeCameraEntity?.editComponents(this) {
+            BlendComponent {
                 this.duration = duration
                 start = from
                 target = to
-            })
+            }
         }
     }
     fun flashScreen(color: Color = Color.RED, duration: Float = 0.05f) {

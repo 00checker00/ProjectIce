@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport
 import com.badlogic.gdx.utils.viewport.Viewport
 import de.project.ice.IceGame
 import de.project.ice.utils.Assets
+import de.project.ice.utils.DefaultSkin
 import sun.font.TrueTypeFont
 import java.util.*
 
@@ -30,24 +31,12 @@ class CursorScreen(game: IceGame) : BaseScreenAdapter(game) {
     private val batch: SpriteBatch
     private val cursor_normal: TextureRegion
     private val cursor_double: TextureRegion
-    private val atlas: TextureAtlas
-    private val manager: AssetManager
     private val camera: OrthographicCamera
     private val viewport: Viewport
     private val cursors = HashMap<Cursor, TextureRegion>()
-    private val font = FreeTypeFontGenerator(Gdx.files.internal("ui/Minecraft.ttf")).let {
-        val params = FreeTypeFontGenerator.FreeTypeFontParameter().apply {
-            size = 16
-            color = Color.WHITE
-            borderWidth = 3f
-            borderColor = Color.BLACK
-        }
-
-        val font = it.generateFont(params)
-        it.dispose()
-
-        font
-    }
+    private val skin = DefaultSkin
+    private val font = skin.getFont("cursor")
+    var cursorScale = 0.6f
 
     init {
 
@@ -63,18 +52,14 @@ class CursorScreen(game: IceGame) : BaseScreenAdapter(game) {
 
         batch = SpriteBatch()
 
-        manager = AssetManager()
-        manager.load("ui/skin.atlas", TextureAtlas::class.java)
-        manager.finishLoading()
-        atlas = manager.get<TextureAtlas>("ui/skin.atlas")
-        cursor_normal = atlas.findRegion("cursor_normal")
-        cursor_double = atlas.findRegion("cursor_double")
-        cursors.put(Cursor.None, atlas.findRegion("transparent"))
-        cursors.put(Cursor.Walk, atlas.findRegion("cursor_walk"))
-        cursors.put(Cursor.Speak, atlas.findRegion("cursor_talk"))
-        cursors.put(Cursor.Look, atlas.findRegion("cursor_look"))
-        cursors.put(Cursor.Take, atlas.findRegion("cursor_take"))
-        cursors.put(Cursor.Use, atlas.findRegion("cursor_take"))
+        cursor_normal = skin.getRegion("cursor_normal")
+        cursor_double = skin.getRegion("cursor_double")
+        cursors.put(Cursor.None, skin.getRegion("transparent"))
+        cursors.put(Cursor.Walk, skin.getRegion("cursor_walk"))
+        cursors.put(Cursor.Speak, skin.getRegion("cursor_talk"))
+        cursors.put(Cursor.Look, skin.getRegion("cursor_look"))
+        cursors.put(Cursor.Take, skin.getRegion("cursor_take"))
+        cursors.put(Cursor.Use, skin.getRegion("cursor_use"))
     }
 
     var primaryCursor: Cursor
@@ -88,6 +73,13 @@ class CursorScreen(game: IceGame) : BaseScreenAdapter(game) {
         set(secondaryCursor) {
             game.engine.controlSystem.secondaryCursor = secondaryCursor
         }
+
+    var cursorText: String
+        get() = game.engine.controlSystem.cursorText
+        set(cursorText) {
+            game.engine.controlSystem.cursorText = cursorText
+        }
+
 
     override val priority: Int
         get() = 10
@@ -108,8 +100,6 @@ class CursorScreen(game: IceGame) : BaseScreenAdapter(game) {
         val primary = game.engine.controlSystem.primaryCursor
         val secondary = game.engine.controlSystem.secondaryCursor
         val item = game.engine.controlSystem.active_item
-        val size = cursor_normal.regionWidth.toFloat()
-
 
         var base_img = if (item == null && secondary == Cursor.None) {
             cursor_normal
@@ -117,17 +107,25 @@ class CursorScreen(game: IceGame) : BaseScreenAdapter(game) {
             cursor_double
         }
 
-        val x = Gdx.input.x.toFloat()
-        val y = viewport.screenHeight - Gdx.input.y.toFloat() - base_img.regionHeight.toFloat()
+        val size = base_img.regionWidth.toFloat() * cursorScale
+        val origin_x = CURSOR_ORIGIN_X * cursorScale
+        val origin_y = CURSOR_ORIGIN_Y * cursorScale
+        val primary_x = CURSOR_PRIMARY_X * cursorScale
+        val primary_y = CURSOR_PRIMARY_Y * cursorScale
+        val secondary_x = CURSOR_SECONDARY_X * cursorScale
+        val secondary_y = CURSOR_SECONDARY_Y * cursorScale
 
-        batch.draw(base_img, x - CURSOR_ORIGIN_X, y + CURSOR_ORIGIN_Y)
+        val x = Gdx.input.x.toFloat()
+        val y = viewport.screenHeight - Gdx.input.y.toFloat() - size
+
+        batch.draw(base_img, x - origin_x, y + origin_y, size, size)
 
         if (item == null) {
             if (game.engine.controlSystem.secondaryCursor != Cursor.None) {
-                batch.draw(cursors[primary], x- CURSOR_PRIMARY_X, y - CURSOR_PRIMARY_Y)
-                batch.draw(cursors[secondary], x-CURSOR_SECONDARY_X, y - CURSOR_SECONDARY_Y)
+                batch.draw(cursors[primary], x- primary_x, y - primary_y, size, size)
+                batch.draw(cursors[secondary], x+secondary_x, y - secondary_y, size, size)
             } else {
-                batch.draw(cursors[primary], x, y)
+                batch.draw(cursors[primary], x, y, size, size)
             }
         } else {
             val icon = Assets.findRegion(item.icon)
@@ -136,18 +134,14 @@ class CursorScreen(game: IceGame) : BaseScreenAdapter(game) {
             }
         }
 
+        font.draw(batch, cursorText, x + size/2, y + size + font.lineHeight)
 
-        if (hotspot != null) {
-            font.draw(batch, hotspot.id, x, y)
-        }
 
         batch.end()
     }
 
     override fun dispose() {
         batch.dispose()
-        atlas.dispose()
-        manager.dispose()
     }
 
     companion object {
@@ -159,4 +153,5 @@ class CursorScreen(game: IceGame) : BaseScreenAdapter(game) {
         private val CURSOR_SECONDARY_Y = 11
 
     }
+
 }

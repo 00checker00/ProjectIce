@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import de.project.ice.IceGame
 import de.project.ice.utils.ColorDrawable
+import de.project.ice.utils.DefaultSkin
 import de.project.ice.utils.DelegatingBlockingInputProcessor
 import de.project.ice.utils.FreetypeSkin
 
@@ -19,7 +20,7 @@ class MessageScreen(game: IceGame, vararg messages: String) : BaseScreenAdapter(
     private val messages: Array<String>
 
     private val stage = Stage()
-    private val skin = FreetypeSkin(Gdx.files.internal("ui/skin.json"))
+    private val skin = DefaultSkin
     private val root = Table(skin)
     private val messageLabel: Label
     override val inputProcessor: InputProcessor = object : DelegatingBlockingInputProcessor(stage) {

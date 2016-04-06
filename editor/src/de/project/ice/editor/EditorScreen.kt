@@ -344,6 +344,12 @@ class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app),
         stopPlaytestItem!!.isDisabled = true
         testMenu.addItem(stopPlaytestItem)
 
+        testMenu.addItem(MenuItem("Clear Savestate", object: ChangeListener() {
+            override fun changed(event: ChangeEvent, actor: Actor) {
+                Storage.SAVESTATE.clear()
+            }
+        }))
+
         helpMenu.addItem(MenuItem("About", object : ChangeListener() {
             override fun changed(event: ChangeListener.ChangeEvent, actor: Actor) {
                 Dialogs.showOKDialog(stage, "about", "ProjectIce Editor version " + VERSION)

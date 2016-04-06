@@ -13,6 +13,7 @@ class CameraComponent : CopyableIceComponent {
     var camera = OrthographicCamera(16f, 9f)
     @Property("Blend color")
     var color = Color.WHITE
+
     @Property("How the camera follows the player")
     var followType: CameraSystem.FollowType = CameraSystem.FollowType.None
     @Property("How near the player can go to the screen edge before the camera scrolls")
@@ -21,6 +22,11 @@ class CameraComponent : CopyableIceComponent {
     var followMinX = Float.MIN_VALUE
     @Property("The maximum X position of the Camera (when it follows the player)")
     var followMaxX = Float.MAX_VALUE
+
+    @Property("The position of the horizon")
+    var targetY: Float = 20.0f
+    @Property("The scale of the distance scaled entities, when they reach the horizon")
+    var targetScale: Float = 1.0f
 
     override fun reset() {
         camera = OrthographicCamera()
@@ -31,6 +37,8 @@ class CameraComponent : CopyableIceComponent {
         followOffset = 1.0f
         followMinX = Float.MIN_VALUE
         followMaxX = Float.MAX_VALUE
+        targetY = 20.0f
+        targetScale = 1.0f
     }
 
     override fun copyTo(copy: CopyableIceComponent) {
@@ -39,6 +47,10 @@ class CameraComponent : CopyableIceComponent {
             copy.camera.position.set(camera.position)
             copy.followType = followType
             copy.followOffset = followOffset
+            copy.followMaxX = followMaxX
+            copy.followMinX = followMinX
+            copy.targetY = targetY
+            copy.targetScale = targetScale
         }
     }
 }

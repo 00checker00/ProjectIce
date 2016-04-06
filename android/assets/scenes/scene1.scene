@@ -1,11 +1,6 @@
 <scene name="scene1" onload="">
 	<music></music>
-	<sounds>
-		<sound>s1_dlg_rein_fall_intro_1_Voice</sound>
-		<sound>s1_dlg_rein_fall_intro_2_Voice</sound>
-		<sound>s1_dlg_rein_fall_intro_3_Voice</sound>
-		<sound>s1_dlg_rein_fall_intro_4_Voice</sound>
-	</sounds>
+	<sounds/>
 	<spritesheets>
 		<spritesheet>objects</spritesheet>
 		<spritesheet>inventory</spritesheet>
@@ -51,6 +46,9 @@
 					<speed type="Float">2.0</speed>
 					<targetPositions type="null"/>
 				</MoveComponent>
+				<DistanceScaleComponent>
+					<currentScale type="Float">0.94898945</currentScale>
+				</DistanceScaleComponent>
 			</components>
 		</entity>
 		<entity>
@@ -89,6 +87,12 @@
 						<pos type="Vector3" x="4.6796875" y="2.421875" z="0.0"/>
 					</camera>
 					<color>-1</color>
+					<followMaxX type="Float">3.4028235E38</followMaxX>
+					<followMinX type="Float">1.4E-45</followMinX>
+					<followOffset type="Float">1.0</followOffset>
+					<followType type="enum" subtype="de.project.ice.ecs.systems.CameraSystem$FollowType">None</followType>
+					<targetScale type="Float">0.5</targetScale>
+					<targetY type="Float">4.0</targetY>
 				</CameraComponent>
 			</components>
 		</entity>
@@ -145,7 +149,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="3.3" y="2.8"/>
 					<rotation type="Float">0.0</rotation>
-					<scale type="Vector2" x="0.5" y="0.5"/>
+					<scale type="Vector2" x="0.7" y="0.7"/>
 					<z type="Integer">1</z>
 				</TransformComponent>
 				<HotspotComponent>
@@ -160,6 +164,9 @@
 				<TextureComponent>
 					<region type="TextureRegion">opa_grau_normal</region>
 				</TextureComponent>
+				<DistanceScaleComponent>
+					<currentScale type="Float">0.65</currentScale>
+				</DistanceScaleComponent>
 			</components>
 		</entity>
 		<entity>
@@ -316,7 +323,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="1.0" y="2.75"/>
 					<rotation type="Float">0.0</rotation>
-					<scale type="Vector2" x="0.5" y="0.5"/>
+					<scale type="Vector2" x="0.7" y="0.7"/>
 					<z type="Integer">1</z>
 				</TransformComponent>
 				<HotspotComponent>
@@ -331,6 +338,9 @@
 				<TextureComponent>
 					<region type="TextureRegion">prinzessin_normal</region>
 				</TextureComponent>
+				<DistanceScaleComponent>
+					<currentScale type="Float">0.65625</currentScale>
+				</DistanceScaleComponent>
 			</components>
 		</entity>
 		<entity>
@@ -379,6 +389,9 @@
 					<targetPos type="Vector2" x="0.0" y="0.0"/>
 					<width type="Float">0.6</width>
 				</HotspotComponent>
+				<DistanceScaleComponent>
+					<currentScale type="Float">1.0</currentScale>
+				</DistanceScaleComponent>
 			</components>
 		</entity>
 		<entity>
@@ -403,6 +416,9 @@
 					<targetPos type="Vector2" x="0.0" y="0.0"/>
 					<width type="Float">0.6</width>
 				</HotspotComponent>
+				<DistanceScaleComponent>
+					<currentScale type="Float">1.0</currentScale>
+				</DistanceScaleComponent>
 			</components>
 		</entity>
 		<entity>
@@ -427,6 +443,9 @@
 					<targetPos type="Vector2" x="0.0" y="0.0"/>
 					<width type="Float">0.6</width>
 				</HotspotComponent>
+				<DistanceScaleComponent>
+					<currentScale type="Float">0.97499996</currentScale>
+				</DistanceScaleComponent>
 			</components>
 		</entity>
 		<entity>
@@ -451,6 +470,9 @@
 					<targetPos type="Vector2" x="0.0" y="0.0"/>
 					<width type="Float">0.6</width>
 				</HotspotComponent>
+				<DistanceScaleComponent>
+					<currentScale type="Float">1.0</currentScale>
+				</DistanceScaleComponent>
 			</components>
 		</entity>
 		<entity>
@@ -475,6 +497,9 @@
 					<targetPos type="Vector2" x="0.0" y="0.0"/>
 					<width type="Float">0.6</width>
 				</HotspotComponent>
+				<DistanceScaleComponent>
+					<currentScale type="Float">0.8125</currentScale>
+				</DistanceScaleComponent>
 			</components>
 		</entity>
 		<entity>
@@ -499,6 +524,9 @@
 					<targetPos type="Vector2" x="0.0" y="0.0"/>
 					<width type="Float">0.6</width>
 				</HotspotComponent>
+				<DistanceScaleComponent>
+					<currentScale type="Float">0.96250004</currentScale>
+				</DistanceScaleComponent>
 			</components>
 		</entity>
 		<entity>
@@ -542,6 +570,9 @@
 				<TextureComponent>
 					<region type="TextureRegion">superman_normal</region>
 				</TextureComponent>
+				<DistanceScaleComponent>
+					<currentScale type="Float">1.0</currentScale>
+				</DistanceScaleComponent>
 			</components>
 		</entity>
 		<entity>

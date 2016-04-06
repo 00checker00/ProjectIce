@@ -1,6 +1,7 @@
 package de.project.ice.ecs.systems
 
 import com.badlogic.ashley.core.Entity
+import com.badlogic.gdx.Gdx
 import de.project.ice.ecs.Components
 import de.project.ice.ecs.Families
 import de.project.ice.ecs.getComponent
@@ -9,19 +10,17 @@ import de.project.ice.ecs.getComponent
 class DistanceScaleSystem : IteratingIceSystem(Families.distanceScale) {
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
-        val transform = entity.getComponent(Components.transform)
-        val distanceScale = entity.getComponent(Components.distanceScale)
+        val camera = engine.renderingSystem.activeCamera
 
-        val y = Math.min(transform.pos.y, distanceScale.targetY) // Cap y
-        val factor = y / distanceScale.targetY
+        if (camera != null) {
+            val transform = entity.getComponent(Components.transform)
+            val distanceScale = entity.getComponent(Components.distanceScale)
 
-        // linear interpolate the scale factor
-        val newScale = 1.0f - factor + factor * distanceScale.targetScale;
+            val y = Math.min(transform.pos.y, camera.targetY) // Cap y
+            val alpha = y / camera.targetY
 
-        if (newScale != distanceScale.currentScale) {
-
-            val scale = newScale / distanceScale.currentScale
-            transform.scale.scl(scale);
+            // linear interpolate the scale alpha
+            val newScale = 1.0f - alpha + alpha * camera.targetScale;
 
             distanceScale.currentScale = newScale
         }
