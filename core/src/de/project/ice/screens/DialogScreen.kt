@@ -15,18 +15,19 @@ import de.project.ice.Storage
 import de.project.ice.config.Config
 import de.project.ice.dialog.Node
 import de.project.ice.ecs.systems.SoundSystem
+import de.project.ice.utils.DefaultSkin
 import de.project.ice.utils.DelegatingBlockingInputProcessor
 import de.project.ice.utils.FreetypeSkin
 import java.util.*
 
 class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
     private val stage = Stage()
-    private val skin = FreetypeSkin(Gdx.files.internal("ui/skin.json"))
+    private val skin = DefaultSkin
 
     private val root = Table()
     private val buttons = HashMap<String, TextButton>()
-    private var choiceTable: Table? = null
-    public override val inputProcessor: InputProcessor = DialogScreenInputProcessor(stage)
+    private var choiceTable = Table(skin)
+    override val inputProcessor: InputProcessor = DialogScreenInputProcessor(stage)
     var callback: (()->Unit)? = null
 
     init {
@@ -70,18 +71,17 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
             return
         }
         clear()
-        root.row().expand()
+        root.row().expandY()
 
-        choiceTable = Table(skin)
-        choiceTable!!.defaults().space(20f)
-        choiceTable!!.defaults().align(Align.left)
+        choiceTable.defaults().space(20f)
+        choiceTable.defaults().align(Align.left)
 
         if (node.choices.size > 0) {
-            var pad = 50f
+            var pad = 20f
 
             for (pair in node.choices) {
                 val choice = pair.first
-                choiceTable!!.row()
+                choiceTable.row()
                 val text: String
                 try {
                     text = game.strings.get(choice.text)
@@ -90,7 +90,7 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
                     text = choice.text
                     Gdx.app.log(javaClass.simpleName, "Missing translation for: " + choice.text)
                 }
-                val btn = TextButton(text, skin)
+                val btn = TextButton(text, skin, "dialogChoice")
                 val next = choice.next
                 btn.addListener(object : InputListener() {
                     override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean {
@@ -99,12 +99,11 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
                         return true
                     }
                 })
-                pad /= 2f
-                choiceTable!!.add(btn).padLeft(pad)
+                choiceTable.add(btn).padLeft(pad)
             }
         }
 
-        root.add<Table>(choiceTable).bottom().center()
+        root.add(choiceTable).expandX()
 
         root.row().expandX()
 
@@ -121,9 +120,9 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
             }
 
             game.engine.soundSystem.playSound(node.text, SoundSystem.Type.Voice)
-            val textLabel = Label(text, skin)
+            val textLabel = Label(text, skin, "dialogText")
             textLabel.setAlignment(Align.center)
-            val scrollPane = ScrollPane(textLabel, skin)
+            val scrollPane = ScrollPane(textLabel, skin, "dialogText")
             root.add(scrollPane).height(50f).fill()
         }
 

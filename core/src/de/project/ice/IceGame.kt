@@ -103,6 +103,12 @@ open class IceGame : ApplicationAdapter() {
             cursorScreen.secondaryCursor = secondaryCursor
         }
 
+    var cursorText: String
+        get() = cursorScreen.cursorText
+        set(cursorText) {
+            cursorScreen.cursorText = cursorText
+        }
+
     override fun render() {
         Assets.update()
 
@@ -174,7 +180,7 @@ open class IceGame : ApplicationAdapter() {
     fun startNewGame() {
         engine.removeAllEntities()
         try {
-            SceneLoader.loadScene(engine, Gdx.files.internal("scenes/scene3.scene"))
+            SceneLoader.loadScene(engine, Gdx.files.internal("scenes/scene2.scene"))
         } catch (e: IOException) {
             e.printStackTrace()
         } catch (e: SceneLoader.LoadException) {

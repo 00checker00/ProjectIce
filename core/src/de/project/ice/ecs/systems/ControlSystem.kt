@@ -41,6 +41,7 @@ constructor() : IteratingIceSystem(Families.controllable), InputProcessor {
     var primaryCursor: CursorScreen.Cursor = CursorScreen.Cursor.None
     var secondaryCursor: CursorScreen.Cursor = CursorScreen.Cursor.None
     var active_item: Inventory.Item? = null
+    var cursorText: String = ""
 
     public override fun processEntity(entity: Entity, deltaTime: Float) {
         val texture = Components.texture.get(entity)
@@ -188,6 +189,7 @@ constructor() : IteratingIceSystem(Families.controllable), InputProcessor {
                     hotspot_entity = this
                     primaryCursor = hotspot.primaryCursor
                     secondaryCursor = hotspot.secondaryCursor
+                    cursorText = active_hotspot?.id?:""
                 }
             }
         }

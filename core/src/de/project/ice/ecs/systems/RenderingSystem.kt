@@ -11,9 +11,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
 import de.project.ice.config.Config
-import de.project.ice.ecs.Components
-import de.project.ice.ecs.Families
-import de.project.ice.ecs.IceEngine
 import de.project.ice.ecs.components.*
 import de.project.ice.utils.Assets
 
@@ -21,6 +18,7 @@ import java.util.Comparator
 
 import de.project.ice.config.Config.PIXELS_TO_METRES
 import de.project.ice.config.Config.RENDER_DEBUG
+import de.project.ice.ecs.*
 
 class RenderingSystem : SortedIteratingIceSystem(Families.renderable, RenderingSystem.RenderingComparator()) {
     private var hotspots: ImmutableArray<Entity>? = null
@@ -155,6 +153,12 @@ class RenderingSystem : SortedIteratingIceSystem(Families.renderable, RenderingS
 
         var scaleX = t.scale.x
         var scaleY = t.scale.y
+
+        if (entity.hasComponent(Components.distanceScale)) {
+            val scale = entity.getComponent(Components.distanceScale).currentScale
+            scaleY *= scale
+            scaleX *= scale
+        }
 
         if (Components.breath.has(entity)) {
             val breath = Components.breath.get(entity)

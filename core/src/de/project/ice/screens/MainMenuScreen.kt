@@ -9,13 +9,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import de.project.ice.IceGame
 import de.project.ice.config.Config
+import de.project.ice.utils.DefaultSkin
 import de.project.ice.utils.DelegatingBlockingInputProcessor
 import de.project.ice.utils.FreetypeSkin
 import java.util.*
 
 open class MainMenuScreen(game: IceGame) : BaseScreenAdapter(game) {
     private val stage = Stage()
-    private val skin = FreetypeSkin(Gdx.files.internal("ui/skin.json"))
+    private val skin = DefaultSkin
     private val root = Table()
     private val menuLayout = VerticalGroup()
     private val buttons = HashMap<String,TextButton>()

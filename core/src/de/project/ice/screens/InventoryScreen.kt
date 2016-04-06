@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.scenes.scene2d.ui.Skin
+import com.badlogic.gdx.utils.ObjectMap
 import com.badlogic.gdx.utils.viewport.FitViewport
 import de.project.ice.IceGame
 import de.project.ice.config.Config.INVENTORY_KEY
@@ -16,14 +16,23 @@ import de.project.ice.config.Config.MENU_KEY
 import de.project.ice.inventory.Combinations
 import de.project.ice.inventory.Inventory
 import de.project.ice.utils.Assets
-import de.project.ice.utils.FreetypeSkin
+import de.project.ice.utils.DefaultSkin
+import java.util.*
 
 class InventoryScreen(game: IceGame) : BaseScreenAdapter(game) {
-    private val skin = FreetypeSkin(Gdx.files.internal("ui/skin.json"))
+    private val skin = DefaultSkin
     private val bag: TextureRegion by lazy { skin.getRegion("beutel") }
     private val batch = SpriteBatch()
     private val camera = OrthographicCamera(Gdx.graphics.width.toFloat(), Gdx.graphics.height.toFloat())
-    private val viewport = FitViewport(VIEWPORT_SIZE, VIEWPORT_SIZE, camera)
+    private val viewport = FitViewport(bag.regionWidth.toFloat(), bag.regionHeight.toFloat(), camera)
+    private val itemPositions = ObjectMap<Inventory.Item, Vector2>()
+
+    init {
+        game.primaryCursor = CursorScreen.Cursor.None
+        game.secondaryCursor = CursorScreen.Cursor.None
+        game.cursorText = ""
+    }
+
     override val inputProcessor = object : InputAdapter() {
         override fun keyDown(keycode: Int): Boolean {
             when (keycode) {
@@ -43,7 +52,7 @@ class InventoryScreen(game: IceGame) : BaseScreenAdapter(game) {
         }
 
         override fun touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
-            val item = itemAt(screenX.toFloat(), screenY.toFloat())
+            val item: Inventory.Item? = getItemAtPos(viewport.unproject(Vector2(screenX.toFloat(), screenY.toFloat())))
             when (button) {
                 Input.Buttons.LEFT -> {
                     var active_item = game.engine.controlSystem.active_item;
@@ -71,19 +80,24 @@ class InventoryScreen(game: IceGame) : BaseScreenAdapter(game) {
 
         override fun touchDragged(screenX: Int, screenY: Int, pointer: Int): Boolean {
             val pos = viewport.unproject(Vector2(screenX.toFloat(), screenY.toFloat()))
-            if ((pos.x > VIEWPORT_SIZE || pos.x < 0) && game.engine.controlSystem.active_item != null) {
-                game.removeScreen(this@InventoryScreen)
-            }
+            //if ((pos.x > VIEWPORT_SIZE || pos.x < 0) && game.engine.controlSystem.active_item != null) {
+            //    game.removeScreen(this@InventoryScreen)
+            //}
             return true
         }
 
         override fun mouseMoved(screenX: Int, screenY: Int): Boolean {
             game.primaryCursor = CursorScreen.Cursor.None
             game.secondaryCursor = CursorScreen.Cursor.None
-            val item = itemAt(screenX.toFloat(), screenY.toFloat())
+            val item = getItemAtPos(viewport.unproject(Vector2(screenX.toFloat(), screenY.toFloat())))
             if (item != null) {
                 game.primaryCursor = CursorScreen.Cursor.Take
                 game.secondaryCursor = CursorScreen.Cursor.Look
+                game.cursorText = item.name
+            } else {
+                game.primaryCursor = CursorScreen.Cursor.None
+                game.secondaryCursor = CursorScreen.Cursor.None
+                game.cursorText = ""
             }
             return true
         }
@@ -91,6 +105,23 @@ class InventoryScreen(game: IceGame) : BaseScreenAdapter(game) {
         override fun scrolled(amount: Int): Boolean {
             return true
         }
+    }
+
+    fun getItemPosition(item: Inventory.Item): Vector2 {
+        return itemPositions.get(item) ?: let {
+            val rng = Random(item.name.hashCode().toLong())
+            Vector2 (
+                    rng.nextFloat()*bag.regionWidth,
+                    rng.nextFloat()*bag.regionHeight
+            ).apply { itemPositions.put(item, this) }
+        }
+    }
+
+    fun getItemAtPos(pos: Vector2): Inventory.Item? {
+        var items = game.inventory.items
+                .map { Pair(it, getItemPosition(it)) }
+                .filter { Rectangle(it.second.x, it.second.y, ICON_SIZE, ICON_SIZE).contains(pos) }
+        return items.lastOrNull()?.first
     }
 
     override fun resume() {
@@ -109,69 +140,29 @@ class InventoryScreen(game: IceGame) : BaseScreenAdapter(game) {
         viewport.apply()
         batch.projectionMatrix = camera.combined
         batch.begin()
-        var column = 0
-        var row = 0
-        var bag_ratio = bag.regionWidth.toFloat()/bag.regionHeight
-        batch.draw(bag, 0f, 0f, 1024f, 1024f*bag_ratio)
+
+        batch.draw(bag, 0f, 0f, bag.regionWidth.toFloat(), bag.regionHeight.toFloat())
+
         for (item in game.inventory.items) {
+
             val holder = Assets.findRegion(item.icon)
             if (holder.data != null) {
-                val pos = calcPos(row, column)
+                val pos = getItemPosition(item)
                 batch.draw(holder.data, pos.x, pos.y, ICON_SIZE, ICON_SIZE)
             }
-            if (++column >= ICON_COLUMNS) {
-                column = 0
-                ++row
-            }
         }
+
         batch.end()
-    }
-
-    private fun calcPos(row: Int, column: Int): Vector2 {
-        val x = MARGIN_HORIZONTAL + ICON_SIZE * column + ICON_SPACE * column + ICON_SPACE * 0.5f
-        val y = MARGIN_VERTICAL + ICON_SIZE * row + ICON_SPACE * row + ICON_SPACE * 0.5f
-        return Vector2(x, y)
-    }
-
-    private fun itemAt(x: Float, y: Float): Inventory.Item? {
-        val pos = viewport.unproject(Vector2(x, y))
-        val column = ((pos.x - MARGIN_HORIZONTAL) / (ICON_SIZE + ICON_SPACE)).toInt()
-        val row = ((pos.y - MARGIN_VERTICAL) / (ICON_SIZE + ICON_SPACE)).toInt()
-
-        if (row >= ICON_ROWS || column >= ICON_COLUMNS) {
-            return null
-        }
-
-        if (!Rectangle(MARGIN_HORIZONTAL + ICON_SIZE * column + ICON_SPACE * column,
-                MARGIN_VERTICAL + ICON_SIZE * row + ICON_SPACE * row,
-                ICON_SIZE,
-                ICON_SIZE).contains(pos)) {
-            return null
-        }
-
-        val index = row * ICON_COLUMNS + column
-        if (index >= game.inventory.items.size || index < 0) {
-            return null
-        } else {
-            return game.inventory.items.get(index)
-        }
     }
 
     override fun dispose() {
         batch.dispose()
-        skin.dispose()
     }
 
     override val priority: Int
         get() = 900
 
     companion object {
-        private val ICON_ROWS = 8
-        private val ICON_COLUMNS = 8
         private val ICON_SIZE = 64f
-        private val ICON_SPACE = 16f
-        private val VIEWPORT_SIZE = 1024f
-        private val MARGIN_VERTICAL = (VIEWPORT_SIZE - ICON_ROWS * (ICON_SIZE + ICON_SPACE)) * 0.5f
-        private val MARGIN_HORIZONTAL = (VIEWPORT_SIZE - ICON_COLUMNS * (ICON_SIZE + ICON_SPACE)) * 0.5f
     }
 }
