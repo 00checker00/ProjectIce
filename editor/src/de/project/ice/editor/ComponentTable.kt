@@ -47,18 +47,23 @@ class ComponentTable(component: Component) : VisTable() {
 
 
         val clazz = o.javaClass.kotlin
-        for (property in clazz.memberProperties) {
+        for (item in clazz.memberProperties.groupBy { (it.javaField?.annotations?.find { it is Property } as Property?)?.group?:"default" }) {
 
-            val f = property.javaField!!
+            val group = item.key
 
-            val propertyAnnotation = f.annotations.find { it is Property }
+            for (property in item.value) {
+
+                val f = property.javaField!!
+
+                val propertyAnnotation = f.annotations.find { it is Property }
 
 
 
-            if (propertyAnnotation != null && propertyAnnotation is Property && !propertyAnnotation.debug) {
-                f.isAccessible = true
-                addField(f, component, propertyAnnotation.Description)
-                row()
+                if (propertyAnnotation != null && propertyAnnotation is Property && !propertyAnnotation.debug) {
+                    f.isAccessible = true
+                    addField(f, component, propertyAnnotation.Description)
+                    row()
+                }
             }
         }
     }
