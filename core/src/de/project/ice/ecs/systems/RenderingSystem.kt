@@ -144,12 +144,15 @@ class RenderingSystem : SortedIteratingIceSystem(Families.renderable, RenderingS
 
     public override fun processEntity(entity: Entity, deltaTime: Float) {
         val tex = Components.texture.get(entity)
+        val t = Components.transform.get(entity)
 
-        if (tex.region.data == null) {
-            return
+        if (debugRenderer.isDrawing && !Components.texture.has(entity)) {
+            cross(t.pos)
         }
 
-        val t = Components.transform.get(entity)
+        if (tex?.region?.data == null) {
+            return
+        }
 
         var scaleX = t.scale.x
         var scaleY = t.scale.y
@@ -182,9 +185,6 @@ class RenderingSystem : SortedIteratingIceSystem(Families.renderable, RenderingS
                     if (t.flipHorizontal) -1f else 1f, if (t.flipVertical) -1f else 1f,
                     MathUtils.radiansToDegrees * t.rotation)
 
-        } else if (debugRenderer.isDrawing) {
-            debugRenderer.rect(t.pos.x-width/2, t.pos.y, width, height)
-            // cross(t.pos.cpy().add(0.0f, height / 2).add(originX, originY))
         }
     }
 
