@@ -19,6 +19,7 @@ import java.util.Comparator
 import de.project.ice.config.Config.PIXELS_TO_METRES
 import de.project.ice.config.Config.RENDER_DEBUG
 import de.project.ice.ecs.*
+import de.project.ice.utils.plus
 
 class RenderingSystem : SortedIteratingIceSystem(Families.renderable, RenderingSystem.RenderingComparator()) {
     private var hotspots: ImmutableArray<Entity>? = null
@@ -127,9 +128,9 @@ class RenderingSystem : SortedIteratingIceSystem(Families.renderable, RenderingS
         val transform = Components.transform.get(entity)
         val hotspot = Components.hotspot.get(entity)
 
-        val pos = transform.pos.cpy().add(hotspot.origin)
-        val origin = pos.cpy().add(hotspot.origin)
-        val center = origin.cpy().add(hotspot.width / 2, hotspot.height / 2)
+        val pos = transform.pos + hotspot.origin
+        val origin = pos + hotspot.origin
+        val center = origin + Vector2(hotspot.width / 2, hotspot.height / 2)
 
         if (batch.isDrawing && Gdx.input.isKeyPressed(Config.HOTSPOT_KEY)) {
             val region = Assets.findRegion("icon_hotspot")

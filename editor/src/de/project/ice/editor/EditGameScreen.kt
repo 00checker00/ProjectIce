@@ -92,11 +92,13 @@ class EditGameScreen(app: EditorApplication) : BaseScreenAdapter(app) {
                 val coords = cameraComponent.camera.unproject(Vector3(screenX.toFloat(), screenY.toFloat(), 0f))
 
                 dragComponent!!.pos.set(Vector2(coords.x - dragOriginX, coords.y - dragOriginY))
+                return true
             } else if (cameraDrag != null) {
                 cameraDrag!!.translate(Vector2(screenX.toFloat(), screenY.toFloat()).sub(cameraDragDown).scl(PIXELS_TO_METRES).scl(-1f, 1f))
                 cameraDragDown.set(screenX.toFloat(), screenY.toFloat())
+                return true
             }
-            return true
+            return false
         }
     }
 }

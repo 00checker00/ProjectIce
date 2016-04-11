@@ -15,6 +15,9 @@ import de.project.ice.IceGame
 import de.project.ice.pathlib.PathArea
 import de.project.ice.pathlib.Shape
 import de.project.ice.screens.BaseScreenAdapter
+import de.project.ice.utils.minus
+import de.project.ice.utils.plus
+import de.project.ice.utils.times
 
 class PathScreen(game: IceGame) : BaseScreenAdapter(game) {
 
@@ -49,13 +52,13 @@ class PathScreen(game: IceGame) : BaseScreenAdapter(game) {
                             val cur = pathArea.shape.vertices.get(i)
                             val next = pathArea.shape.vertices.get((i + 1) % pathArea.shape.vertices.size)
 
-                            val dir = next.cpy().sub(cur).nor()
-                            val rot = dir.cpy().rotate90(0).scl(epsilon)
+                            val dir = (next - cur).nor()
+                            val rot = dir.cpy().rotate90(0) * epsilon
 
-                            val bounds = Array(arrayOf(cur.cpy().add(rot), cur.cpy().sub(rot), next.cpy().sub(rot), next.cpy().add(rot)))
+                            val bounds = Array(arrayOf(cur + rot, cur - rot, next - rot, next + rot))
 
                             if (Intersector.isPointInPolygon(bounds, Vector2(pos.x, pos.y))) {
-                                insertPos = cur.cpy().add(dir.cpy().scl(Vector2(pos.x, pos.y).sub(cur).len()))
+                                insertPos = cur + (dir * ((Vector2(pos.x, pos.y) - cur).len()))
                                 insertIndex = i + 1
                                 break
                             }
