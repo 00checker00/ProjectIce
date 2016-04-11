@@ -1,6 +1,7 @@
 package de.project.ice.editor
 
 
+import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.Gdx
 import de.project.ice.IceGame
 import de.project.ice.editor.undoredo.UndoRedoManager
@@ -15,8 +16,14 @@ class EditorApplication : IceGame() {
     override fun init() {
         Gdx.input.inputProcessor = inputProcessor
         pauseGame()
-        addScreen(EditGameScreen(this))
-        addScreen(EditorScreen(this))
+        val editGameScreen = EditGameScreen(this)
+        addScreen(editGameScreen)
+        addScreen(object: EditorScreen(this@EditorApplication) {
+            override fun selectionChanged(entity: Entity?) {
+                super.selectionChanged(entity)
+                editGameScreen.selectedEntity = entity
+            }
+        })
         Gdx.graphics.setCursor(Gdx.graphics.newCursor(null, 0, 0))
     }
 

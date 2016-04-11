@@ -29,7 +29,7 @@ import org.apache.commons.vfs2.VFS
 import org.apache.commons.vfs2.impl.DefaultFileMonitor
 import java.io.*
 
-class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app), EntitiesWindow.SelectionListener {
+open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(app), EntitiesWindow.SelectionListener {
     private val pathScreen: PathScreen by lazy { PathScreen(app) }
     private val stage: Stage by lazy { Stage() }
     private val root: VisTable by lazy { VisTable(true) }
