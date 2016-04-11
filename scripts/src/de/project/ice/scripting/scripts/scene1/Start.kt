@@ -29,6 +29,7 @@ class Start : Script() {
 
         game.engine.getEntityByName("Kai")?.add(game.engine.createComponent(MoveComponent::class.java).apply {
             targetPositions.addAll(waypoints)
+            callback = { AndiWalksToKai(game) }
         })
     }
 
@@ -42,7 +43,7 @@ class Start : Script() {
                 game.blockSaving {
 
                     game.showDialog("s1_dlg_intro") {
-                        game.engine.soundSystem.playSound("s1_dlg_rein_fall_intro_1")
+
 
                         runOnce("falls_went_to_igloo") {
 
@@ -71,26 +72,8 @@ class Start : Script() {
                             }
 
                             game.engine.timeout(1.0f) {
-                                game.showDialog("s1_dlg_intro") {
+                                game.showDialog("s1_dlg_trolaf_intro") {
                                     kaiGetsPaper(game)
-                                }
-                            }
-
-                            game.engine.timeout(1.0f) {
-                                game.showDialog("s1_dlg_intro") {
-
-                                    game.engine.editEntity("Andi_Player") {
-                                        PathPlanningComponent {
-                                            speed = 1.0f
-                                            start = game.engine.getEntityByName("Andi_Player")?.getComponent(Components.transform)?.pos!!
-                                            target = game.engine.getEntityByName("go_andi_to_kai")?.getComponent(Components.transform)?.pos!!
-                                            callback = {
-                                                game.engine.editEntity("Kai") {
-
-                                                }
-                                            }
-                                        }
-                                    }
                                 }
                             }
 
@@ -102,4 +85,79 @@ class Start : Script() {
 
         }
     }
+
+    private fun AndiWalksToKai(game: IceGame) {
+        game.showDialog("s1_dlg_kai_intro") {
+
+            game.engine.editEntity("Andi_Player") {
+                PathPlanningComponent {
+                    start = game.engine.getEntityByName("Andi_Player")?.getComponent(Components.transform)?.pos!!
+                    target = game.engine.getEntityByName("go_andi_to_kai")?.getComponent(Components.transform)?.pos!!
+                    callback = {
+                        game.showDialog("s1_dlg_andi_intro") {
+                            game.showDialog("s1_dlg_kai_intro_2"){
+                                KaiTakesWrit(game)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun KaiTakesWrit(game: IceGame) {
+
+            game.engine.editEntity("Kai") {
+                PathPlanningComponent {
+                    start = game.engine.getEntityByName("Kai")?.getComponent(Components.transform)?.pos!!
+                    target = game.engine.getEntityByName("kai_takes_writ_andi")?.getComponent(Components.transform)?.pos!!
+                    callback = {
+                        game.showDialog("s1_dlg_andi_intro_2"){
+                            PathPlanningComponent {
+                                start = game.engine.getEntityByName("Kai")?.getComponent(Components.transform)?.pos!!
+                                target = game.engine.getEntityByName("kai_writ_toss_well")?.getComponent(Components.transform)?.pos!!
+                                callback = {
+                                    game.engine.timeout(2.0f) {
+
+                                        PathPlanningComponent {
+                                            start = game.engine.getEntityByName("Kai")?.getComponent(Components.transform)?.pos!!
+                                            target = game.engine.getEntityByName("kai_waypoint_1")?.getComponent(Components.transform)?.pos!!
+                                            callback = {
+
+                                                val waypoints = arrayOf(
+
+                                                        game.engine.getEntityByName("out_main_chars")?.getComponent(Components.transform)?.pos
+
+                                                ).filterNotNull()
+
+                                                game.engine.getEntityByName("Kai")?.add(game.engine.createComponent(MoveComponent::class.java).apply {
+                                                    targetPositions.addAll(waypoints)
+                                                })
+                                            }
+                                        }
+
+                                    }
+
+
+
+                                }
+
+                            }
+                        }
+
+
+                    }
+
+                }
+
+
+
+
+
+
+            }
+
+    }
+
+
 }
