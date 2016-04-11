@@ -20,6 +20,7 @@ import de.project.ice.screens.CursorScreen
 import de.project.ice.ecs.getComponent
 
 import de.project.ice.config.Config.PIXELS_TO_METRES
+import de.project.ice.utils.plus
 
 class ControlSystem
 @SuppressWarnings("unchecked")
@@ -60,7 +61,7 @@ constructor() : IteratingIceSystem(Families.controllable), InputProcessor {
                     var target: Vector2
                     if (hotspot_entity != null) {
                         val hotspotComponent = Components.hotspot.get(hotspot_entity)
-                        target = Components.transform.get(hotspot_entity).pos.cpy().add(hotspotComponent.origin).add(hotspotComponent.targetPos)
+                        target = Components.transform.get(hotspot_entity).pos + hotspotComponent.origin + hotspotComponent.targetPos
                     } else {
                         val mouse_target = active_camera!!.unproject(Vector3(pointerPos.x, pointerPos.y, 0f)) // unprojects UI coordinates to camera coordinates
                         target = Vector2(mouse_target.x, mouse_target.y)
@@ -172,8 +173,8 @@ constructor() : IteratingIceSystem(Families.controllable), InputProcessor {
                 val transform = it.getComponent(Components.transform)
                 val hotspot = it.getComponent(Components.hotspot)
 
-                val pos = transform.pos.cpy().add(hotspot.origin)
-                val origin = pos.cpy().add(hotspot.origin)
+                val pos = transform.pos + hotspot.origin
+                val origin = pos + hotspot.origin
 
                 if (Rectangle(origin.x, origin.y, hotspot.width, hotspot.height).contains(coords.x, coords.y)) {
                     return@filter true
