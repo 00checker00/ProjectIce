@@ -190,7 +190,7 @@ object SceneLoader {
     }
 
     private fun loadString(element: Element): String {
-        return element.text.apply {
+        return element.text?:"".apply {
             replace("&gt", ">")
             replace("&lt", "<")
             replace("&amp", "&")

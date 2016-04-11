@@ -186,10 +186,16 @@ constructor() : IteratingIceSystem(Families.controllable), InputProcessor {
 
                 active_hotspot = Hotspot[hotspot.script]
                 if (active_hotspot != null) {
+                    val text: String
+                    try {
+                        text = engine.game.strings["${hotspot.cursorText}_text"]
+                    } catch (ex: Exception) {
+                        text = active_hotspot?.id?:""
+                    }
                     hotspot_entity = this
                     primaryCursor = hotspot.primaryCursor
                     secondaryCursor = hotspot.secondaryCursor
-                    cursorText = active_hotspot?.id?:""
+                    cursorText = text
                 }
             }
         }

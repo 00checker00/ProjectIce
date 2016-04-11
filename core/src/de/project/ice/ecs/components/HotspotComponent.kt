@@ -19,6 +19,8 @@ class HotspotComponent : CopyableIceComponent {
     var primaryCursor = CursorScreen.Cursor.None
     @Property("Secondary cursor (Right click)", group = "cursor")
     var secondaryCursor = CursorScreen.Cursor.None
+    @Property("Id of the cursor text")
+    var cursorText = ""
 
     override fun reset() {
         origin.set(0f, 0f)
@@ -28,6 +30,7 @@ class HotspotComponent : CopyableIceComponent {
         script = ""
         primaryCursor = CursorScreen.Cursor.None
         secondaryCursor = CursorScreen.Cursor.None
+        cursorText = ""
     }
 
     override fun copyTo(copy: CopyableIceComponent) {
@@ -39,6 +42,7 @@ class HotspotComponent : CopyableIceComponent {
             copy.script = script
             copy.primaryCursor = primaryCursor
             copy.secondaryCursor = secondaryCursor
+            copy.cursorText = cursorText
         }
     }
 }
