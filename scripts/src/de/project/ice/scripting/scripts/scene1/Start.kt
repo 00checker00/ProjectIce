@@ -2,6 +2,7 @@ package de.project.ice.scripting.scripts.scene1
 
 import com.badlogic.ashley.core.Entity
 import de.project.ice.IceGame
+import de.project.ice.dialog.Node
 import de.project.ice.ecs.Components
 import de.project.ice.ecs.components.MoveComponent
 import de.project.ice.ecs.getComponent
@@ -117,7 +118,13 @@ class Start : Script() {
                                 start = game.engine.getEntityByName("Kai")?.getComponent(Components.transform)?.pos!!
                                 target = game.engine.getEntityByName("kai_writ_toss_well")?.getComponent(Components.transform)?.pos!!
                                 callback = {
-                                    game.engine.timeout(2.0f) {
+                                    val dialog = Node().apply {
+                                        speaker = "Kai"
+                                        text = "s1_dlg_kai_torn_to_pieces"
+                                    }
+                                    game.showDialog(dialog)
+
+                                    game.engine.timeout(0.0f) {
 
                                         PathPlanningComponent {
                                             start = game.engine.getEntityByName("Kai")?.getComponent(Components.transform)?.pos!!

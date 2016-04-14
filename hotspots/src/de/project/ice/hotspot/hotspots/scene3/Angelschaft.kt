@@ -10,6 +10,6 @@ class Angelschaft : Use.Take("Angelschaft","Angelschaft") {
     }
 
     override fun take(game: IceGame, hotspotId: String) {
-        super.take(game, )
+        super.take(game, hotspotId )
     }
 }

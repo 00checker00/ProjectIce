@@ -19,7 +19,7 @@ class Brunnen : Use.Adapter(){
         animation?.animation = 3
         var duration = animation?.animations?.get(3)?.data?.animationDuration?: 0.0f
 
-        game.engine.timeout( duration-0.5f , { super.take(game, )})
+        game.engine.timeout( duration-0.5f , { super.take(game, hotspotId)})
 
     }
 }

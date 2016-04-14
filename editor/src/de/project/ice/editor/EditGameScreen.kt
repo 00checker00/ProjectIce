@@ -33,6 +33,7 @@ class EditGameScreen(app: EditorApplication) : BaseScreenAdapter(app) {
             sceneRecording?.let {
                 app.undoManager.addAction(it.finish())
                 sceneRecording = null
+
             }
             return false
         }
@@ -57,6 +58,8 @@ class EditGameScreen(app: EditorApplication) : BaseScreenAdapter(app) {
                     cameraDragDown.set(screenX.toFloat(), screenY.toFloat())
                     cameraDrag = cameraComponent.camera
                 }
+
+
             }
             return false
         }
