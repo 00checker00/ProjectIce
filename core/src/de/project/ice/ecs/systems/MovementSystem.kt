@@ -47,8 +47,9 @@ class MovementSystem : IteratingIceSystem(Family.all(MoveComponent::class.java).
 
                 // Target reached
                 if (move.targetPositions.isEmpty()) {
-                    move.callback?.invoke()
+                    val callback = move.callback
                     entity.remove(MoveComponent::class.java)
+                    callback?.invoke()
 
                     // Stop walk animation
                     if (Components.walking.has(entity)) {

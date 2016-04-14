@@ -9,16 +9,18 @@ class HotspotComponent : CopyableIceComponent {
     val origin = Vector2(0f, 0f)
     @Property("Position to which characters walk when interacting with the hotspot. Relative to the origin")
     val targetPos = Vector2(0f, 0f)
-    @Property("Width of the hotspot")
+    @Property("Width of the hotspot", group = "size")
     var width = 0f
-    @Property("Height of the hotspot")
+    @Property("Height of the hotspot", group = "size")
     var height = 0f
     @Property("Name of the Script (Classname)")
     var script = ""
-    @Property("Primary cursor (Left click)")
+    @Property("Primary cursor (Left click)", group = "cursor")
     var primaryCursor = CursorScreen.Cursor.None
-    @Property("Secondary cursor (Right click)")
+    @Property("Secondary cursor (Right click)", group = "cursor")
     var secondaryCursor = CursorScreen.Cursor.None
+    @Property("Id of the cursor text")
+    var cursorText = ""
 
     override fun reset() {
         origin.set(0f, 0f)
@@ -28,6 +30,7 @@ class HotspotComponent : CopyableIceComponent {
         script = ""
         primaryCursor = CursorScreen.Cursor.None
         secondaryCursor = CursorScreen.Cursor.None
+        cursorText = ""
     }
 
     override fun copyTo(copy: CopyableIceComponent) {
@@ -39,6 +42,7 @@ class HotspotComponent : CopyableIceComponent {
             copy.script = script
             copy.primaryCursor = primaryCursor
             copy.secondaryCursor = secondaryCursor
+            copy.cursorText = cursorText
         }
     }
 }

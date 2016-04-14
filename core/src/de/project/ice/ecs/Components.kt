@@ -26,4 +26,4 @@ object Components {
 }
 
 fun Entity.hasComponent(mapper: ComponentMapper<out IceComponent>): Boolean = mapper.has(this)
-fun <T : IceComponent> Entity.getComponent(mapper: ComponentMapper<T>): T = mapper.get(this)
+fun <T : IceComponent> Entity.getComponent(mapper: ComponentMapper<T>): T = mapper.get(this) ?: throw RuntimeException()
