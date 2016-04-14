@@ -9,7 +9,7 @@ import de.project.ice.utils.SceneLoader
 
 open class GotoScene(val scene : String) : Use.Adapter() {
 
-    override fun walk(game: IceGame) {
+    override fun walk(game: IceGame, hotspotId: String) {
         game.engine.blendScreen(1.0f, Color.BLACK)
         game.engine.timeout(1.0f) {
 
