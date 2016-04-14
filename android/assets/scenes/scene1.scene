@@ -1,17 +1,10 @@
 <scene name="" onload="">
 	<music></music>
 	<sounds>
-		<sound>s1_dlg_kai_intro_1_Voice</sound>
-		<sound>s1_dlg_kai_intro_2_Voice</sound>
-		<sound>s1_dlg_kai_intro_3_Voice</sound>
-		<sound>s1_dlg_kai_intro_4_Voice</sound>
-		<sound>s1_dlg_kai_intro_5_Voice</sound>
-		<sound>s1_dlg_andi_intro_2_Voice</sound>
 		<sound>s1_dlg_rein_fall_intro_1_Voice</sound>
 		<sound>s1_dlg_rein_fall_intro_2_Voice</sound>
 		<sound>s1_dlg_rein_fall_intro_3_Voice</sound>
 		<sound>s1_dlg_rein_fall_intro_4_Voice</sound>
-		<sound>s1_dlg_andi_intro_1_Voice</sound>
 	</sounds>
 	<spritesheets>
 		<spritesheet>objects</spritesheet>
@@ -121,11 +114,11 @@
 								<vertex type="Vector2" x="1.5381424" y="0.59024084"/>
 								<vertex type="Vector2" x="1.5481632" y="0.016075373"/>
 								<vertex type="Vector2" x="4.218727" y="-0.026631117"/>
-								<vertex type="Vector2" x="7.109688" y="0.12046933"/>
-								<vertex type="Vector2" x="7.2396874" y="0.86071527"/>
-								<vertex type="Vector2" x="7.784688" y="1.8524551"/>
-								<vertex type="Vector2" x="8.539688" y="2.3839138"/>
-								<vertex type="Vector2" x="8.619688" y="2.7445467"/>
+								<vertex type="Vector2" x="8.734375" y="0.009888411"/>
+								<vertex type="Vector2" x="8.494375" y="0.89248955"/>
+								<vertex type="Vector2" x="9.464375" y="2.6482015"/>
+								<vertex type="Vector2" x="9.259375" y="3.0562859"/>
+								<vertex type="Vector2" x="8.614375" y="2.8807147"/>
 								<vertex type="Vector2" x="7.984375" y="2.8785517"/>
 								<vertex type="Vector2" x="7.9593744" y="3.3294358"/>
 								<vertex type="Vector2" x="7.024688" y="2.9485888"/>
@@ -598,7 +591,6 @@
 					<z type="Integer">0</z>
 				</TransformComponent>
 				<MoveComponent>
-					<callback type="null"/>
 					<isMoving type="Boolean">false</isMoving>
 					<speed type="Float">2.0</speed>
 					<targetPositions type="null"/>
@@ -624,6 +616,12 @@
 				<DistanceScaleComponent>
 					<currentScale type="Float">0.7616086</currentScale>
 				</DistanceScaleComponent>
+				<MoveComponent>
+					<callback type="null"/>
+					<isMoving type="Boolean">false</isMoving>
+					<speed type="Float">2.0</speed>
+					<targetPositions type="null"/>
+				</MoveComponent>
 			</components>
 		</entity>
 		<entity>
@@ -774,6 +772,31 @@
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">goto_scene2</name>
+				</NameComponent>
+				<TransformComponent>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
+					<flipVertical type="Boolean">false</flipVertical>
+					<pos type="Vector2" x="7.1299973" y="-0.17082727"/>
+					<rotation type="Float">0.0</rotation>
+					<scale type="Vector2" x="1.0" y="1.0"/>
+					<z type="Integer">0</z>
+				</TransformComponent>
+				<HotspotComponent>
+					<cursorText type="String">s2_location_name</cursorText>
+					<height type="Float">0.8</height>
+					<origin type="Vector2" x="0.0" y="0.0"/>
+					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Walk</primaryCursor>
+					<script type="String">scene1.GotoScene2</script>
+					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">None</secondaryCursor>
+					<targetPos type="Vector2" x="0.7" y="-0.1"/>
+					<width type="Float">1.5</width>
+				</HotspotComponent>
 			</components>
 		</entity>
 	</entities>

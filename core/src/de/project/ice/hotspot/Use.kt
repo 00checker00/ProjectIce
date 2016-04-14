@@ -18,7 +18,7 @@ interface Use {
             }
         }
 
-        protected fun walk(game: IceGame) {
+        protected open fun walk(game: IceGame) {
         }
 
         protected open fun look(game: IceGame) {
