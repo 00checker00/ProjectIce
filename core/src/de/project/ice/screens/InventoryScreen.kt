@@ -201,7 +201,7 @@ class InventoryScreen(game: IceGame) : BaseScreenAdapter(game) {
         for (item in game.inventory.items) {
             if (item == game.engine.controlSystem.active_item)
                 continue
-
+        }
         for (item in game.inventory.items) {
 
             val holder = Assets.findRegion(item.icon)

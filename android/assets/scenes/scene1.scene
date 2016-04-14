@@ -1,6 +1,11 @@
-<scene name="scene1" onload="">
+<scene name="" onload="">
 	<music></music>
-	<sounds/>
+	<sounds>
+		<sound>s1_dlg_rein_fall_intro_1_Voice</sound>
+		<sound>s1_dlg_rein_fall_intro_2_Voice</sound>
+		<sound>s1_dlg_rein_fall_intro_3_Voice</sound>
+		<sound>s1_dlg_rein_fall_intro_4_Voice</sound>
+	</sounds>
 	<spritesheets>
 		<spritesheet>objects</spritesheet>
 		<spritesheet>inventory</spritesheet>
@@ -17,7 +22,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="2.886013" y="0.4080844"/>
+					<pos type="Vector2" x="2.7810128" y="0.3815614"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="0.7" y="0.7"/>
 					<z type="Integer">0</z>
@@ -41,14 +46,14 @@
 					<animation type="Integer">2</animation>
 					<isWalking type="Boolean">false</isWalking>
 				</WalkingComponent>
+				<DistanceScaleComponent>
+					<currentScale type="Float">0.9618439</currentScale>
+				</DistanceScaleComponent>
 				<MoveComponent>
 					<isMoving type="Boolean">false</isMoving>
-					<speed type="Float">2.0</speed>
+					<speed type="Float">1.0</speed>
 					<targetPositions type="null"/>
 				</MoveComponent>
-				<DistanceScaleComponent>
-					<currentScale type="Float">0.94898945</currentScale>
-				</DistanceScaleComponent>
 			</components>
 		</entity>
 		<entity>
@@ -84,14 +89,14 @@
 				</TransformComponent>
 				<CameraComponent>
 					<camera type="OrthographicCamera" viewportWidth="9.6" viewportHeight="5.4">
-						<pos type="Vector3" x="4.6796875" y="2.421875" z="0.0"/>
+						<pos type="Vector3" x="4.684375" y="2.5390625" z="0.0"/>
 					</camera>
 					<color>-1</color>
-					<followMaxX type="Float">3.4028235E38</followMaxX>
-					<followMinX type="Float">1.4E-45</followMinX>
-					<followOffset type="Float">1.0</followOffset>
-					<followType type="enum" subtype="de.project.ice.ecs.systems.CameraSystem$FollowType">None</followType>
-					<targetScale type="Float">0.5</targetScale>
+					<followMaxX type="Float">5.3</followMaxX>
+					<followMinX type="Float">4.7</followMinX>
+					<followOffset type="Float">3.0</followOffset>
+					<followType type="enum" subtype="de.project.ice.ecs.systems.CameraSystem$FollowType">Horizontal</followType>
+					<targetScale type="Float">0.6</targetScale>
 					<targetY type="Float">4.0</targetY>
 				</CameraComponent>
 			</components>
@@ -109,13 +114,13 @@
 								<vertex type="Vector2" x="1.5381424" y="0.59024084"/>
 								<vertex type="Vector2" x="1.5481632" y="0.016075373"/>
 								<vertex type="Vector2" x="4.218727" y="-0.026631117"/>
-								<vertex type="Vector2" x="7.109688" y="0.12046933"/>
-								<vertex type="Vector2" x="7.2396874" y="0.86071527"/>
-								<vertex type="Vector2" x="7.784688" y="1.8524551"/>
-								<vertex type="Vector2" x="8.539688" y="2.3839138"/>
-								<vertex type="Vector2" x="8.619688" y="2.7445467"/>
-								<vertex type="Vector2" x="7.529688" y="2.8299596"/>
-								<vertex type="Vector2" x="7.404688" y="3.1573763"/>
+								<vertex type="Vector2" x="8.734375" y="0.009888411"/>
+								<vertex type="Vector2" x="8.494375" y="0.89248955"/>
+								<vertex type="Vector2" x="9.464375" y="2.6482015"/>
+								<vertex type="Vector2" x="9.259375" y="3.0562859"/>
+								<vertex type="Vector2" x="8.614375" y="2.8807147"/>
+								<vertex type="Vector2" x="7.984375" y="2.8785517"/>
+								<vertex type="Vector2" x="7.9593744" y="3.3294358"/>
 								<vertex type="Vector2" x="7.024688" y="2.9485888"/>
 								<vertex type="Vector2" x="6.989688" y="2.6781144"/>
 								<vertex type="Vector2" x="6.229687" y="2.1846168"/>
@@ -153,6 +158,7 @@
 					<z type="Integer">1</z>
 				</TransformComponent>
 				<HotspotComponent>
+					<cursorText type="String"></cursorText>
 					<height type="Float">1.2</height>
 					<origin type="Vector2" x="-0.2" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</primaryCursor>
@@ -165,7 +171,7 @@
 					<region type="TextureRegion">opa_grau_normal</region>
 				</TextureComponent>
 				<DistanceScaleComponent>
-					<currentScale type="Float">0.65</currentScale>
+					<currentScale type="Float">0.72</currentScale>
 				</DistanceScaleComponent>
 			</components>
 		</entity>
@@ -177,19 +183,20 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="3.0" y="1.7"/>
+					<pos type="Vector2" x="3.8150046" y="1.7371342"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">1</z>
 				</TransformComponent>
 				<HotspotComponent>
-					<height type="Float">2.1</height>
+					<cursorText type="String"></cursorText>
+					<height type="Float">3.0</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Walk</primaryCursor>
 					<script type="String">scene1.Hauptiglu</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
 					<targetPos type="Vector2" x="0.0" y="0.0"/>
-					<width type="Float">2.4</width>
+					<width type="Float">3.0</width>
 				</HotspotComponent>
 			</components>
 		</entity>
@@ -199,6 +206,7 @@
 					<name type="String">Andis Iglu</name>
 				</NameComponent>
 				<HotspotComponent>
+					<cursorText type="String"></cursorText>
 					<height type="Float">2.5</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Walk</primaryCursor>
@@ -222,19 +230,20 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="5.5" y="2.2"/>
+					<pos type="Vector2" x="6.9500046" y="2.396267"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
 				<NameComponent>
-					<name type="String">Teilnehmer1</name>
+					<name type="String">Trolaf</name>
 				</NameComponent>
 				<HotspotComponent>
+					<cursorText type="String"></cursorText>
 					<height type="Float">1.3</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</primaryCursor>
-					<script type="String">scene1.Teilnehmer</script>
+					<script type="String">scene1.Trolaf</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
 					<targetPos type="Vector2" x="0.0" y="0.0"/>
 					<width type="Float">0.6</width>
@@ -249,19 +258,20 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="6.15" y="2.6"/>
+					<pos type="Vector2" x="8.054994" y="2.9447942"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
 				<HotspotComponent>
-					<height type="Float">0.8</height>
+					<cursorText type="String"></cursorText>
+					<height type="Float">1.1</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Use</primaryCursor>
 					<script type="String">scene1.Brunnen</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
 					<targetPos type="Vector2" x="0.0" y="0.0"/>
-					<width type="Float">0.7</width>
+					<width type="Float">0.9</width>
 				</HotspotComponent>
 			</components>
 		</entity>
@@ -273,12 +283,13 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="6.7" y="1.0"/>
+					<pos type="Vector2" x="8.869998" y="0.7583484"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">1</z>
 				</TransformComponent>
 				<HotspotComponent>
+					<cursorText type="String"></cursorText>
 					<height type="Float">1.8</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Walk</primaryCursor>
@@ -303,6 +314,7 @@
 					<z type="Integer">0</z>
 				</TransformComponent>
 				<HotspotComponent>
+					<cursorText type="String"></cursorText>
 					<height type="Float">0.7</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Take</primaryCursor>
@@ -327,6 +339,7 @@
 					<z type="Integer">1</z>
 				</TransformComponent>
 				<HotspotComponent>
+					<cursorText type="String"></cursorText>
 					<height type="Float">1.3</height>
 					<origin type="Vector2" x="-0.2" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</primaryCursor>
@@ -339,7 +352,7 @@
 					<region type="TextureRegion">prinzessin_normal</region>
 				</TextureComponent>
 				<DistanceScaleComponent>
-					<currentScale type="Float">0.65625</currentScale>
+					<currentScale type="Float">0.725</currentScale>
 				</DistanceScaleComponent>
 			</components>
 		</entity>
@@ -349,6 +362,7 @@
 					<name type="String">Teilstueck 1</name>
 				</NameComponent>
 				<HotspotComponent>
+					<cursorText type="String"></cursorText>
 					<height type="Float">0.2</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Take</primaryCursor>
@@ -372,17 +386,18 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="6.5" y="0.0"/>
+					<pos type="Vector2" x="5.1949987" y="0.111395"/>
 					<rotation type="Float">0.0</rotation>
-					<scale type="Vector2" x="1.0" y="1.0"/>
+					<scale type="Vector2" x="0.6" y="0.6"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
 				<NameComponent>
 					<name type="String">Teilnehmer2</name>
 				</NameComponent>
 				<HotspotComponent>
+					<cursorText type="String">s1_participants</cursorText>
 					<height type="Float">1.3</height>
-					<origin type="Vector2" x="0.0" y="0.0"/>
+					<origin type="Vector2" x="-0.2" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</primaryCursor>
 					<script type="String">scene1.Teilnehmer</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
@@ -390,8 +405,11 @@
 					<width type="Float">0.6</width>
 				</HotspotComponent>
 				<DistanceScaleComponent>
-					<currentScale type="Float">1.0</currentScale>
+					<currentScale type="Float">0.98886055</currentScale>
 				</DistanceScaleComponent>
+				<TextureComponent>
+					<region type="TextureRegion">nebenperson1_normal</region>
+				</TextureComponent>
 			</components>
 		</entity>
 		<entity>
@@ -399,26 +417,30 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="2.0" y="0.0"/>
+					<pos type="Vector2" x="6.4449964" y="1.9785843"/>
 					<rotation type="Float">0.0</rotation>
-					<scale type="Vector2" x="1.0" y="1.0"/>
+					<scale type="Vector2" x="0.6" y="0.6"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
 				<NameComponent>
 					<name type="String">Teilnehmer3</name>
 				</NameComponent>
 				<HotspotComponent>
+					<cursorText type="String"></cursorText>
 					<height type="Float">1.3</height>
-					<origin type="Vector2" x="0.0" y="0.0"/>
+					<origin type="Vector2" x="-0.2" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</primaryCursor>
 					<script type="String">scene1.Teilnehmer</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
 					<targetPos type="Vector2" x="0.0" y="0.0"/>
-					<width type="Float">0.6</width>
+					<width type="Float">0.8</width>
 				</HotspotComponent>
 				<DistanceScaleComponent>
-					<currentScale type="Float">1.0</currentScale>
+					<currentScale type="Float">0.80214155</currentScale>
 				</DistanceScaleComponent>
+				<TextureComponent>
+					<region type="TextureRegion">opa_eskimo_normal</region>
+				</TextureComponent>
 			</components>
 		</entity>
 		<entity>
@@ -426,26 +448,30 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="2.7" y="0.2"/>
+					<pos type="Vector2" x="3.8949993" y="0.9744606"/>
 					<rotation type="Float">0.0</rotation>
-					<scale type="Vector2" x="1.0" y="1.0"/>
+					<scale type="Vector2" x="0.6" y="0.6"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
 				<NameComponent>
 					<name type="String">Teilnehmer4</name>
 				</NameComponent>
 				<HotspotComponent>
+					<cursorText type="String"></cursorText>
 					<height type="Float">1.3</height>
-					<origin type="Vector2" x="0.0" y="0.0"/>
+					<origin type="Vector2" x="-0.3" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</primaryCursor>
 					<script type="String">scene1.Teilnehmer</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
 					<targetPos type="Vector2" x="0.0" y="0.0"/>
-					<width type="Float">0.6</width>
+					<width type="Float">1.1</width>
 				</HotspotComponent>
 				<DistanceScaleComponent>
-					<currentScale type="Float">0.97499996</currentScale>
+					<currentScale type="Float">0.9025539</currentScale>
 				</DistanceScaleComponent>
+				<TextureComponent>
+					<region type="TextureRegion">eskimo_weapon1_normal</region>
+				</TextureComponent>
 			</components>
 		</entity>
 		<entity>
@@ -453,26 +479,30 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="8.5" y="0.0"/>
+					<pos type="Vector2" x="4.484999" y="1.9785864"/>
 					<rotation type="Float">0.0</rotation>
-					<scale type="Vector2" x="1.0" y="1.0"/>
+					<scale type="Vector2" x="0.6" y="0.6"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
 				<NameComponent>
 					<name type="String">Teilnehmer5</name>
 				</NameComponent>
 				<HotspotComponent>
+					<cursorText type="String"></cursorText>
 					<height type="Float">1.3</height>
-					<origin type="Vector2" x="0.0" y="0.0"/>
+					<origin type="Vector2" x="-0.2" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</primaryCursor>
 					<script type="String">scene1.Teilnehmer</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
 					<targetPos type="Vector2" x="0.0" y="0.0"/>
-					<width type="Float">0.6</width>
+					<width type="Float">0.8</width>
 				</HotspotComponent>
 				<DistanceScaleComponent>
-					<currentScale type="Float">1.0</currentScale>
+					<currentScale type="Float">0.80214137</currentScale>
 				</DistanceScaleComponent>
+				<TextureComponent>
+					<region type="TextureRegion">po</region>
+				</TextureComponent>
 			</components>
 		</entity>
 		<entity>
@@ -480,26 +510,30 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="5.0" y="1.5"/>
+					<pos type="Vector2" x="6.4050026" y="0.36483216"/>
 					<rotation type="Float">0.0</rotation>
-					<scale type="Vector2" x="1.0" y="1.0"/>
+					<scale type="Vector2" x="0.6" y="0.6"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
 				<NameComponent>
 					<name type="String">Teilnehmer6</name>
 				</NameComponent>
 				<HotspotComponent>
-					<height type="Float">1.3</height>
-					<origin type="Vector2" x="0.0" y="0.0"/>
+					<cursorText type="String"></cursorText>
+					<height type="Float">1.4</height>
+					<origin type="Vector2" x="-0.2" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</primaryCursor>
 					<script type="String">scene1.Teilnehmer</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
 					<targetPos type="Vector2" x="0.0" y="0.0"/>
-					<width type="Float">0.6</width>
+					<width type="Float">0.9</width>
 				</HotspotComponent>
 				<DistanceScaleComponent>
-					<currentScale type="Float">0.8125</currentScale>
+					<currentScale type="Float">0.9635168</currentScale>
 				</DistanceScaleComponent>
+				<TextureComponent>
+					<region type="TextureRegion">po</region>
+				</TextureComponent>
 			</components>
 		</entity>
 		<entity>
@@ -507,26 +541,30 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="3.8" y="0.3"/>
+					<pos type="Vector2" x="2.000003" y="1.0585463"/>
 					<rotation type="Float">0.0</rotation>
-					<scale type="Vector2" x="1.0" y="1.0"/>
+					<scale type="Vector2" x="0.6" y="0.6"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
 				<NameComponent>
 					<name type="String">Teilnehmer7</name>
 				</NameComponent>
 				<HotspotComponent>
-					<height type="Float">1.3</height>
-					<origin type="Vector2" x="0.0" y="0.0"/>
+					<cursorText type="String"></cursorText>
+					<height type="Float">1.4</height>
+					<origin type="Vector2" x="-0.2" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</primaryCursor>
 					<script type="String">scene1.Teilnehmer</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
 					<targetPos type="Vector2" x="0.0" y="0.0"/>
-					<width type="Float">0.6</width>
+					<width type="Float">0.9</width>
 				</HotspotComponent>
 				<DistanceScaleComponent>
-					<currentScale type="Float">0.96250004</currentScale>
+					<currentScale type="Float">0.89414537</currentScale>
 				</DistanceScaleComponent>
+				<TextureComponent>
+					<region type="TextureRegion">po</region>
+				</TextureComponent>
 			</components>
 		</entity>
 		<entity>
@@ -552,6 +590,11 @@
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
+				<MoveComponent>
+					<isMoving type="Boolean">false</isMoving>
+					<speed type="Float">2.0</speed>
+					<targetPositions type="null"/>
+				</MoveComponent>
 			</components>
 		</entity>
 		<entity>
@@ -562,7 +605,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="10.0" y="0.0"/>
+					<pos type="Vector2" x="8.539688" y="2.3839138"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="0.7" y="0.7"/>
 					<z type="Integer">0</z>
@@ -571,8 +614,14 @@
 					<region type="TextureRegion">superman_normal</region>
 				</TextureComponent>
 				<DistanceScaleComponent>
-					<currentScale type="Float">1.0</currentScale>
+					<currentScale type="Float">0.7616086</currentScale>
 				</DistanceScaleComponent>
+				<MoveComponent>
+					<callback type="null"/>
+					<isMoving type="Boolean">false</isMoving>
+					<speed type="Float">2.0</speed>
+					<targetPositions type="null"/>
+				</MoveComponent>
 			</components>
 		</entity>
 		<entity>
@@ -583,7 +632,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="5.0" y="0.0"/>
+					<pos type="Vector2" x="6.8750043" y="0.23870397"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
@@ -598,7 +647,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="3.0" y="1.4"/>
+					<pos type="Vector2" x="3.2750044" y="1.5807476"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
@@ -613,7 +662,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="0.1" y="1.7"/>
+					<pos type="Vector2" x="0.04500532" y="1.7823187"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
@@ -628,7 +677,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="0.1" y="2.2"/>
+					<pos type="Vector2" x="0.4800024" y="2.4241648"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
@@ -643,7 +692,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="0.9" y="2.7"/>
+					<pos type="Vector2" x="1.1700046" y="2.8432212"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
@@ -658,7 +707,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="1.8" y="2.8"/>
+					<pos type="Vector2" x="1.8200042" y="2.8326118"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
@@ -673,11 +722,81 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="3.3" y="1.6"/>
+					<pos type="Vector2" x="3.0149972" y="2.8750498"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">kai_takes_writ_andi</name>
+				</NameComponent>
+				<TransformComponent>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
+					<flipVertical type="Boolean">false</flipVertical>
+					<pos type="Vector2" x="3.4450006" y="2.864441"/>
+					<rotation type="Float">0.0</rotation>
+					<scale type="Vector2" x="1.0" y="1.0"/>
+					<z type="Integer">0</z>
+				</TransformComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">kai_writ_toss_well</name>
+				</NameComponent>
+				<TransformComponent>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
+					<flipVertical type="Boolean">false</flipVertical>
+					<pos type="Vector2" x="7.700006" y="2.9970539"/>
+					<rotation type="Float">0.0</rotation>
+					<scale type="Vector2" x="1.0" y="1.0"/>
+					<z type="Integer">0</z>
+				</TransformComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">out_main_chars</name>
+				</NameComponent>
+				<TransformComponent>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
+					<flipVertical type="Boolean">false</flipVertical>
+					<pos type="Vector2" x="12.295022" y="0.36601257"/>
+					<rotation type="Float">0.0</rotation>
+					<scale type="Vector2" x="1.0" y="1.0"/>
+					<z type="Integer">0</z>
+				</TransformComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">goto_scene2</name>
+				</NameComponent>
+				<TransformComponent>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
+					<flipVertical type="Boolean">false</flipVertical>
+					<pos type="Vector2" x="7.1299973" y="-0.17082727"/>
+					<rotation type="Float">0.0</rotation>
+					<scale type="Vector2" x="1.0" y="1.0"/>
+					<z type="Integer">0</z>
+				</TransformComponent>
+				<HotspotComponent>
+					<cursorText type="String">s2_location_name</cursorText>
+					<height type="Float">0.8</height>
+					<origin type="Vector2" x="0.0" y="0.0"/>
+					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Walk</primaryCursor>
+					<script type="String">scene1.GotoScene2</script>
+					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">None</secondaryCursor>
+					<targetPos type="Vector2" x="0.7" y="-0.1"/>
+					<width type="Float">1.5</width>
+				</HotspotComponent>
 			</components>
 		</entity>
 	</entities>
