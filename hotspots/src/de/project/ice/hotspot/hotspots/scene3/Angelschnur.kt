@@ -9,11 +9,11 @@ class Angelschnur : Use.Adapter(), UseWith {
 
     override val useableItems: Set<String> = hashSetOf("inv_shaft");
 
-    override fun useWith(game: IceGame, item: String) {
+    override fun useWith(game: IceGame, item: String, hotspotId: String) {
         throw UnsupportedOperationException()
     }
 
-    override fun look(game: IceGame) {
+    override fun look(game: IceGame, hotspotId: String) {
         game.showMessages("s3_ice_floe_desc");
     }
 }

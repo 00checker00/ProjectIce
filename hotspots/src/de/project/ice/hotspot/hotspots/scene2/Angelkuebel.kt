@@ -7,11 +7,11 @@ import de.project.ice.scripting.runOnce
 
 
 class Angelkuebel : Use.Take("", "inv_fishing_rod") {
-    override fun look(game: IceGame) {
+    override fun look(game: IceGame, hotspotId: String) {
         game.showMessages("s2_fishing_rod_cylinder_desc");
     }
 
-    override fun take(game: IceGame) {
+    override fun take(game: IceGame, hotspotId: String) {
 
         if(Storage.SAVESTATE.getString("s2_angelrute")=="true") {
         //    super.take(game)

@@ -5,6 +5,9 @@ import com.badlogic.ashley.core.Family
 import de.project.ice.ecs.Components
 import de.project.ice.ecs.components.MoveComponent
 import de.project.ice.ecs.components.UseComponent
+import de.project.ice.ecs.getComponent
+import de.project.ice.ecs.hasComponent
+import de.project.ice.ecs.getComponent
 import de.project.ice.hotspot.Hotspot
 
 class UseSystem : IteratingIceSystem(Family.all(UseComponent::class.java).exclude(MoveComponent::class.java).get()) {
@@ -20,11 +23,17 @@ class UseSystem : IteratingIceSystem(Family.all(UseComponent::class.java).exclud
 
         val hotspot = Hotspot[hotspotComponent.script]
 
+        val entityname: String
+        if (entity.hasComponent(Components.name))
+            entityname = entity.getComponent(Components.name).name
+        else
+            entityname = ""
+
         if (hotspot != null) {
             if (use.withItem != null) {
-                hotspot.useWith(engine.game, use.withItem!!.name)
+                hotspot.useWith(engine.game, use.withItem!!.name, entityname)
             } else {
-                hotspot.use(engine.game, use.cursor)
+                hotspot.use(engine.game, use.cursor, entityname)
             }
         }
         entity.remove(UseComponent::class.java)
