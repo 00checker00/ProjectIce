@@ -169,7 +169,7 @@ constructor() : IteratingIceSystem(Families.controllable), InputProcessor {
                 primaryCursor = CursorScreen.Cursor.Walk
             }
 
-            hotspots?.filter {
+            val entity = hotspots?.filter {
                 val transform = it.getComponent(Components.transform)
                 val hotspot = it.getComponent(Components.hotspot)
 
@@ -182,8 +182,9 @@ constructor() : IteratingIceSystem(Families.controllable), InputProcessor {
                 return@filter false
             }?.sortedBy {
                 it.getComponent(Components.transform)?.z?:0
-            }?.firstOrNull()?.apply {
-                val hotspot = Components.hotspot.get(this)
+            }?.firstOrNull()
+            if (entity != null) {
+                val hotspot = entity.getComponent(Components.hotspot)
 
                 active_hotspot = Hotspot[hotspot.script]
                 if (active_hotspot != null) {
@@ -191,13 +192,15 @@ constructor() : IteratingIceSystem(Families.controllable), InputProcessor {
                     try {
                         text = engine.game.strings["${hotspot.cursorText}_text"]
                     } catch (ex: Exception) {
-                        text = active_hotspot?.id?:""
+                        text = active_hotspot?.id ?: ""
                     }
-                    hotspot_entity = this
+                    hotspot_entity = entity
                     primaryCursor = hotspot.primaryCursor
                     secondaryCursor = hotspot.secondaryCursor
                     cursorText = text
                 }
+            } else {
+                cursorText = ""
             }
         }
         return true
