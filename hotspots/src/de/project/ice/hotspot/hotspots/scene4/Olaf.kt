@@ -5,11 +5,11 @@ import de.project.ice.hotspot.Use
 
 
 class Olaf : Use.Adapter(){
-    override fun look(game: IceGame) {
+    override fun look(game: IceGame, hotspotId: String) {
         game.showMessages("s4_olaf_desc")
     }
 
-    override fun speak(game: IceGame) {
+    override fun speak(game: IceGame, hotspotId: String) {
         game.showDialog("")
     }
 }

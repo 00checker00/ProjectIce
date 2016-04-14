@@ -5,7 +5,7 @@ import de.project.ice.hotspot.Use
 
 
 class Papierstueck : Use.Adapter(){
-    override fun look(game: IceGame) {
+    override fun look(game: IceGame, hotspotId: String) {
         game.showMessages("s1_paperpart_desc")
     }
 }

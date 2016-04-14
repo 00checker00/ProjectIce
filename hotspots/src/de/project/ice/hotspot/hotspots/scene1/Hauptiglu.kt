@@ -5,7 +5,7 @@ import de.project.ice.hotspot.Use
 
 
 class Hauptiglu : Use.Adapter(){
-    override fun look(game: IceGame) {
+    override fun look(game: IceGame, hotspotId: String) {
         game.showMessages("s1_main_igloo_desc")
     }
 }

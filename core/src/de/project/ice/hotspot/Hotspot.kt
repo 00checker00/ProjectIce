@@ -13,13 +13,13 @@ class Hotspot internal constructor(val id: String, val scriptObject: Any? = null
         return scriptUseWith?.useableItems?.contains(item) ?: false
     }
 
-    fun useWith(game: IceGame, item: String) {
+    fun useWith(game: IceGame, item: String, hotspotId: String) {
         if (canUseWith(item))
-            scriptUseWith?.useWith(game, item)
+            scriptUseWith?.useWith(game, item, hotspotId)
     }
 
-    fun use(game: IceGame, cursor: Cursor) {
-        scriptUse?.use(game, cursor)
+    fun use(game: IceGame, cursor: Cursor, hotspotId: String) {
+        scriptUse?.use(game, cursor, hotspotId)
     }
 
     companion object {
