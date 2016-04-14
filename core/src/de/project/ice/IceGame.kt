@@ -28,7 +28,11 @@ open class IceGame : ApplicationAdapter() {
     val strings: I18NBundle by lazy { I18NBundle.createBundle(Gdx.files.internal("strings/ProjectIce")) }
     var isGamePaused = false
         private set
-    var BlockInteraction = false;
+    var BlockInteraction = false
+        set(value) {
+            field = value
+            engine.controlSystem.setProcessing(!value)
+        }
     var BlockSaving = false;
 
     override fun create() {
