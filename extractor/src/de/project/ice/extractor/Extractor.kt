@@ -57,14 +57,16 @@ fun extractLookups(sheet: Sheet): Map<String, String> {
     val result = HashMap<String, String>(sheet.lastRowNum*2)
     for (row in sheet.rowIterator()) {
         val id = row.getCell(0)?.stringCellValue ?: continue
-        val desc = row.getCell(1)?.stringCellValue ?: continue
-        val text = row.getCell(2)?.stringCellValue ?: continue
+        val desc = row.getCell(1)?.stringCellValue
+        val text = row.getCell(2)?.stringCellValue
 
         if (filter(row.getCell(0)))
             continue
 
-        result.put("${id}_desc", desc)
-        result.put("${id}_text", text)
+        if (desc != null)
+            result.put("${id}_desc", desc)
+        if (text != null)
+            result.put("${id}_text", text)
     }
     return result
 }
