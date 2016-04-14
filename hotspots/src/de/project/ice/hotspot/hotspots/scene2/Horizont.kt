@@ -8,7 +8,7 @@ import de.project.ice.hotspot.Use
  */
 class Horizont : Use.Adapter(){
 
-    override fun look(game: IceGame) {
+    override fun look(game: IceGame, hotspotId: String) {
       //  game.showDialog("s2")
         game.showMessages("s2_horizon_desc")
     }

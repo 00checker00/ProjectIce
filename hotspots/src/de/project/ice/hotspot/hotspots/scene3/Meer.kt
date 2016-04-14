@@ -5,7 +5,7 @@ import de.project.ice.hotspot.Use
 
 
 class Meer : Use.Adapter() {
-    override fun look(game: IceGame) {
+    override fun look(game: IceGame, hotspotId: String) {
         game.showMessages("s3_ocean_desc");
     }
 }

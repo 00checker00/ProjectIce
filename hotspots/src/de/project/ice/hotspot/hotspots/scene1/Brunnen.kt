@@ -7,11 +7,11 @@ import de.project.ice.hotspot.Use
 
 
 class Brunnen : Use.Adapter(){
-    override fun look(game: IceGame) {
+    override fun look(game: IceGame, hotspotId: String) {
         game.showMessages("s1_well_desc")
     }
 
-    override fun use(game: IceGame) {
+    override fun use(game: IceGame, hotspotId: String) {
 
         val andi = game.engine.getEntityByName("Andi_Player")
         val animation = andi?.getComponent(Components.animation)
@@ -19,7 +19,7 @@ class Brunnen : Use.Adapter(){
         animation?.animation = 3
         var duration = animation?.animations?.get(3)?.data?.animationDuration?: 0.0f
 
-        game.engine.timeout( duration-0.5f , { super.take(game)})
+        game.engine.timeout( duration-0.5f , { super.take(game, )})
 
     }
 }

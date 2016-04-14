@@ -9,7 +9,7 @@ import de.project.ice.screens.CursorScreen
 
 
 class Options : Use {
-    override fun use(game: IceGame, cursor: CursorScreen.Cursor) {
+    override fun use(game: IceGame, cursor: CursorScreen.Cursor, hotspotId: String) {
         val andi = game.engine.getEntityByName("Andi_Player")
         val start = andi?.getComponent(Components.transform)?.pos
         val target = game.engine.getEntityByName("out_options")?.getComponent(Components.transform)?.pos
