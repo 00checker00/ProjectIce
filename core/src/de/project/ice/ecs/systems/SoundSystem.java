@@ -149,8 +149,12 @@ public class SoundSystem extends IceSystem
 
         if (!file.exists())
         {
-            Gdx.app.log(getClass().getSimpleName(), "Music file doesn'T exist: " + file.path());
-            return;
+            file = Gdx.files.internal("music/" + name + ".ogg");
+            if (!file.exists())
+            {
+                Gdx.app.log(getClass().getSimpleName(), "Sound file doesn't exist: " + file.pathWithoutExtension() + " {.ogg, .mp3} ");
+                return;
+            }
         }
 
         musicname = name;

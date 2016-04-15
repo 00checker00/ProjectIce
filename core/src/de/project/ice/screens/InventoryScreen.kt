@@ -3,6 +3,7 @@ package de.project.ice.screens
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.InputAdapter
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.g2d.TextureRegion
@@ -16,13 +17,12 @@ import de.project.ice.IceGame
 import de.project.ice.Storage
 import de.project.ice.config.Config.INVENTORY_KEY
 import de.project.ice.config.Config.MENU_KEY
+import de.project.ice.ecs.Components
+import de.project.ice.ecs.getComponents
 import de.project.ice.inventory.Combinations
 import de.project.ice.inventory.Inventory
 import de.project.ice.inventory.Items
-import de.project.ice.utils.Assets
-import de.project.ice.utils.DefaultSkin
-import de.project.ice.utils.minus
-import de.project.ice.utils.plus
+import de.project.ice.utils.*
 import java.util.*
 
 internal enum class Button { Load, Save, Home }
@@ -84,22 +84,70 @@ class InventoryScreen(game: IceGame) : BaseScreenAdapter(game) {
             val item = getItemAtPos(pos)
             when (button) {
                 Input.Buttons.LEFT -> {
-                    var active_item = game.engine.controlSystem.active_item;
-                    when {
-                        active_item != null && item != null -> if (Combinations.canCombine(active_item, item)) {
-                            Combinations.combine(game, active_item, item)
-                            game.engine.controlSystem.active_item = null
+
+                    if(Circle(BUTTON_POSITIONS[Button.Save], BUTTON_SIZE).contains(pos) ) {
+                        if(game.blockSaving) {
+                            game.showMessages("general_save_blocked")
+                        } else {
+                            val xmlState = SceneWriter.serializeToString(game.engine, game.engine.sceneProperties!!)
+
+                            Storage.SAVESTATE.put("__SAVESTATE__", xmlState)
+                            game.removeScreen(this@InventoryScreen)
+                            game.showMessages("general_save_success")
                         }
-                        active_item != null && item == null -> {
-                            game.engine.controlSystem.active_item = null
-                            itemPositions.put(active_item, pos + dragOffset)
+
+
+                    } else if(Circle(BUTTON_POSITIONS[Button.Load], BUTTON_SIZE).contains(pos)) {
+                        if(game.blockSaving) {
+                            game.showMessages("general_load_blocked")
+                        } else {
+                            if (Storage.SAVESTATE.hasKey("__SAVESTATE__")) {
+
+                                game.removeScreen(this@InventoryScreen)
+                                game.engine.blendScreen(1.0f, Color.BLACK)
+                                game.engine.timeout(1.0f) {
+                                    val xmlState = Storage.SAVESTATE.getString("__SAVESTATE__")
+
+                                    game.engine.entities.forEach {
+                                        game.engine.removeEntity(it)
+                                    }
+
+                                    game.engine.timeout(0f) {
+                                        game.engine.timeout(0f) {
+                                            game.engine.blendScreen(0.0f, Color.BLACK)
+                                            game.engine.timeout(0.5f) {
+                                                game.engine.blendScreen(1.0f, Color.WHITE, Color.BLACK)
+                                            }
+
+                                            SceneLoader.loadScene(game.engine, xmlState)
+                                            game.showMessages("general_load_success")
+                                        }
+                                    }
+                                }
+                            } else {
+                                game.showMessages("general_load_nosave")
+                            }
                         }
-                        item != null -> {
-                            dragOffset = getItemPosition(item) - pos
-                            draggedItem = item
-                            dragStart = pos
-                            itemPositions.put(draggedItem, pos + dragOffset)
-                            dragged = false
+
+                    } else {
+                        var active_item = game.engine.controlSystem.active_item;
+
+                        when {
+                            active_item != null && item != null -> if (Combinations.canCombine(active_item, item)) {
+                                Combinations.combine(game, active_item, item)
+                                game.engine.controlSystem.active_item = null
+                            }
+                            active_item != null && item == null -> {
+                                game.engine.controlSystem.active_item = null
+                                itemPositions.put(active_item, pos + dragOffset)
+                            }
+                            item != null -> {
+                                dragOffset = getItemPosition(item) - pos
+                                draggedItem = item
+                                dragStart = pos
+                                itemPositions.put(draggedItem, pos + dragOffset)
+                                dragged = false
+                            }
                         }
                     }
                 }

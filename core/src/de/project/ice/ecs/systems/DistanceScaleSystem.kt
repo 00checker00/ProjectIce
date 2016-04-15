@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.Gdx
 import de.project.ice.ecs.Components
 import de.project.ice.ecs.Families
-import de.project.ice.ecs.getComponent
+import de.project.ice.ecs.getComponents
 
 
 class DistanceScaleSystem : IteratingIceSystem(Families.distanceScale) {
@@ -13,8 +13,8 @@ class DistanceScaleSystem : IteratingIceSystem(Families.distanceScale) {
         val camera = engine.renderingSystem.activeCamera
 
         if (camera != null) {
-            val transform = entity.getComponent(Components.transform)
-            val distanceScale = entity.getComponent(Components.distanceScale)
+            val transform = entity.getComponents(Components.transform)
+            val distanceScale = entity.getComponents(Components.distanceScale)
 
             val y = Math.min(transform.pos.y, camera.targetY) // Cap y
             val alpha = y / camera.targetY

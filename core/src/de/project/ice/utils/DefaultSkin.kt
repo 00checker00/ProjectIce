@@ -47,4 +47,9 @@ val DefaultSkin = Skin("ui/skin.atlas") {
         up = ColorDrawable(com.badlogic.gdx.graphics.Color.BLUE)
         fontColor = skin.getColor("dialogChoiceFont")
     }
+    TextButtonStyle {
+        font = skin.getFont("dialogFont")
+        up = ColorDrawable(com.badlogic.gdx.graphics.Color.BLUE)
+        fontColor = skin.getColor("dialogChoiceFont")
+    }
 }
