@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.I18NBundle
 import de.project.ice.dialog.Dialog
+import de.project.ice.dialog.Node
 import de.project.ice.ecs.IceEngine
 import de.project.ice.inventory.Inventory
 import de.project.ice.screens.*
@@ -60,15 +61,16 @@ open class IceGame : ApplicationAdapter() {
         isGamePaused = false
     }
 
-    fun showDialog(dialog: String) {
-        addScreen(DialogScreen(this, Dialog.load(Gdx.files.internal("dialog/$dialog.dlz"))))
-    }
-
-    fun showDialog(dialog: String, callback: ()->Unit) {
-        addScreen(DialogScreen(this, Dialog.load(Gdx.files.internal("dialog/$dialog.dlz"))).apply {
+    fun showDialog(node: Node, callback: ()->Unit = {}) {
+        addScreen(DialogScreen(this, node).apply {
             this.callback = callback
         })
     }
+
+    fun showDialog(dialog: String, callback: ()->Unit = {}) {
+        showDialog(Dialog.load(Gdx.files.internal("dialog/$dialog.dlz")), callback)
+    }
+
 
     fun showMessages(vararg messages: String) {
         addScreen(MessageScreen(this, *messages.map {

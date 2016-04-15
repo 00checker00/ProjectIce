@@ -3,7 +3,7 @@ package de.project.ice.dialog
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.utils.Array
 
-class Node(val id: String) {
+class Node(val id: String = "") {
     enum class Type {
         Start, Node, Branch, Choice, Text, Set
     }

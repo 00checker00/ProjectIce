@@ -23,7 +23,6 @@ object Components {
     @JvmField val distanceScale = ComponentMapper.getFor(DistanceScaleComponent::class.java)
     @JvmField val timeout = ComponentMapper.getFor(TimeoutComponent::class.java)
     @JvmField val blend = ComponentMapper.getFor(BlendComponent::class.java)
-    @JvmField val speak = ComponentMapper.getFor(SpeakComponent::class.java)
 }
 
 fun Entity.hasComponent(mapper: ComponentMapper<out IceComponent>): Boolean = mapper.has(this)

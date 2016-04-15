@@ -44,6 +44,10 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
     private var startPlaytestItem: MenuItem? = null;
     private var stopPlaytestItem: MenuItem? = null;
     private var hotspotsNeedReload = false
+    private var componentvisible = false
+    private var entitiesvisible = false
+
+
     private val hotspotsMonitor = DefaultFileMonitor(object: FileListener {
 
         override fun fileChanged(event: FileChangeEvent) {
@@ -65,6 +69,12 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
         start()
     }
     private var scriptsNeedReload = false
+
+    private val editGameScreen = EditGameScreen(app)
+
+
+
+
     private val scriptsMonitor = DefaultFileMonitor(object: FileListener {
 
         override fun fileChanged(event: FileChangeEvent) {
@@ -147,6 +157,11 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
     }
 
     init {
+
+        app.addScreen(editGameScreen)
+
+
+
         VisUI.load()
         FileChooser.setFavoritesPrefsName("de.project.ice.editor")
 
@@ -209,15 +224,32 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
     private fun stopPlaytest() {
         stopPlaytestItem!!.isDisabled = true
         startPlaytestItem!!.isDisabled = false
+
+        entitiesWindow.isVisible = entitiesvisible
+        componentsWindow.isVisible = componentvisible
+
         restoreState()
         game.pauseGame()
     }
 
     private fun startPlaytest() {
+
+        editGameScreen.inputProcessor.detached = true
+
         stopPlaytestItem!!.isDisabled = false
         startPlaytestItem!!.isDisabled = true
+
+        entitiesvisible = entitiesWindow.isVisible
+        componentvisible = componentsWindow.isVisible
+
+        entitiesWindow.isVisible = false
+        componentsWindow.isVisible = false
         storeState()
         game.resumeGame()
+
+
+
+
     }
 
     private fun createMenus() {
@@ -605,6 +637,8 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
 
     override fun selectionChanged(entity: Entity?) {
         componentsWindow.setEntity(entity)
+
+        editGameScreen.selectedEntity = entity
     }
 
     companion object {
