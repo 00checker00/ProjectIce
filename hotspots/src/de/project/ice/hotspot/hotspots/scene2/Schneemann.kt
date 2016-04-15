@@ -6,7 +6,7 @@ import de.project.ice.hotspot.Use
 
 class Schneemann : Use.Adapter() {
     override fun speak(game: IceGame, hotspotId: String) {
-        game.showDialog("s2_snowman_talk_desc")
+        game.showMessages("s2_snowman_talk")
     }
 
     override fun look(game: IceGame, hotspotId: String) {

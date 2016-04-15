@@ -18,6 +18,6 @@ class Wurm: Use.Take("Worm", "inv_worm") {
     }
 
     override fun look(game: IceGame, hotspotId: String) {
-        game.showMessages("s2_wormhole_desc")
+        game.showMessages("s2_worm_desc")
     }
 }
