@@ -1,9 +1,13 @@
 package de.project.ice.screens
 
+import com.badlogic.ashley.core.Entity
+import com.badlogic.ashley.core.Family
+import com.badlogic.ashley.utils.ImmutableArray
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputProcessor
-import com.badlogic.gdx.graphics.g2d.BitmapFont
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
+import com.badlogic.gdx.graphics.g2d.GlyphLayout
+import com.badlogic.gdx.math.Rectangle
+import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Stage
@@ -14,21 +18,26 @@ import de.project.ice.IceGame
 import de.project.ice.Storage
 import de.project.ice.config.Config
 import de.project.ice.dialog.Node
+import de.project.ice.ecs.Components
+import de.project.ice.ecs.components.SpeakComponent
+import de.project.ice.ecs.getComponent
+import de.project.ice.ecs.getComponents
 import de.project.ice.ecs.systems.SoundSystem
-import de.project.ice.utils.DefaultSkin
-import de.project.ice.utils.DelegatingBlockingInputProcessor
-import de.project.ice.utils.FreetypeSkin
+import de.project.ice.utils.*
 import java.util.*
 
 class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
     private val stage = Stage()
     private val skin = DefaultSkin
+    private val font = skin.getFont("dialogFont")
+    private val textLayout = GlyphLayout()
 
     private val root = Table()
     private val buttons = HashMap<String, TextButton>()
     private var choiceTable = Table(skin)
     override val inputProcessor: InputProcessor = DialogScreenInputProcessor(stage)
     var callback: (()->Unit)? = null
+    val dialogEntities: ImmutableArray<Entity>
 
     init {
         if (Config.RENDER_DEBUG) {
@@ -40,6 +49,8 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
         stage.addActor(root)
 
         root.setFillParent(true)
+
+        dialogEntities = game.engine.getEntitiesFor(Family.all(SpeakComponent::class.java).get())
 
         showNode(dialog)
     }
@@ -120,16 +131,26 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
             }
 
             game.engine.soundSystem.playSound(node.text, SoundSystem.Type.Voice)
-            val textLabel = Label(text, skin, "dialogText")
-            textLabel.setAlignment(Align.center)
-            val scrollPane = ScrollPane(textLabel, skin, "dialogText")
-            root.add(scrollPane).height(50f).fill()
+
+            game.engine.addEntity {
+                SpeakComponent {
+                    this.text = text
+                    this.targetName = node.speaker
+                }
+            }
+
+            //val textLabel = Label(text, skin, "dialogText")
+            //textLabel.setAlignment(Align.center)
+            //val scrollPane = ScrollPane(textLabel, skin, "dialogText")
+            //root.add(scrollPane).height(50f).fill()
         }
 
     }
 
     private fun clear() {
         root.clear()
+
+        dialogEntities.forEach { game.engine.removeEntity(it) }
     }
 
     override val priority: Int
@@ -149,6 +170,45 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
 
     override fun render() {
         stage.viewport.apply()
+
+        val camera = game.engine.renderingSystem.activeCamera
+
+        if (camera != null) {
+
+            stage.batch.begin()
+
+            for (dialogLine in dialogEntities.map { it.getComponent(Components.speak) }) {
+                if (dialogLine.target == null)
+                    continue
+
+                textLayout.setText(font, dialogLine.text)
+
+                val (targetTransform, targetHotspot) = dialogLine.target!!.getComponents(Components.transform, Components.hotspot)
+
+                val targetX = targetTransform.pos.x
+                val targetY = targetTransform.pos.y + targetHotspot.height
+
+                val projected = camera.camera.project(Vector3(targetX, targetY, 0f))
+
+                var x = projected.x - textLayout.width/2
+                var y = projected.y + textLayout.height
+
+                var viewportTopLeft = camera.camera.project(Vector3(camera.camera.position))
+                var viewportBottomRight = camera.camera.project(Vector3(camera.camera.position.x + camera.camera.viewportWidth,
+                                                                        camera.camera.position.y + camera.camera.viewportHeight,
+                                                                        0f))
+
+                //if (x - textLayout.width/2 < viewportTopLeft.x)
+                //    x = viewportTopLeft.x + textLayout.width/2
+                //if (x + textLayout.width/2 > viewportBottomRight.x)
+                //    x = viewportBottomRight.x - textLayout.width/2
+
+                font.draw(stage.batch, textLayout, x , y )
+            }
+
+            stage.batch.end()
+        }
+
         stage.draw()
     }
 

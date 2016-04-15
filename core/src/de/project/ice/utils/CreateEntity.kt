@@ -88,6 +88,9 @@ class EntityBuilder {
 
     fun WalkingComponent(init: WalkingComponent.()->Unit)
             = let { val comp = engine.createComponent(WalkingComponent::class.java); comp.init(); entity.add(comp); comp }
+
+    fun SpeakComponent(init: SpeakComponent.()->Unit)
+            = let { val comp = engine.createComponent(SpeakComponent::class.java); comp.init(); entity.add(comp); comp }
 }
 
 

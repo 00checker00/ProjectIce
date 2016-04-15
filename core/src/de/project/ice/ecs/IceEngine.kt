@@ -27,6 +27,7 @@ class IceEngine(val game: IceGame) : PooledEngine() {
     val timeoutSystem: TimeoutSystem by lazy { TimeoutSystem() }
     val reloadAssetsSystem: ReloadAssetsSystem by lazy { ReloadAssetsSystem() }
     val blendSystem: BlendSystem by lazy { BlendSystem() }
+    val speakSystem: SpeakSystem by lazy { SpeakSystem() }
 
 
     private val namedEntities: ImmutableArray<Entity>
@@ -46,6 +47,7 @@ class IceEngine(val game: IceGame) : PooledEngine() {
         addSystem(timeoutSystem)
         addSystem(reloadAssetsSystem)
         addSystem(blendSystem)
+        addSystem(speakSystem)
 
         namedEntities = getEntitiesFor(Family.all(NameComponent::class.java).get())
     }
