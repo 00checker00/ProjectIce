@@ -16,14 +16,7 @@ class EditorApplication : IceGame() {
     override fun init() {
         Gdx.input.inputProcessor = inputProcessor
         pauseGame()
-        val editGameScreen = EditGameScreen(this)
-        addScreen(editGameScreen)
-        addScreen(object: EditorScreen(this@EditorApplication) {
-            override fun selectionChanged(entity: Entity?) {
-                super.selectionChanged(entity)
-                editGameScreen.selectedEntity = entity
-            }
-        })
+        addScreen(EditorScreen(this))
         Gdx.graphics.setCursor(Gdx.graphics.newCursor(null, 0, 0))
     }
 

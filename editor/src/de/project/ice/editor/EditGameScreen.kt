@@ -14,12 +14,14 @@ import de.project.ice.ecs.components.TransformComponent
 import de.project.ice.ecs.getComponent
 import de.project.ice.editor.undoredo.ModifySceneAction
 import de.project.ice.screens.BaseScreenAdapter
+import de.project.ice.utils.DetachableInputProcessor
+import de.project.ice.utils.DetachableInputProcessorAdapter
 
 class EditGameScreen(app: EditorApplication) : BaseScreenAdapter(app) {
     override val priority = 3
     var selectedEntity: Entity? = null;
 
-    override val inputProcessor: InputProcessor =  object : InputAdapter() {
+    override val inputProcessor: DetachableInputProcessor =  object : DetachableInputProcessorAdapter() {
         private var sceneRecording: ModifySceneAction.Recording? = null
         private var dragComponent: TransformComponent? = null
         private var dragOriginX = 0f
@@ -28,6 +30,9 @@ class EditGameScreen(app: EditorApplication) : BaseScreenAdapter(app) {
         private var cameraDrag: OrthographicCamera? = null
 
         override fun touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
+            if (detached)
+                return false
+
             dragComponent = null
             cameraDrag = null
             sceneRecording?.let {
@@ -39,6 +44,9 @@ class EditGameScreen(app: EditorApplication) : BaseScreenAdapter(app) {
         }
 
         override fun touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
+            if (detached)
+                return  false
+
             if (app.isGamePaused) {
                 val cameras = app.engine.getEntitiesFor(Families.camera)
                 if (cameras.size() == 0) {
@@ -65,6 +73,9 @@ class EditGameScreen(app: EditorApplication) : BaseScreenAdapter(app) {
         }
 
         override fun touchDragged(screenX: Int, screenY: Int, pointer: Int): Boolean {
+            if (detached)
+                return false
+
             if (selectedEntity != null) {
                 val cameras = app.engine.getEntitiesFor(Families.camera)
                 if (cameras.size() == 0) {
