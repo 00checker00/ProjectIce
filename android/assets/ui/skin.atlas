@@ -58,59 +58,87 @@ cursor_look
   orig: 114 ,114
   offset: 0 ,0
   index:0
-load_button_none
+load_button_hover
   rotate: false
   xy: 799 ,0
   size: 125 ,125
   orig: 125 ,125
   offset: 0 ,0
   index:0
-load_button_hover
+load_button_none
   rotate: false
   xy: 924 ,0
   size: 125 ,125
   orig: 125 ,125
   offset: 0 ,0
   index:0
+save_button_hover
+  rotate: false
+  xy: 1049 ,0
+  size: 142 ,140
+  orig: 142 ,140
+  offset: 0 ,0
+  index:0
 save_button_none
   rotate: false
-  xy: 0 ,125
+  xy: 1191 ,0
   size: 142 ,140
   orig: 142 ,140
   offset: 0 ,0
   index:0
 home_button_hover
   rotate: false
-  xy: 142 ,125
-  size: 142 ,140
-  orig: 142 ,140
-  offset: 0 ,0
-  index:0
-save_button_hover
-  rotate: false
-  xy: 284 ,125
+  xy: 1333 ,0
   size: 142 ,140
   orig: 142 ,140
   offset: 0 ,0
   index:0
 home_button_none
   rotate: false
-  xy: 426 ,125
+  xy: 1475 ,0
   size: 142 ,140
   orig: 142 ,140
   offset: 0 ,0
   index:0
-beutel_ebene
+ui_button_shadow
   rotate: false
-  xy: 0 ,265
-  size: 1121 ,773
-  orig: 1121 ,773
+  xy: 0 ,140
+  size: 303 ,124
+  orig: 303 ,124
+  offset: 0 ,0
+  index:0
+ui_buttons_normal
+  rotate: false
+  xy: 303 ,140
+  size: 303 ,124
+  orig: 303 ,124
+  offset: 0 ,0
+  index:0
+logo
+  rotate: false
+  xy: 606 ,140
+  size: 1043 ,446
+  orig: 1043 ,446
   offset: 0 ,0
   index:0
 beutel
   rotate: false
-  xy: 0 ,1038
+  xy: 0 ,586
   size: 1121 ,773
   orig: 1121 ,773
+  offset: 0 ,0
+  index:0
+beutel_ebene
+  rotate: false
+  xy: 0 ,1359
+  size: 1121 ,773
+  orig: 1121 ,773
+  offset: 0 ,0
+  index:0
+ui_dialogBox
+  rotate: false
+  xy: 0 ,2132
+  size: 1722 ,315
+  orig: 1722 ,315
   offset: 0 ,0
   index:0
