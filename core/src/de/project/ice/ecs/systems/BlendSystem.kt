@@ -6,13 +6,14 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import de.project.ice.ecs.Components
 import de.project.ice.ecs.components.BlendComponent
-import de.project.ice.ecs.getComponent
+import de.project.ice.ecs.components.CameraComponent
+import de.project.ice.ecs.getComponents
 
 
-class BlendSystem: IteratingIceSystem(Family.all(BlendComponent::class.java).get()) {
+class BlendSystem: IteratingIceSystem(Family.all(BlendComponent::class.java, CameraComponent::class.java).get()) {
     override fun processEntity(entity: Entity, delta: Float) {
-        val cameraComponent = entity.getComponent(Components.camera)
-        val blendComponent = entity.getComponent(Components.blend)
+        val cameraComponent = entity.getComponents(Components.camera)
+        val blendComponent = entity.getComponents(Components.blend)
 
         if (cameraComponent != null && blendComponent != null) {
             blendComponent.current += delta

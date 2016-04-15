@@ -2,7 +2,7 @@ package de.project.ice.hotspot.hotspots.scene1
 
 import de.project.ice.IceGame
 import de.project.ice.ecs.Components
-import de.project.ice.ecs.getComponent
+import de.project.ice.ecs.getComponents
 import de.project.ice.hotspot.Use
 
 
@@ -14,7 +14,7 @@ class Brunnen : Use.Adapter(){
     override fun use(game: IceGame, hotspotId: String) {
 
         val andi = game.engine.getEntityByName("Andi_Player")
-        val animation = andi?.getComponent(Components.animation)
+        val animation = andi?.getComponents(Components.animation)
 
         animation?.animation = 3
         var duration = animation?.animations?.get(3)?.data?.animationDuration?: 0.0f

@@ -13,7 +13,7 @@ import de.project.ice.ecs.components.MoveComponent
 import de.project.ice.ecs.components.PathPlanningComponent
 import de.project.ice.ecs.components.WalkAreaComponent
 import de.project.ice.pathlib.*
-import de.project.ice.ecs.getComponent
+import de.project.ice.ecs.getComponents
 
 class PathSystem : IceSystem() {
     private var walkareaEntities = ImmutableArray(Array<Entity>(0))
@@ -54,7 +54,7 @@ class PathSystem : IceSystem() {
         val result = DefaultGraphPath<PathNode>()
         for (i in 0..pathplanningEntities.size() - 1) {
             val entity = pathplanningEntities.get(i)
-            val pathPlanningComponent = entity.getComponent(Components.pathplanning)
+            val pathPlanningComponent = entity.getComponents(Components.pathplanning)
             astar.searchNodePath(waypoints.get(2 * i), waypoints.get(2 * i + 1), PathHeuristic(), result)
             val moveComponent = engine!!.createComponent(MoveComponent::class.java)
             moveComponent.callback = pathPlanningComponent.callback

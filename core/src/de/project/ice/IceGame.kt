@@ -187,7 +187,8 @@ open class IceGame : ApplicationAdapter() {
     fun startNewGame() {
         engine.removeAllEntities()
         try {
-            SceneLoader.loadScene(engine, Gdx.files.internal("scenes/scene2.scene"))
+
+            SceneLoader.loadScene(engine, Gdx.files.internal("scenes/scene1.scene"))
         } catch (e: IOException) {
             e.printStackTrace()
         } catch (e: SceneLoader.LoadException) {

@@ -159,7 +159,7 @@ class RenderingSystem : SortedIteratingIceSystem(Families.renderable, RenderingS
         var scaleY = t.scale.y
 
         if (entity.hasComponent(Components.distanceScale)) {
-            val scale = entity.getComponent(Components.distanceScale).currentScale
+            val scale = entity.getComponents(Components.distanceScale).currentScale
             scaleY *= scale
             scaleX *= scale
         }

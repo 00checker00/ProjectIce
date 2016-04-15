@@ -36,9 +36,8 @@ open class MainMenuScreen(game: IceGame) : BaseScreenAdapter(game) {
         stage.addActor(root)
 
         root.setFillParent(true)
-        root.background = skin.getTiledDrawable("menu_bg")
 
-        val logo = Image(skin, "menu_logo")
+        val logo = Image(skin, "logo")
         root.add(logo)
 
         root.row()
