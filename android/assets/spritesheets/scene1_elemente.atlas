@@ -1,0 +1,74 @@
+scene1_elemente.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+trolaf
+  rotate: false
+  xy: 0 ,0
+  size: 212 ,260
+  orig: 212 ,260
+  offset: 0 ,0
+  index:0
+statisten2_
+  rotate: false
+  xy: 212 ,0
+  size: 197 ,393
+  orig: 197 ,393
+  offset: 0 ,0
+  index:0
+olaf
+  rotate: false
+  xy: 409 ,0
+  size: 315 ,395
+  orig: 315 ,395
+  offset: 0 ,0
+  index:0
+urne_mitBrief
+  rotate: false
+  xy: 724 ,0
+  size: 287 ,400
+  orig: 287 ,400
+  offset: 0 ,0
+  index:0
+urne_ohneBrief
+  rotate: false
+  xy: 1011 ,0
+  size: 287 ,400
+  orig: 287 ,400
+  offset: 0 ,0
+  index:0
+brolaf
+  rotate: false
+  xy: 0 ,400
+  size: 330 ,429
+  orig: 330 ,429
+  offset: 0 ,0
+  index:0
+statisten4_
+  rotate: false
+  xy: 330 ,400
+  size: 201 ,456
+  orig: 201 ,456
+  offset: 0 ,0
+  index:0
+statisten3_
+  rotate: false
+  xy: 531 ,400
+  size: 156 ,460
+  orig: 156 ,460
+  offset: 0 ,0
+  index:0
+statisten1_
+  rotate: false
+  xy: 687 ,400
+  size: 218 ,476
+  orig: 218 ,476
+  offset: 0 ,0
+  index:0
+iglu_stueck
+  rotate: false
+  xy: 905 ,400
+  size: 277 ,564
+  orig: 277 ,564
+  offset: 0 ,0
+  index:0
