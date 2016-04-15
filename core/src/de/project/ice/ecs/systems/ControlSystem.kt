@@ -43,6 +43,9 @@ constructor() : IteratingIceSystem(Families.controllable), InputProcessor {
     var secondaryCursor: CursorScreen.Cursor = CursorScreen.Cursor.None
     var active_item: Inventory.Item? = null
     var cursorText: String = ""
+    override fun setProcessing(processing: Boolean) {
+        super.setProcessing(processing)
+    }
 
     public override fun processEntity(entity: Entity, deltaTime: Float) {
         val texture = Components.texture.get(entity)

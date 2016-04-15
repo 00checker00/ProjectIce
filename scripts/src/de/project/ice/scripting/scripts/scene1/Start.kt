@@ -37,49 +37,46 @@ class Start : Script() {
     override fun onUpdateEntity(game: IceGame, entity: Entity, delta: Float) {
 
         runOnce("scene1_intro") {
-            game.BlockInteraction = true
-            game.BlockSaving = true
-
-            game.blockInteraction {
-                game.blockSaving {
-
-                    game.showDialog("s1_dlg_rein_fall_intro") {
+            game.blockInteraction = true
+            game.blockSaving = true
 
 
-                        runOnce("falls_went_to_igloo") {
 
-                            game.engine.editEntity("Klara Fall") {
-                                PathPlanningComponent {
-                                    speed = 1.0f
-                                    start = game.engine.getEntityByName("Klara Fall")?.getComponent(Components.transform)?.pos!!
-                                    target = game.engine.getEntityByName("out_fall_igloo")?.getComponent(Components.transform)?.pos!!
-                                    callback = {
-                                        game.engine.removeEntity("Klara Fall")
-                                    }
-                                }
+            game.showDialog("s1_dlg_rein_fall_intro") {
+
+
+                runOnce("falls_went_to_igloo") {
+
+                    game.engine.editEntity("Klara Fall") {
+                        PathPlanningComponent {
+                            speed = 1.0f
+                            start = game.engine.getEntityByName("Klara Fall")?.getComponent(Components.transform)?.pos!!
+                            target = game.engine.getEntityByName("out_fall_igloo")?.getComponent(Components.transform)?.pos!!
+                            callback = {
+                                game.engine.removeEntity("Klara Fall")
                             }
-
-                            game.engine.timeout(0.5f) {
-                                game.engine.editEntity("Rein Fall") {
-                                    PathPlanningComponent {
-                                        speed = 0.7f
-                                        start = game.engine.getEntityByName("Rein Fall")?.getComponent(Components.transform)?.pos!!
-                                        target = game.engine.getEntityByName("out_fall_igloo")?.getComponent(Components.transform)?.pos!!
-                                        callback = {
-                                            game.engine.removeEntity("Rein Fall")
-                                        }
-                                    }
-                                }
-                            }
-
-                            game.engine.timeout(1.0f) {
-                                game.showDialog("s1_dlg_trolaf_intro") {
-                                    kaiGetsPaper(game)
-                                }
-                            }
-
                         }
                     }
+
+                    game.engine.timeout(0.5f) {
+                        game.engine.editEntity("Rein Fall") {
+                            PathPlanningComponent {
+                                speed = 0.7f
+                                start = game.engine.getEntityByName("Rein Fall")?.getComponent(Components.transform)?.pos!!
+                                target = game.engine.getEntityByName("out_fall_igloo")?.getComponent(Components.transform)?.pos!!
+                                callback = {
+                                    game.engine.removeEntity("Rein Fall")
+                                }
+                            }
+                        }
+                    }
+
+                    game.engine.timeout(1.0f) {
+                        game.showDialog("s1_dlg_trolaf_intro") {
+                            kaiGetsPaper(game)
+                        }
+                    }
+
                 }
             }
 
@@ -120,11 +117,19 @@ class Start : Script() {
                                 callback = {
                                     val dialog = Node().apply {
                                         speaker = "Kai"
+                                        type = Node.Type.Text
                                         text = "s1_dlg_kai_torn_to_pieces"
                                     }
-                                    game.showDialog(dialog)
+                                    val handle = game.showDialog(dialog)
 
-                                    game.engine.timeout(0.0f) {
+                                    game.engine.timeout(2.5f) {
+                                        handle.cancel()
+                                        game.blockInteraction = false
+                                        game.blockSaving = false
+
+                                    }
+
+                                    game.engine.timeout(2.0f) {
 
                                         PathPlanningComponent {
                                             start = game.engine.getEntityByName("Kai")?.getComponent(Components.transform)?.pos!!
@@ -137,9 +142,11 @@ class Start : Script() {
 
                                                 ).filterNotNull()
 
-                                                game.engine.getEntityByName("Kai")?.add(game.engine.createComponent(MoveComponent::class.java).apply {
-                                                    targetPositions.addAll(waypoints)
-                                                })
+                                                game.engine.editEntity("Kai") {
+                                                    MoveComponent {
+                                                        targetPositions.addAll(waypoints)
+                                                    }
+                                                }
                                             }
                                         }
 
