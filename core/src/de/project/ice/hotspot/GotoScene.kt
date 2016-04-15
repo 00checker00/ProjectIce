@@ -3,11 +3,15 @@ package de.project.ice.hotspot
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import de.project.ice.IceGame
+import de.project.ice.ecs.Components
+import de.project.ice.ecs.getComponent
 import de.project.ice.utils.Assets
 import de.project.ice.utils.SceneLoader
 
 
 open class GotoScene(val scene : String) : Use.Adapter() {
+
+    protected open val spawnpoint : String? = null
 
     override fun walk(game: IceGame, hotspotId: String) {
         game.engine.blendScreen(1.0f, Color.BLACK)
@@ -30,11 +34,22 @@ open class GotoScene(val scene : String) : Use.Adapter() {
                     game.engine.timeout(0.5f) {
                         game.engine.blendScreen(1.0f, Color.WHITE, Color.BLACK)
                     }
+                    if(spawnpoint!=null) {
+                        val target = game.engine.getEntityByName(spawnpoint!!)?.getComponent(Components.transform)!!
+                        val transform = game.engine.getEntityByName("Andi_Player")?.getComponent(Components.transform)!!
+                        transform.pos.set(target.pos)
+                    }
+
+                    afterSceneLoaded(game)
 
                 }
             }
 
         }
+
+    }
+
+    open fun afterSceneLoaded(game : IceGame){
 
     }
 }

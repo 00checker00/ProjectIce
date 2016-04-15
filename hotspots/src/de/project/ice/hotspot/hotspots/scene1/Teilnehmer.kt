@@ -14,6 +14,7 @@ class Teilnehmer : Use.Adapter(){
     override fun speak(game: IceGame, hotspotId: String) {
         val dialog = Node().apply {
             speaker = hotspotId
+            type = Node.Type.Text
             text = "s1_dlg_participants"
         }
         game.showDialog(dialog)
