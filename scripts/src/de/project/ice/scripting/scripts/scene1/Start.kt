@@ -43,7 +43,7 @@ class Start : Script() {
             game.blockInteraction {
                 game.blockSaving {
 
-                    game.showDialog("s1_dlg_intro") {
+                    game.showDialog("s1_dlg_rein_fall_intro") {
 
 
                         runOnce("falls_went_to_igloo") {

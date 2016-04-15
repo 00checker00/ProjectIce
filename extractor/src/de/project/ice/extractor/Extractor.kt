@@ -46,7 +46,7 @@ fun extractLines(name: String): String {
     result.toList().sortedBy { it.first }.groupBy { it.first.substringBefore("_") }.forEach {
         sb.append("######## begin ${it.key} ########\n")
         it.value.forEach {
-            sb.append("${it.first}=${it.second}\n")
+            sb.append("${it.first}=${it.second.replace("\num ", "\\n")}\n")
         }
         sb.append("######## end ${it.key} ########\n\n")
     }
