@@ -69,6 +69,12 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
         start()
     }
     private var scriptsNeedReload = false
+
+    private val editGameScreen = EditGameScreen(app)
+
+
+
+
     private val scriptsMonitor = DefaultFileMonitor(object: FileListener {
 
         override fun fileChanged(event: FileChangeEvent) {
@@ -151,6 +157,11 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
     }
 
     init {
+
+        app.addScreen(editGameScreen)
+
+
+
         VisUI.load()
         FileChooser.setFavoritesPrefsName("de.project.ice.editor")
 
@@ -223,6 +234,7 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
 
     private fun startPlaytest() {
 
+        editGameScreen.inputProcessor.detached = true
 
         stopPlaytestItem!!.isDisabled = false
         startPlaytestItem!!.isDisabled = true
@@ -234,6 +246,8 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
         componentsWindow.isVisible = false
         storeState()
         game.resumeGame()
+
+
 
 
     }
@@ -623,6 +637,8 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
 
     override fun selectionChanged(entity: Entity?) {
         componentsWindow.setEntity(entity)
+
+        editGameScreen.selectedEntity = entity
     }
 
     companion object {
