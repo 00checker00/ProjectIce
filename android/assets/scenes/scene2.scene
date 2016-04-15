@@ -26,6 +26,7 @@
 					<z type="Integer">10</z>
 				</TransformComponent>
 				<HotspotComponent>
+					<cursorText type="String"></cursorText>
 					<height type="Float">2.1</height>
 					<origin type="Vector2" x="3.4" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</primaryCursor>
@@ -95,6 +96,16 @@
 				<DistanceScaleComponent>
 					<currentScale type="Float">0.9655891</currentScale>
 				</DistanceScaleComponent>
+				<HotspotComponent>
+					<cursorText type="String"></cursorText>
+					<height type="Float">1.5</height>
+					<origin type="Vector2" x="0.0" y="0.0"/>
+					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">None</primaryCursor>
+					<script type="String"></script>
+					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">None</secondaryCursor>
+					<targetPos type="Vector2" x="0.0" y="0.0"/>
+					<width type="Float">0.0</width>
+				</HotspotComponent>
 			</components>
 		</entity>
 		<entity>
@@ -171,6 +182,7 @@
 					<z type="Integer">0</z>
 				</TransformComponent>
 				<HotspotComponent>
+					<cursorText type="String"></cursorText>
 					<height type="Float">1.5</height>
 					<origin type="Vector2" x="-0.17" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</primaryCursor>
@@ -201,6 +213,7 @@
 					<z type="Integer">0</z>
 				</TransformComponent>
 				<HotspotComponent>
+					<cursorText type="String"></cursorText>
 					<height type="Float">0.5</height>
 					<origin type="Vector2" x="-0.05" y="-0.05"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Take</primaryCursor>
@@ -225,6 +238,7 @@
 					<z type="Integer">1</z>
 				</TransformComponent>
 				<HotspotComponent>
+					<cursorText type="String"></cursorText>
 					<height type="Float">1.5</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Take</primaryCursor>
@@ -249,6 +263,7 @@
 					<z type="Integer">1</z>
 				</TransformComponent>
 				<HotspotComponent>
+					<cursorText type="String"></cursorText>
 					<height type="Float">0.7</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</primaryCursor>
@@ -273,6 +288,7 @@
 					<z type="Integer">0</z>
 				</TransformComponent>
 				<HotspotComponent>
+					<cursorText type="String"></cursorText>
 					<height type="Float">2.0</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</primaryCursor>
@@ -297,6 +313,7 @@
 					<z type="Integer">2</z>
 				</TransformComponent>
 				<HotspotComponent>
+					<cursorText type="String"></cursorText>
 					<height type="Float">2.0</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</primaryCursor>
@@ -321,6 +338,7 @@
 					<z type="Integer">2</z>
 				</TransformComponent>
 				<HotspotComponent>
+					<cursorText type="String"></cursorText>
 					<height type="Float">2.0</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</primaryCursor>

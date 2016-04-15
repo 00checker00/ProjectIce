@@ -3,7 +3,7 @@ package de.project.ice.utils
 import com.badlogic.gdx.Gdx
 
 val DefaultSkin = Skin("ui/skin.atlas") {
-    val baseFontFile = Gdx.files.internal("ui/LazySpringDay.ttf")
+    val baseFontFile = Gdx.files.internal("ui/GosmickSans.ttf")
     Color("dialogBack") {
         r = 1.0f
         g = 1.0f
@@ -21,14 +21,17 @@ val DefaultSkin = Skin("ui/skin.atlas") {
     }
     FreetypeFont("cursor") {
         file = baseFontFile
-        size = 16
+        size = 22
         color = com.badlogic.gdx.graphics.Color.WHITE
         borderWidth = 3f
         borderColor = com.badlogic.gdx.graphics.Color.BLACK
     }
     FreetypeFont("dialogFont") {
         file = baseFontFile
-        color = com.badlogic.gdx.graphics.Color.BLACK
+        size = 22
+        color = com.badlogic.gdx.graphics.Color.WHITE
+        borderWidth = 3f
+        borderColor = com.badlogic.gdx.graphics.Color.BLACK
     }
     LabelStyle {
         font = skin.getDefaultFont()
