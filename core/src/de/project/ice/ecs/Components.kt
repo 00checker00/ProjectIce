@@ -22,6 +22,7 @@ object Components {
     @JvmField val walking = ComponentMapper.getFor(WalkingComponent::class.java)
     @JvmField val distanceScale = ComponentMapper.getFor(DistanceScaleComponent::class.java)
     @JvmField val timeout = ComponentMapper.getFor(TimeoutComponent::class.java)
+    @JvmField val blend = ComponentMapper.getFor(BlendComponent::class.java)
     @JvmField val speak = ComponentMapper.getFor(SpeakComponent::class.java)
 }
 
