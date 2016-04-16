@@ -1,0 +1,11 @@
+main_menu.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+main_menu
+  rotate: false
+  xy: 0 ,0
+  size: 1920 ,1080
+  orig: 1920 ,1080
+  offset: 0 ,0
+  index:0
