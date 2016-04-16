@@ -1,6 +1,5 @@
 package de.project.ice.screens
 
-import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputProcessor
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
@@ -11,8 +10,8 @@ import de.project.ice.IceGame
 import de.project.ice.config.Config
 import de.project.ice.utils.DefaultSkin
 import de.project.ice.utils.DelegatingBlockingInputProcessor
-import de.project.ice.utils.FreetypeSkin
 import java.util.*
+
 
 open class MainMenuScreen(game: IceGame) : BaseScreenAdapter(game) {
     private val stage = Stage()
@@ -46,26 +45,26 @@ open class MainMenuScreen(game: IceGame) : BaseScreenAdapter(game) {
         menuLayout.space(5f)
         root.add(menuLayout)
 
-        createMenuButton(BUTTON_NEW_GAME_ID, "PLAY", object : InputListener() {
+        createMenuButton(ButtonProperties(BUTTON_NEW_GAME_ID), "PLAY", object : InputListener() {
             override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean {
                 this@MainMenuScreen.game.startNewGame()
                 this@MainMenuScreen.game.removeScreen(this@MainMenuScreen)
                 return true
             }
         })
-        createMenuButton(BUTTON_SAVE_LOAD_ID, "LOAD", object : InputListener() {
+        createMenuButton(ButtonProperties(BUTTON_SAVE_LOAD_ID), "LOAD", object : InputListener() {
             override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean {
                 println("Save/Load")
                 return true
             }
         })
-        insertMenuButton(BUTTON_SETTINGS_ID, "OPTIONS", object : InputListener() {
+        createMenuButton(ButtonProperties(BUTTON_SETTINGS_ID), "OPTIONS", object : InputListener() {
             override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean {
                 println("Settings")
                 return true
             }
-        }, BUTTON_SAVE_LOAD_ID)
-        createMenuButton(BUTTON_EXIT_ID, "QUIT", object : InputListener() {
+        })
+        createMenuButton(ButtonProperties(BUTTON_EXIT_ID), "QUIT", object : InputListener() {
             override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean {
                 this@MainMenuScreen.game.exit()
                 return true
@@ -78,19 +77,19 @@ open class MainMenuScreen(game: IceGame) : BaseScreenAdapter(game) {
 
 
 
-    protected fun createMenuButtonAfter(id: String, text: String, listener: InputListener?, idAfter: String) {
+    protected fun createMenuButtonAfter(properties: ButtonProperties, text: String, listener: InputListener?, idAfter: String) {
 
 
-        buttonGroups[id] = createButtonGroup().apply {
+        buttonGroups[properties.id] = createButtonGroup().apply {
 
-            val button = createButton(text)
+            val button = createButton(properties, text)
             if (listener != null) {
                 button.addListener(listener)
             }
 
 
             this.addActor(button)
-            buttons.put(id, button)
+            buttons.put(properties.id, button)
 
             menuLayout.addActorAfter(buttonGroups[idAfter],this)
         }
@@ -99,34 +98,34 @@ open class MainMenuScreen(game: IceGame) : BaseScreenAdapter(game) {
 
     }
 
-    protected fun insertMenuButton(id: String, text: String, listener: InputListener?, idGroup: String) {
+    protected fun insertMenuButton(properties: ButtonProperties, text: String, listener: InputListener?, idGroup: String) {
 
         buttonGroups[idGroup]?.apply {
 
-            val button = createButton(text)
+            val button = createButton(properties, text)
             if (listener != null) {
                 button.addListener(listener)
             }
 
             this.addActor(button)
-            buttons.put(id, button)
+            buttons.put(properties.id, button)
         }
 
     }
 
-    protected fun createMenuButton(id: String, text: String, listener: InputListener?) {
+    protected fun createMenuButton(properties: ButtonProperties, text: String, listener: InputListener?) {
 
 
-        buttonGroups[id] = createButtonGroup().apply {
+        buttonGroups[properties.id] = createButtonGroup().apply {
 
-            val button = createButton(text)
+            val button = createButton(properties, text)
             if (listener != null) {
                 button.addListener(listener)
             }
 
 
             this.addActor(button)
-            buttons.put(id, button)
+            buttons.put(properties.id, button)
 
             menuLayout.addActor(this)
         }
@@ -146,11 +145,11 @@ open class MainMenuScreen(game: IceGame) : BaseScreenAdapter(game) {
 
     }
 
-    private fun createButton(text: String) : TextButton {
+    private fun createButton(properties: ButtonProperties, text: String) : TextButton {
 
-        return object:TextButton(text, skin){
-            override fun getPrefWidth(): Float = 125f
-
+        return object:TextButton(text, skin, properties.skin){
+            override fun getPrefWidth(): Float = 303f
+            override fun getPrefHeight(): Float = 124f
         }
     }
 
@@ -173,9 +172,9 @@ open class MainMenuScreen(game: IceGame) : BaseScreenAdapter(game) {
     }
 
     override fun dispose() {
-        stage.dispose()
     }
 
+    protected  data class ButtonProperties(val id: String, val skin: String = "menuButton")
     companion object {
         val BUTTON_NEW_GAME_ID = "BTN_NEW_GAME"
         val BUTTON_SAVE_LOAD_ID = "BTN_SAVE_LOAD"
