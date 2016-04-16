@@ -1,14 +1,6 @@
 <scene name="Scene_2" onload="">
-	<music></music>
-	<sounds>
-		<sound>s1_dlg_kai_intro_1_Voice</sound>
-		<sound>s1_dlg_kai_intro_2_Voice</sound>
-		<sound>s1_dlg_kai_intro_3_Voice</sound>
-		<sound>s1_dlg_rein_fall_intro_1_Voice</sound>
-		<sound>s1_dlg_rein_fall_intro_2_Voice</sound>
-		<sound>s1_dlg_rein_fall_intro_3_Voice</sound>
-		<sound>s1_dlg_rein_fall_intro_4_Voice</sound>
-	</sounds>
+	<music>6</music>
+	<sounds/>
 	<spritesheets>
 		<spritesheet>Eisschollenweg</spritesheet>
 		<spritesheet>objects</spritesheet>
@@ -387,6 +379,31 @@
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">goto_scene1</name>
+				</NameComponent>
+				<TransformComponent>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
+					<flipVertical type="Boolean">false</flipVertical>
+					<pos type="Vector2" x="-0.043498755" y="0.49080837"/>
+					<rotation type="Float">0.0</rotation>
+					<scale type="Vector2" x="1.0" y="1.0"/>
+					<z type="Integer">0</z>
+				</TransformComponent>
+				<HotspotComponent>
+					<cursorText type="String">s1_location_name</cursorText>
+					<height type="Float">1.4</height>
+					<origin type="Vector2" x="0.0" y="0.0"/>
+					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Walk</primaryCursor>
+					<script type="String">scene2.GotoScene1</script>
+					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">None</secondaryCursor>
+					<targetPos type="Vector2" x="0.0" y="0.0"/>
+					<width type="Float">0.6</width>
+				</HotspotComponent>
 			</components>
 		</entity>
 	</entities>

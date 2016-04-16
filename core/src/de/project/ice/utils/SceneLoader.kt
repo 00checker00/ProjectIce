@@ -104,10 +104,53 @@ object SceneLoader {
                 builder.music(music.text)
                 engine.soundSystem.playMusic(music.text, true)
             }
-            return builder.create()
+            return builder.create().apply {
+                engine.sceneProperties = this
+
+                Assets.clear()
+                Assets.finishAll()
+                for (spritesheet in this.spritesheets) {
+                    Assets.loadAtlas(spritesheet)
+                }
+                engine.soundSystem.playMusic(this.music)
+            }
         } catch (ex: Exception) {
             throw LoadException("Unknown error", ex)
         }
+    }
+
+    @Throws(IOException::class, LoadException::class)
+    fun getSceneName(engine: IceEngine, `in`: InputStream): String {
+        return getSceneName(engine, XmlReader().parse(`in`))
+    }
+
+    @Throws(IOException::class, LoadException::class)
+    fun getSceneName(engine: IceEngine, `in`: String): String {
+        return getSceneName(engine, XmlReader().parse(`in`))
+    }
+
+    @Throws(IOException::class, LoadException::class)
+    fun getSceneName(engine: IceEngine, `in`: Reader): String {
+        return getSceneName(engine, XmlReader().parse(`in`))
+    }
+
+    @Throws(IOException::class, LoadException::class)
+    fun getSceneName(engine: IceEngine, `in`: FileHandle): String {
+        return getSceneName(engine, XmlReader().parse(`in`))
+    }
+
+    @Throws(LoadException::class)
+    private fun getSceneName(engine: IceEngine, scene: Element?): String {
+            if (scene == null || scene.name != "scene") {
+                throw LoadException("Invalid scene file (Not a scene file)")
+            }
+
+            val sceneName: String
+            try {
+                return scene.getAttribute("name")
+            } catch (ignore: Exception) {
+                throw LoadException("Invalid scene file (Missing scene name)")
+            }
     }
 
     @Throws(LoadException::class)

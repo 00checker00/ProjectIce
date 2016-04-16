@@ -14,19 +14,19 @@ fun runOnce(id: String, func: ()->Unit) {
 
 fun IceGame.blockInteraction(func: ()->Unit) {
     blockInteractionCounter.incrementAndGet()
-    BlockInteraction = true
+    blockInteraction = true
     func.invoke()
     if(blockInteractionCounter.decrementAndGet() == 0) {
-        BlockInteraction = false
+        blockInteraction = false
     }
 }
 
 fun IceGame.blockSaving(func: ()->Unit) {
     blockSavingCounter.incrementAndGet()
-    BlockSaving = true
+    blockSaving = true
     func.invoke()
     if(blockSavingCounter.decrementAndGet() == 0) {
-        BlockSaving = false
+        blockSaving = false
     }
 }
 

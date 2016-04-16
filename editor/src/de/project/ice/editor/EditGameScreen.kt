@@ -11,7 +11,7 @@ import de.project.ice.config.Config.PIXELS_TO_METRES
 import de.project.ice.ecs.Components
 import de.project.ice.ecs.Families
 import de.project.ice.ecs.components.TransformComponent
-import de.project.ice.ecs.getComponent
+import de.project.ice.ecs.getComponents
 import de.project.ice.editor.undoredo.ModifySceneAction
 import de.project.ice.screens.BaseScreenAdapter
 import de.project.ice.utils.DetachableInputProcessor
@@ -89,7 +89,7 @@ class EditGameScreen(app: EditorApplication) : BaseScreenAdapter(app) {
                 val dx = coords.x - dragOriginX
                 val dy = coords.y - dragOriginY
 
-                selectedEntity?.getComponent(Components.transform)?.pos?.add(dx, dy)
+                selectedEntity?.getComponents(Components.transform)?.pos?.add(dx, dy)
 
                 dragOriginX = coords.x
                 dragOriginY = coords.y

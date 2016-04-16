@@ -104,8 +104,8 @@ fun filter(cell: Cell): Boolean {
         return true
 
     val text = cell.stringCellValue
-    if (text.startsWith("<") && text.endsWith(">"))
-        return true
+    //if (text.startsWith("<") && text.endsWith(">"))
+    //    return true
 
     if (text.isEmpty())
         return true

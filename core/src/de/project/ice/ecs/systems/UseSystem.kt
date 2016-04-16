@@ -5,9 +5,9 @@ import com.badlogic.ashley.core.Family
 import de.project.ice.ecs.Components
 import de.project.ice.ecs.components.MoveComponent
 import de.project.ice.ecs.components.UseComponent
-import de.project.ice.ecs.getComponent
+import de.project.ice.ecs.getComponents
 import de.project.ice.ecs.hasComponent
-import de.project.ice.ecs.getComponent
+import de.project.ice.ecs.getComponents
 import de.project.ice.hotspot.Hotspot
 
 class UseSystem : IteratingIceSystem(Family.all(UseComponent::class.java).exclude(MoveComponent::class.java).get()) {
@@ -25,7 +25,7 @@ class UseSystem : IteratingIceSystem(Family.all(UseComponent::class.java).exclud
 
         val entityname: String
         if (entity.hasComponent(Components.name))
-            entityname = entity.getComponent(Components.name).name
+            entityname = entity.getComponents(Components.name).name
         else
             entityname = ""
 

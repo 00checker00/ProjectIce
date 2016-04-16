@@ -27,8 +27,8 @@ object Components {
 }
 
 fun Entity.hasComponent(mapper: ComponentMapper<out IceComponent>): Boolean = mapper.has(this)
-fun <T : IceComponent> Entity.getComponent(mapper: ComponentMapper<T>): T = mapper.get(this) ?: throw RuntimeException()
 
+fun <T : IceComponent> Entity.getComponents(mapper: ComponentMapper<T>): T = mapper.get(this) ?: throw RuntimeException()
 fun <T : IceComponent, U : IceComponent> Entity.getComponents(mapper1: ComponentMapper<T>, mapper2: ComponentMapper<U>): Pair<T, U>
         = Pair(mapper1.get(this) ?: throw RuntimeException(), mapper2.get(this) ?: throw RuntimeException())
 fun <T : IceComponent, U : IceComponent, V: IceComponent> Entity.getComponents(mapper1: ComponentMapper<T>, mapper2: ComponentMapper<U>, mapper3: ComponentMapper<V>): Triple<T, U, V>

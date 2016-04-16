@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Color
 import de.project.ice.IceGame
 import de.project.ice.ecs.components.NameComponent
 import de.project.ice.ecs.systems.*
+import de.project.ice.utils.SceneLoader
 import de.project.ice.utils.addEntity
 import de.project.ice.utils.editComponents
 
@@ -28,6 +29,7 @@ class IceEngine(val game: IceGame) : PooledEngine() {
     val reloadAssetsSystem: ReloadAssetsSystem by lazy { ReloadAssetsSystem() }
     val blendSystem: BlendSystem by lazy { BlendSystem() }
     val speakSystem: SpeakSystem by lazy { SpeakSystem() }
+    var sceneProperties: SceneLoader.SceneProperties? = null
 
 
     private val namedEntities: ImmutableArray<Entity>
@@ -103,6 +105,8 @@ class IceEngine(val game: IceGame) : PooledEngine() {
             removeEntity(entity)
         }
     }
+
+
 
     companion object {
 

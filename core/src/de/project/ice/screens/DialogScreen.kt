@@ -19,7 +19,7 @@ import de.project.ice.config.Config
 import de.project.ice.dialog.Node
 import de.project.ice.ecs.Components
 import de.project.ice.ecs.components.SpeakComponent
-import de.project.ice.ecs.getComponent
+import de.project.ice.ecs.getComponents
 import de.project.ice.ecs.getComponents
 import de.project.ice.ecs.systems.SoundSystem
 import de.project.ice.utils.*
@@ -176,7 +176,7 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
 
             stage.batch.begin()
 
-            for (dialogLine in dialogEntities.map { it.getComponent(Components.speak) }) {
+            for (dialogLine in dialogEntities.map { it.getComponents(Components.speak) }) {
                 if (dialogLine.target == null)
                     continue
 
