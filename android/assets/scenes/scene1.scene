@@ -1,6 +1,18 @@
 <scene name="Scene_1" onload="">
 	<music>5</music>
-	<sounds/>
+	<sounds>
+		<sound>s1_dlg_kai_intro_1_Voice</sound>
+		<sound>s1_dlg_kai_intro_2_Voice</sound>
+		<sound>s1_dlg_kai_intro_3_Voice</sound>
+		<sound>s1_dlg_kai_intro_4_Voice</sound>
+		<sound>s1_dlg_kai_intro_5_Voice</sound>
+		<sound>s1_dlg_andi_intro_2_Voice</sound>
+		<sound>s1_dlg_rein_fall_intro_1_Voice</sound>
+		<sound>s1_dlg_rein_fall_intro_2_Voice</sound>
+		<sound>s1_dlg_rein_fall_intro_3_Voice</sound>
+		<sound>s1_dlg_rein_fall_intro_4_Voice</sound>
+		<sound>s1_dlg_andi_intro_1_Voice</sound>
+	</sounds>
 	<spritesheets>
 		<spritesheet>scene1_elemente</spritesheet>
 		<spritesheet>objects</spritesheet>
@@ -8,6 +20,7 @@
 		<spritesheet>Dorfszene_center</spritesheet>
 		<spritesheet>elemente</spritesheet>
 		<spritesheet>andi</spritesheet>
+		<spritesheet>inventory_icon</spritesheet>
 	</spritesheets>
 	<entities>
 		<entity>
@@ -15,46 +28,18 @@
 				<NameComponent>
 					<name type="String">Andi_Player</name>
 				</NameComponent>
+				<AndiComponent/>
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="2.7560122" y="0.43850327"/>
+					<pos type="Vector2" x="2.7084615" y="0.46892774"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="0.7" y="0.7"/>
 					<z type="Integer">5</z>
 				</TransformComponent>
-				<TextureComponent>
-					<region type="TextureRegion">andi_idle</region>
-				</TextureComponent>
-				<AnimationComponent>
-					<animation type="Integer">1</animation>
-					<animations type="IntMap" subType="Animation">
-						<_1 type="Animation" frameDuration="Infinity" mode="REVERSED">andi_idle</_1>
-						<_2 type="Animation" frameDuration="0.03" mode="LOOP">andi_lauf</_2>
-						<_3 type="Animation" frameDuration="0.03" mode="NORMAL">andi_buecken</_3>
-					</animations>
-					<time type="Float">0.0</time>
-				</AnimationComponent>
 				<ControlComponent>
-					<speed type="Float">4.0</speed>
+					<speed type="Float">3.0</speed>
 				</ControlComponent>
-				<WalkingComponent>
-					<animation type="Integer">2</animation>
-					<isWalking type="Boolean">false</isWalking>
-				</WalkingComponent>
-				<DistanceScaleComponent>
-					<currentScale type="Float">0.9561497</currentScale>
-				</DistanceScaleComponent>
-				<HotspotComponent>
-					<cursorText type="String"></cursorText>
-					<height type="Float">1.3</height>
-					<origin type="Vector2" x="0.0" y="0.0"/>
-					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">None</primaryCursor>
-					<script type="String"></script>
-					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">None</secondaryCursor>
-					<targetPos type="Vector2" x="0.0" y="0.0"/>
-					<width type="Float">0.0</width>
-				</HotspotComponent>
 			</components>
 		</entity>
 		<entity>
@@ -340,7 +325,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="1.0" y="2.75"/>
+					<pos type="Vector2" x="1.6018813" y="2.9038668"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="0.7" y="0.7"/>
 					<z type="Integer">5</z>
@@ -359,7 +344,7 @@
 					<region type="TextureRegion">prinzessin_normal</region>
 				</TextureComponent>
 				<DistanceScaleComponent>
-					<currentScale type="Float">0.725</currentScale>
+					<currentScale type="Float">0.7096133</currentScale>
 				</DistanceScaleComponent>
 			</components>
 		</entity>

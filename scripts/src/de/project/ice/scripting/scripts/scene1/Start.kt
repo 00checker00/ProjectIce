@@ -10,6 +10,7 @@ import de.project.ice.scripting.Script
 import de.project.ice.scripting.blockInteraction
 import de.project.ice.scripting.blockSaving
 import de.project.ice.scripting.runOnce
+import de.project.ice.utils.Assets
 import de.project.ice.utils.editEntity
 
 /**
@@ -93,6 +94,11 @@ class Start : Script() {
                     start = game.engine.getEntityByName("Andi_Player")?.getComponents(Components.transform)?.pos!!
                     target = game.engine.getEntityByName("go_andi_to_kai")?.getComponents(Components.transform)?.pos!!
                     callback = {
+
+                        val urne = game.engine.getEntityByName("Urne")
+                        val urntex = urne?.getComponents((Components.texture))
+                        urntex?.region = Assets.findRegion("urne_ohneBrief")
+
                         game.showDialog("s1_dlg_andi_intro") {
                             game.showDialog("s1_dlg_kai_intro_2"){
                                 KaiTakesWrit(game)

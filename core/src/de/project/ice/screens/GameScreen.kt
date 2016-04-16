@@ -18,7 +18,8 @@ class GameScreen(game: IceGame, private val engine: IceEngine) : BaseScreenAdapt
             engine.movementSystem,
             engine.scriptingSystem,
             engine.breathSystem,
-            engine.timeoutSystem
+            engine.timeoutSystem,
+            engine.andiSystem
     )
 
     override val inputProcessor: InputProcessor = object : DelegatingBlockingInputProcessor(engine.controlSystem) {

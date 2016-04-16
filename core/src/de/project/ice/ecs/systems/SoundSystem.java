@@ -160,6 +160,7 @@ public class SoundSystem extends IceSystem
         musicname = name;
         Music music = Gdx.audio.newMusic(file);
         music.setLooping(loop);
+        music.setVolume(0.5f);
 
 
         if (this.music != null)

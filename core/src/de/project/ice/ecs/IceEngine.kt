@@ -30,7 +30,7 @@ class IceEngine(val game: IceGame) : PooledEngine() {
     val blendSystem: BlendSystem by lazy { BlendSystem() }
     val speakSystem: SpeakSystem by lazy { SpeakSystem() }
     var sceneProperties: SceneLoader.SceneProperties? = null
-
+    val andiSystem: AndiSystem by lazy { AndiSystem()}
 
     private val namedEntities: ImmutableArray<Entity>
 
@@ -50,6 +50,7 @@ class IceEngine(val game: IceGame) : PooledEngine() {
         addSystem(reloadAssetsSystem)
         addSystem(blendSystem)
         addSystem(speakSystem)
+        addSystem(andiSystem)
 
         namedEntities = getEntitiesFor(Family.all(NameComponent::class.java).get())
     }
