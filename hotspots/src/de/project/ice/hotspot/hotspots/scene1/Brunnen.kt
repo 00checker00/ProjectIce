@@ -4,6 +4,7 @@ import de.project.ice.IceGame
 import de.project.ice.ecs.Components
 import de.project.ice.ecs.getComponents
 import de.project.ice.hotspot.Use
+import de.project.ice.scripting.runOnce
 
 
 class Brunnen : Use.Adapter(){
@@ -21,5 +22,8 @@ class Brunnen : Use.Adapter(){
 
         game.engine.timeout( duration-0.5f , { super.take(game, hotspotId)})
 
+        runOnce("note_taken"){
+            game.inventory.addItem("inv_note_shred_4")
+        }
     }
 }
