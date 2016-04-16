@@ -50,6 +50,8 @@ open class IceGame : ApplicationAdapter() {
     protected open fun init() {
         addScreen(MainMenuScreen(this))
         Gdx.input.inputProcessor = inputProcessor
+
+        SceneLoader.loadScene(engine, Gdx.files.internal("scenes/Hauptmenue.scene"))
     }
 
     fun pauseGame() {
@@ -190,13 +192,15 @@ open class IceGame : ApplicationAdapter() {
         engine.blendScreen(2.0f, Color.BLACK)
 
         engine.timeout(2.0f) {
-            engine.removeAllEntities()
-            try {
-                SceneLoader.loadScene(engine, Gdx.files.internal("scenes/scene1.scene"))
-            } catch (e: IOException) {
-                e.printStackTrace()
-            } catch (e: SceneLoader.LoadException) {
-                e.printStackTrace()
+            engine.entities.forEach { engine.removeEntity(it) }
+            engine.timeout(0f) {
+                try {
+                    SceneLoader.loadScene(engine, Gdx.files.internal("scenes/scene1.scene"))
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                } catch (e: SceneLoader.LoadException) {
+                    e.printStackTrace()
+                }
             }
         }
     }
