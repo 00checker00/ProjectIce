@@ -13,8 +13,7 @@ import de.project.ice.utils.editComponents
 class AndiSystem: IteratingIceSystem(Family.all(AndiComponent::class.java).get()) {
     override fun processEntity(entity: Entity, deltaTime: Float) {
         entity.editComponents(engine) {
-
-            if (entity.hasComponent(Components.animation)) {
+            if (!entity.hasComponent(Components.animation)) {
                 if (!entity.hasComponent(Components.animation))
                     AnimationComponent {
                         animations.put(1, Assets.createAnimation("andi_idle", Float.POSITIVE_INFINITY, Animation.PlayMode.REVERSED))
@@ -23,34 +22,34 @@ class AndiSystem: IteratingIceSystem(Family.all(AndiComponent::class.java).get()
                     }
             }
 
-            if (entity.hasComponent(Components.transform)) {
+            if (!entity.hasComponent(Components.transform)) {
                TransformComponent {  }
             }
 
-            if (entity.hasComponent(Components.texture)) {
+            if (!entity.hasComponent(Components.texture)) {
                 TextureComponent {
                     region = Assets.findRegion("andi_idle")
                 }
             }
 
-            if (entity.hasComponent(Components.control)) {
+            if (!entity.hasComponent(Components.control)) {
                 ControlComponent {
                     speed = 2f
                 }
             }
 
-            if (entity.hasComponent(Components.walking)) {
+            if (!entity.hasComponent(Components.walking)) {
                 WalkingComponent {
                     animation = 2
                 }
             }
 
-            if (entity.hasComponent(Components.distanceScale)) {
+            if (!entity.hasComponent(Components.distanceScale)) {
                 DistanceScaleComponent {  }
             }
 
 
-            if (entity.hasComponent(Components.hotspot)) {
+            if (!entity.hasComponent(Components.hotspot)) {
                 HotspotComponent {
                     height = 1.3f
                 }
