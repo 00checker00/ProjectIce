@@ -193,11 +193,6 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
 
                     var x = projected.x - textLayout.width/2
 
-                    if (x - textLayout.width/2 < 0)
-                        x = textLayout.width/2
-                    if (x + textLayout.width/2 > Gdx.graphics.width)
-                        x = Gdx.graphics.width - textLayout.width/2
-
                     font.draw(stage.batch, textLayout, x , y )
 
                     y += textLayout.height * 1.5f

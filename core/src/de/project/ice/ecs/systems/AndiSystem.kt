@@ -13,7 +13,6 @@ import de.project.ice.utils.editComponents
 class AndiSystem: IteratingIceSystem(Family.all(AndiComponent::class.java).get()) {
     override fun processEntity(entity: Entity, deltaTime: Float) {
         entity.editComponents(engine) {
-
             if (!entity.hasComponent(Components.animation)) {
                 if (!entity.hasComponent(Components.animation))
                     AnimationComponent {
