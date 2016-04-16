@@ -6,7 +6,6 @@ import com.badlogic.ashley.utils.ImmutableArray
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputProcessor
 import com.badlogic.gdx.graphics.g2d.GlyphLayout
-import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
@@ -181,8 +180,6 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
                 if (dialogLine.target == null)
                     continue
 
-                textLayout.setText(font, dialogLine.text)
-
                 val (targetTransform, targetHotspot) = dialogLine.target!!.getComponents(Components.transform, Components.hotspot)
 
                 val targetX = targetTransform.pos.x
@@ -190,20 +187,23 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
 
                 val projected = camera.camera.project(Vector3(targetX, targetY, 0f))
 
-                var x = projected.x - textLayout.width/2
-                var y = projected.y + textLayout.height
+                var y = projected.y + font.lineHeight * 1.2f
+                for (line in dialogLine.text.split("\n").reversed()) {
+                    textLayout.setText(font, line)
 
-                var viewportTopLeft = camera.camera.project(Vector3(camera.camera.position))
-                var viewportBottomRight = camera.camera.project(Vector3(camera.camera.position.x + camera.camera.viewportWidth,
-                                                                        camera.camera.position.y + camera.camera.viewportHeight,
-                                                                        0f))
+                    var x = projected.x - textLayout.width/2
 
-                //if (x - textLayout.width/2 < viewportTopLeft.x)
-                //    x = viewportTopLeft.x + textLayout.width/2
-                //if (x + textLayout.width/2 > viewportBottomRight.x)
-                //    x = viewportBottomRight.x - textLayout.width/2
+                    if (x - textLayout.width/2 < 0)
+                        x = textLayout.width/2
+                    if (x + textLayout.width/2 > Gdx.graphics.width)
+                        x = Gdx.graphics.width - textLayout.width/2
 
-                font.draw(stage.batch, textLayout, x , y )
+                    font.draw(stage.batch, textLayout, x , y )
+
+                    y += textLayout.height * 1.5f
+                }
+
+
             }
 
             stage.batch.end()
