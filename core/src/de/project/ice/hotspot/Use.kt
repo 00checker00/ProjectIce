@@ -39,6 +39,7 @@ interface Use {
     open class Take(private val entityName: String, private val itemName: String) : Adapter() {
 
         override fun take(game: IceGame, hotspotId: String) {
+           // game.engine.soundSystem.playSound("")
             val entity = game.engine.getEntityByName(entityName)
             if (entity != null) {
                 game.engine.removeEntity(entity)

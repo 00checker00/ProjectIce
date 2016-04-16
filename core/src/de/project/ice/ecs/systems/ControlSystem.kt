@@ -17,7 +17,7 @@ import de.project.ice.hotspot.Hotspot
 import de.project.ice.inventory.Inventory
 import de.project.ice.pathlib.PathCalculator
 import de.project.ice.screens.CursorScreen
-import de.project.ice.ecs.getComponent
+import de.project.ice.ecs.getComponents
 
 import de.project.ice.config.Config.PIXELS_TO_METRES
 import de.project.ice.utils.plus
@@ -43,6 +43,9 @@ constructor() : IteratingIceSystem(Families.controllable), InputProcessor {
     var secondaryCursor: CursorScreen.Cursor = CursorScreen.Cursor.None
     var active_item: Inventory.Item? = null
     var cursorText: String = ""
+    override fun setProcessing(processing: Boolean) {
+        super.setProcessing(processing)
+    }
 
     public override fun processEntity(entity: Entity, deltaTime: Float) {
         val texture = Components.texture.get(entity)
@@ -70,6 +73,7 @@ constructor() : IteratingIceSystem(Families.controllable), InputProcessor {
                     val start = transform.pos.cpy()
 
                     val pathPlanningComponent = engine.createComponent(PathPlanningComponent::class.java)
+                    pathPlanningComponent.speed = entity.getComponents(Components.control).speed
                     pathPlanningComponent.target = target
                     pathPlanningComponent.start = start
 
@@ -170,8 +174,8 @@ constructor() : IteratingIceSystem(Families.controllable), InputProcessor {
             }
 
             val entity = hotspots?.filter {
-                val transform = it.getComponent(Components.transform)
-                val hotspot = it.getComponent(Components.hotspot)
+                val transform = it.getComponents(Components.transform)
+                val hotspot = it.getComponents(Components.hotspot)
 
                 val pos = transform.pos + hotspot.origin
                 val origin = pos + hotspot.origin
@@ -181,10 +185,10 @@ constructor() : IteratingIceSystem(Families.controllable), InputProcessor {
                 }
                 return@filter false
             }?.sortedBy {
-                it.getComponent(Components.transform)?.z?:0
+                it.getComponents(Components.transform)?.z?:0
             }?.firstOrNull()
             if (entity != null) {
-                val hotspot = entity.getComponent(Components.hotspot)
+                val hotspot = entity.getComponents(Components.hotspot)
 
                 active_hotspot = Hotspot[hotspot.script]
                 if (active_hotspot != null) {

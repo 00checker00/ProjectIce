@@ -6,6 +6,8 @@ import com.badlogic.gdx.Preferences
 
 abstract class Storage internal constructor(internal var prefs: Preferences) {
 
+    fun hasKey(key: String) = prefs.contains(key)
+
     fun put(key: String, `val`: Boolean): Storage {
         prefs.putString(key, java.lang.Boolean.toString(`val`))
         return this

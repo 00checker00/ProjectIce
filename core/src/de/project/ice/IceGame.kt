@@ -29,12 +29,12 @@ open class IceGame : ApplicationAdapter() {
     val strings: I18NBundle by lazy { I18NBundle.createBundle(Gdx.files.internal("strings/ProjectIce")) }
     var isGamePaused = false
         private set
-    var BlockInteraction = false
+    var blockInteraction = false
         set(value) {
             field = value
             engine.controlSystem.setProcessing(!value)
         }
-    var BlockSaving = false;
+    var blockSaving = false;
 
     override fun create() {
         I18NBundle.setSimpleFormatter(true)
@@ -61,14 +61,14 @@ open class IceGame : ApplicationAdapter() {
         isGamePaused = false
     }
 
-    fun showDialog(node: Node, callback: ()->Unit = {}) {
-        addScreen(DialogScreen(this, node).apply {
+    fun showDialog(node: Node, callback: ()->Unit = {}): DialogHandle {
+        return DialogHandle(addScreen(DialogScreen(this, node).apply {
             this.callback = callback
-        })
+        }), this)
     }
 
-    fun showDialog(dialog: String, callback: ()->Unit = {}) {
-        showDialog(Dialog.load(Gdx.files.internal("dialog/$dialog.dlz")), callback)
+    fun showDialog(dialog: String, callback: ()->Unit = {}): DialogHandle {
+        return showDialog(Dialog.load(Gdx.files.internal("dialog/$dialog.dlz")), callback)
     }
 
 
@@ -150,7 +150,7 @@ open class IceGame : ApplicationAdapter() {
             screen.resize(Gdx.graphics.width, Gdx.graphics.height)
         }
         screensToAdd.clear()
-        for (pair in screensToRemove) {
+        for (pair in screensToRemove.filter { screens.contains(it.first, true) }) {
             if (pair === screens.peek()) {
                 screens.pop()
                 screens.peek().resume()
@@ -175,8 +175,9 @@ open class IceGame : ApplicationAdapter() {
         screensToRemove.add(Pair(screen, dispose))
     }
 
-    fun addScreen(screen: BaseScreen) {
+    fun <T: BaseScreen> addScreen(screen: T): T{
         screensToAdd.add(screen)
+        return screen
     }
 
     fun isScreenVisible(screen: BaseScreen): Boolean {
@@ -186,7 +187,8 @@ open class IceGame : ApplicationAdapter() {
     fun startNewGame() {
         engine.removeAllEntities()
         try {
-            SceneLoader.loadScene(engine, Gdx.files.internal("scenes/scene2.scene"))
+
+            SceneLoader.loadScene(engine, Gdx.files.internal("scenes/scene1.scene"))
         } catch (e: IOException) {
             e.printStackTrace()
         } catch (e: SceneLoader.LoadException) {
@@ -275,5 +277,11 @@ open class IceGame : ApplicationAdapter() {
             }
             return false
         }
+    }
+}
+
+class DialogHandle internal constructor(private val screen: DialogScreen, private val game: IceGame) {
+    fun cancel() {
+        game.removeScreen(screen)
     }
 }

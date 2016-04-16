@@ -5,13 +5,13 @@ import com.badlogic.ashley.core.Family
 import com.badlogic.gdx.Gdx
 import de.project.ice.ecs.Components
 import de.project.ice.ecs.components.SpeakComponent
-import de.project.ice.ecs.getComponent
+import de.project.ice.ecs.getComponents
 
 
 class SpeakSystem: IteratingIceSystem(Family.all(SpeakComponent::class.java).get()) {
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
-        val speakComponent = entity.getComponent(Components.speak)
+        val speakComponent = entity.getComponents(Components.speak)
 
         if (speakComponent.target == null) {
             speakComponent.target = engine.getEntityByName(speakComponent.targetName)

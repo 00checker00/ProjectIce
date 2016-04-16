@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector3
 import de.project.ice.ecs.Components
 import de.project.ice.ecs.IceEngine
 import de.project.ice.ecs.components.CameraComponent
-import de.project.ice.ecs.getComponent
+import de.project.ice.ecs.getComponents
 
 /**
  * all camera settings here
@@ -34,7 +34,7 @@ class CameraSystem() : IceSystem() {
             val maxX = camera.followMaxX
 
             val camera = camera.camera;
-            val pos = andi.getComponent(Components.transform).pos
+            val pos = andi.getComponents(Components.transform).pos
             val dir = camera.position.cpy().sub(Vector3(pos.x, camera.position.y, 0.0f));
             val edgeOffset = camera.viewportWidth/2 - dir.len()
 

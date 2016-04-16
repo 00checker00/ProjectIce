@@ -207,6 +207,8 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
             }
         }
 
+        game.engine.soundSystem.setProcessing(false)
+
     }
 
     private fun hideAllWindows() {
@@ -222,11 +224,15 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
     }
 
     private fun stopPlaytest() {
+        editGameScreen.inputProcessor.detached = false
+
         stopPlaytestItem!!.isDisabled = true
         startPlaytestItem!!.isDisabled = false
 
         entitiesWindow.isVisible = entitiesvisible
         componentsWindow.isVisible = componentvisible
+
+        game.engine.soundSystem.setProcessing(true)
 
         restoreState()
         game.pauseGame()
@@ -241,6 +247,8 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
 
         entitiesvisible = entitiesWindow.isVisible
         componentvisible = componentsWindow.isVisible
+
+        game.engine.soundSystem.setProcessing(false)
 
         entitiesWindow.isVisible = false
         componentsWindow.isVisible = false
