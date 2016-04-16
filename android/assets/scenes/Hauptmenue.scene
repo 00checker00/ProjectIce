@@ -1,275 +1,131 @@
 <scene name="" onload="">
-	<music></music>
+	<music>10</music>
 	<sounds/>
 	<spritesheets>
+		<spritesheet>main_menu</spritesheet>
+		<spritesheet>gluehen_szene1</spritesheet>
+		<spritesheet>fire_szene1</spritesheet>
+		<spritesheet>rauch_szene1</spritesheet>
 		<spritesheet>andi</spritesheet>
 		<spritesheet>Dorfszene_panorama</spritesheet>
 	</spritesheets>
 	<entities>
 		<entity>
 			<components>
-				<NameComponent>
-					<name type="String">Andi_Player</name>
-				</NameComponent>
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="7.8199997" y="1.833336"/>
-					<rotation type="Float">0.0</rotation>
-					<scale type="Vector2" x="1.5" y="1.5"/>
-					<z type="Integer">0</z>
-				</TransformComponent>
-				<TextureComponent>
-					<region type="TextureRegion">andi_sprechen1</region>
-				</TextureComponent>
-				<AnimationComponent>
-					<animation type="Integer">1</animation>
-					<animations type="IntMap" subType="Animation">
-						<_1 type="Animation" frameDuration="Infinity" mode="REVERSED">andi_lauf</_1>
-						<_2 type="Animation" frameDuration="0.03" mode="LOOP">andi_lauf</_2>
-						<_3 type="Animation" frameDuration="0.03" mode="NORMAL">andi_buecken</_3>
-					</animations>
-					<time type="Float">0.0</time>
-				</AnimationComponent>
-				<MoveComponent>
-					<isMoving type="Boolean">false</isMoving>
-					<speed type="Float">2.0</speed>
-					<targetPositions type="null"/>
-				</MoveComponent>
-				<WalkingComponent>
-					<animation type="Integer">2</animation>
-					<isWalking type="Boolean">false</isWalking>
-				</WalkingComponent>
-			</components>
-		</entity>
-		<entity>
-			<components>
-				<TransformComponent>
-					<flipHorizontal type="Boolean">false</flipHorizontal>
-					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="-6.39" y="-0.008067608"/>
+					<pos type="Vector2" x="7.447504" y="-0.085003614"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
-					<z type="Integer">1</z>
+					<z type="Integer">10</z>
 				</TransformComponent>
 				<NameComponent>
 					<name type="String">Background</name>
 				</NameComponent>
 				<TextureComponent>
-					<region type="TextureRegion">background</region>
+					<region type="TextureRegion">main_menu</region>
 				</TextureComponent>
 				<CameraComponent>
 					<camera type="OrthographicCamera" viewportWidth="14.4" viewportHeight="8.099999">
 						<pos type="Vector3" x="7.1484375" y="4.0390625" z="0.0"/>
 					</camera>
+					<color>-1</color>
+					<followMaxX type="Float">3.4028235E38</followMaxX>
+					<followMinX type="Float">1.4E-45</followMinX>
+					<followOffset type="Float">1.0</followOffset>
+					<followType type="enum" subtype="de.project.ice.ecs.systems.CameraSystem$FollowType">None</followType>
+					<targetScale type="Float">1.0</targetScale>
+					<targetY type="Float">20.0</targetY>
 				</CameraComponent>
 			</components>
 		</entity>
 		<entity>
 			<components>
 				<NameComponent>
-					<name type="String">out_newGame</name>
+					<name type="String">fire</name>
 				</NameComponent>
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="10.4" y="4.5"/>
+					<pos type="Vector2" x="4.038753" y="1.5936167"/>
 					<rotation type="Float">0.0</rotation>
-					<scale type="Vector2" x="1.0" y="1.0"/>
+					<scale type="Vector2" x="0.5" y="0.5"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
+				<AnimationComponent>
+					<animation type="Integer">1</animation>
+					<animations type="IntMap" subType="Animation">
+						<_1 type="Animation" frameDuration="0.07" mode="LOOP">feuer</_1>
+						<_2 type="Animation" frameDuration="0.03" mode="LOOP">andi_lauf</_2>
+						<_3 type="Animation" frameDuration="0.03" mode="NORMAL">andi_buecken</_3>
+					</animations>
+					<time type="Float">0.0</time>
+				</AnimationComponent>
+				<TextureComponent>
+					<region type="TextureRegion">feuer</region>
+				</TextureComponent>
 			</components>
 		</entity>
 		<entity>
 			<components>
 				<NameComponent>
-					<name type="String">out_loadGame</name>
+					<name type="String">smoke</name>
 				</NameComponent>
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="14.0" y="0.0"/>
+					<pos type="Vector2" x="2.081251" y="3.2531888"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
+				<TextureComponent>
+					<region type="TextureRegion">rauch</region>
+				</TextureComponent>
+				<AnimationComponent>
+					<animation type="Integer">1</animation>
+					<animations type="IntMap" subType="Animation">
+						<_1 type="Animation" frameDuration="0.07" mode="LOOP">rauch</_1>
+					</animations>
+					<time type="Float">0.0</time>
+				</AnimationComponent>
 			</components>
 		</entity>
 		<entity>
 			<components>
 				<NameComponent>
-					<name type="String">out_options</name>
+					<name type="String">glow_campfire</name>
 				</NameComponent>
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="2.2" y="4.7"/>
+					<pos type="Vector2" x="4.0514145" y="1.362823"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
-					<z type="Integer">0</z>
+					<z type="Integer">3</z>
 				</TransformComponent>
+				<TextureComponent>
+					<region type="TextureRegion">gluhen</region>
+				</TextureComponent>
 			</components>
 		</entity>
 		<entity>
 			<components>
 				<NameComponent>
-					<name type="String">out_quit</name>
+					<name type="String">glow_viking_igloo</name>
 				</NameComponent>
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="0.0" y="1.0"/>
+					<pos type="Vector2" x="9.976188" y="1.5606513"/>
 					<rotation type="Float">0.0</rotation>
-					<scale type="Vector2" x="1.0" y="1.0"/>
-					<z type="Integer">0</z>
+					<scale type="Vector2" x="0.7" y="0.7"/>
+					<z type="Integer">3</z>
 				</TransformComponent>
-			</components>
-		</entity>
-		<entity>
-			<components>
-				<NameComponent>
-					<name type="String">sign_newGame</name>
-				</NameComponent>
-				<TransformComponent>
-					<flipHorizontal type="Boolean">false</flipHorizontal>
-					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="6.0" y="2.6"/>
-					<rotation type="Float">0.0</rotation>
-					<scale type="Vector2" x="1.0" y="1.0"/>
-					<z type="Integer">0</z>
-				</TransformComponent>
-				<HotspotComponent>
-					<height type="Float">0.6</height>
-					<origin type="Vector2" x="0.0" y="0.0"/>
-					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Walk</primaryCursor>
-					<script type="String">mainmenu.NewGame</script>
-					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">None</secondaryCursor>
-					<targetPos type="Vector2" x="0.0" y="0.0"/>
-					<width type="Float">1.9</width>
-				</HotspotComponent>
-			</components>
-		</entity>
-		<entity>
-			<components>
-				<NameComponent>
-					<name type="String">Walkarea</name>
-				</NameComponent>
-				<WalkAreaComponent>
-					<area type="PathArea">
-						<shape type="Shape" closed="true">
-							<vertices>
-								<vertex type="Vector2" x="1.6734376" y="4.692548"/>
-								<vertex type="Vector2" x="2.1684375" y="3.627608"/>
-								<vertex type="Vector2" x="2.4459376" y="3.0951378"/>
-								<vertex type="Vector2" x="3.1434374" y="2.7401578"/>
-								<vertex type="Vector2" x="4.373437" y="2.296433"/>
-								<vertex type="Vector2" x="4.7259374" y="2.0947394"/>
-								<vertex type="Vector2" x="2.3934374" y="1.6994212"/>
-								<vertex type="Vector2" x="0.6909375" y="1.8527079"/>
-								<vertex type="Vector2" x="-0.05156231" y="1.820437"/>
-								<vertex type="Vector2" x="0.05343771" y="0.36824584"/>
-								<vertex type="Vector2" x="3.3009372" y="0.48119426"/>
-								<vertex type="Vector2" x="5.303437" y="0.5053973"/>
-								<vertex type="Vector2" x="5.8734374" y="0.658684"/>
-								<vertex type="Vector2" x="8.168437" y="0.19882393"/>
-								<vertex type="Vector2" x="9.518436" y="-0.010937214"/>
-								<vertex type="Vector2" x="14.303436" y="0.053604603"/>
-								<vertex type="Vector2" x="14.340937" y="1.255696"/>
-								<vertex type="Vector2" x="11.355937" y="1.9011142"/>
-								<vertex type="Vector2" x="11.055937" y="2.175417"/>
-								<vertex type="Vector2" x="11.393436" y="2.5868711"/>
-								<vertex type="Vector2" x="11.978436" y="3.3775084"/>
-								<vertex type="Vector2" x="12.285936" y="3.9906557"/>
-								<vertex type="Vector2" x="12.255937" y="4.5796"/>
-								<vertex type="Vector2" x="12.795937" y="5.1443405"/>
-								<vertex type="Vector2" x="13.005936" y="5.8058944"/>
-								<vertex type="Vector2" x="12.405936" y="6.1689425"/>
-								<vertex type="Vector2" x="11.820936" y="5.7010136"/>
-								<vertex type="Vector2" x="11.535936" y="5.281492"/>
-								<vertex type="Vector2" x="11.265936" y="4.636074"/>
-								<vertex type="Vector2" x="10.748437" y="3.982588"/>
-								<vertex type="Vector2" x="9.833437" y="3.5227275"/>
-								<vertex type="Vector2" x="9.405937" y="3.3936439"/>
-								<vertex type="Vector2" x="6.4359374" y="3.538863"/>
-								<vertex type="Vector2" x="4.883437" y="3.6356757"/>
-								<vertex type="Vector2" x="2.685938" y="5.0797987"/>
-							</vertices>
-						</shape>
-						<holes/>
-					</area>
-				</WalkAreaComponent>
-			</components>
-		</entity>
-		<entity>
-			<components>
-				<TransformComponent>
-					<flipHorizontal type="Boolean">false</flipHorizontal>
-					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="5.8" y="1.8"/>
-					<rotation type="Float">0.0</rotation>
-					<scale type="Vector2" x="1.0" y="1.0"/>
-					<z type="Integer">0</z>
-				</TransformComponent>
-				<NameComponent>
-					<name type="String">sign_loadGame</name>
-				</NameComponent>
-				<HotspotComponent>
-					<height type="Float">0.6</height>
-					<origin type="Vector2" x="0.0" y="0.0"/>
-					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Walk</primaryCursor>
-					<script type="String">mainmenu.LoadGame</script>
-					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">None</secondaryCursor>
-					<targetPos type="Vector2" x="0.0" y="0.0"/>
-					<width type="Float">2.0</width>
-				</HotspotComponent>
-			</components>
-		</entity>
-		<entity>
-			<components>
-				<NameComponent>
-					<name type="String">sign_options</name>
-				</NameComponent>
-				<TransformComponent>
-					<flipHorizontal type="Boolean">false</flipHorizontal>
-					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="3.5" y="1.6"/>
-					<rotation type="Float">0.0</rotation>
-					<scale type="Vector2" x="1.0" y="1.0"/>
-					<z type="Integer">0</z>
-				</TransformComponent>
-				<HotspotComponent>
-					<height type="Float">0.6</height>
-					<origin type="Vector2" x="0.0" y="0.0"/>
-					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Walk</primaryCursor>
-					<script type="String">mainmenu.Options</script>
-					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">None</secondaryCursor>
-					<targetPos type="Vector2" x="0.0" y="0.0"/>
-					<width type="Float">2.0</width>
-				</HotspotComponent>
-			</components>
-		</entity>
-		<entity>
-			<components>
-				<NameComponent>
-					<name type="String">sign_quit</name>
-				</NameComponent>
-				<TransformComponent>
-					<flipHorizontal type="Boolean">false</flipHorizontal>
-					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="3.5" y="2.5"/>
-					<rotation type="Float">0.0</rotation>
-					<scale type="Vector2" x="1.0" y="1.0"/>
-					<z type="Integer">0</z>
-				</TransformComponent>
-				<HotspotComponent>
-					<height type="Float">0.6</height>
-					<origin type="Vector2" x="0.0" y="0.0"/>
-					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Walk</primaryCursor>
-					<script type="String">mainmenu.Quit</script>
-					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">None</secondaryCursor>
-					<targetPos type="Vector2" x="0.0" y="0.0"/>
-					<width type="Float">2.0</width>
-				</HotspotComponent>
+				<TextureComponent>
+					<region type="TextureRegion">gluhen</region>
+				</TextureComponent>
 			</components>
 		</entity>
 	</entities>
