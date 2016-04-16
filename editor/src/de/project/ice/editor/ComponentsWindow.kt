@@ -119,6 +119,7 @@ constructor(private val app: EditorApplication, private val undoRedoManager: Und
 
     companion object {
         var components: Array<Class<out Component>> = arrayOf(
+                AndiComponent::class.java,
                 AnimationComponent::class.java,
                 BlendComponent::class.java,
                 BreathComponent::class.java,
