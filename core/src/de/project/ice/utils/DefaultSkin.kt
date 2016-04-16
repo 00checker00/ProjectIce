@@ -33,6 +33,11 @@ val DefaultSkin = Skin("ui/skin.atlas") {
         borderWidth = 3f
         borderColor = com.badlogic.gdx.graphics.Color.BLACK
     }
+    FreetypeFont("menuFont") {
+        file = Gdx.files.internal("ui/VTC-GarageSale.ttf")
+        color = com.badlogic.gdx.graphics.Color.WHITE
+        size = 48
+    }
     LabelStyle {
         font = skin.getDefaultFont()
     }
@@ -44,12 +49,16 @@ val DefaultSkin = Skin("ui/skin.atlas") {
     }
     TextButtonStyle("dialogChoice") {
         font = skin.getFont("dialogFont")
-        up = ColorDrawable(com.badlogic.gdx.graphics.Color.BLUE)
+        up = skin.getDrawable("ui_button_shadow")
+        down = skin.getDrawable("ui_buttons_normal")
         fontColor = skin.getColor("dialogChoiceFont")
     }
-    TextButtonStyle {
-        font = skin.getFont("dialogFont")
-        up = ColorDrawable(com.badlogic.gdx.graphics.Color.BLUE)
-        fontColor = skin.getColor("dialogChoiceFont")
+    TextButtonStyle("menuButton") {
+        font = skin.getFont("menuFont")
+        up = skin.getDrawable("ui_button_shadow")
+        fontColor = com.badlogic.gdx.graphics.Color.valueOf("#00ccff")
+        overFontColor = com.badlogic.gdx.graphics.Color.valueOf("#ff99cc")
+        downFontColor = com.badlogic.gdx.graphics.Color.valueOf("#b2e3e5")
     }
+
 }

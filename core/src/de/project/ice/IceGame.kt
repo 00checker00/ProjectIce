@@ -3,6 +3,7 @@ package de.project.ice
 import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputProcessor
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.I18NBundle
@@ -185,16 +186,19 @@ open class IceGame : ApplicationAdapter() {
     }
 
     fun startNewGame() {
-        engine.removeAllEntities()
-        try {
+        screens.filter { it is MainMenuScreen }.forEach { removeScreen(it) }
+        engine.blendScreen(2.0f, Color.BLACK)
 
-            SceneLoader.loadScene(engine, Gdx.files.internal("scenes/scene1.scene"))
-        } catch (e: IOException) {
-            e.printStackTrace()
-        } catch (e: SceneLoader.LoadException) {
-            e.printStackTrace()
+        engine.timeout(2.0f) {
+            engine.removeAllEntities()
+            try {
+                SceneLoader.loadScene(engine, Gdx.files.internal("scenes/scene1.scene"))
+            } catch (e: IOException) {
+                e.printStackTrace()
+            } catch (e: SceneLoader.LoadException) {
+                e.printStackTrace()
+            }
         }
-
     }
 
     /**
