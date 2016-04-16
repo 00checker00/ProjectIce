@@ -1,0 +1,151 @@
+rauch_szene1.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+rauch
+  rotate: false
+  xy: 0 ,0
+  size: 232 ,570
+  orig: 232 ,570
+  offset: 0 ,0
+  index:0
+rauch
+  rotate: false
+  xy: 232 ,0
+  size: 232 ,570
+  orig: 232 ,570
+  offset: 0 ,0
+  index:1
+rauch
+  rotate: false
+  xy: 464 ,0
+  size: 232 ,570
+  orig: 232 ,570
+  offset: 0 ,0
+  index:2
+rauch
+  rotate: false
+  xy: 696 ,0
+  size: 232 ,570
+  orig: 232 ,570
+  offset: 0 ,0
+  index:3
+rauch
+  rotate: false
+  xy: 928 ,0
+  size: 231 ,570
+  orig: 232 ,570
+  offset: 0 ,0
+  index:4
+rauch
+  rotate: false
+  xy: 1159 ,0
+  size: 231 ,570
+  orig: 232 ,570
+  offset: 0 ,0
+  index:5
+rauch
+  rotate: false
+  xy: 1390 ,0
+  size: 231 ,570
+  orig: 232 ,570
+  offset: 0 ,0
+  index:6
+rauch
+  rotate: false
+  xy: 1621 ,0
+  size: 231 ,570
+  orig: 232 ,570
+  offset: 0 ,0
+  index:7
+rauch
+  rotate: false
+  xy: 0 ,570
+  size: 230 ,570
+  orig: 232 ,570
+  offset: 0 ,0
+  index:8
+rauch
+  rotate: false
+  xy: 230 ,570
+  size: 230 ,570
+  orig: 232 ,570
+  offset: 0 ,0
+  index:9
+rauch
+  rotate: false
+  xy: 460 ,570
+  size: 230 ,570
+  orig: 232 ,570
+  offset: 0 ,0
+  index:10
+rauch
+  rotate: false
+  xy: 690 ,570
+  size: 230 ,570
+  orig: 232 ,570
+  offset: 0 ,0
+  index:11
+rauch
+  rotate: false
+  xy: 920 ,570
+  size: 229 ,570
+  orig: 232 ,570
+  offset: 0 ,0
+  index:12
+rauch
+  rotate: false
+  xy: 1149 ,570
+  size: 229 ,570
+  orig: 232 ,570
+  offset: 0 ,0
+  index:13
+rauch
+  rotate: false
+  xy: 1378 ,570
+  size: 229 ,570
+  orig: 232 ,570
+  offset: 0 ,0
+  index:14
+rauch
+  rotate: false
+  xy: 1607 ,570
+  size: 229 ,570
+  orig: 232 ,570
+  offset: 0 ,0
+  index:15
+rauch
+  rotate: false
+  xy: 0 ,1140
+  size: 229 ,570
+  orig: 232 ,570
+  offset: 0 ,0
+  index:16
+rauch
+  rotate: false
+  xy: 229 ,1140
+  size: 228 ,570
+  orig: 232 ,570
+  offset: 0 ,0
+  index:17
+rauch
+  rotate: false
+  xy: 457 ,1140
+  size: 228 ,570
+  orig: 232 ,570
+  offset: 0 ,0
+  index:18
+rauch
+  rotate: false
+  xy: 685 ,1140
+  size: 228 ,570
+  orig: 232 ,570
+  offset: 0 ,0
+  index:19
+rauch
+  rotate: false
+  xy: 913 ,1140
+  size: 229 ,570
+  orig: 232 ,570
+  offset: 0 ,0
+  index:20
