@@ -29,8 +29,8 @@ class IceEngine(val game: IceGame) : PooledEngine() {
     val reloadAssetsSystem: ReloadAssetsSystem by lazy { ReloadAssetsSystem() }
     val blendSystem: BlendSystem by lazy { BlendSystem() }
     val speakSystem: SpeakSystem by lazy { SpeakSystem() }
+    val andiSystem: AndiSystem by lazy { AndiSystem() }
     var sceneProperties: SceneLoader.SceneProperties? = null
-    val andiSystem: AndiSystem by lazy { AndiSystem()}
 
     private val namedEntities: ImmutableArray<Entity>
 
