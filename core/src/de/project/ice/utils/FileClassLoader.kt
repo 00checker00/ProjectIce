@@ -1,5 +1,6 @@
 package de.project.ice.utils
 
+import com.badlogic.gdx.Gdx
 import java.io.File
 import java.util.*
 
@@ -34,7 +35,7 @@ abstract class FileClassLoader(parent: ClassLoader = ClassLoader.getSystemClassL
     }
 
     private fun loadClassData(name: String): ByteArray {
-        val file = File("$path/${name.replace(".", "/")}.class")
+        val file = Gdx.files.internal("$path/${name.replace(".", "/")}.class")
 
         if (!file.exists())
             throw ClassNotFoundException("Class for Hotspot \"$name\" not found")

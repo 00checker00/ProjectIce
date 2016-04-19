@@ -129,10 +129,7 @@ abstract class Storage internal constructor(internal var prefs: Preferences) {
         }
     }
 
-    class Savestate internal constructor() : Storage(Gdx.app.getPreferences(PREFIX + "_temp")) {
-        init {
-            prefs.clear()
-        }
+    class Savestate internal constructor() : Storage(Gdx.app.getPreferences(PREFIX + "_temp").apply { clear() }) {
 
         fun load(slot: Int) {
             this.prefs.clear()
@@ -143,7 +140,6 @@ abstract class Storage internal constructor(internal var prefs: Preferences) {
         fun save(slot: Int) {
             val p = Gdx.app.getPreferences(PREFIX + "_slot" + slot)
             p.put(this.prefs.get())
-            p.clear()
             p.flush()
         }
     }

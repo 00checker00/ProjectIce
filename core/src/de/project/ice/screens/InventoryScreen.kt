@@ -19,6 +19,7 @@ import de.project.ice.config.Config.INVENTORY_KEY
 import de.project.ice.config.Config.MENU_KEY
 import de.project.ice.ecs.Components
 import de.project.ice.ecs.getComponents
+import de.project.ice.hotspot.GotoScene
 import de.project.ice.inventory.Combinations
 import de.project.ice.inventory.Inventory
 import de.project.ice.inventory.Items
@@ -87,26 +88,23 @@ class InventoryScreen(game: IceGame) : BaseScreenAdapter(game) {
 
                     if(Circle(BUTTON_POSITIONS[Button.Save], BUTTON_SIZE).contains(pos) ) {
                         if(game.blockSaving) {
-                            game.showMessages("general_save_blocked")
+                            game.showToastMessages("general_save_blocked")
                         } else {
-                            val xmlState = SceneWriter.serializeToString(game.engine, game.engine.sceneProperties!!)
+                            game.save()
 
-                            Storage.SAVESTATE.put("__SAVESTATE__", xmlState)
                             game.removeScreen(this@InventoryScreen)
-                            game.showMessages("general_save_success")
+                            game.showToastMessages("general_save_success")
                         }
-
 
                     } else if(Circle(BUTTON_POSITIONS[Button.Load], BUTTON_SIZE).contains(pos)) {
                         if(game.blockSaving) {
-                            game.showMessages("general_load_blocked")
+                            game.showToastMessages("general_load_blocked")
                         } else {
-                            if (Storage.SAVESTATE.hasKey("__SAVESTATE__")) {
+                            if (game.hasSave()) {
 
                                 game.removeScreen(this@InventoryScreen)
                                 game.engine.blendScreen(1.0f, Color.BLACK)
                                 game.engine.timeout(1.0f) {
-                                    val xmlState = Storage.SAVESTATE.getString("__SAVESTATE__")
 
                                     game.engine.entities.forEach {
                                         game.engine.removeEntity(it)
@@ -119,16 +117,23 @@ class InventoryScreen(game: IceGame) : BaseScreenAdapter(game) {
                                                 game.engine.blendScreen(1.0f, Color.WHITE, Color.BLACK)
                                             }
 
-                                            SceneLoader.loadScene(game.engine, xmlState)
-                                            game.showMessages("general_load_success")
+                                            game.load()
+                                            game.showToastMessages("general_load_success")
                                         }
                                     }
                                 }
                             } else {
-                                game.showMessages("general_load_nosave")
+                                game.showToastMessages("general_load_nosave")
                             }
                         }
 
+                    } else if(Circle(BUTTON_POSITIONS[Button.Home], BUTTON_SIZE).contains(pos)) {
+                        object: GotoScene("Hauptmenue"){
+                            override fun afterSceneLoaded(game: IceGame) {
+                                game.addScreen(MainMenuScreen(game))
+                            }
+                        }.use(game, CursorScreen.Cursor.Walk, "")
+                        game.removeScreen(this@InventoryScreen)
                     } else {
                         var active_item = game.engine.controlSystem.active_item;
 
@@ -153,7 +158,7 @@ class InventoryScreen(game: IceGame) : BaseScreenAdapter(game) {
                 }
 
                 Input.Buttons.RIGHT -> if (item != null) {
-                    game.showMessages(item.description)
+                    game.showAndiMessages(item.description)
                 }
             }
             return true
@@ -249,8 +254,6 @@ class InventoryScreen(game: IceGame) : BaseScreenAdapter(game) {
         for (item in game.inventory.items) {
             if (item == game.engine.controlSystem.active_item)
                 continue
-        }
-        for (item in game.inventory.items) {
 
             val holder = Assets.findRegion(item.icon)
             if (holder.data != null) {

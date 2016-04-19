@@ -139,14 +139,6 @@ project(":core") {
     }
 }
 
-project(":hotspots") {
-    apply plugin: "java"
-
-    dependencies {
-        compile project(":core")
-    }
-}
-
 project(":scripts") {
     apply plugin: "java"
 
@@ -155,7 +147,6 @@ project(":scripts") {
     }
 }
 
-project(":core").getTasksByName("jar" , false).first().finalizedBy project(":hotspots").getTasksByName("copyClasses", false).first()
 project(":core").getTasksByName("jar" , false).first().finalizedBy project(":scripts").getTasksByName("copyClasses", false).first()
 
 tasks.eclipse.doLast {

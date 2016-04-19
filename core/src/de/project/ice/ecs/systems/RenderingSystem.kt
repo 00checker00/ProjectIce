@@ -132,7 +132,7 @@ class RenderingSystem : SortedIteratingIceSystem(Families.renderable, RenderingS
         val origin = pos + hotspot.origin
         val center = origin + Vector2(hotspot.width / 2, hotspot.height / 2)
 
-        if (batch.isDrawing && Gdx.input.isKeyPressed(Config.HOTSPOT_KEY)) {
+        if (batch.isDrawing && Gdx.input.isKeyPressed(Config.HOTSPOT_KEY) && !entity.hasComponent(Components.control)) {
             val region = Assets.findRegion("icon_hotspot")
             if (region.isValid)
                 batch.draw(region.data, center.x - 0.25f, center.y - 0.25f, 0.5f, 0.5f)

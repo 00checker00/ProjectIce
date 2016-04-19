@@ -17,6 +17,8 @@ import com.kotcrab.vis.ui.widget.*
 import com.kotcrab.vis.ui.widget.file.FileChooser
 import com.kotcrab.vis.ui.widget.file.FileChooserAdapter
 import de.project.ice.Storage
+import de.project.ice.config.Config
+import de.project.ice.dialog.Node
 import de.project.ice.hotspot.Hotspot
 import de.project.ice.screens.BaseScreenAdapter
 import de.project.ice.scripting.Script
@@ -206,9 +208,6 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
                 e.printStackTrace()
             }
         }
-
-        game.engine.soundSystem.setProcessing(false)
-
     }
 
     private fun hideAllWindows() {
@@ -225,6 +224,7 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
 
     private fun stopPlaytest() {
         editGameScreen.inputProcessor.detached = false
+        Config.RENDER_DEBUG = true
 
         stopPlaytestItem!!.isDisabled = true
         startPlaytestItem!!.isDisabled = false
@@ -232,7 +232,7 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
         entitiesWindow.isVisible = entitiesvisible
         componentsWindow.isVisible = componentvisible
 
-        game.engine.soundSystem.setProcessing(true)
+        game.engine.soundSystem.stopMusic()
 
         restoreState()
         game.pauseGame()
@@ -241,6 +241,7 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
     private fun startPlaytest() {
 
         editGameScreen.inputProcessor.detached = true
+        Config.RENDER_DEBUG = false
 
         stopPlaytestItem!!.isDisabled = false
         startPlaytestItem!!.isDisabled = true
@@ -248,16 +249,12 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
         entitiesvisible = entitiesWindow.isVisible
         componentvisible = componentsWindow.isVisible
 
-        game.engine.soundSystem.setProcessing(false)
+        game.engine.soundSystem.resumeMusic()
 
         entitiesWindow.isVisible = false
         componentsWindow.isVisible = false
         storeState()
         game.resumeGame()
-
-
-
-
     }
 
     private fun createMenus() {
@@ -286,13 +283,7 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
                 scenePropertiesDialog.addListener(object : DialogListener<SceneProperties> {
                     override fun onResult(result: SceneProperties) {
                         game.engine.soundSystem.unloadSounds()
-                        game.engine.soundSystem.stopMusic()
-                        game.engine.soundSystem.playMusic(result.music)
-
-                        for (sound in result.sounds) {
-                            game.engine.soundSystem.loadSound(sound)
-                        }
-
+                        game.engine.soundSystem.playMusic(result.music, volume = result.musicVolume)
                         reloadAssets()
                     }
 
@@ -576,7 +567,6 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
                 engine(game.engine)
                 writer(xml)
                 sceneName(app.sceneProperties.name)
-                onloadScript(app.sceneProperties.onloadScript)
             }.create().serializeScene()
 
         } catch (e: IOException) {

@@ -18,7 +18,8 @@ class AndiSystem: IteratingIceSystem(Family.all(AndiComponent::class.java).get()
                     AnimationComponent {
                         animations.put(1, Assets.createAnimation("andi_idle", Float.POSITIVE_INFINITY, Animation.PlayMode.REVERSED))
                         animations.put(2, Assets.createAnimation("andi_lauf", 0.03f, Animation.PlayMode.LOOP))
-                        animations.put(3, Assets.createAnimation("andi_buecken", 0.0f, Animation.PlayMode.NORMAL))
+                        animations.put(3, Assets.createAnimation("andi_buecken", 0.03f, Animation.PlayMode.NORMAL))
+                        animation = 1
                     }
             }
 

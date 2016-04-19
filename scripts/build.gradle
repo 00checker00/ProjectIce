@@ -31,7 +31,14 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 }
 
-task copyClasses(type:Copy, dependsOn:[classes]) {
+task copyHotspots(type:Copy, dependsOn:[classes]) {
     from files(new File(sourceSets.main.output.classesDir,  "/de/project/ice/scripting/scripts"))
     into new File(project.assetsDir, "scripts")
 }
+
+task copyScripts(type:Copy, dependsOn:[classes]) {
+    from files(new File(sourceSets.main.output.classesDir,  "/de/project/ice/hotspot/hotspots"))
+    into new File(project.assetsDir, "hotspots")
+}
+
+task copyClasses(dependsOn:[copyScripts, copyHotspots])

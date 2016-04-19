@@ -45,28 +45,33 @@ open class MainMenuScreen(game: IceGame) : BaseScreenAdapter(game) {
         menuLayout.space(5f)
         root.add(menuLayout)
 
-        createMenuButton(ButtonProperties(BUTTON_NEW_GAME_ID), "PLAY", object : InputListener() {
+        createMenuButton(ButtonProperties(BUTTON_NEW_GAME_ID), game.strings.get("menu_new_game"), object : InputListener() {
             override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean {
-                this@MainMenuScreen.game.startNewGame()
-                this@MainMenuScreen.game.removeScreen(this@MainMenuScreen)
+                game.startNewGame()
+                game.removeScreen(this@MainMenuScreen)
                 return true
             }
         })
-        createMenuButton(ButtonProperties(BUTTON_SAVE_LOAD_ID), "LOAD", object : InputListener() {
+        createMenuButton(ButtonProperties(BUTTON_SAVE_LOAD_ID), game.strings.get("menu_load_game"), object : InputListener() {
             override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean {
-                println("Save/Load")
+                if (game.hasSave()) {
+                    game.load(blendScreen = true)
+                    game.removeScreen(this@MainMenuScreen)
+                } else {
+                    game.showToastMessages("general_load_nosave")
+                }
                 return true
             }
         })
-        createMenuButton(ButtonProperties(BUTTON_SETTINGS_ID), "OPTIONS", object : InputListener() {
+        createMenuButton(ButtonProperties(BUTTON_SETTINGS_ID), game.strings.get("menu_options"), object : InputListener() {
             override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean {
                 println("Settings")
                 return true
             }
         })
-        createMenuButton(ButtonProperties(BUTTON_EXIT_ID), "QUIT", object : InputListener() {
+        createMenuButton(ButtonProperties(BUTTON_EXIT_ID), game.strings.get("menu_quit"), object : InputListener() {
             override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean {
-                this@MainMenuScreen.game.exit()
+                game.exit()
                 return true
             }
         })
@@ -74,7 +79,6 @@ open class MainMenuScreen(game: IceGame) : BaseScreenAdapter(game) {
 
     override val priority: Int
         get() = 100
-
 
 
     protected fun createMenuButtonAfter(properties: ButtonProperties, text: String, listener: InputListener?, idAfter: String) {

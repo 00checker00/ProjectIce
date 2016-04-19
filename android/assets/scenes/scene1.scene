@@ -1,18 +1,5 @@
 <scene name="Scene_1" onload="">
-	<music>5</music>
-	<sounds>
-		<sound>s1_dlg_kai_intro_1_Voice</sound>
-		<sound>s1_dlg_kai_intro_2_Voice</sound>
-		<sound>s1_dlg_kai_intro_3_Voice</sound>
-		<sound>s1_dlg_kai_intro_4_Voice</sound>
-		<sound>s1_dlg_kai_intro_5_Voice</sound>
-		<sound>s1_dlg_andi_intro_2_Voice</sound>
-		<sound>s1_dlg_rein_fall_intro_1_Voice</sound>
-		<sound>s1_dlg_rein_fall_intro_2_Voice</sound>
-		<sound>s1_dlg_rein_fall_intro_3_Voice</sound>
-		<sound>s1_dlg_rein_fall_intro_4_Voice</sound>
-		<sound>s1_dlg_andi_intro_1_Voice</sound>
-	</sounds>
+	<music volume="0.1">Town of the Fisherman</music>
 	<spritesheets>
 		<spritesheet>scene1_elemente</spritesheet>
 		<spritesheet>objects</spritesheet>
@@ -38,7 +25,7 @@
 					<z type="Integer">5</z>
 				</TransformComponent>
 				<ControlComponent>
-					<speed type="Float">3.0</speed>
+					<speed type="Float">2.0</speed>
 				</ControlComponent>
 			</components>
 		</entity>
@@ -68,14 +55,14 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="0.0" y="0.0"/>
+					<pos type="Vector2" x="-0.029999733" y="2.3841858E-7"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
 				<CameraComponent>
 					<camera type="OrthographicCamera" viewportWidth="9.6" viewportHeight="5.4">
-						<pos type="Vector3" x="5.3" y="2.5390625" z="0.0"/>
+						<pos type="Vector3" x="4.7" y="2.5390625" z="0.0"/>
 					</camera>
 					<color>-1</color>
 					<followMaxX type="Float">5.3</followMaxX>
@@ -113,15 +100,17 @@
 								<vertex type="Vector2" x="6.084687" y="1.5772355"/>
 								<vertex type="Vector2" x="4.7598543" y="1.619942"/>
 								<vertex type="Vector2" x="3.9246876" y="1.648413"/>
-								<vertex type="Vector2" x="2.9996872" y="1.6104517"/>
+								<vertex type="Vector2" x="2.9750001" y="1.6790625"/>
 								<vertex type="Vector2" x="0.5246873" y="1.6104517"/>
-								<vertex type="Vector2" x="0.24468756" y="2.2890105"/>
+								<vertex type="Vector2" x="0.24499941" y="2.1317697"/>
+								<vertex type="Vector2" x="0.8999996" y="2.6388626"/>
 								<vertex type="Vector2" x="1.5496874" y="2.7113304"/>
 								<vertex type="Vector2" x="3.7296875" y="2.7445467"/>
 								<vertex type="Vector2" x="3.5246873" y="3.1811018"/>
 								<vertex type="Vector2" x="1.7546873" y="3.1336503"/>
-								<vertex type="Vector2" x="0.70968723" y="2.782508"/>
-								<vertex type="Vector2" x="-0.13531256" y="2.6543884"/>
+								<vertex type="Vector2" x="1.1549997" y="2.924777"/>
+								<vertex type="Vector2" x="0.5899997" y="2.6226788"/>
+								<vertex type="Vector2" x="-0.10000038" y="2.0184832"/>
 								<vertex type="Vector2" x="-0.04531288" y="1.2972705"/>
 							</vertices>
 						</shape>
@@ -169,7 +158,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="3.7450042" y="1.8462753"/>
+					<pos type="Vector2" x="3.7900052" y="1.8247614"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">8</z>
@@ -181,7 +170,7 @@
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Walk</primaryCursor>
 					<script type="String">scene1.Hauptiglu</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
-					<targetPos type="Vector2" x="0.0" y="0.0"/>
+					<targetPos type="Vector2" x="1.7" y="0.0"/>
 					<width type="Float">3.0</width>
 				</HotspotComponent>
 			</components>
@@ -577,7 +566,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="5.45" y="1.8"/>
+					<pos type="Vector2" x="5.495" y="1.79"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
