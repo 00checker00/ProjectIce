@@ -1,6 +1,5 @@
 <scene name="" onload="">
-	<music>Under The Sea</music>
-	<sounds/>
+	<music volume="0.17999999">Under The Sea</music>
 	<spritesheets>
 		<spritesheet>main_menu</spritesheet>
 		<spritesheet>gluehen_szene1</spritesheet>

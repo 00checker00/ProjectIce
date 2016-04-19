@@ -78,16 +78,7 @@ class SceneWriter private constructor(private val sceneName: String, private val
 
     @Throws(IOException::class)
     private fun serializeAudio(xml: XmlWriter, sound: SoundSystem) {
-        xml.element("music").text(sound.music).pop()
-
-        xml.element("sounds")
-
-        for (s in sound.sounds) {
-            xml.element("sound").text(s).pop()
-        }
-
-        xml.pop()
-
+        xml.element("music").attribute("volume", sound.musicvolume.toString()).text(sound.musicname).pop()
     }
 
     @Throws(IOException::class)
@@ -229,7 +220,6 @@ class SceneWriter private constructor(private val sceneName: String, private val
                     SceneWriter.Builder().engine(engine)
                             .writer(XmlWriter(this))
                             .sceneName(properties.name)
-                            .onloadScript(properties.onloadScript)
                             .create().serializeScene()
                 }.toString()
     }

@@ -1,0 +1,219 @@
+<scene name="Igloo" onload="">
+	<music volume="0.31">Warriors Heart Inn</music>
+	<spritesheets>
+		<spritesheet>objects</spritesheet>
+		<spritesheet>scene3</spritesheet>
+		<spritesheet>andi</spritesheet>
+		<spritesheet>inventory_icon</spritesheet>
+	</spritesheets>
+	<entities>
+		<entity>
+			<components>
+				<CameraComponent>
+					<camera type="OrthographicCamera" viewportWidth="16.0" viewportHeight="9.0">
+						<pos type="Vector3" x="8.0" y="4.5" z="0.0"/>
+					</camera>
+					<color>-1</color>
+					<followMaxX type="Float">3.4028235E38</followMaxX>
+					<followMinX type="Float">1.4E-45</followMinX>
+					<followOffset type="Float">1.0</followOffset>
+					<followType type="enum" subtype="de.project.ice.ecs.systems.CameraSystem$FollowType">None</followType>
+					<targetScale type="Float">1.0</targetScale>
+					<targetY type="Float">20.0</targetY>
+				</CameraComponent>
+				<NameComponent>
+					<name type="String">Kamera</name>
+				</NameComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">Background</name>
+				</NameComponent>
+				<TextureComponent>
+					<region type="TextureRegion">iglu_innen</region>
+				</TextureComponent>
+				<TransformComponent>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
+					<flipVertical type="Boolean">false</flipVertical>
+					<pos type="Vector2" x="8.208328" y="-0.34960198"/>
+					<rotation type="Float">0.0</rotation>
+					<scale type="Vector2" x="1.5" y="1.5"/>
+					<z type="Integer">100</z>
+				</TransformComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">Oven</name>
+				</NameComponent>
+				<TransformComponent>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
+					<flipVertical type="Boolean">false</flipVertical>
+					<pos type="Vector2" x="0.9833355" y="0.770916"/>
+					<rotation type="Float">0.0</rotation>
+					<scale type="Vector2" x="1.4" y="1.4"/>
+					<z type="Integer">50</z>
+				</TransformComponent>
+				<TextureComponent>
+					<region type="TextureRegion">ofen</region>
+				</TextureComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<TransformComponent>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
+					<flipVertical type="Boolean">false</flipVertical>
+					<pos type="Vector2" x="1.2500024" y="2.7788842"/>
+					<rotation type="Float">0.0</rotation>
+					<scale type="Vector2" x="1.0" y="1.0"/>
+					<z type="Integer">40</z>
+				</TransformComponent>
+				<NameComponent>
+					<name type="String">Teapot</name>
+				</NameComponent>
+				<TextureComponent>
+					<region type="TextureRegion">teekanne</region>
+				</TextureComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">Walkarea</name>
+				</NameComponent>
+				<WalkAreaComponent>
+					<area type="PathArea">
+						<shape type="Shape" closed="true">
+							<vertices>
+								<vertex type="Vector2" x="2.2583332" y="2.5816734"/>
+								<vertex type="Vector2" x="2.2333336" y="1.3446214"/>
+								<vertex type="Vector2" x="2.3249998" y="0.7081673"/>
+								<vertex type="Vector2" x="0.25" y="0.5826695"/>
+								<vertex type="Vector2" x="0.20833349" y="0.116533756"/>
+								<vertex type="Vector2" x="15.866667" y="0.17928267"/>
+								<vertex type="Vector2" x="15.866667" y="2.6175299"/>
+								<vertex type="Vector2" x="9.883333" y="2.868526"/>
+								<vertex type="Vector2" x="4.175" y="2.7250996"/>
+							</vertices>
+						</shape>
+						<holes/>
+					</area>
+				</WalkAreaComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<AndiComponent/>
+				<NameComponent>
+					<name type="String">Andi_Player</name>
+				</NameComponent>
+				<TransformComponent>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
+					<flipVertical type="Boolean">false</flipVertical>
+					<pos type="Vector2" x="8.150006" y="2.698206"/>
+					<rotation type="Float">0.0</rotation>
+					<scale type="Vector2" x="1.5" y="1.5"/>
+					<z type="Integer">50</z>
+				</TransformComponent>
+				<HotspotComponent>
+					<cursorText type="String"></cursorText>
+					<height type="Float">3.0</height>
+					<origin type="Vector2" x="0.0" y="0.0"/>
+					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">None</primaryCursor>
+					<script type="String"></script>
+					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">None</secondaryCursor>
+					<targetPos type="Vector2" x="0.0" y="0.0"/>
+					<width type="Float">0.0</width>
+				</HotspotComponent>
+				<ControlComponent>
+					<speed type="Float">5.0</speed>
+				</ControlComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">Klara Fall</name>
+				</NameComponent>
+				<TransformComponent>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
+					<flipVertical type="Boolean">false</flipVertical>
+					<pos type="Vector2" x="14.149995" y="2.1603577"/>
+					<rotation type="Float">0.0</rotation>
+					<scale type="Vector2" x="1.5" y="1.5"/>
+					<z type="Integer">50</z>
+				</TransformComponent>
+				<TextureComponent>
+					<region type="TextureRegion">prinzessin_normal</region>
+				</TextureComponent>
+				<HotspotComponent>
+					<cursorText type="String">s1_klara_fall</cursorText>
+					<height type="Float">3.8</height>
+					<origin type="Vector2" x="-0.6" y="0.0"/>
+					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</primaryCursor>
+					<script type="String">igloo.KlaraFall</script>
+					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
+					<targetPos type="Vector2" x="-0.6" y="-0.4"/>
+					<width type="Float">2.3</width>
+				</HotspotComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<TransformComponent>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
+					<flipVertical type="Boolean">false</flipVertical>
+					<pos type="Vector2" x="10.141666" y="2.9223096"/>
+					<rotation type="Float">0.0</rotation>
+					<scale type="Vector2" x="1.0" y="1.0"/>
+					<z type="Integer">0</z>
+				</TransformComponent>
+				<NameComponent>
+					<name type="String">Goto scene1</name>
+				</NameComponent>
+				<HotspotComponent>
+					<cursorText type="String">s1_location_name</cursorText>
+					<height type="Float">4.0</height>
+					<origin type="Vector2" x="-2.0" y="0.0"/>
+					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Walk</primaryCursor>
+					<script type="String">igloo.GotoScene1</script>
+					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">None</secondaryCursor>
+					<targetPos type="Vector2" x="0.0" y="0.0"/>
+					<width type="Float">4.0</width>
+				</HotspotComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">Rein Fall</name>
+				</NameComponent>
+				<TransformComponent>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
+					<flipVertical type="Boolean">false</flipVertical>
+					<pos type="Vector2" x="2.1749983" y="2.1693203"/>
+					<rotation type="Float">0.0</rotation>
+					<scale type="Vector2" x="-1.5" y="1.5"/>
+					<z type="Integer">50</z>
+				</TransformComponent>
+				<TextureComponent>
+					<region type="TextureRegion">opa_eskimo_normal</region>
+				</TextureComponent>
+				<HotspotComponent>
+					<cursorText type="String">s1_rein_fall</cursorText>
+					<height type="Float">3.4</height>
+					<origin type="Vector2" x="-0.6" y="0.0"/>
+					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</primaryCursor>
+					<script type="String">igloo.ReinFall</script>
+					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
+					<targetPos type="Vector2" x="1.9" y="-0.1"/>
+					<width type="Float">2.3</width>
+				</HotspotComponent>
+			</components>
+		</entity>
+	</entities>
+</scene>

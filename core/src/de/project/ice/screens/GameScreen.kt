@@ -31,13 +31,11 @@ class GameScreen(game: IceGame, private val engine: IceEngine) : BaseScreenAdapt
         }
 
         override fun keyDown(keycode: Int): Boolean {
-            when (keycode) {
-                MENU_KEY -> {
-                    this@GameScreen.game.addScreen(PauseScreen(this@GameScreen.game))
-                    return true
-                }
+            if (game.blockInteraction)
+                return false
 
-                INVENTORY_KEY -> {
+            when (keycode) {
+                MENU_KEY, INVENTORY_KEY -> {
                     this@GameScreen.game.addScreen(InventoryScreen(this@GameScreen.game))
                     return true
                 }

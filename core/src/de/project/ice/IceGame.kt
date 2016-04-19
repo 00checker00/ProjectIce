@@ -1,8 +1,6 @@
 package de.project.ice
 
-import com.badlogic.gdx.ApplicationAdapter
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.InputProcessor
+import com.badlogic.gdx.*
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.utils.Array
@@ -14,6 +12,7 @@ import de.project.ice.inventory.Inventory
 import de.project.ice.screens.*
 import de.project.ice.utils.Assets
 import de.project.ice.utils.SceneLoader
+import de.project.ice.utils.SceneWriter
 
 import java.io.IOException
 import java.util.*
@@ -35,7 +34,8 @@ open class IceGame : ApplicationAdapter() {
             field = value
             engine.controlSystem.setProcessing(!value)
         }
-    var blockSaving = false;
+    var blockSaving = false
+    var currentSaveSlot: Int = 0; private set
 
     override fun create() {
         I18NBundle.setSimpleFormatter(true)
@@ -45,6 +45,7 @@ open class IceGame : ApplicationAdapter() {
 
         init()
 
+        Storage.SAVESTATE.load(currentSaveSlot)
     }
 
     protected open fun init() {
@@ -64,6 +65,59 @@ open class IceGame : ApplicationAdapter() {
         isGamePaused = false
     }
 
+    fun save(slot: Int = currentSaveSlot): Boolean {
+        var result = false
+        if (!blockSaving) {
+            val xmlState = SceneWriter.serializeToString(engine, engine.sceneProperties!!)
+            Storage.SAVESTATE.put("__SAVESTATE__", xmlState)
+            Storage.SAVESTATE.save(slot)
+            result = true
+        }
+        currentSaveSlot = slot
+        return result
+    }
+
+    fun load(slot: Int = currentSaveSlot, blendScreen: Boolean = false): Boolean {
+        var result = false
+        if (!blockSaving) {
+            if (slot != currentSaveSlot)
+                Storage.SAVESTATE.load(slot)
+
+            if (hasSave()) {
+                val xmlState = Storage.SAVESTATE.getString("__SAVESTATE__")
+                if (blendScreen) {
+                    engine.blendScreen(2.0f, Color.BLACK)
+
+                    engine.timeout(2.0f) {
+                        engine.entities.forEach { engine.removeEntity(it) }
+                        engine.timeout(0f) {
+                            try {
+                                SceneLoader.loadScene(engine, xmlState)
+                            } catch (e: IOException) {
+                                e.printStackTrace()
+                            } catch (e: SceneLoader.LoadException) {
+                                e.printStackTrace()
+                            }
+                        }
+                    }
+                } else {
+                    SceneLoader.loadScene(engine, xmlState)
+                }
+                result = true
+            }
+        }
+        currentSaveSlot = slot
+        return result
+    }
+
+    fun hasSave(slot: Int = currentSaveSlot): Boolean {
+        if (!blockSaving)
+            if (slot != currentSaveSlot)
+                Storage.SAVESTATE.load(slot)
+
+        return Storage.SAVESTATE.hasKey("__SAVESTATE__")
+    }
+
     fun showDialog(node: Node, callback: ()->Unit = {}): DialogHandle {
         return DialogHandle(addScreen(DialogScreen(this, node).apply {
             this.callback = callback
@@ -75,9 +129,34 @@ open class IceGame : ApplicationAdapter() {
     }
 
 
-    fun showMessages(vararg messages: String) {
-        addScreen(MessageScreen(this, *messages.map {
-            try { strings.get(it) } catch (ex: MissingResourceException) { "$$$it$$" } }.toTypedArray()))
+    fun showToastMessages(vararg messages: String) {
+        val messageStrings = messages.map {
+            try {
+                strings.get(it)
+            } catch (ex: MissingResourceException) {
+                "$$$it$$"
+            }
+        }.toTypedArray()
+
+        val messageScreen = screens.filter { it is MessageScreen }.firstOrNull() as MessageScreen?
+        if (messageScreen != null)
+            messageScreen.addMessages(*messageStrings)
+        else
+            addScreen(MessageScreen(this, *messageStrings))
+    }
+
+
+    fun showAndiMessages(vararg messages: String) {
+        val start = Node()
+        messages.fold(start) {
+            node, msg -> Node().apply {
+                type = Node.Type.Text
+                speaker = "Andi_Player"
+                text = msg
+                node.next = this
+            }
+        }
+        showDialog(start)
     }
 
     override fun dispose() {
@@ -123,7 +202,7 @@ open class IceGame : ApplicationAdapter() {
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT or GL20.GL_DEPTH_BUFFER_BIT)
         val delta = Gdx.graphics.deltaTime
-        for (screen in screens) {
+        for (screen in Array(screens)) {
             screen.update(delta)
         }
         for (screen in screens) {
@@ -188,6 +267,7 @@ open class IceGame : ApplicationAdapter() {
     }
 
     fun startNewGame() {
+        Storage.SAVESTATE.clear()
         screens.filter { it is MainMenuScreen }.forEach { removeScreen(it) }
         engine.blendScreen(2.0f, Color.BLACK)
 
@@ -215,6 +295,17 @@ open class IceGame : ApplicationAdapter() {
 
     inner class InputMultiplexer : InputProcessor {
         override fun keyDown(keycode: Int): Boolean {
+            if (keycode == Input.Keys.ENTER && Gdx.input.isKeyPressed(Input.Keys.ALT_LEFT)) {
+                if (Gdx.graphics.isFullscreen)
+                    Gdx.graphics.setWindowedMode(1920, 1080)
+                else for (mode in Gdx.graphics.getDisplayModes(Gdx.graphics.primaryMonitor)) {
+                        if (mode.width == 1920 && mode.height == 1080) {
+                            Gdx.graphics.setFullscreenMode(mode)
+                            break
+                        }
+                    }
+                return true
+            }
             for (i in screens.size - 1 downTo 0) {
                 if (screens.get(i).inputProcessor.keyDown(keycode)) {
                     return true

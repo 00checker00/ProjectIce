@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.*
+import com.badlogic.gdx.scenes.scene2d.ui.Stack
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import de.project.ice.IceGame
@@ -19,7 +20,6 @@ import de.project.ice.config.Config
 import de.project.ice.dialog.Node
 import de.project.ice.ecs.Components
 import de.project.ice.ecs.components.SpeakComponent
-import de.project.ice.ecs.getComponents
 import de.project.ice.ecs.getComponents
 import de.project.ice.ecs.systems.SoundSystem
 import de.project.ice.utils.*
@@ -31,23 +31,46 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
     private val font = skin.getFont("dialogFont")
     private val textLayout = GlyphLayout()
 
-    private val root = Table()
+    private val choices = Table(skin)
+    private val root = Container<Stack>()
     private val buttons = HashMap<String, TextButton>()
-    private var choiceTable = Table(skin)
     override val inputProcessor: InputProcessor = DialogScreenInputProcessor(stage)
     var callback: (()->Unit)? = null
     val dialogEntities: ImmutableArray<Entity>
 
+    private var dialogueSoundID: Long = -1L
+
     init {
+        game.primaryCursor = CursorScreen.Cursor.None
+        game.secondaryCursor = CursorScreen.Cursor.None
+        game.cursorText = ""
+
         if (Config.RENDER_DEBUG) {
             stage.setDebugAll(true)
         }
 
         stage.viewport = ScreenViewport()
 
+        val backgroundImage = skin.getRegion("ui_dialogBox")
+        val background = Image(backgroundImage)
+
+        val stack = Stack(background, choices)
+
+        choices.apply {
+            setFillParent(true)
+            top()
+            pad(64f, 100f, 64f, 100f)
+        }
+
         stage.addActor(root)
 
-        root.setFillParent(true)
+        root.apply {
+            actor = stack
+            setFillParent(true)
+            bottom()
+            fillX()
+            layout()
+        }
 
         dialogEntities = game.engine.getEntitiesFor(Family.all(SpeakComponent::class.java).get())
 
@@ -80,18 +103,14 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
             showNode(next)
             return
         }
-        clear()
-        root.row().expandY()
+        dialogEntities.forEach { game.engine.removeEntity(it) }
 
-        choiceTable.defaults().space(20f)
-        choiceTable.defaults().align(Align.left)
-
+        choices.clear()
         if (node.choices.size > 0) {
-            var pad = 20f
-
+            root.isVisible = true
             for (pair in node.choices) {
                 val choice = pair.first
-                choiceTable.row()
+                choices.row()
                 val text: String
                 try {
                     text = game.strings.get(choice.text)
@@ -101,6 +120,7 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
                     Gdx.app.log(javaClass.simpleName, "Missing translation for: " + choice.text)
                 }
                 val btn = TextButton(text, skin, "dialogChoice")
+                btn.label.setAlignment(Align.left)
                 val next = choice.next
                 btn.addListener(object : InputListener() {
                     override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean {
@@ -109,13 +129,11 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
                         return true
                     }
                 })
-                choiceTable.add(btn).padLeft(pad)
+                choices.add(btn).fillX().expandX().top().left()
             }
+        } else {
+            root.isVisible = false
         }
-
-        root.add(choiceTable).expandX()
-
-        root.row().expandX()
 
         (inputProcessor as DialogScreenInputProcessor).next = node.next
         inputProcessor.nextEnabled = node.choices.size == 0
@@ -129,7 +147,8 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
                 Gdx.app.log(javaClass.simpleName, "Missing translation for: " + node.text)
             }
 
-            game.engine.soundSystem.playSound(node.text, SoundSystem.Type.Voice)
+            game.engine.soundSystem.stopSound(dialogueSoundID)
+            dialogueSoundID = game.engine.soundSystem.playSound(node.text, SoundSystem.Type.Voice)
 
             game.engine.addEntity {
                 SpeakComponent {
@@ -137,19 +156,8 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
                     this.targetName = node.speaker
                 }
             }
-
-            //val textLabel = Label(text, skin, "dialogText")
-            //textLabel.setAlignment(Align.center)
-            //val scrollPane = ScrollPane(textLabel, skin, "dialogText")
-            //root.add(scrollPane).height(50f).fill()
         }
 
-    }
-
-    private fun clear() {
-        root.clear()
-
-        dialogEntities.forEach { game.engine.removeEntity(it) }
     }
 
     override val priority: Int
@@ -193,6 +201,14 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
 
                     var x = projected.x - textLayout.width/2
 
+                    val size = camera.camera.project(Vector3(camera.camera.viewportWidth, camera.camera.viewportHeight, 0f))
+
+                    if (x < MIN_SCREEN_DIST)
+                        x = MIN_SCREEN_DIST
+                    else if (x > size.x - textLayout.width - MIN_SCREEN_DIST)
+                        x = size.x - textLayout.width - MIN_SCREEN_DIST
+
+
                     font.draw(stage.batch, textLayout, x , y )
 
                     y += textLayout.height * 1.5f
@@ -223,5 +239,9 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
             showNode(next)
             return true
         }
+    }
+
+    companion object {
+        val MIN_SCREEN_DIST = 30f
     }
 }

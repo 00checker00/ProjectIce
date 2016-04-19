@@ -1,6 +1,5 @@
 <scene name="Scene_2" onload="">
-	<music>6</music>
-	<sounds/>
+	<music volume="0.04">Kujara Ranch</music>
 	<spritesheets>
 		<spritesheet>Eisschollenweg</spritesheet>
 		<spritesheet>objects</spritesheet>
@@ -118,7 +117,7 @@
 						<shape type="Shape" closed="true">
 							<vertices>
 								<vertex type="Vector2" x="-0.018541338" y="0.059099443"/>
-								<vertex type="Vector2" x="-0.016124727" y="1.6276457"/>
+								<vertex type="Vector2" x="-0.03062487" y="1.6318153"/>
 								<vertex type="Vector2" x="-0.023375036" y="2.129275"/>
 								<vertex type="Vector2" x="0.9287919" y="2.0859873"/>
 								<vertex type="Vector2" x="1.3202916" y="1.889919"/>
@@ -314,20 +313,20 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="2.5999994" y="0.61469257"/>
+					<pos type="Vector2" x="2.1843326" y="1.6857272"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">2</z>
 				</TransformComponent>
 				<HotspotComponent>
 					<cursorText type="String">s2_river_frozen</cursorText>
-					<height type="Float">2.0</height>
+					<height type="Float">1.5</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</primaryCursor>
 					<script type="String">scene2.Fluss</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">None</secondaryCursor>
-					<targetPos type="Vector2" x="0.0" y="0.0"/>
-					<width type="Float">1.0</width>
+					<targetPos type="Vector2" x="1.0" y="0.0"/>
+					<width type="Float">1.5</width>
 				</HotspotComponent>
 			</components>
 		</entity>
@@ -401,7 +400,7 @@
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Walk</primaryCursor>
 					<script type="String">scene2.GotoScene1</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">None</secondaryCursor>
-					<targetPos type="Vector2" x="0.0" y="0.0"/>
+					<targetPos type="Vector2" x="0.1" y="0.6"/>
 					<width type="Float">0.6</width>
 				</HotspotComponent>
 			</components>

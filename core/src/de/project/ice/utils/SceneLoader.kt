@@ -87,23 +87,14 @@ object SceneLoader {
                 }
             }
 
-
-            val sounds = scene.getChildByName("sounds")
-            if (sounds != null) {
-                for (i in 0..sounds.childCount - 1) {
-                    val child = sounds.getChild(i)
-                    if (child.name == "sound") {
-                        builder.sound(child.text)
-                        engine.soundSystem.loadSound(child.text)
-                    }
-                }
-            }
-
             val music = scene.getChildByName("music")
             if (music != null && music.text != null) {
+                val volume = music.getAttribute("volume", "1.0").toFloat()
                 builder.music(music.text)
-                engine.soundSystem.playMusic(music.text, true)
+                builder.musicVolume(volume)
+                engine.soundSystem.playMusic(music.text, true, volume)
             }
+
             return builder.create().apply {
                 engine.sceneProperties = this
 
@@ -112,10 +103,10 @@ object SceneLoader {
                 for (spritesheet in this.spritesheets) {
                     Assets.loadAtlas(spritesheet)
                 }
-                engine.soundSystem.playMusic(this.music)
             }
         } catch (ex: Exception) {
-            throw LoadException("Unknown error", ex)
+            if (ex is LoadException) throw ex
+            else throw LoadException("Unknown error", ex)
         }
     }
 
@@ -361,18 +352,16 @@ object SceneLoader {
     data class SceneProperties internal constructor (
             var name: String,
             var spritesheets: Array<String>,
-            var sounds: Array<String>,
             var music: String,
-            var onloadScript: String,
-            var engine: IceEngine) {
+            var engine: IceEngine,
+            var musicVolume: Float = 1.0f) {
 
         infix fun assignTo(other: SceneProperties) {
             other.name = name
             other.spritesheets = spritesheets
-            other.sounds = sounds
             other.music = music
-            other.onloadScript = onloadScript
             other.engine = engine
+            other.musicVolume = musicVolume
         }
     }
 
@@ -381,8 +370,8 @@ object SceneLoader {
         private var spritesheets = Array<String>()
         private var sounds = Array<String>()
         private var music = ""
-        private var onloadScript = ""
         private var engine: IceEngine? = null
+        private var musicVolume = 1.0f
 
         fun name(name: String): ScenePropertiesBuilder {
             this.name = name
@@ -404,18 +393,13 @@ object SceneLoader {
             return this
         }
 
-        fun sound(sound: String): ScenePropertiesBuilder {
-            this.sounds.add(sound)
-            return this
-        }
-
         fun music(music: String): ScenePropertiesBuilder {
             this.music = music
             return this
         }
 
-        fun onloadScript(onloadScript: String): ScenePropertiesBuilder {
-            this.onloadScript = onloadScript
+        fun musicVolume(volume: Float): ScenePropertiesBuilder {
+            this.musicVolume = volume
             return this
         }
 
@@ -425,7 +409,7 @@ object SceneLoader {
         }
 
         fun create(): SceneProperties {
-            return SceneProperties(name, spritesheets, sounds, music, onloadScript, engine!!)
+            return SceneProperties(name, spritesheets, music, engine!!, musicVolume)
         }
     }
 }

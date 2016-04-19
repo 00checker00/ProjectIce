@@ -4,6 +4,7 @@ package de.project.ice.editor
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.Gdx
 import de.project.ice.IceGame
+import de.project.ice.config.Config
 import de.project.ice.editor.undoredo.UndoRedoManager
 import de.project.ice.utils.SceneLoader
 
@@ -14,6 +15,7 @@ class EditorApplication : IceGame() {
     }
 
     override fun init() {
+        Config.RENDER_DEBUG = true
         Gdx.input.inputProcessor = inputProcessor
         pauseGame()
         addScreen(EditorScreen(this))
