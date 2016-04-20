@@ -407,11 +407,11 @@
 					<name type="String">Olaf</name>
 				</NameComponent>
 				<HotspotComponent>
-					<cursorText type="String">s1_participants</cursorText>
+					<cursorText type="String">s1_olaf</cursorText>
 					<height type="Float">1.5</height>
 					<origin type="Vector2" x="-0.27" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</primaryCursor>
-					<script type="String">scene1.Teilnehmer</script>
+					<script type="String">scene1.Olaf</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
 					<targetPos type="Vector2" x="0.0" y="0.0"/>
 					<width type="Float">1.0</width>
@@ -500,11 +500,11 @@
 					<name type="String">Brolaf</name>
 				</NameComponent>
 				<HotspotComponent>
-					<cursorText type="String">s1_participants</cursorText>
+					<cursorText type="String">s1_brolaf</cursorText>
 					<height type="Float">1.7</height>
 					<origin type="Vector2" x="-0.2" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</primaryCursor>
-					<script type="String">scene1.Teilnehmer</script>
+					<script type="String">scene1.Brolaf</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
 					<targetPos type="Vector2" x="0.0" y="0.0"/>
 					<width type="Float">0.9</width>
@@ -622,7 +622,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="6.8750043" y="0.23870397"/>
+					<pos type="Vector2" x="8.325003" y="0.55662966"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
@@ -742,7 +742,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="7.700006" y="2.9970539"/>
+					<pos type="Vector2" x="7.7200055" y="3.006544"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
