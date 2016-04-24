@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Vector2
@@ -170,9 +171,18 @@ class RenderingSystem : SortedIteratingIceSystem(Families.renderable, RenderingS
             scaleY += scaleY * breath.curScale.y
         }
 
+        val region = tex.region.data!!
+        val width: Float
+        val height: Float
 
-        val width = tex.region.data!!.regionWidth.toFloat() * PIXELS_TO_METRES * scaleX
-        val height = tex.region.data!!.regionHeight.toFloat() * PIXELS_TO_METRES * scaleY
+        if (region is TextureAtlas.AtlasRegion) {
+            width = region.originalWidth * PIXELS_TO_METRES * scaleX
+            height = region.originalHeight * PIXELS_TO_METRES * scaleX
+        } else {
+            width = region.regionWidth.toFloat() * PIXELS_TO_METRES * scaleX
+            height = region.regionHeight.toFloat() * PIXELS_TO_METRES * scaleX
+        }
+
         val originX = width * 0.5f
         val originY = height * 0.5f
 
