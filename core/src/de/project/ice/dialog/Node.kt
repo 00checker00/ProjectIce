@@ -14,7 +14,7 @@ class Node(val id: String = "") {
     var variable_value: String? = null
     var text = ""
     var speaker = ""
-    var color = Color.BLACK;
+    var color = Color.WHITE;
     val choices = Array<Pair<Node, Int>>(0)
     var branch: Branch? = null
 

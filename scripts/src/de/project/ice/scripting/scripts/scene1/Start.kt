@@ -1,6 +1,7 @@
 package de.project.ice.scripting.scripts.scene1
 
 import com.badlogic.ashley.core.Entity
+import com.badlogic.gdx.graphics.Color
 import de.project.ice.IceGame
 import de.project.ice.dialog.Node
 import de.project.ice.ecs.Components
@@ -123,6 +124,7 @@ class Start : Script() {
                                 target = game.engine.getEntityByName("kai_writ_toss_well")?.getComponents(Components.transform)?.pos!!
                                 callback = {
                                     val dialog = Node().apply {
+                                        color = Color.valueOf("#ff6262")
                                         speaker = "Kai"
                                         type = Node.Type.Text
                                         text = "s1_dlg_kai_torn_to_pieces"
