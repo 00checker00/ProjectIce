@@ -59,8 +59,8 @@ class IntMapEditor : BaseEditor() {
             map = field.get(target) as IntMap<Any>
             for (entry in map!!) {
                 val binder = Binder(entry.key, entry.value)
-                add(NumberEditor.IntegerEditor().bind(Binder::class.java.getField("key"), binder, "The " + entry.key + ". entry"))
-                add(Editors.editorForClass(entry.value.javaClass).bind(Binder::class.java.getField("value"), binder, description)).row()
+                add(NumberEditor.IntegerEditor().bind(Binder::class.java.getDeclaredField("key"), binder, "The " + entry.key + ". entry"))
+                add(Editors.editorForClass(entry.value.javaClass).bind(Binder::class.java.getDeclaredField("value"), binder, description)).row()
                 binders.add(binder)
             }
         } catch (e: IllegalAccessException) {

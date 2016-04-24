@@ -99,7 +99,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="4.0514145" y="1.362823"/>
+					<pos type="Vector2" x="4.021415" y="1.1038837"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">3</z>
@@ -107,6 +107,14 @@
 				<TextureComponent>
 					<region type="TextureRegion">gluhen</region>
 				</TextureComponent>
+				<AnimationComponent>
+					<animation type="Integer">1</animation>
+					<animations type="IntMap" subType="Animation">
+						<_1 type="Animation" frameDuration="0.11" mode="LOOP">gluhen</_1>
+						<_2 type="Animation" frameDuration="0.0" mode="NORMAL">null</_2>
+					</animations>
+					<time type="Float">0.0</time>
+				</AnimationComponent>
 			</components>
 		</entity>
 		<entity>
@@ -117,7 +125,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="9.976188" y="1.5606513"/>
+					<pos type="Vector2" x="9.95369" y="1.2774355"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="0.7" y="0.7"/>
 					<z type="Integer">3</z>
@@ -125,6 +133,13 @@
 				<TextureComponent>
 					<region type="TextureRegion">gluhen</region>
 				</TextureComponent>
+				<AnimationComponent>
+					<animation type="Integer">1</animation>
+					<animations type="IntMap" subType="Animation">
+						<_1 type="Animation" frameDuration="0.12" mode="LOOP_REVERSED">gluhen</_1>
+					</animations>
+					<time type="Float">0.0</time>
+				</AnimationComponent>
 			</components>
 		</entity>
 	</entities>
