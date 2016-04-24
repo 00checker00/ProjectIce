@@ -154,6 +154,7 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
                 SpeakComponent {
                     this.text = text
                     this.targetName = node.speaker
+                    this.color = node.color
                 }
             }
         }
@@ -197,6 +198,7 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
 
                 var y = projected.y + font.lineHeight * 1.2f
                 for (line in dialogLine.text.split("\n").reversed()) {
+                    font.color = dialogLine.color;
                     textLayout.setText(font, line)
 
                     var x = projected.x - textLayout.width/2

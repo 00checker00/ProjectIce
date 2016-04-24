@@ -151,6 +151,7 @@ open class IceGame : ApplicationAdapter() {
         messages.fold(start) {
             node, msg -> Node().apply {
                 type = Node.Type.Text
+                color = Color.valueOf("#008fff")
                 speaker = "Andi_Player"
                 text = msg
                 node.next = this
