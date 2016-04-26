@@ -43,7 +43,6 @@ class Start : Script() {
             game.blockSaving = true
 
 
-
             game.showDialog("s1_dlg_rein_fall_intro") {
 
 
@@ -95,7 +94,7 @@ class Start : Script() {
                     start = game.engine.getEntityByName("Andi_Player")?.getComponents(Components.transform)?.pos!!
                     target = game.engine.getEntityByName("go_andi_to_kai")?.getComponents(Components.transform)?.pos!!
                     callback = {
-
+                        game.engine.getEntityByName("Andi_Player")?.getComponents(Components.transform)?.flipHorizontal = false
                         val urne = game.engine.getEntityByName("Urne")
                         val urntex = urne?.getComponents((Components.texture))
                         urntex?.region = Assets.findRegion("urne_ohneBrief")
