@@ -1,0 +1,12 @@
+ {
+    stripWhitespaceX: true,
+    stripWhitespaceY: true,
+    ignoreBlankImages: false,
+    paddingX: 2,
+    paddingY: 2,
+    flattenPaths: true,
+    maxWidth: 2048,
+    maxHeight: 2048,
+    filterMin: Linear,
+    filterMag: Linear
+}
