@@ -185,17 +185,41 @@ class RenderingSystem : SortedIteratingIceSystem(Families.renderable, RenderingS
 
         val originX = width * 0.5f
         val originY = height * 0.5f
+        val rotX = t.rotationOrigin.x * scaleX
+        val rotY = t.rotationOrigin.y * scaleY
+        var posX = t.pos.x
+        var posY = t.pos.y
+
+        var rotation = MathUtils.radiansToDegrees * t.rotation;
+
+        if (entity.hasComponent(Components.walking)) {
+            val walking = entity.getComponents(Components.walking)
+            if (walking.isWalking && walking.wiggle) {
+                val a = walking.wiggleSpeed
+                val b = walking.wiggleStrength
+                val c = 0.0f
+                val x = walking.wiggleAlpha
+                val f = (Math.abs((x - a/4f - c) % a - a/2f) - a/4f) * 4f/a * b
+                posY += (1.0f-Math.abs(f)) * walking.wiggleHeight
+                rotation += f * walking.wiggleStrength
+            }
+        }
 
         if (batch.isDrawing) {
 
             // draw the sprite in accordance with all calculated data (above)
             batch.draw(tex.region.data,
-                    t.pos.x - width/2, t.pos.y,
-                    originX, originY,
+                    posX - width/2, posY,
+                    originX + rotX, originY + rotY,
                     width, height,
                     if (t.flipHorizontal) -1f else 1f, if (t.flipVertical) -1f else 1f,
-                    MathUtils.radiansToDegrees * t.rotation)
+                    rotation)
 
+        } else if (debugRenderer.isDrawing) {
+            val color = debugRenderer.color
+            debugRenderer.color = Color.ORANGE
+            cross(Vector2(posX + originX + rotX - width/2, posY + originY + rotY))
+            debugRenderer.color = color
         }
     }
 

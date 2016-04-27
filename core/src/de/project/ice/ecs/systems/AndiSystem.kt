@@ -41,7 +41,8 @@ class AndiSystem: IteratingIceSystem(Family.all(AndiComponent::class.java).get()
 
             if (!entity.hasComponent(Components.walking)) {
                 WalkingComponent {
-                    animation = 2
+                    animation = 0
+                    wiggle = true
                 }
             }
 
