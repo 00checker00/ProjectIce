@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Family
 import com.badlogic.ashley.utils.ImmutableArray
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputProcessor
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.GlyphLayout
 import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.scenes.scene2d.InputEvent
@@ -124,7 +125,13 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
                 val next = choice.next
                 btn.addListener(object : InputListener() {
                     override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int): Boolean {
-                        showNode(next)
+                        showNode(Node().apply {
+                            type = Node.Type.Text
+                            this.text = choice.text
+                            speaker = "Andi_Player"
+                            color = Color.valueOf("#008fff")
+                            this.next = next
+                        })
                         game.engine.soundSystem.playSound(choice.text, SoundSystem.Type.Voice)
                         return true
                     }

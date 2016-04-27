@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.IntMap;
+import de.project.ice.ecs.components.ActivationDirection
 import de.project.ice.ecs.systems.CameraSystem
 import de.project.ice.screens.CursorScreen
 import de.project.ice.utils.Assets;
@@ -27,7 +28,9 @@ class Editors {
                 OrthographicCamera::class.java              -> OrthographicCameraEditor()
                 CursorScreen.Cursor::class.java             -> CursorEditor()
                 CameraSystem.FollowType::class.java         -> FollowTypeEditor()
+                ActivationDirection::class.java             -> ActivationDirectionEditor()
                 else                                        -> BaseEditor()
+
             }
         }
     }

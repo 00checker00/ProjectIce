@@ -4,6 +4,10 @@ import com.badlogic.gdx.math.Vector2
 import de.project.ice.annotations.Property
 import de.project.ice.screens.CursorScreen
 
+enum class ActivationDirection{
+    Left,Right,Dynamic
+}
+
 class HotspotComponent : CopyableIceComponent {
     @Property("The position of the hotspot")
     val origin = Vector2(0f, 0f)
@@ -21,6 +25,8 @@ class HotspotComponent : CopyableIceComponent {
     var secondaryCursor = CursorScreen.Cursor.None
     @Property("Id of the cursor text")
     var cursorText = ""
+    @Property("Direction of Flip/Flop")
+    var activationDirection = ActivationDirection.Dynamic
 
     override fun reset() {
         origin.set(0f, 0f)
@@ -31,6 +37,7 @@ class HotspotComponent : CopyableIceComponent {
         primaryCursor = CursorScreen.Cursor.None
         secondaryCursor = CursorScreen.Cursor.None
         cursorText = ""
+        activationDirection = ActivationDirection.Dynamic
     }
 
     override fun copyTo(copy: CopyableIceComponent) {
@@ -43,6 +50,7 @@ class HotspotComponent : CopyableIceComponent {
             copy.primaryCursor = primaryCursor
             copy.secondaryCursor = secondaryCursor
             copy.cursorText = cursorText
+            copy.activationDirection = activationDirection
         }
     }
 }
