@@ -1,6 +1,4 @@
  {
-    stripWhitespaceX: true,
-    stripWhitespaceY: true,
     ignoreBlankImages: false,
     paddingX: 2,
     paddingY: 2,

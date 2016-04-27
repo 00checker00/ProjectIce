@@ -1,9 +1,9 @@
 <scene name="" onload="">
 	<music volume="0.17999999">Under The Sea</music>
 	<spritesheets>
-		<spritesheet>main_menu</spritesheet>
-		<spritesheet>gluehen_szene1</spritesheet>
 		<spritesheet>fire_szene1</spritesheet>
+		<spritesheet>gluehen_szene1</spritesheet>
+		<spritesheet>main_menu</spritesheet>
 		<spritesheet>rauch_szene1</spritesheet>
 		<spritesheet>andi</spritesheet>
 		<spritesheet>Dorfszene_panorama</spritesheet>
@@ -74,7 +74,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="2.081251" y="3.2531888"/>
+					<pos type="Vector2" x="2.1038005" y="3.3793814"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
@@ -85,7 +85,8 @@
 				<AnimationComponent>
 					<animation type="Integer">1</animation>
 					<animations type="IntMap" subType="Animation">
-						<_1 type="Animation" frameDuration="0.07" mode="LOOP">rauch</_1>
+						<_1 type="Animation" frameDuration="0.09" mode="LOOP_PINGPONG">rauch</_1>
+						<_2 type="Animation" frameDuration="0.0" mode="NORMAL">null</_2>
 					</animations>
 					<time type="Float">0.0</time>
 				</AnimationComponent>

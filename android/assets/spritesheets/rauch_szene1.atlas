@@ -7,147 +7,147 @@ repeat: none
 rauch
   rotate: false
   xy: 2, 1146
-  size: 231, 570
-  orig: 232, 570
-  offset: 0, 0
-  index: 6
-rauch
-  rotate: false
-  xy: 2, 574
-  size: 230, 570
-  orig: 232, 570
-  offset: 0, 0
-  index: 7
-rauch
-  rotate: false
-  xy: 235, 1146
-  size: 230, 570
-  orig: 232, 570
-  offset: 1, 0
-  index: 10
-rauch
-  rotate: false
-  xy: 2, 2
-  size: 230, 570
-  orig: 232, 570
-  offset: 1, 0
-  index: 11
-rauch
-  rotate: false
-  xy: 234, 574
-  size: 229, 570
-  orig: 232, 570
-  offset: 1, 0
-  index: 8
-rauch
-  rotate: false
-  xy: 467, 1146
-  size: 229, 570
-  orig: 232, 570
-  offset: 1, 0
-  index: 9
-rauch
-  rotate: false
-  xy: 234, 2
-  size: 229, 570
-  orig: 232, 570
-  offset: 1, 0
-  index: 16
-rauch
-  rotate: false
-  xy: 465, 574
-  size: 228, 570
-  orig: 232, 570
-  offset: 1, 0
-  index: 12
-rauch
-  rotate: false
-  xy: 698, 1146
-  size: 228, 570
-  orig: 232, 570
-  offset: 1, 0
-  index: 13
-rauch
-  rotate: false
-  xy: 465, 2
-  size: 228, 570
-  orig: 232, 570
-  offset: 1, 0
-  index: 14
-rauch
-  rotate: false
-  xy: 695, 574
-  size: 228, 570
-  orig: 232, 570
-  offset: 1, 0
-  index: 15
-rauch
-  rotate: false
-  xy: 928, 1146
-  size: 228, 570
-  orig: 232, 570
-  offset: 2, 0
-  index: 17
-rauch
-  rotate: false
-  xy: 695, 2
-  size: 228, 570
-  orig: 232, 570
-  offset: 2, 0
-  index: 18
-rauch
-  rotate: false
-  xy: 925, 574
-  size: 228, 570
-  orig: 232, 570
-  offset: 2, 0
-  index: 19
-rauch
-  rotate: false
-  xy: 1158, 1146
-  size: 228, 570
-  orig: 232, 570
-  offset: 1, 0
-  index: 20
-rauch
-  rotate: false
-  xy: 1388, 1170
-  size: 232, 546
-  orig: 232, 570
-  offset: 0, 0
-  index: 0
-rauch
-  rotate: false
-  xy: 1622, 1170
-  size: 232, 546
-  orig: 232, 570
-  offset: 0, 0
-  index: 3
-rauch
-  rotate: false
-  xy: 1155, 598
-  size: 231, 546
-  orig: 232, 570
-  offset: 0, 0
-  index: 4
-rauch
-  rotate: false
-  xy: 1388, 622
-  size: 231, 546
-  orig: 232, 570
-  offset: 0, 0
-  index: 5
-rauch
-  rotate: false
-  xy: 1621, 622
-  size: 230, 546
+  size: 232, 570
   orig: 232, 570
   offset: 0, 0
   index: 1
 rauch
   rotate: false
-  xy: 925, 26
-  size: 230, 546
+  xy: 2, 574
+  size: 232, 570
   orig: 232, 570
   offset: 0, 0
   index: 2
+rauch
+  rotate: false
+  xy: 236, 1146
+  size: 232, 570
+  orig: 232, 570
+  offset: 0, 0
+  index: 3
+rauch
+  rotate: false
+  xy: 2, 2
+  size: 232, 570
+  orig: 232, 570
+  offset: 0, 0
+  index: 4
+rauch
+  rotate: false
+  xy: 236, 574
+  size: 232, 570
+  orig: 232, 570
+  offset: 0, 0
+  index: 5
+rauch
+  rotate: false
+  xy: 470, 1146
+  size: 232, 570
+  orig: 232, 570
+  offset: 0, 0
+  index: 6
+rauch
+  rotate: false
+  xy: 236, 2
+  size: 232, 570
+  orig: 232, 570
+  offset: 0, 0
+  index: 7
+rauch
+  rotate: false
+  xy: 470, 574
+  size: 232, 570
+  orig: 232, 570
+  offset: 0, 0
+  index: 8
+rauch
+  rotate: false
+  xy: 704, 1146
+  size: 232, 570
+  orig: 232, 570
+  offset: 0, 0
+  index: 9
+rauch
+  rotate: false
+  xy: 470, 2
+  size: 232, 570
+  orig: 232, 570
+  offset: 0, 0
+  index: 10
+rauch
+  rotate: false
+  xy: 704, 574
+  size: 232, 570
+  orig: 232, 570
+  offset: 0, 0
+  index: 11
+rauch
+  rotate: false
+  xy: 938, 1146
+  size: 232, 570
+  orig: 232, 570
+  offset: 0, 0
+  index: 12
+rauch
+  rotate: false
+  xy: 704, 2
+  size: 232, 570
+  orig: 232, 570
+  offset: 0, 0
+  index: 13
+rauch
+  rotate: false
+  xy: 938, 574
+  size: 232, 570
+  orig: 232, 570
+  offset: 0, 0
+  index: 14
+rauch
+  rotate: false
+  xy: 1172, 1146
+  size: 232, 570
+  orig: 232, 570
+  offset: 0, 0
+  index: 15
+rauch
+  rotate: false
+  xy: 938, 2
+  size: 232, 570
+  orig: 232, 570
+  offset: 0, 0
+  index: 16
+rauch
+  rotate: false
+  xy: 1172, 574
+  size: 232, 570
+  orig: 232, 570
+  offset: 0, 0
+  index: 17
+rauch
+  rotate: false
+  xy: 1406, 1146
+  size: 232, 570
+  orig: 232, 570
+  offset: 0, 0
+  index: 18
+rauch
+  rotate: false
+  xy: 1172, 2
+  size: 232, 570
+  orig: 232, 570
+  offset: 0, 0
+  index: 19
+rauch
+  rotate: false
+  xy: 1406, 574
+  size: 232, 570
+  orig: 232, 570
+  offset: 0, 0
+  index: 20
+rauch
+  rotate: false
+  xy: 1640, 1146
+  size: 232, 570
+  orig: 232, 570
+  offset: 0, 0
+  index: 21

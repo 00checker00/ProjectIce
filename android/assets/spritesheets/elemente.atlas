@@ -1,26 +1,40 @@
 
 elemente.png
-size: 512,512
+size: 1024,512
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+angelkorb1_scene2
+  rotate: false
+  xy: 2, 39
+  size: 214, 334
+  orig: 214, 334
+  offset: 0, 0
+  index: -1
+angelkorb2_scene2
+  rotate: false
+  xy: 218, 39
+  size: 214, 334
+  orig: 214, 334
+  offset: 0, 0
+  index: -1
 nathan
   rotate: false
-  xy: 2, 2
+  xy: 713, 193
   size: 81, 180
   orig: 81, 180
   offset: 0, 0
   index: 0
 schneemann
   rotate: false
-  xy: 2, 184
+  xy: 434, 117
   size: 277, 256
   orig: 277, 256
   offset: 0, 0
   index: 0
 wurm
   rotate: false
-  xy: 281, 405
+  xy: 2, 2
   size: 24, 35
   orig: 24, 35
   offset: 0, 0

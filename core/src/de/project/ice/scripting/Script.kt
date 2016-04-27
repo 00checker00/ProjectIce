@@ -12,7 +12,7 @@ import de.project.ice.hotspot.HotspotLoader
 
 /**
  * Base class for scripts
- * Note that all scripts have to be inside the "de.project.ice.scripting.scripts" package
+ * Note that all scripts have to be inside the "de.project.ice.hotspot.hotspots.scene1panorama.scripts" package
  */
 abstract class Script {
     /**
@@ -62,7 +62,7 @@ abstract class Script {
         operator fun get(id: String): Script? {
             var script: Script? = scripts.get(id, null)
             if (script == null) {
-                val classname = "de.project.ice.scripting.scripts.$id"
+                val classname = "de.project.ice.hotspot.hotspots.scene1panorama.scripts.$id"
                 try {
                     val clazz = loader.loadClass(classname)
                     script = clazz.newInstance() as? Script

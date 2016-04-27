@@ -2,7 +2,6 @@
 	<music volume="0.099999994">Town of the Fisherman</music>
 	<spritesheets>
 		<spritesheet>scene1_elemente</spritesheet>
-		<spritesheet>objects</spritesheet>
 		<spritesheet>inventory</spritesheet>
 		<spritesheet>gluehen_szene1</spritesheet>
 		<spritesheet>fire_szene1</spritesheet>
@@ -22,7 +21,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="2.5534623" y="0.23696005"/>
+					<pos type="Vector2" x="0.1264137" y="0.34737778"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="0.7" y="0.7"/>
 					<z type="Integer">50</z>
@@ -82,11 +81,13 @@
 								<vertex type="Vector2" x="-2.605" y="1.1985031"/>
 								<vertex type="Vector2" x="-2.74" y="1.1337676"/>
 								<vertex type="Vector2" x="-2.33" y="0.7723292"/>
-								<vertex type="Vector2" x="-2.38" y="0.48641515"/>
-								<vertex type="Vector2" x="-1.7999811" y="0.40022945"/>
-								<vertex type="Vector2" x="1.1049998" y="0.17892265"/>
-								<vertex type="Vector2" x="3.155" y="0.8262751"/>
+								<vertex type="Vector2" x="-2.52" y="0.36486578"/>
+								<vertex type="Vector2" x="-1.8550001" y="0.25444698"/>
+								<vertex type="Vector2" x="1.06" y="0.07041597"/>
+								<vertex type="Vector2" x="2.105" y="0.18609262"/>
 								<vertex type="Vector2" x="4.3050003" y="0.5673342"/>
+								<vertex type="Vector2" x="5.06" y="0.13351226"/>
+								<vertex type="Vector2" x="5.85" y="-0.03474474"/>
 								<vertex type="Vector2" x="14.57" y="-0.06383467"/>
 								<vertex type="Vector2" x="14.625" y="0.91798353"/>
 								<vertex type="Vector2" x="11.765" y="1.0312704"/>
@@ -97,12 +98,27 @@
 								<vertex type="Vector2" x="7.040001" y="2.374527"/>
 								<vertex type="Vector2" x="4.9900002" y="2.4446568"/>
 								<vertex type="Vector2" x="4.8" y="2.0454562"/>
-								<vertex type="Vector2" x="4.2650003" y="1.9591424"/>
-								<vertex type="Vector2" x="3.5100002" y="1.8998017"/>
+								<vertex type="Vector2" x="4.09" y="2.1736293"/>
+								<vertex type="Vector2" x="3.655" y="2.5627239"/>
+								<vertex type="Vector2" x="3.195" y="2.3681765"/>
+								<vertex type="Vector2" x="2.5800002" y="2.5154014"/>
+								<vertex type="Vector2" x="0.9099999" y="2.9360442"/>
+								<vertex type="Vector2" x="0.7000002" y="3.1831715"/>
+								<vertex type="Vector2" x="0.43500024" y="3.3619447"/>
+								<vertex type="Vector2" x="-0.22999993" y="3.3619447"/>
+								<vertex type="Vector2" x="-1.2150002" y="3.2778163"/>
+								<vertex type="Vector2" x="-2.76" y="3.388235"/>
+								<vertex type="Vector2" x="-2.665" y="3.0622368"/>
+								<vertex type="Vector2" x="-2.0750003" y="2.2577577"/>
+								<vertex type="Vector2" x="-1.7" y="2.4891112"/>
+								<vertex type="Vector2" x="-0.38499975" y="2.447047"/>
+								<vertex type="Vector2" x="0.44500017" y="2.604788"/>
+								<vertex type="Vector2" x="0.9000001" y="2.3050802"/>
+								<vertex type="Vector2" x="3.1773312" y="1.4767847"/>
 								<vertex type="Vector2" x="2.9500003" y="1.1877139"/>
-								<vertex type="Vector2" x="1.66" y="0.9773241"/>
-								<vertex type="Vector2" x="0.17000027" y="1.5599416"/>
-								<vertex type="Vector2" x="-0.43000004" y="1.6840177"/>
+								<vertex type="Vector2" x="1.3599999" y="1.043152"/>
+								<vertex type="Vector2" x="0.52500004" y="1.1009905"/>
+								<vertex type="Vector2" x="-0.415" y="1.4637947"/>
 								<vertex type="Vector2" x="-0.995" y="0.9017998"/>
 							</vertices>
 						</shape>
@@ -144,10 +160,10 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="0.22641373" y="1.573215"/>
+					<pos type="Vector2" x="0.18141419" y="1.3155723"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.0" y="1.0"/>
-					<z type="Integer">40</z>
+					<z type="Integer">50</z>
 				</TransformComponent>
 				<TextureComponent>
 					<region type="TextureRegion">gluhen</region>
@@ -170,7 +186,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="0.15875292" y="2.084525"/>
+					<pos type="Vector2" x="0.15875122" y="2.0372024"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="0.5" y="0.5"/>
 					<z type="Integer">50</z>
@@ -197,7 +213,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="-2.5687473" y="4.6827602"/>
+					<pos type="Vector2" x="-2.5687466" y="4.703792"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="1.5" y="1.0"/>
 					<z type="Integer">50</z>
@@ -222,7 +238,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="9.843587" y="-0.1610204"/>
+					<pos type="Vector2" x="11.193585" y="-0.15576231"/>
 					<rotation type="Float">0.0</rotation>
 					<scale type="Vector2" x="0.7" y="0.7"/>
 					<z type="Integer">100</z>
@@ -230,6 +246,146 @@
 				<TextureComponent>
 					<region type="TextureRegion">background_right</region>
 				</TextureComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">wegweier</name>
+				</NameComponent>
+				<TransformComponent>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
+					<flipVertical type="Boolean">false</flipVertical>
+					<pos type="Vector2" x="3.7752426" y="0.52289164"/>
+					<rotation type="Float">0.0</rotation>
+					<scale type="Vector2" x="0.7" y="0.7"/>
+					<z type="Integer">50</z>
+				</TransformComponent>
+				<TextureComponent>
+					<region type="TextureRegion">wegweiser_scene1</region>
+				</TextureComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">fishies_1</name>
+				</NameComponent>
+				<TransformComponent>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
+					<flipVertical type="Boolean">false</flipVertical>
+					<pos type="Vector2" x="1.5464002" y="1.1223059"/>
+					<rotation type="Float">0.0</rotation>
+					<scale type="Vector2" x="0.7" y="0.7"/>
+					<z type="Integer">50</z>
+				</TransformComponent>
+				<TextureComponent>
+					<region type="TextureRegion">fischi1_scene1</region>
+				</TextureComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">fishies_2</name>
+				</NameComponent>
+				<TransformComponent>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
+					<flipVertical type="Boolean">false</flipVertical>
+					<pos type="Vector2" x="-1.2191261" y="1.8111099"/>
+					<rotation type="Float">0.0</rotation>
+					<scale type="Vector2" x="0.7" y="0.7"/>
+					<z type="Integer">50</z>
+				</TransformComponent>
+				<TextureComponent>
+					<region type="TextureRegion">fischi2_scene1</region>
+				</TextureComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">schnee</name>
+				</NameComponent>
+				<TransformComponent>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
+					<flipVertical type="Boolean">false</flipVertical>
+					<pos type="Vector2" x="-0.14912605" y="-0.1238451"/>
+					<rotation type="Float">0.0</rotation>
+					<scale type="Vector2" x="0.7" y="0.7"/>
+					<z type="Integer">50</z>
+				</TransformComponent>
+				<TextureComponent>
+					<region type="TextureRegion">schnee_scene1</region>
+				</TextureComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">kai_statue</name>
+				</NameComponent>
+				<TransformComponent>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
+					<flipVertical type="Boolean">false</flipVertical>
+					<pos type="Vector2" x="4.265878" y="2.1791759"/>
+					<rotation type="Float">0.0</rotation>
+					<scale type="Vector2" x="0.7" y="0.7"/>
+					<z type="Integer">50</z>
+				</TransformComponent>
+				<TextureComponent>
+					<region type="TextureRegion">kai_statue</region>
+				</TextureComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">goto_scene2</name>
+				</NameComponent>
+				<TransformComponent>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
+					<flipVertical type="Boolean">false</flipVertical>
+					<pos type="Vector2" x="8.799994" y="-0.12619543"/>
+					<rotation type="Float">0.0</rotation>
+					<scale type="Vector2" x="1.0" y="1.0"/>
+					<z type="Integer">0</z>
+				</TransformComponent>
+				<HotspotComponent>
+					<cursorText type="String">s2_location_name</cursorText>
+					<height type="Float">0.8</height>
+					<origin type="Vector2" x="0.0" y="0.0"/>
+					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Walk</primaryCursor>
+					<script type="String">scene1.GotoScene2</script>
+					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">None</secondaryCursor>
+					<targetPos type="Vector2" x="1.7" y="-0.1"/>
+					<width type="Float">3.0</width>
+				</HotspotComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">Zwerch</name>
+				</NameComponent>
+				<TransformComponent>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
+					<flipVertical type="Boolean">false</flipVertical>
+					<pos type="Vector2" x="-1.4499983" y="1.3723452"/>
+					<rotation type="Float">0.0</rotation>
+					<scale type="Vector2" x="1.0" y="1.0"/>
+					<z type="Integer">0</z>
+				</TransformComponent>
+				<HotspotComponent>
+					<cursorText type="String">s1_panorama_zwerch</cursorText>
+					<height type="Float">0.7</height>
+					<origin type="Vector2" x="0.0" y="0.0"/>
+					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</primaryCursor>
+					<script type="String">scene1panorama.Zwerch</script>
+					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</secondaryCursor>
+					<targetPos type="Vector2" x="0.0" y="0.0"/>
+					<width type="Float">0.3</width>
+				</HotspotComponent>
 			</components>
 		</entity>
 	</entities>

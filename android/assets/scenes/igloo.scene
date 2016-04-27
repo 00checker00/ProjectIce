@@ -136,7 +136,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="8.150006" y="2.698206"/>
 					<rotation type="Float">0.0</rotation>
-					<scale type="Vector2" x="1.5" y="1.5"/>
+					<scale type="Vector2" x="1.7" y="1.7"/>
 					<z type="Integer">5</z>
 				</TransformComponent>
 				<HotspotComponent>
@@ -221,7 +221,7 @@
 					<z type="Integer">5</z>
 				</TransformComponent>
 				<TextureComponent>
-					<region type="TextureRegion">opa_eskimo_normal</region>
+					<region type="TextureRegion">opa_grau_normal</region>
 				</TextureComponent>
 				<HotspotComponent>
 					<cursorText type="String">s1_rein_fall</cursorText>

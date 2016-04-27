@@ -14,6 +14,13 @@ task run(dependsOn: classes, type: JavaExec) {
     ignoreExitValue = true
 }
 
+task pack(dependsOn: classes, type: JavaExec) {
+    main = "de.project.ice.spriteconverter.Packer"
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+    args = [new File("../sprites").absolutePath, new File(assetsDir, "spritesheets").absolutePath]
+}
+
 task dist(type: Jar) {
     from files(sourceSets.main.output.classesDir)
     from { configurations.compile.collect { zipTree(it) } }

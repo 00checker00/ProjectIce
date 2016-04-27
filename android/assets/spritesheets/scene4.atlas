@@ -6,119 +6,119 @@ filter: Linear,Linear
 repeat: none
 bild1
   rotate: false
-  xy: 1691, 798
+  xy: 1691, 788
   size: 293, 218
   orig: 293, 218
   offset: 0, 0
   index: 0
 candle
   rotate: false
-  xy: 1986, 906
-  size: 29, 110
+  xy: 1986, 890
+  size: 41, 116
   orig: 41, 116
-  offset: 4, 0
+  offset: 0, 0
   index: 0
 candle_fire
   rotate: false
-  xy: 2, 2
-  size: 10, 17
+  xy: 232, 26
+  size: 10, 18
   orig: 10, 18
   offset: 0, 0
   index: 0
 candle_fire
   rotate: false
-  xy: 2, 2
-  size: 10, 17
+  xy: 232, 26
+  size: 10, 18
   orig: 10, 18
   offset: 0, 0
   index: 6
 candle_fire
   rotate: false
-  xy: 232, 40
-  size: 9, 17
+  xy: 412, 124
+  size: 10, 18
   orig: 10, 18
-  offset: 1, 0
+  offset: 0, 0
   index: 1
 candle_fire
   rotate: false
-  xy: 232, 40
-  size: 9, 17
+  xy: 412, 124
+  size: 10, 18
   orig: 10, 18
-  offset: 1, 0
+  offset: 0, 0
   index: 5
 candle_fire
   rotate: false
-  xy: 412, 138
-  size: 9, 17
+  xy: 1691, 406
+  size: 10, 18
   orig: 10, 18
   offset: 0, 0
   index: 2
 candle_fire
   rotate: false
-  xy: 412, 138
-  size: 9, 17
+  xy: 1691, 406
+  size: 10, 18
   orig: 10, 18
   offset: 0, 0
   index: 4
 candle_fire
   rotate: false
-  xy: 1691, 418
-  size: 9, 16
+  xy: 1846, 508
+  size: 10, 18
   orig: 10, 18
-  offset: 0, 1
+  offset: 0, 0
   index: 3
 eis_tisch
   rotate: false
-  xy: 2, 21
-  size: 228, 134
+  xy: 2, 2
+  size: 228, 140
   orig: 228, 140
-  offset: 0, 6
+  offset: 0, 0
   index: 0
 fridge
   rotate: false
-  xy: 1691, 538
+  xy: 1691, 528
   size: 168, 258
   orig: 168, 258
   offset: 0, 0
   index: 0
 holz
   rotate: false
-  xy: 232, 59
+  xy: 232, 46
   size: 178, 96
   orig: 178, 96
   offset: 0, 0
   index: 0
 iglu_innen
   rotate: false
-  xy: 2, 157
-  size: 1418, 859
+  xy: 2, 144
+  size: 1418, 862
   orig: 1418, 862
-  offset: 0, 1
+  offset: 0, 0
   index: 0
 ofen
   rotate: false
-  xy: 1422, 244
-  size: 267, 772
+  xy: 1422, 233
+  size: 267, 773
   orig: 267, 773
   offset: 0, 0
   index: 0
 robbe
   rotate: false
-  xy: 1691, 436
+  xy: 1691, 426
   size: 153, 100
   orig: 153, 100
   offset: 0, 0
   index: 0
 sitz1
   rotate: false
-  xy: 1861, 703
-  size: 110, 93
+  xy: 1861, 692
+  size: 111, 94
   orig: 111, 94
   offset: 0, 0
   index: 0
 teekanne
   rotate: false
-  xy: 1422, 161
+  xy: 1422, 150
   size: 119, 81
   orig: 119, 81
   offset: 0, 0
