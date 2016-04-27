@@ -179,8 +179,8 @@ class RenderingSystem : SortedIteratingIceSystem(Families.renderable, RenderingS
             width = region.originalWidth * PIXELS_TO_METRES * scaleX
             height = region.originalHeight * PIXELS_TO_METRES * scaleX
         } else {
-            width = region.regionWidth.toFloat() * PIXELS_TO_METRES * scaleX
-            height = region.regionHeight.toFloat() * PIXELS_TO_METRES * scaleX
+            width = region.regionWidth.toFloat() * PIXELS_TO_METRES * scaleY
+            height = region.regionHeight.toFloat() * PIXELS_TO_METRES * scaleY
         }
 
         val originX = width * 0.5f

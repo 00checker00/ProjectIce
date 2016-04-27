@@ -1,4 +1,4 @@
-package de.project.ice.scripting.scripts.scene1
+package de.project.ice.scripting.scene1
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.graphics.Color

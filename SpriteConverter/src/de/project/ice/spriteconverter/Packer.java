@@ -13,16 +13,40 @@ public class Packer
     public static void main(String[] args)
     {
         File dir;
+        File outdir;
+
         if (args.length == 0) {
             dir = new File(".").getAbsoluteFile();
-        } else {
+            outdir = new File(dir, "output");
+        } else if (args.length == 1) {
             dir = new File(args[0]);
             if (!dir.exists()) {
                 System.out.println("Input dir does not exist");
                 System.exit(1);
             }
             dir = dir.getAbsoluteFile();
+            outdir = new File(dir, "output");
+        } else if (args.length == 2) {
+            dir = new File(args[0]);
+            if (!dir.exists()) {
+                System.out.println("Input dir does not exist");
+                System.exit(1);
+            }
+            dir = dir.getAbsoluteFile();
+
+            outdir = new File(args[1]);
+            if (!outdir.exists()) {
+                System.out.println("Output dir does not exist");
+                System.exit(1);
+            }
+            outdir = outdir.getAbsoluteFile();
+        } else {
+            outdir = null;
+            dir = null;
+            System.out.println("Wrong arguments");
+            System.exit(1);
         }
+
         TexturePacker.Settings settings;
         try {
             settings = new Json().fromJson(TexturePacker.Settings.class, new FileReader(new File(dir,  "pack.json")));
@@ -40,7 +64,7 @@ public class Packer
                 return pathname.exists() && pathname.isDirectory();
             }
         })) {
-            TexturePacker.process(settings, file.getAbsolutePath(), new File(dir, "output").getAbsolutePath(), file.getName() + ".atlas");
+            TexturePacker.process(settings, file.getAbsolutePath(), outdir.getAbsolutePath(), file.getName() + ".atlas");
         }
     }
 }

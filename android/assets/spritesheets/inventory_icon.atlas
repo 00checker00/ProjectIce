@@ -6,120 +6,120 @@ filter: Linear,Linear
 repeat: none
 icon_hotspot
   rotate: false
-  xy: 190, 96
-  size: 137, 196
+  xy: 2, 204
+  size: 200, 200
   orig: 200, 200
-  offset: 31, 3
+  offset: 0, 0
   index: 0
 inv_felicia
   rotate: false
-  xy: 943, 334
-  size: 200, 156
+  xy: 2, 2
+  size: 200, 200
   orig: 200, 200
-  offset: 0, 22
+  offset: 0, 0
   index: 0
 inv_fishing_rod
   rotate: false
-  xy: 579, 296
-  size: 183, 194
+  xy: 204, 204
+  size: 200, 200
   orig: 200, 200
-  offset: 9, 2
+  offset: 0, 0
   index: 0
 inv_fishing_rod_nohook
   rotate: false
-  xy: 392, 296
-  size: 185, 194
+  xy: 204, 2
+  size: 200, 200
   orig: 200, 200
-  offset: 1, 3
+  offset: 0, 0
   index: 0
 inv_fishing_rod_worm
   rotate: false
-  xy: 2, 294
-  size: 198, 196
+  xy: 406, 204
+  size: 200, 200
   orig: 200, 200
-  offset: 1, 1
+  offset: 0, 0
   index: 0
 inv_hook
   rotate: false
-  xy: 1930, 342
-  size: 114, 148
+  xy: 406, 2
+  size: 200, 200
   orig: 200, 200
-  offset: 43, 26
+  offset: 0, 0
   index: 0
 inv_nick
   rotate: false
-  xy: 1342, 373
-  size: 199, 117
+  xy: 608, 204
+  size: 200, 200
   orig: 200, 200
-  offset: 0, 41
+  offset: 0, 0
   index: 0
 inv_note
   rotate: false
-  xy: 202, 296
-  size: 188, 194
+  xy: 608, 2
+  size: 200, 200
   orig: 200, 200
-  offset: 6, 0
+  offset: 0, 0
   index: 0
 inv_note_shred_1
   rotate: false
-  xy: 500, 136
-  size: 147, 158
+  xy: 810, 204
+  size: 200, 200
   orig: 200, 200
-  offset: 26, 21
+  offset: 0, 0
   index: 0
 inv_note_shred_1_2
   rotate: false
-  xy: 1543, 370
-  size: 194, 120
+  xy: 810, 2
+  size: 200, 200
   orig: 200, 200
-  offset: 3, 40
+  offset: 0, 0
   index: 0
 inv_note_shred_2
   rotate: false
-  xy: 2, 94
-  size: 186, 198
+  xy: 1012, 204
+  size: 200, 200
   orig: 200, 200
-  offset: 7, 0
+  offset: 0, 0
   index: 0
 inv_note_shred_3
   rotate: false
-  xy: 329, 125
-  size: 169, 169
+  xy: 1012, 2
+  size: 200, 200
   orig: 200, 200
-  offset: 15, 16
+  offset: 0, 0
   index: 0
 inv_note_shred_3_4
   rotate: false
-  xy: 1739, 377
-  size: 189, 113
+  xy: 1214, 204
+  size: 200, 200
   orig: 200, 200
-  offset: 6, 43
+  offset: 0, 0
   index: 0
 inv_note_shred_4
   rotate: false
-  xy: 764, 295
-  size: 177, 195
+  xy: 1214, 2
+  size: 200, 200
   orig: 200, 200
-  offset: 12, 5
+  offset: 0, 0
   index: 0
 inv_shaft
   rotate: false
-  xy: 1145, 352
-  size: 195, 138
+  xy: 1416, 204
+  size: 200, 200
   orig: 200, 200
-  offset: 2, 31
+  offset: 0, 0
   index: 0
 inv_string
   rotate: false
-  xy: 2, 36
-  size: 194, 56
+  xy: 1416, 2
+  size: 200, 200
   orig: 200, 200
-  offset: 3, 78
+  offset: 0, 0
   index: 0
 inv_worm
   rotate: false
-  xy: 198, 2
-  size: 146, 92
+  xy: 1618, 204
+  size: 200, 200
   orig: 200, 200
-  offset: 27, 54
+  offset: 0, 0
   index: 0

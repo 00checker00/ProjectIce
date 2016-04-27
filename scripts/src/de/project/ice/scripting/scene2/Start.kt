@@ -1,4 +1,4 @@
-package de.project.ice.scripting.scripts.scene2
+package de.project.ice.scripting.scene2
 
 import com.badlogic.ashley.core.Entity
 import de.project.ice.IceGame

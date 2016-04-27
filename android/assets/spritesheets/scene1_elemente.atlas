@@ -6,71 +6,106 @@ filter: Linear,Linear
 repeat: none
 brolaf
   rotate: false
-  xy: 281, 532
+  xy: 862, 393
   size: 330, 429
   orig: 330, 429
   offset: 0, 0
   index: 0
+fischi1_scene1
+  rotate: false
+  xy: 302, 2
+  size: 448, 342
+  orig: 448, 342
+  offset: 0, 0
+  index: -1
+fischi2_scene1
+  rotate: false
+  xy: 2, 10
+  size: 298, 246
+  orig: 298, 246
+  offset: 0, 0
+  index: -1
 iglu_stueck
   rotate: false
-  xy: 2, 397
+  xy: 2, 258
   size: 277, 564
   orig: 277, 564
   offset: 0, 0
   index: 0
+kai_statue
+  rotate: false
+  xy: 1018, 120
+  size: 145, 271
+  orig: 145, 271
+  offset: 0, 0
+  index: -1
 olaf
   rotate: false
-  xy: 613, 566
+  xy: 1483, 427
   size: 315, 395
   orig: 315, 395
   offset: 0, 0
   index: 0
+schnee_scene1
+  rotate: false
+  xy: 2, 824
+  size: 1965, 196
+  orig: 1965, 196
+  offset: 0, 0
+  index: -1
 statisten1_
   rotate: false
-  xy: 1508, 485
+  xy: 281, 346
   size: 218, 476
   orig: 218, 476
   offset: 0, 0
   index: 0
 statisten2_
   rotate: false
-  xy: 2, 2
+  xy: 1668, 32
   size: 197, 393
   orig: 197, 393
   offset: 0, 0
   index: 0
 statisten3_
   rotate: false
-  xy: 495, 70
+  xy: 501, 362
   size: 156, 460
   orig: 156, 460
   offset: 0, 0
   index: 0
 statisten4_
   rotate: false
-  xy: 1728, 505
-  size: 197, 456
+  xy: 659, 366
+  size: 201, 456
   orig: 201, 456
-  offset: 4, 0
+  offset: 0, 0
   index: 0
 trolaf
   rotate: false
-  xy: 281, 270
+  xy: 1165, 131
   size: 212, 260
   orig: 212, 260
   offset: 0, 0
   index: 0
 urne_mitBrief
   rotate: false
-  xy: 930, 561
+  xy: 1194, 422
   size: 287, 400
   orig: 287, 400
   offset: 0, 0
   index: 0
 urne_ohneBrief
   rotate: false
-  xy: 1219, 582
-  size: 287, 379
+  xy: 1379, 20
+  size: 287, 400
   orig: 287, 400
   offset: 0, 0
   index: 0
+wegweiser_scene1
+  rotate: false
+  xy: 752, 35
+  size: 264, 329
+  orig: 264, 329
+  offset: 0, 0
+  index: -1
