@@ -46,9 +46,11 @@ val DefaultSkin = Skin("ui/skin.atlas") {
         size = 48
     }
     FreetypeFont("dialogChoiceFont") {
-        file = Gdx.files.internal("ui/VTC-GarageSale.ttf")
+        file = baseFontFile
+        size = 22
         color = com.badlogic.gdx.graphics.Color.WHITE
-        size = 18
+        borderWidth = 3f
+        borderColor = com.badlogic.gdx.graphics.Color.BLACK
     }
     LabelStyle {
         font = skin.getDefaultFont()

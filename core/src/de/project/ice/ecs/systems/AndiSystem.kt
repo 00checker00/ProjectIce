@@ -9,6 +9,9 @@ import de.project.ice.ecs.hasComponent
 import de.project.ice.utils.Assets
 import de.project.ice.utils.editComponents
 
+enum class AndiAnimation(val number:Int) {
+    Idle(1),Lauf(2),Buecken(3),Greifen(4)
+}
 
 class AndiSystem: IteratingIceSystem(Family.all(AndiComponent::class.java).get()) {
     override fun processEntity(entity: Entity, deltaTime: Float) {
@@ -16,9 +19,10 @@ class AndiSystem: IteratingIceSystem(Family.all(AndiComponent::class.java).get()
             if (!entity.hasComponent(Components.animation)) {
                 if (!entity.hasComponent(Components.animation))
                     AnimationComponent {
-                        animations.put(1, Assets.createAnimation("andi_idle", Float.POSITIVE_INFINITY, Animation.PlayMode.REVERSED))
-                        animations.put(2, Assets.createAnimation("andi_lauf", 0.03f, Animation.PlayMode.LOOP))
-                        animations.put(3, Assets.createAnimation("andi_buecken", 0.03f, Animation.PlayMode.NORMAL))
+                        animations.put(AndiAnimation.Idle.number, Assets.createAnimation("andi_idle", Float.POSITIVE_INFINITY, Animation.PlayMode.REVERSED))
+                        animations.put(AndiAnimation.Lauf.number, Assets.createAnimation("andi_lauf", 0.03f, Animation.PlayMode.LOOP))
+                        animations.put(AndiAnimation.Buecken.number, Assets.createAnimation("andi_buecken", 0.03f, Animation.PlayMode.NORMAL))
+                        animations.put(AndiAnimation.Greifen.number, Assets.createAnimation("andi_greifen", 0.03f, Animation.PlayMode.NORMAL))
                         animation = 1
                     }
             }
