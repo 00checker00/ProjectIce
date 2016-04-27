@@ -37,7 +37,10 @@ class MovementSystem : IteratingIceSystem(Family.all(MoveComponent::class.java).
 
                 // Start walk animation
                 if (Components.walking.has(entity)) {
-                    Components.walking.get(entity).isWalking = true
+                    entity.getComponents(Components.walking).apply {
+                        isWalking = true;
+                        wiggleAlpha += deltaTime
+                    }
                 }
             } else {
                 t.pos.set(targetVector.x, targetVector.y)

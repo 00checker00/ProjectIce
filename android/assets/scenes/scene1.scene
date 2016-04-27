@@ -21,6 +21,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="2.0834632" y="-0.025327444"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="0.7" y="0.7"/>
 					<z type="Integer">5</z>
 				</TransformComponent>
@@ -39,6 +40,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="4.9435806" y="-0.17101741"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="0.7" y="0.7"/>
 					<z type="Integer">10</z>
 				</TransformComponent>
@@ -57,6 +59,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="-0.029999733" y="2.3841858E-7"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
@@ -129,6 +132,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="3.3" y="2.8"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="-1.0"/>
 					<scale type="Vector2" x="0.7" y="0.7"/>
 					<z type="Integer">5</z>
 				</TransformComponent>
@@ -148,6 +152,11 @@
 				<DistanceScaleComponent>
 					<currentScale type="Float">0.72</currentScale>
 				</DistanceScaleComponent>
+				<WalkingComponent>
+					<animation type="Integer">0</animation>
+					<isWalking type="Boolean">false</isWalking>
+					<wiggle type="Boolean">true</wiggle>
+				</WalkingComponent>
 			</components>
 		</entity>
 		<entity>
@@ -160,6 +169,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="3.7900052" y="1.8247614"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">8</z>
 				</TransformComponent>
@@ -195,6 +205,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="-0.2" y="0.3"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
@@ -207,6 +218,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="7.3600044" y="2.4294832"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="0.5" y="0.5"/>
 					<z type="Integer">5</z>
 				</TransformComponent>
@@ -238,6 +250,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="8.054994" y="2.9447942"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
@@ -263,6 +276,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="8.869998" y="0.7583484"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">1</z>
 				</TransformComponent>
@@ -288,6 +302,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="2.3099995" y="2.8"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="0.25" y="0.25"/>
 					<z type="Integer">5</z>
 				</TransformComponent>
@@ -316,6 +331,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="1.6018813" y="2.9038668"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="-1.2"/>
 					<scale type="Vector2" x="0.7" y="0.7"/>
 					<z type="Integer">5</z>
 				</TransformComponent>
@@ -335,12 +351,11 @@
 				<DistanceScaleComponent>
 					<currentScale type="Float">0.7096133</currentScale>
 				</DistanceScaleComponent>
-				<MoveComponent>
-					<callback type="null"/>
-					<isMoving type="Boolean">false</isMoving>
-					<speed type="Float">1.1</speed>
-					<targetPositions type="null"/>
-				</MoveComponent>
+				<WalkingComponent>
+					<animation type="Integer">0</animation>
+					<isWalking type="Boolean">false</isWalking>
+					<wiggle type="Boolean">true</wiggle>
+				</WalkingComponent>
 			</components>
 		</entity>
 		<entity>
@@ -353,6 +368,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="7.164998" y="-0.19711733"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
@@ -375,6 +391,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="5.205001" y="0.12191141"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="0.6" y="0.6"/>
 					<z type="Integer">5</z>
 				</TransformComponent>
@@ -406,6 +423,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="6.864998" y="1.9833294"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="0.6" y="0.6"/>
 					<z type="Integer">5</z>
 				</TransformComponent>
@@ -437,6 +455,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="3.9149995" y="0.13649333"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="0.6" y="0.6"/>
 					<z type="Integer">5</z>
 				</TransformComponent>
@@ -468,6 +487,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="4.3849974" y="1.8761197"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="0.6" y="0.6"/>
 					<z type="Integer">5</z>
 				</TransformComponent>
@@ -499,6 +519,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="7.5750055" y="1.4846925"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="0.6" y="0.6"/>
 					<z type="Integer">5</z>
 				</TransformComponent>
@@ -530,6 +551,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="1.9150033" y="1.0275103"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="0.6" y="0.6"/>
 					<z type="Integer">5</z>
 				</TransformComponent>
@@ -574,6 +596,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="5.488438" y="1.5864505"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
@@ -592,8 +615,9 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="10.799697" y="0.19639206"/>
+					<pos type="Vector2" x="10.334705" y="-0.2945161"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="-1.1"/>
 					<scale type="Vector2" x="0.7" y="0.7"/>
 					<z type="Integer">5</z>
 				</TransformComponent>
@@ -601,7 +625,7 @@
 					<region type="TextureRegion">superman_normal</region>
 				</TextureComponent>
 				<DistanceScaleComponent>
-					<currentScale type="Float">0.9803608</currentScale>
+					<currentScale type="Float">1.0294516</currentScale>
 				</DistanceScaleComponent>
 				<MoveComponent>
 					<isMoving type="Boolean">false</isMoving>
@@ -618,6 +642,11 @@
 					<targetPos type="Vector2" x="0.0" y="0.0"/>
 					<width type="Float">0.0</width>
 				</HotspotComponent>
+				<WalkingComponent>
+					<animation type="Integer">0</animation>
+					<isWalking type="Boolean">false</isWalking>
+					<wiggle type="Boolean">true</wiggle>
+				</WalkingComponent>
 			</components>
 		</entity>
 		<entity>
@@ -630,6 +659,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="8.325003" y="0.55662966"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
@@ -645,6 +675,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="3.2750044" y="1.5807476"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
@@ -660,6 +691,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="0.04500532" y="1.7823187"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
@@ -675,6 +707,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="0.4800024" y="2.4241648"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
@@ -690,6 +723,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="1.1700046" y="2.8432212"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
@@ -705,6 +739,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="1.8200042" y="2.8326118"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
@@ -720,6 +755,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="3.0149972" y="2.8750498"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
@@ -735,6 +771,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="3.4450006" y="2.864441"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
@@ -750,6 +787,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="7.7200055" y="3.006544"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
@@ -765,6 +803,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="12.295022" y="0.36601257"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
@@ -780,6 +819,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="7.9199953" y="0.2847098"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
@@ -792,6 +832,7 @@
 					<flipVertical type="Boolean">false</flipVertical>
 					<pos type="Vector2" x="0.1299982" y="-0.46977055"/>
 					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="1.0" y="1.0"/>
 					<z type="Integer">0</z>
 				</TransformComponent>
