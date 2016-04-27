@@ -8,8 +8,10 @@ class TransformComponent : CopyableIceComponent {
     val pos = Vector2()
     @Property("The scale of this Entity")
     val scale = Vector2(1.0f, 1.0f)
-    @Property("The rotation of this Entity")
+    @Property("The rotation of this Entity", group = "rotation")
     var rotation = 0.0f
+    @Property("The origin Point of the rotation for this entity", group = "rotation")
+    var rotationOrigin = Vector2();
     @Property("The Z-Index of this Entity. 0 is the topmost Index")
     var z = 0
     @Property("Whether this Entity is flipped Horizontal")
@@ -24,6 +26,7 @@ class TransformComponent : CopyableIceComponent {
         z = 0
         flipHorizontal = false
         flipVertical = false
+        rotationOrigin.set(0f, 0f)
     }
 
     override fun copyTo(copy: CopyableIceComponent) {
@@ -34,6 +37,7 @@ class TransformComponent : CopyableIceComponent {
             copy.z = z
             copy.flipHorizontal = flipHorizontal
             copy.flipVertical = flipVertical
+            copy.rotationOrigin = rotationOrigin
         }
     }
 }

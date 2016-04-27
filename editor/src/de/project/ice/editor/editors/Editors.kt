@@ -17,6 +17,7 @@ class Editors {
                 Short::class.java, java.lang.Short.TYPE     -> NumberEditor.ShortEditor()
                 Int::class.java, java.lang.Integer.TYPE     -> NumberEditor.IntegerEditor()
                 Long::class.java, java.lang.Long.TYPE       -> NumberEditor.LongEditor()
+                Boolean::class.java, java.lang.Boolean.TYPE -> BoolEditor()
                 Vector2::class.java                         -> Vector2Editor()
                 Vector3::class.java                         -> Vector3Editor()
                 String::class.java                          -> StringEditor()
