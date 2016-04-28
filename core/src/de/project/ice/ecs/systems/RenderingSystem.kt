@@ -177,9 +177,9 @@ class RenderingSystem : SortedIteratingIceSystem(Families.renderable, RenderingS
 
         if (region is TextureAtlas.AtlasRegion) {
             width = region.originalWidth * PIXELS_TO_METRES * scaleX
-            height = region.originalHeight * PIXELS_TO_METRES * scaleX
+            height = region.originalHeight * PIXELS_TO_METRES * scaleY
         } else {
-            width = region.regionWidth.toFloat() * PIXELS_TO_METRES * scaleY
+            width = region.regionWidth.toFloat() * PIXELS_TO_METRES * scaleX
             height = region.regionHeight.toFloat() * PIXELS_TO_METRES * scaleY
         }
 

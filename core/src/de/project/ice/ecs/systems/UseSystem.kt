@@ -3,6 +3,7 @@ package de.project.ice.ecs.systems
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.Family
 import de.project.ice.ecs.Components
+import de.project.ice.ecs.components.ActivationDirection
 import de.project.ice.ecs.components.MoveComponent
 import de.project.ice.ecs.components.UseComponent
 import de.project.ice.ecs.getComponents
@@ -28,6 +29,11 @@ class UseSystem : IteratingIceSystem(Family.all(UseComponent::class.java).exclud
             entityname = entity.getComponents(Components.name).name
         else
             entityname = ""
+
+        if(hotspotComponent.activationDirection != ActivationDirection.Dynamic) {
+            engine.getEntityByName("Andi_Player")?.getComponents(Components.transform)?.flipHorizontal = hotspotComponent.activationDirection == ActivationDirection.Right
+
+        }
 
         if (hotspot != null) {
             if (use.withItem != null) {

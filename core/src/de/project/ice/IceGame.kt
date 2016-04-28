@@ -7,7 +7,10 @@ import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.I18NBundle
 import de.project.ice.dialog.Dialog
 import de.project.ice.dialog.Node
+import de.project.ice.ecs.Components
 import de.project.ice.ecs.IceEngine
+import de.project.ice.ecs.getComponents
+import de.project.ice.ecs.systems.AndiAnimation
 import de.project.ice.inventory.Inventory
 import de.project.ice.screens.*
 import de.project.ice.utils.Assets
@@ -63,6 +66,16 @@ open class IceGame : ApplicationAdapter() {
     fun resumeGame() {
         gameScreen.resumeGame()
         isGamePaused = false
+    }
+
+    fun playAndiAnimation(anim: AndiAnimation, callback: (()->Unit)?) {
+        val andi = engine.getEntityByName("Andi_Player")
+        val animation = andi?.getComponents(Components.animation)
+
+        animation?.animation = anim.number
+        var duration = animation?.animations?.get(3)?.data?.animationDuration ?: 0.0f
+
+        engine.timeout(duration - 0.5f, { callback?.invoke() })
     }
 
     fun save(slot: Int = currentSaveSlot): Boolean {

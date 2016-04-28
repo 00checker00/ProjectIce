@@ -1,4 +1,4 @@
-package de.project.ice.scripting.scene1
+package de.project.ice.scripting.scripts.scene1
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.graphics.Color
@@ -39,6 +39,8 @@ class Start : Script() {
     override fun onUpdateEntity(game: IceGame, entity: Entity, delta: Float) {
 
         runOnce("scene1_intro") {
+            game.engine.soundSystem.playMusic("11", true, 0.5f);
+
             game.blockInteraction = true
             game.blockSaving = true
 
@@ -153,7 +155,10 @@ class Start : Script() {
                                                 game.engine.editEntity("Kai") {
                                                     MoveComponent {
                                                         targetPositions.addAll(waypoints)
-                                                        callback = {game.blockSaving = false}
+                                                        callback = {
+                                                            game.blockSaving = false
+                                                            game.engine.soundSystem.playMusic("Town of the Fisherman", true, 0.1f);
+                                                        }
                                                     }
                                                 }
                                             }

@@ -293,9 +293,9 @@ class InventoryScreen(game: IceGame) : BaseScreenAdapter(game) {
         private val ITEM_POSITION_STORAGE_KEY = "__INVENTORY_SCREEN_ITEM_POSITIONS__"
         private val VALID_REGION = Ellipse(555f, 485f, 400f, 280f)
         private val BUTTON_POSITIONS = mapOf(
-                Button.Home to Vector2(1005f, 486f),
-                Button.Load to Vector2(254f, 536f),
-                Button.Save to Vector2(180f, 282f)
+                Button.Home to Vector2(995f, 496f),
+                Button.Load to Vector2(254f, 550f),
+                Button.Save to Vector2(180f, 300f)
         )
         private val BUTTON_SIZE = 125f
     }
