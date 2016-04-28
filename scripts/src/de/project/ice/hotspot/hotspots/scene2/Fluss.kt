@@ -6,6 +6,6 @@ import de.project.ice.hotspot.Use
 
 class Fluss : Use.Adapter() {
     override fun look(game: IceGame, hotspotId: String) {
-        game.showToastMessages("s2_river_desc");
+        game.showAndiMessages("s2_river_desc");
     }
 }

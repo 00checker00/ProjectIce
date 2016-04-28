@@ -1,6 +1,8 @@
 package de.project.ice.hotspot.hotspots.scene2
 
 import de.project.ice.IceGame
+import de.project.ice.ecs.Components
+import de.project.ice.ecs.getComponents
 import de.project.ice.hotspot.Use
 
 
