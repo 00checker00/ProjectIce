@@ -2,6 +2,7 @@ package de.project.ice.hotspot
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.math.Vector2
 import de.project.ice.IceGame
 import de.project.ice.Storage
 import de.project.ice.ecs.Components
@@ -16,6 +17,9 @@ open class GotoScene(val scene : String) : Use.Adapter() {
     protected open val spawnpoint : String? = null
 
     override fun walk(game: IceGame, hotspotId: String) {
+
+        game.blockInteraction = true;
+
         game.engine.blendScreen(1.0f, Color.BLACK)
         game.engine.timeout(1.0f) {
             val sceneXml = SceneWriter.serializeToString(game.engine, game.engine.sceneProperties!!)
@@ -40,14 +44,14 @@ open class GotoScene(val scene : String) : Use.Adapter() {
                     game.engine.timeout(0.5f) {
                         game.engine.blendScreen(1.0f, Color.WHITE, Color.BLACK)
                     }
-                    if(spawnpoint!=null) {
-                        val target = game.engine.getEntityByName(spawnpoint!!)?.getComponents(Components.transform)!!
-                        val transform = game.engine.getEntityByName("Andi_Player")?.getComponents(Components.transform)!!
-                        transform.pos.set(target.pos)
+                    spawnpoint?.let {
+                        val target = game.engine.getEntityByName(it)?.getComponents(Components.transform)
+                        val transform = game.engine.getEntityByName("Andi_Player")?.getComponents(Components.transform)
+                        transform?.pos?.set(target?.pos?:transform.pos)
                     }
 
                     afterSceneLoaded(game)
-
+                    game.blockInteraction = false;
                 }
             }
 
