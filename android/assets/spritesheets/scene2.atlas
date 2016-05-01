@@ -66,14 +66,7 @@ angel_tween
   size: 193, 351
   orig: 193, 351
   offset: 0, 0
-  index: 141
-angel_tween
-  rotate: false
-  xy: 1202, 413
-  size: 193, 351
-  orig: 193, 351
-  offset: 0, 0
-  index: 139
+  index: 1
 angel_tween
   rotate: false
   xy: 1202, 413
@@ -87,7 +80,14 @@ angel_tween
   size: 193, 351
   orig: 193, 351
   offset: 0, 0
-  index: 1
+  index: 139
+angel_tween
+  rotate: false
+  xy: 1202, 413
+  size: 193, 351
+  orig: 193, 351
+  offset: 0, 0
+  index: 141
 angel_tween
   rotate: false
   xy: 1397, 413
@@ -276,371 +276,7 @@ schollen2_wellen
   size: 180, 62
   orig: 180, 62
   offset: 0, 0
-  index: 11
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 66
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 72
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 71
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 69
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 13
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 34
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 55
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 64
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 62
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 52
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 37
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 47
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 19
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 46
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 6
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 41
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 9
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 4
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 31
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 28
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 33
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 22
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 54
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 39
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 43
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
   index: 40
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 61
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 7
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 35
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 48
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 51
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 38
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 49
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 67
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 65
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 59
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 24
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 32
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 1
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 36
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 44
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 16
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 57
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 14
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 18
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 50
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 68
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 45
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 74
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 23
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 70
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 30
 schollen2_wellen
   rotate: false
   xy: 1241, 90
@@ -654,56 +290,7 @@ schollen2_wellen
   size: 180, 62
   orig: 180, 62
   offset: 0, 0
-  index: 17
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 73
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 8
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 56
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 29
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 15
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 21
-schollen2_wellen
-  rotate: false
-  xy: 1241, 90
-  size: 180, 62
-  orig: 180, 62
-  offset: 0, 0
-  index: 63
+  index: 69
 schollen2_wellen
   rotate: false
   xy: 1241, 90
@@ -717,7 +304,35 @@ schollen2_wellen
   size: 180, 62
   orig: 180, 62
   offset: 0, 0
-  index: 12
+  index: 19
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 66
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 38
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 39
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 45
 schollen2_wellen
   rotate: false
   xy: 1241, 90
@@ -731,6 +346,111 @@ schollen2_wellen
   size: 180, 62
   orig: 180, 62
   offset: 0, 0
+  index: 36
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 11
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 7
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 74
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 18
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 43
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 64
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 61
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 41
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 42
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 21
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 37
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 16
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 52
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 23
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
   index: 26
 schollen2_wellen
   rotate: false
@@ -738,7 +458,14 @@ schollen2_wellen
   size: 180, 62
   orig: 180, 62
   offset: 0, 0
-  index: 58
+  index: 17
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 33
 schollen2_wellen
   rotate: false
   xy: 1241, 90
@@ -752,7 +479,147 @@ schollen2_wellen
   size: 180, 62
   orig: 180, 62
   offset: 0, 0
-  index: 10
+  index: 3
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 24
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 35
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 57
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 70
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 51
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 72
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 28
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 67
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 34
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 22
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 32
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 8
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 58
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 71
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 9
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 44
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 62
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 14
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 13
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 50
 schollen2_wellen
   rotate: false
   xy: 1241, 90
@@ -766,7 +633,7 @@ schollen2_wellen
   size: 180, 62
   orig: 180, 62
   offset: 0, 0
-  index: 3
+  index: 29
 schollen2_wellen
   rotate: false
   xy: 1241, 90
@@ -780,7 +647,42 @@ schollen2_wellen
   size: 180, 62
   orig: 180, 62
   offset: 0, 0
-  index: 27
+  index: 4
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 56
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 15
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 55
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 49
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 46
 schollen2_wellen
   rotate: false
   xy: 1241, 90
@@ -794,7 +696,105 @@ schollen2_wellen
   size: 180, 62
   orig: 180, 62
   offset: 0, 0
-  index: 42
+  index: 63
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 12
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 31
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 30
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 27
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 73
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 48
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 54
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 47
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 59
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 1
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 6
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 10
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 68
+schollen2_wellen
+  rotate: false
+  xy: 1241, 90
+  size: 180, 62
+  orig: 180, 62
+  offset: 0, 0
+  index: 65
 schollen2_wellen
   rotate: false
   xy: 1423, 90
@@ -843,91 +843,7 @@ schollen3_wellen
   size: 247, 80
   orig: 247, 80
   offset: 0, 0
-  index: 24
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 12
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 17
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 5
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 23
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 6
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 20
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 22
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 36
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 1
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 11
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 2
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 50
+  index: 38
 schollen3_wellen
   rotate: false
   xy: 1126, 1573
@@ -941,111 +857,6 @@ schollen3_wellen
   size: 247, 80
   orig: 247, 80
   offset: 0, 0
-  index: 45
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 9
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 8
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 47
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 43
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 19
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 32
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 10
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 38
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 48
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 27
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 33
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 37
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 3
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 18
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
   index: 21
 schollen3_wellen
   rotate: false
@@ -1053,42 +864,14 @@ schollen3_wellen
   size: 247, 80
   orig: 247, 80
   offset: 0, 0
-  index: 30
+  index: 50
 schollen3_wellen
   rotate: false
   xy: 1126, 1573
   size: 247, 80
   orig: 247, 80
   offset: 0, 0
-  index: 35
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 29
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 28
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 40
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 42
+  index: 2
 schollen3_wellen
   rotate: false
   xy: 1126, 1573
@@ -1102,28 +885,7 @@ schollen3_wellen
   size: 247, 80
   orig: 247, 80
   offset: 0, 0
-  index: 7
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 25
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 34
-schollen3_wellen
-  rotate: false
-  xy: 1126, 1573
-  size: 247, 80
-  orig: 247, 80
-  offset: 0, 0
-  index: 52
+  index: 16
 schollen3_wellen
   rotate: false
   xy: 1126, 1573
@@ -1137,21 +899,70 @@ schollen3_wellen
   size: 247, 80
   orig: 247, 80
   offset: 0, 0
-  index: 31
+  index: 17
 schollen3_wellen
   rotate: false
   xy: 1126, 1573
   size: 247, 80
   orig: 247, 80
   offset: 0, 0
-  index: 44
+  index: 27
 schollen3_wellen
   rotate: false
   xy: 1126, 1573
   size: 247, 80
   orig: 247, 80
   offset: 0, 0
-  index: 41
+  index: 28
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 10
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 32
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 42
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 3
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 9
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 34
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 35
 schollen3_wellen
   rotate: false
   xy: 1126, 1573
@@ -1165,28 +976,84 @@ schollen3_wellen
   size: 247, 80
   orig: 247, 80
   offset: 0, 0
-  index: 13
+  index: 12
 schollen3_wellen
   rotate: false
   xy: 1126, 1573
   size: 247, 80
   orig: 247, 80
   offset: 0, 0
-  index: 51
+  index: 6
 schollen3_wellen
   rotate: false
   xy: 1126, 1573
   size: 247, 80
   orig: 247, 80
   offset: 0, 0
-  index: 49
+  index: 39
 schollen3_wellen
   rotate: false
   xy: 1126, 1573
   size: 247, 80
   orig: 247, 80
   offset: 0, 0
-  index: 16
+  index: 20
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 18
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 41
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 44
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 30
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 7
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 8
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 48
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 1
 schollen3_wellen
   rotate: false
   xy: 1126, 1573
@@ -1200,7 +1067,140 @@ schollen3_wellen
   size: 247, 80
   orig: 247, 80
   offset: 0, 0
-  index: 39
+  index: 19
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 22
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 25
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 31
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 47
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 24
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 33
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 45
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 36
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 11
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 52
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 5
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 37
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 49
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 29
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 40
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 51
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 13
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 23
+schollen3_wellen
+  rotate: false
+  xy: 1126, 1573
+  size: 247, 80
+  orig: 247, 80
+  offset: 0, 0
+  index: 43
 schollen3_wellen
   rotate: false
   xy: 1728, 873
@@ -1291,35 +1291,63 @@ schollen4_wellen
   size: 140, 44
   orig: 140, 44
   offset: 0, 0
-  index: 50
+  index: 20
 schollen4_wellen
   rotate: false
   xy: 651, 9
   size: 140, 44
   orig: 140, 44
   offset: 0, 0
-  index: 57
+  index: 53
 schollen4_wellen
   rotate: false
   xy: 651, 9
   size: 140, 44
   orig: 140, 44
   offset: 0, 0
-  index: 59
+  index: 73
 schollen4_wellen
   rotate: false
   xy: 651, 9
   size: 140, 44
   orig: 140, 44
   offset: 0, 0
-  index: 11
+  index: 31
 schollen4_wellen
   rotate: false
   xy: 651, 9
   size: 140, 44
   orig: 140, 44
   offset: 0, 0
-  index: 38
+  index: 65
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 42
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 3
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 63
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 26
 schollen4_wellen
   rotate: false
   xy: 651, 9
@@ -1333,21 +1361,42 @@ schollen4_wellen
   size: 140, 44
   orig: 140, 44
   offset: 0, 0
-  index: 15
+  index: 18
 schollen4_wellen
   rotate: false
   xy: 651, 9
   size: 140, 44
   orig: 140, 44
   offset: 0, 0
-  index: 40
+  index: 12
 schollen4_wellen
   rotate: false
   xy: 651, 9
   size: 140, 44
   orig: 140, 44
   offset: 0, 0
-  index: 9
+  index: 22
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 21
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 8
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 72
 schollen4_wellen
   rotate: false
   xy: 651, 9
@@ -1368,154 +1417,7 @@ schollen4_wellen
   size: 140, 44
   orig: 140, 44
   offset: 0, 0
-  index: 66
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
   index: 28
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 53
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 68
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 14
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 8
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 22
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 1
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 23
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 5
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 30
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 4
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 46
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 42
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 32
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 41
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 39
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 2
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 44
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 20
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 60
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 26
 schollen4_wellen
   rotate: false
   xy: 651, 9
@@ -1529,35 +1431,21 @@ schollen4_wellen
   size: 140, 44
   orig: 140, 44
   offset: 0, 0
-  index: 49
+  index: 33
 schollen4_wellen
   rotate: false
   xy: 651, 9
   size: 140, 44
   orig: 140, 44
   offset: 0, 0
-  index: 27
+  index: 58
 schollen4_wellen
   rotate: false
   xy: 651, 9
   size: 140, 44
   orig: 140, 44
   offset: 0, 0
-  index: 10
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 13
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 69
+  index: 1
 schollen4_wellen
   rotate: false
   xy: 651, 9
@@ -1571,119 +1459,14 @@ schollen4_wellen
   size: 140, 44
   orig: 140, 44
   offset: 0, 0
-  index: 25
+  index: 15
 schollen4_wellen
   rotate: false
   xy: 651, 9
   size: 140, 44
   orig: 140, 44
   offset: 0, 0
-  index: 72
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 6
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 52
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 3
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 36
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 34
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 29
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 31
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 45
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 17
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 21
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 37
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 43
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 55
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 56
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 65
+  index: 39
 schollen4_wellen
   rotate: false
   xy: 651, 9
@@ -1697,21 +1480,56 @@ schollen4_wellen
   size: 140, 44
   orig: 140, 44
   offset: 0, 0
-  index: 67
+  index: 23
 schollen4_wellen
   rotate: false
   xy: 651, 9
   size: 140, 44
   orig: 140, 44
   offset: 0, 0
-  index: 33
+  index: 9
 schollen4_wellen
   rotate: false
   xy: 651, 9
   size: 140, 44
   orig: 140, 44
   offset: 0, 0
-  index: 73
+  index: 48
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 38
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 59
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 77
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 74
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 60
 schollen4_wellen
   rotate: false
   xy: 651, 9
@@ -1719,6 +1537,223 @@ schollen4_wellen
   orig: 140, 44
   offset: 0, 0
   index: 64
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 17
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 34
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 37
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 57
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 71
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 24
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 49
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 50
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 10
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 4
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 30
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 16
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 13
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 78
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 6
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 46
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 14
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 68
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 11
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 25
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 55
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 27
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 69
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 35
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 54
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 67
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 32
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 56
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 43
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 36
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 52
 schollen4_wellen
   rotate: false
   xy: 651, 9
@@ -1739,77 +1774,7 @@ schollen4_wellen
   size: 140, 44
   orig: 140, 44
   offset: 0, 0
-  index: 48
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 74
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 12
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 54
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 24
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 16
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 47
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 35
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 77
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 18
-schollen4_wellen
-  rotate: false
-  xy: 651, 9
-  size: 140, 44
-  orig: 140, 44
-  offset: 0, 0
-  index: 58
+  index: 66
 schollen4_wellen
   rotate: false
   xy: 651, 9
@@ -1823,21 +1788,56 @@ schollen4_wellen
   size: 140, 44
   orig: 140, 44
   offset: 0, 0
-  index: 71
+  index: 40
 schollen4_wellen
   rotate: false
   xy: 651, 9
   size: 140, 44
   orig: 140, 44
   offset: 0, 0
-  index: 78
+  index: 29
 schollen4_wellen
   rotate: false
   xy: 651, 9
   size: 140, 44
   orig: 140, 44
   offset: 0, 0
-  index: 63
+  index: 41
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 45
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 2
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 5
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 44
+schollen4_wellen
+  rotate: false
+  xy: 651, 9
+  size: 140, 44
+  orig: 140, 44
+  offset: 0, 0
+  index: 47
 schollen4_wellen
   rotate: false
   xy: 793, 9
@@ -2479,14 +2479,14 @@ fisch_schatten
   size: 600, 108
   orig: 600, 108
   offset: 0, 0
-  index: 41
+  index: 42
 fisch_schatten
   rotate: false
   xy: 604, 1212
   size: 600, 108
   orig: 600, 108
   offset: 0, 0
-  index: 42
+  index: 41
 fisch_schatten
   rotate: false
   xy: 1206, 1212
@@ -4030,63 +4030,7 @@ schollen1_wellen
   size: 1016, 174
   orig: 1016, 174
   offset: 0, 0
-  index: 21
-schollen1_wellen
-  rotate: false
-  xy: 2, 1058
-  size: 1016, 174
-  orig: 1016, 174
-  offset: 0, 0
-  index: 29
-schollen1_wellen
-  rotate: false
-  xy: 2, 1058
-  size: 1016, 174
-  orig: 1016, 174
-  offset: 0, 0
-  index: 14
-schollen1_wellen
-  rotate: false
-  xy: 2, 1058
-  size: 1016, 174
-  orig: 1016, 174
-  offset: 0, 0
-  index: 27
-schollen1_wellen
-  rotate: false
-  xy: 2, 1058
-  size: 1016, 174
-  orig: 1016, 174
-  offset: 0, 0
-  index: 6
-schollen1_wellen
-  rotate: false
-  xy: 2, 1058
-  size: 1016, 174
-  orig: 1016, 174
-  offset: 0, 0
-  index: 10
-schollen1_wellen
-  rotate: false
-  xy: 2, 1058
-  size: 1016, 174
-  orig: 1016, 174
-  offset: 0, 0
-  index: 15
-schollen1_wellen
-  rotate: false
-  xy: 2, 1058
-  size: 1016, 174
-  orig: 1016, 174
-  offset: 0, 0
-  index: 22
-schollen1_wellen
-  rotate: false
-  xy: 2, 1058
-  size: 1016, 174
-  orig: 1016, 174
-  offset: 0, 0
-  index: 18
+  index: 32
 schollen1_wellen
   rotate: false
   xy: 2, 1058
@@ -4100,7 +4044,14 @@ schollen1_wellen
   size: 1016, 174
   orig: 1016, 174
   offset: 0, 0
-  index: 26
+  index: 15
+schollen1_wellen
+  rotate: false
+  xy: 2, 1058
+  size: 1016, 174
+  orig: 1016, 174
+  offset: 0, 0
+  index: 24
 schollen1_wellen
   rotate: false
   xy: 2, 1058
@@ -4121,27 +4072,6 @@ schollen1_wellen
   size: 1016, 174
   orig: 1016, 174
   offset: 0, 0
-  index: 25
-schollen1_wellen
-  rotate: false
-  xy: 2, 1058
-  size: 1016, 174
-  orig: 1016, 174
-  offset: 0, 0
-  index: 1
-schollen1_wellen
-  rotate: false
-  xy: 2, 1058
-  size: 1016, 174
-  orig: 1016, 174
-  offset: 0, 0
-  index: 36
-schollen1_wellen
-  rotate: false
-  xy: 2, 1058
-  size: 1016, 174
-  orig: 1016, 174
-  offset: 0, 0
   index: 16
 schollen1_wellen
   rotate: false
@@ -4149,35 +4079,28 @@ schollen1_wellen
   size: 1016, 174
   orig: 1016, 174
   offset: 0, 0
-  index: 28
+  index: 19
 schollen1_wellen
   rotate: false
   xy: 2, 1058
   size: 1016, 174
   orig: 1016, 174
   offset: 0, 0
-  index: 31
+  index: 12
 schollen1_wellen
   rotate: false
   xy: 2, 1058
   size: 1016, 174
   orig: 1016, 174
   offset: 0, 0
-  index: 8
+  index: 20
 schollen1_wellen
   rotate: false
   xy: 2, 1058
   size: 1016, 174
   orig: 1016, 174
   offset: 0, 0
-  index: 11
-schollen1_wellen
-  rotate: false
-  xy: 2, 1058
-  size: 1016, 174
-  orig: 1016, 174
-  offset: 0, 0
-  index: 32
+  index: 3
 schollen1_wellen
   rotate: false
   xy: 2, 1058
@@ -4191,7 +4114,126 @@ schollen1_wellen
   size: 1016, 174
   orig: 1016, 174
   offset: 0, 0
-  index: 12
+  index: 34
+schollen1_wellen
+  rotate: false
+  xy: 2, 1058
+  size: 1016, 174
+  orig: 1016, 174
+  offset: 0, 0
+  index: 22
+schollen1_wellen
+  rotate: false
+  xy: 2, 1058
+  size: 1016, 174
+  orig: 1016, 174
+  offset: 0, 0
+  index: 27
+schollen1_wellen
+  rotate: false
+  xy: 2, 1058
+  size: 1016, 174
+  orig: 1016, 174
+  offset: 0, 0
+  index: 29
+schollen1_wellen
+  rotate: false
+  xy: 2, 1058
+  size: 1016, 174
+  orig: 1016, 174
+  offset: 0, 0
+  index: 6
+schollen1_wellen
+  rotate: false
+  xy: 2, 1058
+  size: 1016, 174
+  orig: 1016, 174
+  offset: 0, 0
+  index: 10
+schollen1_wellen
+  rotate: false
+  xy: 2, 1058
+  size: 1016, 174
+  orig: 1016, 174
+  offset: 0, 0
+  index: 8
+schollen1_wellen
+  rotate: false
+  xy: 2, 1058
+  size: 1016, 174
+  orig: 1016, 174
+  offset: 0, 0
+  index: 18
+schollen1_wellen
+  rotate: false
+  xy: 2, 1058
+  size: 1016, 174
+  orig: 1016, 174
+  offset: 0, 0
+  index: 1
+schollen1_wellen
+  rotate: false
+  xy: 2, 1058
+  size: 1016, 174
+  orig: 1016, 174
+  offset: 0, 0
+  index: 14
+schollen1_wellen
+  rotate: false
+  xy: 2, 1058
+  size: 1016, 174
+  orig: 1016, 174
+  offset: 0, 0
+  index: 2
+schollen1_wellen
+  rotate: false
+  xy: 2, 1058
+  size: 1016, 174
+  orig: 1016, 174
+  offset: 0, 0
+  index: 31
+schollen1_wellen
+  rotate: false
+  xy: 2, 1058
+  size: 1016, 174
+  orig: 1016, 174
+  offset: 0, 0
+  index: 36
+schollen1_wellen
+  rotate: false
+  xy: 2, 1058
+  size: 1016, 174
+  orig: 1016, 174
+  offset: 0, 0
+  index: 28
+schollen1_wellen
+  rotate: false
+  xy: 2, 1058
+  size: 1016, 174
+  orig: 1016, 174
+  offset: 0, 0
+  index: 30
+schollen1_wellen
+  rotate: false
+  xy: 2, 1058
+  size: 1016, 174
+  orig: 1016, 174
+  offset: 0, 0
+  index: 11
+schollen1_wellen
+  rotate: false
+  xy: 2, 1058
+  size: 1016, 174
+  orig: 1016, 174
+  offset: 0, 0
+  index: 35
+schollen1_wellen
+  rotate: false
+  xy: 2, 1058
+  size: 1016, 174
+  orig: 1016, 174
+  offset: 0, 0
+  index: 4
 schollen1_wellen
   rotate: false
   xy: 2, 1058
@@ -4212,7 +4254,21 @@ schollen1_wellen
   size: 1016, 174
   orig: 1016, 174
   offset: 0, 0
-  index: 2
+  index: 21
+schollen1_wellen
+  rotate: false
+  xy: 2, 1058
+  size: 1016, 174
+  orig: 1016, 174
+  offset: 0, 0
+  index: 26
+schollen1_wellen
+  rotate: false
+  xy: 2, 1058
+  size: 1016, 174
+  orig: 1016, 174
+  offset: 0, 0
+  index: 25
 schollen1_wellen
   rotate: false
   xy: 2, 1058
@@ -4220,62 +4276,6 @@ schollen1_wellen
   orig: 1016, 174
   offset: 0, 0
   index: 9
-schollen1_wellen
-  rotate: false
-  xy: 2, 1058
-  size: 1016, 174
-  orig: 1016, 174
-  offset: 0, 0
-  index: 3
-schollen1_wellen
-  rotate: false
-  xy: 2, 1058
-  size: 1016, 174
-  orig: 1016, 174
-  offset: 0, 0
-  index: 34
-schollen1_wellen
-  rotate: false
-  xy: 2, 1058
-  size: 1016, 174
-  orig: 1016, 174
-  offset: 0, 0
-  index: 35
-schollen1_wellen
-  rotate: false
-  xy: 2, 1058
-  size: 1016, 174
-  orig: 1016, 174
-  offset: 0, 0
-  index: 19
-schollen1_wellen
-  rotate: false
-  xy: 2, 1058
-  size: 1016, 174
-  orig: 1016, 174
-  offset: 0, 0
-  index: 4
-schollen1_wellen
-  rotate: false
-  xy: 2, 1058
-  size: 1016, 174
-  orig: 1016, 174
-  offset: 0, 0
-  index: 24
-schollen1_wellen
-  rotate: false
-  xy: 2, 1058
-  size: 1016, 174
-  orig: 1016, 174
-  offset: 0, 0
-  index: 30
-schollen1_wellen
-  rotate: false
-  xy: 2, 1058
-  size: 1016, 174
-  orig: 1016, 174
-  offset: 0, 0
-  index: 20
 schollen1_wellen
   rotate: false
   xy: 1020, 1058
@@ -4945,14 +4945,14 @@ angel_tween
   size: 193, 351
   orig: 193, 351
   offset: 0, 0
-  index: 73
+  index: 72
 angel_tween
   rotate: false
   xy: 1757, 531
   size: 193, 351
   orig: 193, 351
   offset: 0, 0
-  index: 72
+  index: 73
 angel_tween
   rotate: false
   xy: 2, 355

@@ -1353,7 +1353,7 @@ andi_sprechen3
   size: 138, 256
   orig: 138, 256
   offset: 0, 0
-  index: 22
+  index: 21
 andi_sprechen3
   rotate: false
   xy: 1682, 260
@@ -1367,14 +1367,14 @@ andi_sprechen3
   size: 138, 256
   orig: 138, 256
   offset: 0, 0
-  index: 24
+  index: 22
 andi_sprechen3
   rotate: false
   xy: 1682, 260
   size: 138, 256
   orig: 138, 256
   offset: 0, 0
-  index: 21
+  index: 24
 andi_sprung
   rotate: false
   xy: 1822, 260
