@@ -271,6 +271,14 @@ open class IceGame : ApplicationAdapter() {
         screensToRemove.add(Pair(screen, dispose))
     }
 
+    fun removeScreen(screenClass: Class<out BaseScreen>, dispose: Boolean = true) {
+        screens.forEach {
+            if (screenClass == it.javaClass) {
+                screensToRemove.add(Pair(it, dispose))
+            }
+        }
+    }
+
     fun <T: BaseScreen> addScreen(screen: T): T{
         screensToAdd.add(screen)
         return screen

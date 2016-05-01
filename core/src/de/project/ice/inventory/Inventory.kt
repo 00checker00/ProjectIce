@@ -48,6 +48,6 @@ class Inventory(private val game: IceGame) {
     }
 
     interface ItemListener {
-        fun itemClicked()
+        fun itemClicked(game: IceGame)
     }
 }
