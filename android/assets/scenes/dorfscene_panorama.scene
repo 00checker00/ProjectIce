@@ -1,0 +1,51 @@
+<scene name="dorfscene_panorama" onload="">
+	<music>6</music>
+	<sounds/>
+	<spritesheets>
+		<spritesheet>objects</spritesheet>
+		<spritesheet>inventory</spritesheet>
+		<spritesheet>Dorfszene_center</spritesheet>
+		<spritesheet>andi</spritesheet>
+		<spritesheet>inventory_icon</spritesheet>
+		<spritesheet>Dorfszene_panorama</spritesheet>
+	</spritesheets>
+	<entities>
+		<entity>
+			<components>
+				<CameraComponent>
+					<camera type="OrthographicCamera" viewportWidth="16.0" viewportHeight="9.0">
+						<pos type="Vector3" x="0.0" y="0.0" z="0.0"/>
+					</camera>
+					<color>-1</color>
+					<followMaxX type="Float">3.4028235E38</followMaxX>
+					<followMinX type="Float">1.4E-45</followMinX>
+					<followOffset type="Float">1.0</followOffset>
+					<followType type="enum" subtype="de.project.ice.ecs.systems.CameraSystem$FollowType">Horizontal</followType>
+					<targetScale type="Float">1.0</targetScale>
+					<targetY type="Float">20.0</targetY>
+				</CameraComponent>
+				<NameComponent>
+					<name type="String">Kamera</name>
+				</NameComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<NameComponent>
+					<name type="String">Background</name>
+				</NameComponent>
+				<TextureComponent>
+					<region type="TextureRegion">null</region>
+				</TextureComponent>
+				<TransformComponent>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
+					<flipVertical type="Boolean">false</flipVertical>
+					<pos type="Vector2" x="-1.6414948" y="0.860394"/>
+					<rotation type="Float">0.0</rotation>
+					<scale type="Vector2" x="1.0" y="1.0"/>
+					<z type="Integer">0</z>
+				</TransformComponent>
+			</components>
+		</entity>
+	</entities>
+</scene>
