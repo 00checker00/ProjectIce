@@ -65,7 +65,7 @@ class InventoryScreen(game: IceGame) : BaseScreenAdapter(game) {
     override val inputProcessor = object : InputAdapter() {
         override fun keyDown(keycode: Int): Boolean {
             when (keycode) {
-                INVENTORY_KEY -> {
+                INVENTORY_KEY, MENU_KEY -> {
                     game.removeScreen(this@InventoryScreen)
                     return true
                 }
@@ -144,7 +144,8 @@ class InventoryScreen(game: IceGame) : BaseScreenAdapter(game) {
                             }
                             active_item != null && item == null -> {
                                 game.engine.controlSystem.active_item = null
-                                itemPositions.put(active_item, pos + dragOffset)
+                                if (isPositionValid(pos + dragOffset))
+                                    itemPositions.put(active_item, pos + dragOffset)
                             }
                             item != null -> {
                                 dragOffset = getItemPosition(item) - pos
@@ -158,7 +159,11 @@ class InventoryScreen(game: IceGame) : BaseScreenAdapter(game) {
                 }
 
                 Input.Buttons.RIGHT -> if (item != null) {
-                    game.showAndiMessages(item.description)
+                    if (item.listener != null) {
+                        item.listener.itemClicked(game)
+                    } else {
+                        game.showAndiMessages(item.description)
+                    }
                 }
             }
             return true

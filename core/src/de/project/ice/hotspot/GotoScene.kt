@@ -39,8 +39,8 @@ open class GotoScene(val scene : String) : Use.Adapter() {
                 else
                     properties = SceneLoader.loadScene(game.engine, Gdx.files.internal("scenes/$scene.scene"))
 
+                game.engine.renderingSystem.activeCamera?.color = Color.BLACK
                 game.engine.timeout(0f) {
-                    game.engine.blendScreen(0.0f, Color.BLACK)
                     game.engine.timeout(0.5f) {
                         game.engine.blendScreen(1.0f, Color.WHITE, Color.BLACK)
                     }

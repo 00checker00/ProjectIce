@@ -1,8 +1,11 @@
 package de.project.ice.inventory
 
 import com.badlogic.gdx.utils.ObjectMap
+import de.project.ice.IceGame
 
 import de.project.ice.inventory.Inventory.Item
+import de.project.ice.screens.InventoryScreen
+import de.project.ice.screens.PapierstueckScreen
 
 object Items {
     private val items = ObjectMap<String, Item>()
@@ -30,10 +33,10 @@ object Items {
         fun name(func: ()->String) { name = func.invoke() }
         fun icon(func: ()->String) { icon = func.invoke() }
         fun description(func: ()->String) { description = func.invoke() }
-        fun onClick(func:()->Unit) {
+        fun onClick(func:(IceGame)->Unit) {
             listener = object: Inventory.ItemListener{
-                override fun itemClicked() {
-                    func.invoke()
+                override fun itemClicked(game: IceGame) {
+                    func.invoke(game)
                 }
             }
         }
@@ -70,7 +73,7 @@ object Items {
             item { name { "inv_note_shred_1" } }
             item { name { "inv_note_shred_2" } }
             item { name { "inv_note_shred_3" } }
-            item { name { "inv_note_shred_4" } }
+            item { name { "inv_note_shred_4" }; onClick { it.addScreen(PapierstueckScreen(it)); it.removeScreen(InventoryScreen::class.java) } }
             item { name { "inv_note_shred_1_2" } }
         }
     }
