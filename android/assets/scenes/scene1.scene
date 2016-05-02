@@ -19,7 +19,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="1.9509633" y="0.23018503"/>
+					<pos type="Vector2" x="1.9884627" y="0.24335599"/>
 					<rotation type="Float">0.0</rotation>
 					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="0.7" y="0.7"/>
@@ -246,6 +246,13 @@
 				<TextureComponent>
 					<region type="TextureRegion">trolaf</region>
 				</TextureComponent>
+				<IdleComponent/>
+				<BreathComponent>
+					<curScale type="Vector2" x="0.0" y="0.0"/>
+					<duration type="Float">1.1</duration>
+					<scaleValue type="Vector2" x="0.02" y="0.02"/>
+					<time type="Float">0.0</time>
+				</BreathComponent>
 			</components>
 		</entity>
 		<entity>
@@ -370,7 +377,7 @@
 					<wiggleAlpha type="Float">0.0</wiggleAlpha>
 					<wiggleHeight type="Float">0.03</wiggleHeight>
 					<wiggleSpeed type="Float">0.5</wiggleSpeed>
-					<wiggleStrength type="Float">2.5</wiggleStrength>
+					<wiggleStrength type="Float">6.0</wiggleStrength>
 				</WalkingComponent>
 			</components>
 		</entity>
@@ -427,11 +434,18 @@
 					<width type="Float">0.8</width>
 				</HotspotComponent>
 				<DistanceScaleComponent>
-					<currentScale type="Float">0.9878088</currentScale>
+					<currentScale type="Float">0.98701864</currentScale>
 				</DistanceScaleComponent>
 				<TextureComponent>
 					<region type="TextureRegion">nebenperson1_normal</region>
 				</TextureComponent>
+				<IdleComponent/>
+				<BreathComponent>
+					<curScale type="Vector2" x="0.0" y="0.0"/>
+					<duration type="Float">0.8</duration>
+					<scaleValue type="Vector2" x="0.03" y="0.01"/>
+					<time type="Float">0.0</time>
+				</BreathComponent>
 			</components>
 		</entity>
 		<entity>
@@ -439,7 +453,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="6.864998" y="1.9833294"/>
+					<pos type="Vector2" x="6.864998" y="1.985964"/>
 					<rotation type="Float">0.0</rotation>
 					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="0.6" y="0.6"/>
@@ -460,11 +474,18 @@
 					<width type="Float">1.0</width>
 				</HotspotComponent>
 				<DistanceScaleComponent>
-					<currentScale type="Float">0.8016671</currentScale>
+					<currentScale type="Float">0.80140364</currentScale>
 				</DistanceScaleComponent>
 				<TextureComponent>
 					<region type="TextureRegion">olaf</region>
 				</TextureComponent>
+				<IdleComponent/>
+				<BreathComponent>
+					<curScale type="Vector2" x="0.0" y="0.0"/>
+					<duration type="Float">0.6</duration>
+					<scaleValue type="Vector2" x="0.01" y="0.01"/>
+					<time type="Float">0.0</time>
+				</BreathComponent>
 			</components>
 		</entity>
 		<entity>
@@ -472,7 +493,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="3.9699998" y="0.14123833"/>
+					<pos type="Vector2" x="3.8900023" y="0.12595654"/>
 					<rotation type="Float">0.0</rotation>
 					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="0.6" y="0.6"/>
@@ -498,6 +519,13 @@
 				<TextureComponent>
 					<region type="TextureRegion">statisten2_</region>
 				</TextureComponent>
+				<BreathComponent>
+					<curScale type="Vector2" x="0.0" y="0.0"/>
+					<duration type="Float">1.0</duration>
+					<scaleValue type="Vector2" x="0.02" y="0.02"/>
+					<time type="Float">0.0</time>
+				</BreathComponent>
+				<IdleComponent/>
 			</components>
 		</entity>
 		<entity>
@@ -526,11 +554,18 @@
 					<width type="Float">0.8</width>
 				</HotspotComponent>
 				<DistanceScaleComponent>
-					<currentScale type="Float">0.81238806</currentScale>
+					<currentScale type="Float">0.8181832</currentScale>
 				</DistanceScaleComponent>
 				<TextureComponent>
 					<region type="TextureRegion">eskimo_weapon1_normal</region>
 				</TextureComponent>
+				<IdleComponent/>
+				<BreathComponent>
+					<curScale type="Vector2" x="0.0" y="0.0"/>
+					<duration type="Float">0.9</duration>
+					<scaleValue type="Vector2" x="0.01" y="0.01"/>
+					<time type="Float">0.0</time>
+				</BreathComponent>
 			</components>
 		</entity>
 		<entity>
@@ -564,6 +599,13 @@
 				<TextureComponent>
 					<region type="TextureRegion">brolaf</region>
 				</TextureComponent>
+				<IdleComponent/>
+				<BreathComponent>
+					<curScale type="Vector2" x="0.0" y="0.0"/>
+					<duration type="Float">1.0</duration>
+					<scaleValue type="Vector2" x="0.02" y="0.02"/>
+					<time type="Float">0.0</time>
+				</BreathComponent>
 			</components>
 		</entity>
 		<entity>
@@ -597,6 +639,13 @@
 				<TextureComponent>
 					<region type="TextureRegion">po</region>
 				</TextureComponent>
+				<IdleComponent/>
+				<BreathComponent>
+					<curScale type="Vector2" x="0.0" y="0.0"/>
+					<duration type="Float">0.7</duration>
+					<scaleValue type="Vector2" x="0.02" y="0.02"/>
+					<time type="Float">0.0</time>
+				</BreathComponent>
 			</components>
 		</entity>
 		<entity>
