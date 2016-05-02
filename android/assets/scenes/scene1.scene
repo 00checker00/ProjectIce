@@ -137,6 +137,7 @@
 					<z type="Integer">5</z>
 				</TransformComponent>
 				<HotspotComponent>
+					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Dynamic</activationDirection>
 					<cursorText type="String">s1_rein_fall</cursorText>
 					<height type="Float">1.2</height>
 					<origin type="Vector2" x="-0.2" y="0.0"/>
@@ -178,6 +179,7 @@
 					<z type="Integer">8</z>
 				</TransformComponent>
 				<HotspotComponent>
+					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Dynamic</activationDirection>
 					<cursorText type="String">s1_main_igloo</cursorText>
 					<height type="Float">3.0</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
@@ -195,6 +197,7 @@
 					<name type="String">Andis Iglu</name>
 				</NameComponent>
 				<HotspotComponent>
+					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Dynamic</activationDirection>
 					<cursorText type="String">s1_player_igloo</cursorText>
 					<height type="Float">2.5</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
@@ -230,13 +233,14 @@
 					<name type="String">Trolaf</name>
 				</NameComponent>
 				<HotspotComponent>
+					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Left</activationDirection>
 					<cursorText type="String">s1_trolaf</cursorText>
 					<height type="Float">1.1</height>
 					<origin type="Vector2" x="-0.1" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</primaryCursor>
 					<script type="String">scene1.Trolaf</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
-					<targetPos type="Vector2" x="0.0" y="0.0"/>
+					<targetPos type="Vector2" x="0.8" y="0.0"/>
 					<width type="Float">0.6</width>
 				</HotspotComponent>
 				<TextureComponent>
@@ -259,13 +263,14 @@
 					<z type="Integer">0</z>
 				</TransformComponent>
 				<HotspotComponent>
+					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Right</activationDirection>
 					<cursorText type="String">s1_well</cursorText>
 					<height type="Float">1.1</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Use</primaryCursor>
 					<script type="String">scene1.Brunnen</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
-					<targetPos type="Vector2" x="0.0" y="0.0"/>
+					<targetPos type="Vector2" x="-0.4" y="0.0"/>
 					<width type="Float">0.9</width>
 				</HotspotComponent>
 			</components>
@@ -285,6 +290,7 @@
 					<z type="Integer">1</z>
 				</TransformComponent>
 				<HotspotComponent>
+					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Dynamic</activationDirection>
 					<cursorText type="String">s1_standard_igloo</cursorText>
 					<height type="Float">1.8</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
@@ -311,13 +317,14 @@
 					<z type="Integer">5</z>
 				</TransformComponent>
 				<HotspotComponent>
+					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Left</activationDirection>
 					<cursorText type="String">s1_urn</cursorText>
 					<height type="Float">0.8</height>
 					<origin type="Vector2" x="-0.12" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Take</primaryCursor>
 					<script type="String">scene1.Urne</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
-					<targetPos type="Vector2" x="0.0" y="0.0"/>
+					<targetPos type="Vector2" x="0.7" y="0.0"/>
 					<width type="Float">0.5</width>
 				</HotspotComponent>
 				<TextureComponent>
@@ -340,6 +347,7 @@
 					<z type="Integer">5</z>
 				</TransformComponent>
 				<HotspotComponent>
+					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Dynamic</activationDirection>
 					<cursorText type="String">s1_klara_fall</cursorText>
 					<height type="Float">1.3</height>
 					<origin type="Vector2" x="-0.2" y="0.0"/>
@@ -381,6 +389,7 @@
 					<z type="Integer">0</z>
 				</TransformComponent>
 				<HotspotComponent>
+					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Dynamic</activationDirection>
 					<cursorText type="String">s1_panorama_location_name</cursorText>
 					<height type="Float">0.8</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
@@ -397,7 +406,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="5.205001" y="0.12191141"/>
+					<pos type="Vector2" x="5.200001" y="0.12191141"/>
 					<rotation type="Float">0.0</rotation>
 					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="0.6" y="0.6"/>
@@ -407,13 +416,14 @@
 					<name type="String">Teilnehmer2</name>
 				</NameComponent>
 				<HotspotComponent>
+					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Left</activationDirection>
 					<cursorText type="String">s1_participants</cursorText>
 					<height type="Float">1.4</height>
 					<origin type="Vector2" x="-0.2" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</primaryCursor>
 					<script type="String">scene1.Teilnehmer</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
-					<targetPos type="Vector2" x="0.0" y="0.0"/>
+					<targetPos type="Vector2" x="1.0" y="0.0"/>
 					<width type="Float">0.8</width>
 				</HotspotComponent>
 				<DistanceScaleComponent>
@@ -439,13 +449,14 @@
 					<name type="String">Olaf</name>
 				</NameComponent>
 				<HotspotComponent>
+					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Right</activationDirection>
 					<cursorText type="String">s1_olaf</cursorText>
 					<height type="Float">1.5</height>
 					<origin type="Vector2" x="-0.27" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</primaryCursor>
 					<script type="String">scene1.Olaf</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
-					<targetPos type="Vector2" x="0.0" y="0.0"/>
+					<targetPos type="Vector2" x="-0.4" y="-0.4"/>
 					<width type="Float">1.0</width>
 				</HotspotComponent>
 				<DistanceScaleComponent>
@@ -461,7 +472,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="3.9149995" y="0.13649333"/>
+					<pos type="Vector2" x="3.9699998" y="0.14123833"/>
 					<rotation type="Float">0.0</rotation>
 					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="0.6" y="0.6"/>
@@ -471,17 +482,18 @@
 					<name type="String">Teilnehmer4</name>
 				</NameComponent>
 				<HotspotComponent>
+					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Right</activationDirection>
 					<cursorText type="String">s1_participants</cursorText>
 					<height type="Float">1.5</height>
 					<origin type="Vector2" x="-0.3" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</primaryCursor>
 					<script type="String">scene1.Teilnehmer</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
-					<targetPos type="Vector2" x="0.0" y="0.0"/>
+					<targetPos type="Vector2" x="-0.6" y="0.0"/>
 					<width type="Float">1.2</width>
 				</HotspotComponent>
 				<DistanceScaleComponent>
-					<currentScale type="Float">0.9863507</currentScale>
+					<currentScale type="Float">0.9858762</currentScale>
 				</DistanceScaleComponent>
 				<TextureComponent>
 					<region type="TextureRegion">statisten2_</region>
@@ -493,7 +505,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="4.3849974" y="1.8761197"/>
+					<pos type="Vector2" x="4.4449964" y="1.8761197"/>
 					<rotation type="Float">0.0</rotation>
 					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="0.6" y="0.6"/>
@@ -503,13 +515,14 @@
 					<name type="String">Teilnehmer5</name>
 				</NameComponent>
 				<HotspotComponent>
+					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Left</activationDirection>
 					<cursorText type="String">s1_participants</cursorText>
 					<height type="Float">1.1</height>
 					<origin type="Vector2" x="-0.2" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</primaryCursor>
 					<script type="String">scene1.Teilnehmer</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
-					<targetPos type="Vector2" x="0.0" y="0.0"/>
+					<targetPos type="Vector2" x="1.0" y="-0.3"/>
 					<width type="Float">0.8</width>
 				</HotspotComponent>
 				<DistanceScaleComponent>
@@ -535,13 +548,14 @@
 					<name type="String">Brolaf</name>
 				</NameComponent>
 				<HotspotComponent>
+					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Right</activationDirection>
 					<cursorText type="String">s1_brolaf</cursorText>
 					<height type="Float">1.7</height>
 					<origin type="Vector2" x="-0.2" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</primaryCursor>
 					<script type="String">scene1.Brolaf</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
-					<targetPos type="Vector2" x="0.0" y="0.0"/>
+					<targetPos type="Vector2" x="-0.5" y="0.0"/>
 					<width type="Float">0.9</width>
 				</HotspotComponent>
 				<DistanceScaleComponent>
@@ -557,7 +571,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="1.9150033" y="1.0275103"/>
+					<pos type="Vector2" x="1.9500041" y="1.0180199"/>
 					<rotation type="Float">0.0</rotation>
 					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="0.6" y="0.6"/>
@@ -567,17 +581,18 @@
 					<name type="String">Teilnehmer7</name>
 				</NameComponent>
 				<HotspotComponent>
+					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Left</activationDirection>
 					<cursorText type="String">s1_participants</cursorText>
 					<height type="Float">1.3</height>
 					<origin type="Vector2" x="-0.2" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Speak</primaryCursor>
 					<script type="String">scene1.Teilnehmer</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
-					<targetPos type="Vector2" x="0.0" y="0.0"/>
+					<targetPos type="Vector2" x="1.0" y="0.0"/>
 					<width type="Float">0.9</width>
 				</HotspotComponent>
 				<DistanceScaleComponent>
-					<currentScale type="Float">0.897249</currentScale>
+					<currentScale type="Float">0.898198</currentScale>
 				</DistanceScaleComponent>
 				<TextureComponent>
 					<region type="TextureRegion">po</region>
@@ -641,6 +656,7 @@
 					<targetPositions type="null"/>
 				</MoveComponent>
 				<HotspotComponent>
+					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Dynamic</activationDirection>
 					<cursorText type="String"></cursorText>
 					<height type="Float">1.6</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
