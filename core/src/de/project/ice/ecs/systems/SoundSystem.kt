@@ -70,12 +70,13 @@ class SoundSystem : IceSystem() {
         }
         val sound = sounds.get(name + "_" + type.toString())
         val playID = sound.play()
-        ids.put(playID, name)
+        ids.put(playID, name + "_" + type.toString())
         return playID
     }
 
     fun stopSound(playID: Long) {
         sounds.get(ids.get(playID, ""))?.stop(playID)
+
     }
 
     fun resumeSound(playID: Long) {

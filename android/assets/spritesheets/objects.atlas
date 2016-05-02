@@ -45,70 +45,7 @@ augenlieder_eskimo
   size: 32, 2
   orig: 32, 2
   offset: 0, 0
-  index: 3
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 11
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 25
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 21
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 18
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 39
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 41
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 23
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 51
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 53
+  index: 26
 augenlieder_eskimo
   rotate: false
   xy: 52, 715
@@ -122,161 +59,7 @@ augenlieder_eskimo
   size: 32, 2
   orig: 32, 2
   offset: 0, 0
-  index: 27
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 46
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 10
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 37
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 47
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 43
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 15
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 49
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 20
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 38
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 5
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 17
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 33
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 30
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 48
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 24
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 40
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 6
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 13
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 22
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 12
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 8
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 35
+  index: 34
 augenlieder_eskimo
   rotate: false
   xy: 52, 715
@@ -290,7 +73,42 @@ augenlieder_eskimo
   size: 32, 2
   orig: 32, 2
   offset: 0, 0
-  index: 4
+  index: 6
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 51
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 40
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 35
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 15
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 46
 augenlieder_eskimo
   rotate: false
   xy: 52, 715
@@ -304,7 +122,56 @@ augenlieder_eskimo
   size: 32, 2
   orig: 32, 2
   offset: 0, 0
-  index: 52
+  index: 1
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 22
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 53
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 25
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 30
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 49
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 41
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 5
 augenlieder_eskimo
   rotate: false
   xy: 52, 715
@@ -318,62 +185,6 @@ augenlieder_eskimo
   size: 32, 2
   orig: 32, 2
   offset: 0, 0
-  index: 44
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 28
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 2
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 36
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 16
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 26
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 45
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
-  index: 1
-augenlieder_eskimo
-  rotate: false
-  xy: 52, 715
-  size: 32, 2
-  orig: 32, 2
-  offset: 0, 0
   index: 19
 augenlieder_eskimo
   rotate: false
@@ -381,7 +192,14 @@ augenlieder_eskimo
   size: 32, 2
   orig: 32, 2
   offset: 0, 0
-  index: 7
+  index: 20
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 13
 augenlieder_eskimo
   rotate: false
   xy: 52, 715
@@ -395,6 +213,69 @@ augenlieder_eskimo
   size: 32, 2
   orig: 32, 2
   offset: 0, 0
+  index: 44
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 2
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 43
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 38
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 21
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 28
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 16
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 12
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 37
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
   index: 31
 augenlieder_eskimo
   rotate: false
@@ -402,7 +283,35 @@ augenlieder_eskimo
   size: 32, 2
   orig: 32, 2
   offset: 0, 0
-  index: 34
+  index: 33
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 4
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 8
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 36
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 18
 augenlieder_eskimo
   rotate: false
   xy: 52, 715
@@ -410,6 +319,97 @@ augenlieder_eskimo
   orig: 32, 2
   offset: 0, 0
   index: 42
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 10
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 17
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 23
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 24
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 48
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 11
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 45
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 7
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 39
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 52
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 3
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 27
+augenlieder_eskimo
+  rotate: false
+  xy: 52, 715
+  size: 32, 2
+  orig: 32, 2
+  offset: 0, 0
+  index: 47
 bein1_eskimo
   rotate: false
   xy: 200, 725
@@ -885,20 +885,6 @@ rotznase_eskimo
   size: 17, 1
   orig: 17, 1
   offset: 0, 0
-  index: 5
-rotznase_eskimo
-  rotate: false
-  xy: 1257, 1588
-  size: 17, 1
-  orig: 17, 1
-  offset: 0, 0
-  index: 11
-rotznase_eskimo
-  rotate: false
-  xy: 1257, 1588
-  size: 17, 1
-  orig: 17, 1
-  offset: 0, 0
   index: 10
 rotznase_eskimo
   rotate: false
@@ -913,7 +899,14 @@ rotznase_eskimo
   size: 17, 1
   orig: 17, 1
   offset: 0, 0
-  index: 4
+  index: 11
+rotznase_eskimo
+  rotate: false
+  xy: 1257, 1588
+  size: 17, 1
+  orig: 17, 1
+  offset: 0, 0
+  index: 5
 rotznase_eskimo
   rotate: false
   xy: 1257, 1588
@@ -921,6 +914,13 @@ rotznase_eskimo
   orig: 17, 1
   offset: 0, 0
   index: 3
+rotznase_eskimo
+  rotate: false
+  xy: 1257, 1588
+  size: 17, 1
+  orig: 17, 1
+  offset: 0, 0
+  index: 4
 rotznase_eskimo
   rotate: false
   xy: 1257, 1585
@@ -934,13 +934,6 @@ rotznase_eskimo
   size: 17, 1
   orig: 17, 1
   offset: 0, 0
-  index: 9
-rotznase_eskimo
-  rotate: false
-  xy: 1257, 1585
-  size: 17, 1
-  orig: 17, 1
-  offset: 0, 0
   index: 7
 rotznase_eskimo
   rotate: false
@@ -948,7 +941,14 @@ rotznase_eskimo
   size: 17, 1
   orig: 17, 1
   offset: 0, 0
-  index: 8
+  index: 9
+rotznase_eskimo
+  rotate: false
+  xy: 1257, 1585
+  size: 17, 1
+  orig: 17, 1
+  offset: 0, 0
+  index: 18
 rotznase_eskimo
   rotate: false
   xy: 1257, 1585
@@ -962,7 +962,7 @@ rotznase_eskimo
   size: 17, 1
   orig: 17, 1
   offset: 0, 0
-  index: 18
+  index: 8
 rotznase_eskimo
   rotate: false
   xy: 1257, 1582
@@ -997,14 +997,14 @@ rotznase_eskimo
   size: 17, 1
   orig: 17, 1
   offset: 0, 0
-  index: 24
+  index: 25
 rotznase_eskimo
   rotate: false
   xy: 1257, 1576
   size: 17, 1
   orig: 17, 1
   offset: 0, 0
-  index: 25
+  index: 24
 rotznase_eskimo
   rotate: false
   xy: 1257, 1576
@@ -1039,14 +1039,14 @@ rotznase_eskimo
   size: 17, 1
   orig: 17, 1
   offset: 0, 0
-  index: 22
+  index: 23
 rotznase_eskimo
   rotate: false
   xy: 1257, 1567
   size: 17, 1
   orig: 17, 1
   offset: 0, 0
-  index: 23
+  index: 22
 rotznase_eskimo
   rotate: false
   xy: 1257, 1564

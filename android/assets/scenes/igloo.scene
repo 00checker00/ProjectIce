@@ -190,6 +190,13 @@
 					<targetPos type="Vector2" x="-1.5" y="0.0"/>
 					<width type="Float">2.3</width>
 				</HotspotComponent>
+				<BreathComponent>
+					<curScale type="Vector2" x="0.0" y="0.0"/>
+					<duration type="Float">1.0</duration>
+					<scaleValue type="Vector2" x="0.01" y="0.02"/>
+					<time type="Float">0.0</time>
+				</BreathComponent>
+				<IdleComponent/>
 			</components>
 		</entity>
 		<entity>
@@ -247,6 +254,13 @@
 					<targetPos type="Vector2" x="2.6" y="-0.1"/>
 					<width type="Float">2.3</width>
 				</HotspotComponent>
+				<BreathComponent>
+					<curScale type="Vector2" x="0.0" y="0.0"/>
+					<duration type="Float">1.1</duration>
+					<scaleValue type="Vector2" x="0.01" y="0.02"/>
+					<time type="Float">0.0</time>
+				</BreathComponent>
+				<IdleComponent/>
 			</components>
 		</entity>
 		<entity>
@@ -327,7 +341,6 @@
 					<region type="TextureRegion">eis_tisch</region>
 				</TextureComponent>
 				<HotspotComponent>
-					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Right</activationDirection>
 					<cursorText type="String">s1_igloo_icedesk</cursorText>
 					<height type="Float">2.1</height>
 					<origin type="Vector2" x="-0.9" y="0.05"/>
@@ -367,6 +380,13 @@
 					<targetPos type="Vector2" x="0.0" y="0.0"/>
 					<width type="Float">1.9</width>
 				</HotspotComponent>
+				<IdleComponent/>
+				<BreathComponent>
+					<curScale type="Vector2" x="0.0" y="0.0"/>
+					<duration type="Float">2.0</duration>
+					<scaleValue type="Vector2" x="0.0" y="0.04"/>
+					<time type="Float">0.0</time>
+				</BreathComponent>
 			</components>
 		</entity>
 		<entity>
@@ -438,7 +458,7 @@
 					<rotation type="Float">0.0</rotation>
 					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="1.5" y="1.5"/>
-					<z type="Integer">0</z>
+					<z type="Integer">1</z>
 				</TransformComponent>
 				<NameComponent>
 					<name type="String">Kerze</name>
@@ -487,6 +507,32 @@
 					<targetPos type="Vector2" x="2.0" y="0.2"/>
 					<width type="Float">2.0</width>
 				</HotspotComponent>
+			</components>
+		</entity>
+		<entity>
+			<components>
+				<TransformComponent>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
+					<flipVertical type="Boolean">false</flipVertical>
+					<pos type="Vector2" x="10.962508" y="2.7074838"/>
+					<rotation type="Float">0.0</rotation>
+					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
+					<scale type="Vector2" x="1.5" y="1.5"/>
+					<z type="Integer">0</z>
+				</TransformComponent>
+				<NameComponent>
+					<name type="String">KerzeFeuer</name>
+				</NameComponent>
+				<TextureComponent>
+					<region type="TextureRegion">candle_fire</region>
+				</TextureComponent>
+				<AnimationComponent>
+					<animation type="Integer">1</animation>
+					<animations type="IntMap" subType="Animation">
+						<_1 type="Animation" frameDuration="0.11" mode="LOOP">candle_fire</_1>
+					</animations>
+					<time type="Float">0.0</time>
+				</AnimationComponent>
 			</components>
 		</entity>
 	</entities>
