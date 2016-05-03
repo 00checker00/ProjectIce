@@ -14,14 +14,14 @@ class Schmied : Use.Adapter(){
     }
 
     override fun speak(game: IceGame, hotspotId: String) {
-         val dialog = Node().apply {
+        val dialog = Node().apply {
             speaker = hotspotId
             type = Node.Type.Text
             text = "s1_dlg_smithy"
-             color = Color.valueOf("#994C00")
-            }
-            game.showDialog(dialog)
+            color = Color.valueOf("#994C00")
         }
-
-
+        game.showDialog(dialog)
     }
+
+
+}

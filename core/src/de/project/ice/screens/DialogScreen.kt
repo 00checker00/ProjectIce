@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputProcessor
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.GlyphLayout
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.InputListener
@@ -210,13 +211,12 @@ class DialogScreen(game: IceGame, dialog: Node) : BaseScreenAdapter(game) {
 
                     var x = projected.x - textLayout.width/2
 
-                    val size = camera.camera.project(Vector3(camera.camera.viewportWidth, camera.camera.viewportHeight, 0f))
+                    val size = Vector2(Gdx.graphics.width.toFloat(), Gdx.graphics.height.toFloat())
 
                     if (x < MIN_SCREEN_DIST)
                         x = MIN_SCREEN_DIST
                     else if (x > size.x - textLayout.width - MIN_SCREEN_DIST)
                         x = size.x - textLayout.width - MIN_SCREEN_DIST
-
 
                     font.draw(stage.batch, textLayout, x , y )
 

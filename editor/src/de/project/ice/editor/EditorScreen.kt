@@ -48,6 +48,7 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
     private var hotspotsNeedReload = false
     private var componentvisible = false
     private var entitiesvisible = false
+    private var pathscreenvisible = false
 
 
     private val hotspotsMonitor = DefaultFileMonitor(object: FileListener {
@@ -231,6 +232,7 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
 
         entitiesWindow.isVisible = entitiesvisible
         componentsWindow.isVisible = componentvisible
+        if (pathscreenvisible) game.addScreen(pathScreen)
 
         game.engine.soundSystem.stopMusic()
 
@@ -248,11 +250,13 @@ open class EditorScreen(private val app: EditorApplication) : BaseScreenAdapter(
 
         entitiesvisible = entitiesWindow.isVisible
         componentvisible = componentsWindow.isVisible
+        pathscreenvisible = game.isScreenVisible(pathScreen)
 
         game.engine.soundSystem.resumeMusic()
 
         entitiesWindow.isVisible = false
         componentsWindow.isVisible = false
+        game.removeScreen(pathScreen, false)
         storeState()
         game.resumeGame()
     }

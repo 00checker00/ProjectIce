@@ -377,7 +377,7 @@
 					<wiggleAlpha type="Float">0.0</wiggleAlpha>
 					<wiggleHeight type="Float">0.03</wiggleHeight>
 					<wiggleSpeed type="Float">0.5</wiggleSpeed>
-					<wiggleStrength type="Float">6.0</wiggleStrength>
+					<wiggleStrength type="Float">5.0</wiggleStrength>
 				</WalkingComponent>
 			</components>
 		</entity>
@@ -434,7 +434,7 @@
 					<width type="Float">0.8</width>
 				</HotspotComponent>
 				<DistanceScaleComponent>
-					<currentScale type="Float">0.98701864</currentScale>
+					<currentScale type="Float">0.9878088</currentScale>
 				</DistanceScaleComponent>
 				<TextureComponent>
 					<region type="TextureRegion">nebenperson1_normal</region>
@@ -514,7 +514,7 @@
 					<width type="Float">1.2</width>
 				</HotspotComponent>
 				<DistanceScaleComponent>
-					<currentScale type="Float">0.9858762</currentScale>
+					<currentScale type="Float">0.98740435</currentScale>
 				</DistanceScaleComponent>
 				<TextureComponent>
 					<region type="TextureRegion">statisten2_</region>
@@ -554,7 +554,7 @@
 					<width type="Float">0.8</width>
 				</HotspotComponent>
 				<DistanceScaleComponent>
-					<currentScale type="Float">0.8181832</currentScale>
+					<currentScale type="Float">0.81238806</currentScale>
 				</DistanceScaleComponent>
 				<TextureComponent>
 					<region type="TextureRegion">eskimo_weapon1_normal</region>
