@@ -21,7 +21,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="4.9764137" y="1.1455243"/>
+					<pos type="Vector2" x="6.3123174" y="2.0816767"/>
 					<rotation type="Float">0.0</rotation>
 					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="0.7" y="0.7"/>
@@ -126,6 +126,7 @@
 								<vertex type="Vector2" x="0.52500004" y="1.1009905"/>
 								<vertex type="Vector2" x="-0.415" y="1.4637947"/>
 								<vertex type="Vector2" x="-0.995" y="0.9017998"/>
+								<vertex type="Vector2" x="2.1233432" y="0.77210045"/>
 							</vertices>
 						</shape>
 						<holes/>
@@ -363,9 +364,9 @@
 					<name type="String">kai_statue</name>
 				</NameComponent>
 				<TransformComponent>
-					<flipHorizontal type="Boolean">true</flipHorizontal>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="4.965876" y="1.9134464"/>
+					<pos type="Vector2" x="4.373474" y="2.1321805"/>
 					<rotation type="Float">0.0</rotation>
 					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="0.7" y="0.7"/>
@@ -751,7 +752,7 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="5.919987" y="1.8980641"/>
+					<pos type="Vector2" x="5.414889" y="1.9322419"/>
 					<rotation type="Float">0.0</rotation>
 					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="0.4" y="0.4"/>
@@ -781,10 +782,10 @@
 				<TransformComponent>
 					<flipHorizontal type="Boolean">true</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="-1.9800034" y="2.467487"/>
+					<pos type="Vector2" x="-2.5817575" y="3.2091303"/>
 					<rotation type="Float">0.0</rotation>
 					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
-					<scale type="Vector2" x="0.4" y="0.4"/>
+					<scale type="Vector2" x="0.3" y="0.3"/>
 					<z type="Integer">50</z>
 				</TransformComponent>
 				<TextureComponent>
@@ -809,9 +810,9 @@
 					<name type="String">Schmied</name>
 				</NameComponent>
 				<TransformComponent>
-					<flipHorizontal type="Boolean">true</flipHorizontal>
+					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="11.5399885" y="0.79244363"/>
+					<pos type="Vector2" x="11.483867" y="1.0932025"/>
 					<rotation type="Float">0.0</rotation>
 					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="0.5" y="0.45"/>
