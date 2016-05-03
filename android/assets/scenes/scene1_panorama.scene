@@ -84,7 +84,9 @@
 								<vertex type="Vector2" x="-2.74" y="1.1337676"/>
 								<vertex type="Vector2" x="-2.33" y="0.7723292"/>
 								<vertex type="Vector2" x="-2.66" y="0.5223665"/>
-								<vertex type="Vector2" x="-4.0750003" y="0.5033858"/>
+								<vertex type="Vector2" x="-3.3770354" y="0.83283067"/>
+								<vertex type="Vector2" x="-3.5323594" y="0.55941296"/>
+								<vertex type="Vector2" x="-4.0434237" y="0.5488969"/>
 								<vertex type="Vector2" x="-4.02" y="0.09530139"/>
 								<vertex type="Vector2" x="-1.8550001" y="0.25444698"/>
 								<vertex type="Vector2" x="1.06" y="0.07041597"/>
@@ -511,13 +513,13 @@
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Walk</primaryCursor>
 					<script type="String">scene1pan.KlaraIglu</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Look</secondaryCursor>
-					<targetPos type="Vector2" x="0.0" y="0.0"/>
+					<targetPos type="Vector2" x="2.0" y="-0.1"/>
 					<width type="Float">2.5</width>
 				</HotspotComponent>
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
 					<flipVertical type="Boolean">false</flipVertical>
-					<pos type="Vector2" x="-4.7800016" y="1.3191589"/>
+					<pos type="Vector2" x="-4.7549496" y="1.324417"/>
 					<rotation type="Float">0.0</rotation>
 					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="1.0" y="1.0"/>

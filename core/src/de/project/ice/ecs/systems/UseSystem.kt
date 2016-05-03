@@ -25,8 +25,8 @@ class UseSystem : IteratingIceSystem(Family.all(UseComponent::class.java).exclud
         val hotspot = Hotspot[hotspotComponent.script]
 
         val entityname: String
-        if (entity.hasComponent(Components.name))
-            entityname = entity.getComponents(Components.name).name
+        if (use.target?.hasComponent(Components.name)?:false)
+            entityname = use.target?.getComponents(Components.name)?.name ?:""
         else
             entityname = ""
 
