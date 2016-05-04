@@ -24,6 +24,7 @@ class Brunnen : Use.Adapter(){
 
         runOnce("note_taken"){
             game.inventory.addItem("inv_note_shred_4")
+            game.showAndiMessages("s1_using_well")
         }
     }
 }

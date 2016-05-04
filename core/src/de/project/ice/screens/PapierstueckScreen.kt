@@ -14,6 +14,7 @@ class PapierstueckScreen(game: IceGame): BaseScreenAdapter(game) {
     override val inputProcessor = object: InputAdapter() {
         override fun touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
             game.removeScreen(this@PapierstueckScreen)
+            game.engine.soundSystem.playSound("paper")
             return true;
         }
 

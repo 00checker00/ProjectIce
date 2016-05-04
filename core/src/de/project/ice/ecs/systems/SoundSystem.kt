@@ -62,14 +62,14 @@ class SoundSystem : IceSystem() {
         return true
     }
 
-    fun playSound(name: String, type: Type = Type.Effect): Long {
+    fun playSound(name: String, type: Type = Type.Effect, volume: Float = 1.0f): Long {
         if (!sounds.containsKey(name + "_" + type.toString())) {
             if (!loadSound(name, type)) {
                 return -1
             }
         }
         val sound = sounds.get(name + "_" + type.toString())
-        val playID = sound.play()
+        val playID = sound.play(volume)
         ids.put(playID, name + "_" + type.toString())
         return playID
     }

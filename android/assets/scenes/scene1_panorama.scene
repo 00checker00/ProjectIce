@@ -58,7 +58,7 @@
 				</NameComponent>
 				<CameraComponent>
 					<camera type="OrthographicCamera" viewportWidth="9.6" viewportHeight="5.4">
-						<pos type="Vector3" x="0.0" y="2.5390625" z="0.0"/>
+						<pos type="Vector3" x="6.0" y="2.5390625" z="0.0"/>
 					</camera>
 					<color>-1</color>
 					<followMaxX type="Float">10.0</followMaxX>
@@ -214,7 +214,7 @@
 					<region type="TextureRegion">feuer</region>
 				</TextureComponent>
 				<HotspotComponent>
-					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Dynamic</activationDirection>
+					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Right</activationDirection>
 					<cursorText type="String">s1_panorama_campfire</cursorText>
 					<height type="Float">1.3</height>
 					<origin type="Vector2" x="-0.25" y="-0.1"/>
@@ -351,7 +351,7 @@
 					<rotation type="Float">0.0</rotation>
 					<rotationOrigin type="Vector2" x="0.0" y="0.0"/>
 					<scale type="Vector2" x="0.7" y="0.7"/>
-					<z type="Integer">51</z>
+					<z type="Integer">49</z>
 				</TransformComponent>
 				<TextureComponent>
 					<region type="TextureRegion">schnee_scene1</region>
@@ -408,7 +408,7 @@
 					<height type="Float">0.8</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Walk</primaryCursor>
-					<script type="String">scene1.GotoScene2</script>
+					<script type="String">scene1pan.GotoScene2</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">None</secondaryCursor>
 					<targetPos type="Vector2" x="1.7" y="-0.1"/>
 					<width type="Float">3.0</width>
@@ -430,7 +430,7 @@
 					<z type="Integer">0</z>
 				</TransformComponent>
 				<HotspotComponent>
-					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Dynamic</activationDirection>
+					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Left</activationDirection>
 					<cursorText type="String">s1_panorama_dwarves</cursorText>
 					<height type="Float">0.7</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
@@ -445,7 +445,7 @@
 		<entity>
 			<components>
 				<NameComponent>
-					<name type="String">goto_scene2</name>
+					<name type="String">goto_scene1</name>
 				</NameComponent>
 				<TransformComponent>
 					<flipHorizontal type="Boolean">false</flipHorizontal>
@@ -462,7 +462,7 @@
 					<height type="Float">0.8</height>
 					<origin type="Vector2" x="0.0" y="0.0"/>
 					<primaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">Walk</primaryCursor>
-					<script type="String">scene2.GotoScene1</script>
+					<script type="String">scene1pan.GotoScene1</script>
 					<secondaryCursor type="enum" subtype="de.project.ice.screens.CursorScreen$Cursor">None</secondaryCursor>
 					<targetPos type="Vector2" x="1.9" y="0.2"/>
 					<width type="Float">3.0</width>
@@ -762,7 +762,7 @@
 					<region type="TextureRegion">statisten3_</region>
 				</TextureComponent>
 				<HotspotComponent>
-					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Dynamic</activationDirection>
+					<activationDirection type="enum" subtype="de.project.ice.ecs.components.ActivationDirection">Right</activationDirection>
 					<cursorText type="String">s1_panorama_oldlady</cursorText>
 					<height type="Float">1.45</height>
 					<origin type="Vector2" x="-0.12" y="0.0"/>

@@ -194,7 +194,7 @@ class InventoryScreen(game: IceGame) : BaseScreenAdapter(game) {
             if (item != null) {
                 game.primaryCursor = CursorScreen.Cursor.Take
                 game.secondaryCursor = CursorScreen.Cursor.Look
-                game.cursorText = item.name
+                game.cursorText = game.strings.get(item.name + "_text")
             } else {
                 game.primaryCursor = CursorScreen.Cursor.None
                 game.secondaryCursor = CursorScreen.Cursor.None
