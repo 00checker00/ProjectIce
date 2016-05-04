@@ -68,7 +68,7 @@ open class IceGame : ApplicationAdapter() {
         isGamePaused = false
     }
 
-    fun playAndiAnimation(anim: AndiAnimation, callback: (()->Unit)?) {
+    fun playAndiAnimation(anim: AndiAnimation, callback: (()->Unit)? = null) {
         val andi = engine.getEntityByName("Andi_Player")
         val animation = andi?.getComponents(Components.animation)
 

@@ -73,7 +73,11 @@ object Items {
             item { name { "inv_note_shred_1" } }
             item { name { "inv_note_shred_2" } }
             item { name { "inv_note_shred_3" } }
-            item { name { "inv_note_shred_4" }; onClick { it.addScreen(PapierstueckScreen(it)); it.removeScreen(InventoryScreen::class.java) } }
+            item { name { "inv_note_shred_4" }; onClick {
+                it.addScreen(PapierstueckScreen(it))
+                it.removeScreen(InventoryScreen::class.java)
+                it.engine.soundSystem.playSound("paper")
+            } }
             item { name { "inv_note_shred_1_2" } }
         }
     }

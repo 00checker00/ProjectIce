@@ -2,11 +2,17 @@ package de.project.ice.inventory
 
 import com.badlogic.gdx.utils.Array
 import de.project.ice.IceGame
+import java.util.*
 
 class Inventory(private val game: IceGame) {
     val items = Array<Item>()
 
-    fun addItem(name: String) {
+    fun addItem(name: String, playSound : Boolean = true) {
+        val random = Random(name.hashCode().toLong());
+        val sound = "swoosh${random.nextInt(4)+1}"
+
+        game.engine.soundSystem.playSound(sound, volume = 0.2f)
+
         removeItem(name)
         val item = Items.get(name)
         item.inventory = this
